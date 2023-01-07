@@ -108,7 +108,7 @@ lastMod = false
   scrollSpy = false # experimental; needs Bootstrap >= 5.2.0-beta1
   navButtonInSection = true
   disableHeaderBar = true
-  alternativeHome = "/docs/prologue/introduction/"
+  alternativeHome = "/docs/learn/about-xpla-chain/"
 
 [menu]
   [menu.section]

@@ -1,6 +1,6 @@
 [[main]]
   name = "Docs"
-  url = "/docs/"
+  url = "/docs/learn/about-xpla-chain/"
   weight = 10
 
 [[main]]
