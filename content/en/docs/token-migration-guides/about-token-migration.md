@@ -14,13 +14,15 @@ During the migration period, you can migrate not only the CTX, but also all the 
 ## Migration Web Application
 Migrate your `CTX` and other assets from [Migration Web Application](https://migration.c2x.world/).
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
-The web application is only available during the migration period.
-{{< /hint >}}
 
-{{< hint warning >}}
+The web application is only available during the migration period.
+{{< /alert >}}
+
+{{< alert context="warning" >}}
 **About transaction fees**
+
 Please note that small transaction fees will be required when performing migration. If you do not have USTC, you can get USTC from [here](https://support.c2x.world) where we are giving away USTC for free as a support measure. Please note that in order to receive the support, you must have more than 1 C2X and less than 0.2 USTC in your C2X Station.
 Please read the following article (https://link.medium.com/CEYbVj3C7sb) for more information about the USTC fee support.
-{{< /hint >}}
+{{< /alert >}}

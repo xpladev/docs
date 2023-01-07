@@ -3,10 +3,11 @@ title: Interacting with the Contract
 weight: 70
 ---
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 You can also follow these steps in the official web wallet for XPLA Chain, [XPLA Vault](https://vault.xpla.io).
-{{< /hint >}}
+{{< /alert >}}
 
 ## Requirements
 

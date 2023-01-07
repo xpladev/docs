@@ -9,10 +9,11 @@ weight: 30
 
 ## Public Endpoints
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Public endpoint warning**
+
 Public RPC endpoints should only be used in development. For live dApps, use a private RPC endpoint from the list above or [set up your own endpoint]({{< ref "system-configuration" >}}).
-{{< /hint >}}
+{{< /alert >}}
 
 ### Public LCD
 

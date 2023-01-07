@@ -13,10 +13,11 @@ This guide is for developers who want to install `xplad` and interact with XPLA 
 - Ensure your `GOPATH` and `GOBIN` environment variables are set up correctly.
 - Linux users: install [build-essential](http://linux-command.org/en/build-essential.html).
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **xplad for Mac**
+
 If you are using a Mac, follow the [`xplad` Mac installation guide]({{< ref "xplad-mac" >}}).
-{{< /hint >}}
+{{< /alert >}}
 
 ## From Binary
 
@@ -61,13 +62,14 @@ build_tags: netgo,ledger
 go: go version go1.18.4 darwin/amd64
 ```
 
-{{< hint info >}}
+{{< alert >}}
 **Tip**
+
 If the `xplad: command not found` error message is returned, confirm that the Go binary path is correctly configured by running the following command:
 ```sh
 export PATH=$PATH:$(go env GOPATH)/bin
 ```
-{{< /hint >}}
+{{< /alert >}}
 
 ## Next steps
 

@@ -3,10 +3,11 @@ title: Fee Grant
 weight: 90
 ---
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 XPLA Chain's fee grant module inherits from the Cosmos SDK's [`feegrant`](https://docs.cosmos.network/master/modules/feegrant/) module. This document is a stub and explains mainly important XPLA Chain-specific notes about how it is used.
-{{< /hint >}}
+{{< /alert >}}
 
 This module allows an account, the granter, to permit another account, the grantee, to pay for fees from the granter's account balance. Grantees will not need to maintain their own balance for paying fees.
 
@@ -87,7 +88,7 @@ To restrict the grantee when values for `spend_limit` and `expiration` are blank
 
 `PeriodicAllowance` is a repeating fee allowance for a specified period and for a specified maximum number of tokens that can spent within that period.
 
-{{< expand "PeriodicAllowance code" >}}
+{{< details "PeriodicAllowance code" >}}
 
 ```protobuf
 // PeriodicAllowance extends Allowance to allow for both a maximum cap,
@@ -137,7 +138,7 @@ message Grant {
   // grantee is the address of the user being granted an allowance of another user's funds.
   string              grantee   = 2;
 ```
-{{< /expand >}}
+{{< /details >}}
 
 - `basic`: The instance of `BasicAllowance`.  It is optional. If empty, the grant will have not have a `spend_limit` or `expiration`.
 
@@ -153,7 +154,7 @@ message Grant {
 
 To run transactions that use fee grant from the CLI, specify the `FeeAccount` flag followed by the granter's account address. When this flag is set, `clientCtx` appends the granter's account address.
 
-{{< expand "FeeAccount code" >}}
+{{< details "FeeAccount code" >}}
 
 ```golang
 if clientCtx.FeeGranter == nil || flagSet.Changed(flags.FlagFeeAccount) {
@@ -686,7 +687,7 @@ message Fee {
   string granter = 4;
 }
 ```
-{{< /expand >}}
+{{< /details >}}
 
 The following example shows a CLI command with the `--fee-account` flag:
 
@@ -702,10 +703,11 @@ Fees are deducted from grants in the `auth` ante handler.
 
 To prevent DoS attacks, using a filtered `feegrant` incurs gas. To ensure that all the grantee's transactions conform to the filter set by the granter, the SDK iterates over the allowed messages in the filter and charges 10 gas per filtered message. Then, the SDK iterates over the messages sent by the grantee to ensure the messages adhere to the filter, which also charges 10 gas per message. If the SDK finds a message that does not conform to the filter, the SDK stops iterating, and the transaction fails.
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Caution**
+
 Gas is charged against the granted allowance. Ensure all your existing messages conform to the filter before you send transactions using your allowance.
-{{< /hint >}}
+{{< /alert >}}
 
 ## State
 

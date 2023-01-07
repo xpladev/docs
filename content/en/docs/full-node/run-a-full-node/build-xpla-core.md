@@ -39,11 +39,12 @@ XPLA Chain core is the official Golang reference implementation of the XPLA Chai
    # ...followed by a lot of dependencies
    ```
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 If the `xplad: command not found` error message is returned, confirm that the Go binary path is correctly configured by running the following command:
 
 ```bash
 export PATH=$PATH:$(go env GOPATH)/bin
 ```
-{{< /hint >}}
+{{< /alert >}}

@@ -21,10 +21,11 @@ Running this command successfully will produce the following log:
 [ INF ] Reset private validator file to genesis state keyFile=/home/user/.xpla/config/priv_validator_key.json stateFile=/home/user/.xpla/data/priv_validator_state.json
 ```
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 After resetting, make sure the addressbook contains peer addresses and is in the correct spot. If not, [download an adressbook](../join-a-network#1-select-a-network) and place it in `~/.xpla/config/`.
-{{< /hint >}}
+{{< /alert >}}
 
 ### Change Genesis
 
@@ -40,10 +41,11 @@ You can recreate a genesis version via the following steps:
 
 ### Reset Personal Data
 
-{{< hint danger >}}
+{{< alert context="danger" >}}
 **Danger**
+
 You may be unable to use your node and its associated accounts after changing your personal data. Do not perform this action unless your node is disposable.
-{{< /hint >}}
+{{< /alert >}}
 
 To change your personal data to a pristine state, delete both `~/.xpla/config/priv_validator_state.json` and `~/.xpla/config/node_key.json`.
 

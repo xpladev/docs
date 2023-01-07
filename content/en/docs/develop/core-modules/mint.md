@@ -3,10 +3,11 @@ title: Mint
 weight: 110
 ---
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 XPLA Chain's mint module inherits from the Cosmos SDK's [`mint`](https://docs.cosmos.network/master/modules/mint/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
-{{< /hint >}}
+{{< /alert >}}
 
 The mint module is in charge of the creation of new XPLA through minting. At the beginning of every block, new XPLA is released by the mint module and sent to the fee collector account to be distributed to stakers as rewards.
 

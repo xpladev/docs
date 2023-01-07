@@ -8,10 +8,11 @@ A validator can be completely restored on a new XPLA Chain node with the followi
 - The Consensus key, stored in `~/.xpla/config/priv_validator.json`
 - The mnemonic to the validator wallet
 
-{{< hint danger >}}
+{{< alert context="danger" >}}
 **Danger**
+
 Before proceeding, ensure that the existing validator is not active. Double voting has severe slashing consequences.
-{{< /hint >}}
+{{< /alert >}}
 
 To Restore a Validator:
 

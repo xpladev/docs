@@ -15,7 +15,7 @@ This guide is for developers who want to install `xplad` and interact with XPLA 
 
 3. Unzip the file in the downloads folder by double clicking on it.
 
-   {{< hint danger >}}
+   {{< alert context="danger" >}}
    **M1 and M2 Mac users**
    If you are using an Intel-based Mac, proceed to step 4.
 
@@ -26,7 +26,7 @@ This guide is for developers who want to install `xplad` and interact with XPLA 
    sudo mkdir lib
    sudo mkdir bin
    ```
-   {{< /hint >}}
+   {{< /alert >}}
 
 4. Navigate to the expanded file in downloads:
 
@@ -53,11 +53,11 @@ This guide is for developers who want to install `xplad` and interact with XPLA 
    ```sh
    xplad
    ```
-   {{< hint info >}}
+   {{< alert >}}
    **If a security warning occurs:**
    1. Open your System Preferences and click **Security & Privacy**.
    2. Under the **General** tab, click **Allow anyway**.
    3. Run `xplad` again.
    4. When prompted, click **Open**.
    5. Repeat for other security errors or warnings.
-   {{< /hint >}}
+   {{< /alert >}}

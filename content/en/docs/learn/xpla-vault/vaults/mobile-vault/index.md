@@ -25,14 +25,15 @@ Complete this tutorial to get started with the XPLA mobile vault.
 
 1. Using a pen and paper, write down your 24-word mnemonic exactly as it appears. Number each word to make verifying easier.
 
-   {{< hint danger >}}
+   {{< alert context="danger" >}}
    **Protect your mnemonic keys**
+
    Anyone with your mnemonic phrase can access your money, and there is no recourse for someone stealing your mnemonic phrase. To protect your mnemonic phrase, consider the following tips:
    - Never save or store your mnemonic phrase as a digital file on any device.
    - Always write down your mnemonic phrase with a pen and paper.
    - Store the paper with your mnemonic phrase on it somewhere safe.
    - Never give your mnemonic phrase to anyone, not even support staff.
-   {{< /hint >}}
+   {{< /alert >}}
 
 1. Verify your writing to make sure every word is spelled correctly and in the right order. If you numbered your phrase, it can be helpful to verify it backward.
 
@@ -62,10 +63,11 @@ Congratulations, you have just created a wallet!
 
 1. Verify the transaction amounts and specify which token you want to pay fees in. Remember to always leave enough tokens in your account for other transactions.
 
-   {{< hint warning>}}
+   {{< alert context="warning" >}}
    **Keep tokens for fees**
+
    Always keep some tokens to pay fees with. Never spend your entire wallet amount. Without money for fees, you can't make any transactions.
-   {{< /hint >}}
+   {{< /alert >}}
 
 1.  Enter your password and tap **Submit**. Wait for the transaction to process. This generally takes a few seconds.
 
@@ -83,10 +85,11 @@ Congratulations, you have just created a wallet!
 
 1. Confirm the amount and select the coin you want to pay fees in.
 
-   {{< hint warning>}}
+   {{< alert context="warning" >}}
    **Keep tokens for fees**
+
    Always keep some tokens to pay fees with. Never spend your entire wallet amount. Without money for fees, you can't make any transactions.
-   {{< /hint >}}
+   {{< /alert >}}
 
 1. Tap **Submit** and wait for your transaction to process.
 

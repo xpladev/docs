@@ -26,10 +26,11 @@ yarn start
 
 [Learn more](https://github.com/xpladev/wallet-provider/tree/main/templates/create-react-app)
 
-{{< hint info >}}
+{{< alert >}}
 **Tip**
+
 The Wallet Controller template is an example of how WalletController behaves underneath the React API. If you are unable to use React, start by using the Wallet Controller template.
-{{< /hint >}}
+{{< /alert >}}
 
 ## Usage
 

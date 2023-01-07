@@ -15,8 +15,9 @@ After choosing the appropriate download type, examine your node and ensure that 
 6:22PM INF Removed all blockchain history dir=/home/ubuntu/.xpla/data
 ```
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Warning**
+
 If you are a validator, ensure that you do not remove your private key.
 
 Example of a removed private key:
@@ -24,7 +25,7 @@ Example of a removed private key:
 ```bash
 6:22PM INF Reset private validator file to genesis state keyFile=/home/ubuntu/.xpla/config/priv_validator_key.json stateFile=/home/ubuntu/.xpla/data/priv_validator_state.json
 ```
-{{< /hint >}}
+{{< /alert >}}
 
 If you have an address book downloaded, you may keep it. Otherwise, you will need to download the [appropriate addressbook]({{< ref "join-a-network#join-a-public-network" >}}) prior to running `xplad start`.
 
@@ -32,10 +33,11 @@ If you have an address book downloaded, you may keep it. Otherwise, you will nee
 
 After [Joining a public network]({{< ref "join-a-network#join-a-public-network" >}}), your node will begin to sync.
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Sync start times**
+
 Nodes take at least an hour to start syncing. This wait time is normal. Before troubleshooting a sync, please wait an hour for the sync to start.
-{{< /hint >}}
+{{< /alert >}}
 
 ## Monitor the Sync
 
@@ -83,13 +85,14 @@ Validators can view the status of the network using [XPLA Explorer](https://expl
 
 Sometimes you may want to sync faster by foregoing checks.
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Warning**
+
 The following command should only be used by advanced users in non-production environments:
 ```bash
 xplad start --x-crisis-skip-assert-invariants
 ```
-{{< /hint >}}
+{{< /alert >}}
 
 ## Congratulations!
 

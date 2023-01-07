@@ -7,7 +7,7 @@ There are a variety of tools in the XPLA Chain Development Suite. Use this guide
 
 If you are new to XPLA Chain, start with the [beginner's guide]({{< ref "get-started" >}}).
 
-```python
+```
 XPLA Chain Development Suite
 │
 ├── xpla.js: JavaScript SDK.

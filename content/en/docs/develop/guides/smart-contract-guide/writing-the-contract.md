@@ -3,10 +3,11 @@ weight: 60
 title: Writing the Contract
 ---
 
-{{< hint info >}}
+{{< alert >}}
 **See also**
+
 To better understand the building blocks of the smart contract you will build in this tutorial, view the [complete contract](https://github.com/CosmWasm/cw-template).
-{{< /hint >}}
+{{< /alert >}}
 
 A smart contract can be considered an instance of a singleton object whose internal state is persisted on the blockchain. Users can trigger state changes through sending it JSON messages, and users can also query its state through sending a request formatted as a JSON message. These messages are different than XPLA Chain messages such as `MsgSend` and `MsgExecuteContract`.
 
@@ -302,10 +303,11 @@ cargo wasm
 
 ### Optimizing Your Build
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 You will need [Docker](https://www.docker.com) installed to run this command.
-{{< /hint >}}
+{{< /alert >}}
 
 You will need to make sure the output WASM binary is as small as possible in order to minimize fees and stay under the size limit for the blockchain. Run the following command in the root directory of your Rust smart contract's project folder.
 
@@ -333,10 +335,11 @@ docker run --rm -v "$(wslpath -w $(pwd))":/code \
 
 This will result in an optimized build of `artifacts/my_first_contract.wasm` or `artifacts/my_first_contract-aarch64.wasm` in your working directory.
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 Please note that rust-optimizer will produce different contracts on Intel and ARM machines. So for reproducible builds you'll have to stick to one.
-{{< /hint >}}
+{{< /alert >}}
 
 ## Schemas
 

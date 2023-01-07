@@ -3,10 +3,11 @@ title: Governance
 weight: 100
 ---
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 XPLA Chain's Governance module inherits from Cosmos SDK's [`gov`](https://docs.cosmos.network/master/modules/gov/) module. This document is a stub, and covers mainly important XPLA Chain-specific notes about how it is used.
-{{< /hint >}}
+{{< /alert >}}
 
 Governance is the process through which members of the XPLA Chain community can effect change on the protocol by submitting petitions known as "proposals" and arriving at a popular consensus when a threshold amount of support has been reached. The proposal structure is versatile and allows for holders of staked XPLA (those who have an interest in the long-term viability of the network) to voice their opinion on both blockchain parameter updates and the future development of the XPLA Chain.
 
@@ -64,10 +65,11 @@ For a proposal to pass, the following conditions must be met:
 
 If any of the previous conditions are not met, the proposal is rejected. Proposals that get rejected with veto do not get their deposits refunded. The parameters `quorum`, `veto`, and `threshold` exist as blockchain parameters within the Governance module.
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Warning**
+
 Deposits will not be refunded for proposals that are rejected with veto, do not meet quorum, or fail to reach the minimum deposit during the deposit period. Non-refunded deposits are burned.
-{{< /hint >}}
+{{< /alert >}}
 
 ### Proposal Implementation
 
@@ -170,10 +172,11 @@ Parameter Change Proposals are a special type of proposal which, once passed, wi
 
 This type of proposal requires validators to update their node software to a new version at a specified block height.
 
-{{< hint danger >}}
+{{< alert context="danger" >}}
 **Danger**
+
 Software upgrade proposals can be difficult to execute. Exercise caution when using this proposal type, as you may lose your deposit due to an incorrect proposal.
-{{< /hint >}}
+{{< /alert >}}
 
 ## Transitions
 

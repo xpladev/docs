@@ -5,10 +5,11 @@ weight: 10
 
 Use this beginner-friendly guide to start building on XPLA Chain.
 
-{{< hint info >}}
+{{< alert >}}
 **Learn about XPLA Chain**
+
 To learn more about XPLA Chain concepts like XPLA, validators, and governance, visit the [XPLA Chain overview]({{< ref "about-xpla-chain" >}}).
-{{< /hint >}}
+{{< /alert >}}
 
 ## Development Suite
 

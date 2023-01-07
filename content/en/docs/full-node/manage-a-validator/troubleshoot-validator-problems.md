@@ -26,10 +26,11 @@ To return the voting power back to your validator:
    - `<xpla>` is the address of your validator account.
    - `<name>` is the name of the validator account. To find this information, run `xplad keys list`.
 
-   {{< hint warning >}}
+   {{< alert context="warning" >}}
    **Warning**
+
    If you don't wait for `xplad` to sync before running `unjail`, an error message will inform you that your validator is still jailed.
-   {{< /hint >}}
+   {{< /alert >}}
 
 1. Check your validator again to see if your voting power is back:
 

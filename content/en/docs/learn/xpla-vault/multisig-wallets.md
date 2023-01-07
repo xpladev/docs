@@ -17,10 +17,11 @@ Multisig wallets enable a wallet to be controlled by multiple parties. A wallet 
 
 2. Enter the wallet addresses of each multisig user in the correct order.
 
-   {{< hint warning >}}
+   {{< alert context="warning" >}}
    **Warning**
+
    Each wallet added must have a transaction history of at least one transaction before it can be added to a multisig wallet.
-   {{< /hint >}}
+   {{< /alert >}}
 
 3. Enter the number of signatures needed to post a transaction in the **Threshold** field.
 
@@ -36,19 +37,21 @@ Multisig wallet managers initiate transactions and send coded strings for multis
 
 2. Make a transaction using your multisig wallet.
 
-   {{< hint info >}}
+   {{< alert >}}
    **Note**
+
    Brand new multisig wallets have no transaction histories. After your first transaction, you will be prompted to provide the wallet addresses again for the multisig wallet. Provide the wallet addresses used to create the wallet to proceed with your transaction.
-   {{< /hint >}}
+   {{< /alert >}}
 
 3. After submitting your transaction, you will be taken to the **Post a multisig tx** page.
 
 4. Copy the multisig wallet address and the encoded string in the **Tx** box and send both to each of the multisig wallet signers.
 
-   {{< hint info >}}
+   {{< alert >}}
    **Sending multisig strings**
+
    Encoded multisig transaction strings can be sent using a regular messenger, as they are not sensitive information. They contain a simple description of the transaction.
-   {{< /hint >}}
+   {{< /alert >}}
 
 ## Sign a Multisig Transaction
 

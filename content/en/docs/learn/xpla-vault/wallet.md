@@ -17,14 +17,15 @@ For information on using multisig wallets in XPLA Vault, see [Multisig wallets](
 
 1. Using a pen and paper, write down your 24-word mnemonic exactly as it appears. Number each word to make verifying easier.
 
-   {{< hint danger >}}
+   {{< alert context="danger" >}}
    **Danger**
+
    Anyone with your mnemonic phrase can access your money, and there is no recourse for someone stealing your mnemonic phrase. To protect your mnemonic phrase, consider the following tips:
    - Never save or store your mnemonic phrase as a digital file on any device.
    - Always write down your mnemonic phrase with a pen and paper.
    - Store the paper with your mnemonic phrase on it somewhere safe.
    - Never give your mnemonic phrase to anyone, not even support staff.
-   {{< /hint >}}
+   {{< /alert >}}
 
 1. Verify your writing to make sure every word is spelled correctly and in the right order. If you numbered your phrase, it can be helpful to verify it backward.
 
@@ -140,10 +141,10 @@ Your wallet is now disconnected.
 
 Deleting a wallet deletes the wallet name, password, and private key from your device. You can access the wallet again by entering your [mnemonic phrase](#recover-a-wallet-using-a-mnemonic-phrase) or [private key and password](#connect-to-a-wallet-using-a-private-key). Deleting a wallet from one device does not delete it from other devices.
 
-{{< hint danger >}}
+{{< alert context="danger" >}}
 **Write down your mnemonic phrase**
 Before you delete your wallet, always make sure you have your mnemonic phrase and private key. Never store your mnemonic phrase on a digital device. Without a mnemonic phrase or private key and password, your wallet and funds will be permanently inaccessible. Always store your mnemonic phrase in a secure location.
-{{< /hint >}}
+{{< /alert >}}
 
 1. Open XPLA Vault and connect to your wallet.
 

@@ -29,10 +29,11 @@ Your vote will be submitted.
 
 Users can vote on a proposal after a minimum deposit of 10 XPLA is reached. To help push a proposal forward to a vote, deposit XPLA to the proposal.
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Warning**
+
 While most deposits get refunded, some deposits get burned. For more information on which deposits get burned, visit the [governance section]({{< ref "about-xpla-chain#governance" >}}) of the concepts page.
-{{< /hint >}}
+{{< /alert >}}
 
 1. Open XPLA Vault and connect your wallet. In the sidebar, click **Governance**.
 
@@ -50,20 +51,22 @@ Your deposit will be added to the proposal.
 
 ## Create a New Proposal
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Avoid unnecessary proposals**
+
 To prevent unnecessary proposals or abuse of the system, all governance proposals must obtain a minimum deposit of 10 XPLA. If 33.4% of the total vote is `NoWithVeto`, `quorum` is not met, or the minimum deposit isn't reached, the deposit will be burned. All other vote outcomes get their deposits refunded. For more information on deposits and refunds, visit the [governance overview]({{< ref "about-xpla-chain#governance" >}}).
-{{< /hint >}}
+{{< /alert >}}
 
 1. Open XPLA Vault and connect your wallet. In the sidebar, click **Governance**.
 
 2. Click on **New proposal**.
 
-   {{< hint info >}}
+   {{< alert >}}
    **Note**
+
    Before uploading any proposal, try to get community feedback on the XPLA Chain Governance forum. The link will be unveiled in the near future.
    Do not use text proposals to suggest parameter changes. For more information, visit the [Governance module reference page]({{< ref "/docs/develop/core-modules/governance" >}}).
-   {{< /hint >}}
+   {{< /alert >}}
 
 3. Select the type of proposal, and enter a title, a description, and the amount of XPLA you want to deposit initially.
 

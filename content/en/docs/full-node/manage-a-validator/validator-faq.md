@@ -3,10 +3,11 @@ title: Validator FAQ
 weight: 30
 ---
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Important**
+
 Read this document thoroughly before becoming a validator.
-{{< /hint >}}
+{{< /alert >}}
 
 ## General Concepts
 
@@ -95,10 +96,11 @@ Once a validator is created and registered, XPLA holders can delegate XPLA to th
 
     **Example:** `xplavalconspub1zcjduc3qcyj09qc03elte23zwshdx92jm6ce88fgc90rtqhjx8v0608qh5ssp0w94c`
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Warning**
+
 A validator requires the above key in order to identify itself on the network, sign blocks, and sign staking/operational transactions such as voting on Governance proposals. It is the validator's sole responsibility to secure these keys and have a contingency backup plan in the event of contingencies.
-{{< /hint >}}
+{{< /alert >}}
 
 ### What Are the Different States a Validator Can Be in?
 
@@ -177,10 +179,11 @@ Validators receive block provisions, block rewards, and fee rewards and share th
 
 **No.** By delegating to a validator, users delegate staking power. The more staking power a validator has, the more weight it has in the consensus and processes. This does not mean that the validator has custody of its delegators' XPLA.
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Important**
+
 It is impossible for a validator to run away with a delegator's funds.
-{{< /hint >}}
+{{< /alert >}}
 
 Although delegated funds cannot be stolen by validators, delegators are still liable if a validator misbehaves. When this happens, a delegator's stake will be partially slashed in proportion to their relative stake.
 
@@ -248,10 +251,11 @@ If a validator misbehaves, their bonded stake along with their delegators' stake
 
 - **Unavailability:** If a validator's signature has not been included in the last X blocks, the validator will get slashed by a marginal amount proportional to X. If X is above a certain limit, then the validator will get unbonded.
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Warning**
+
 Even if a validator does not intentionally misbehave, it can still be slashed if its node crashes, loses connectivity, gets DDoSed, or if its private key is compromised.
-{{< /hint >}}
+{{< /alert >}}
 
 ### Are validators required to self-bond XPLA?
 

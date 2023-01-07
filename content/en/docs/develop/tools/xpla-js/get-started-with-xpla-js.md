@@ -91,11 +91,12 @@ XPLA Chain’s LCD or Light Client Daemon allows users to connect to the blockch
    });
    ```
 
-   {{< hint info >}}
+   {{< alert >}}
    **Note**
+
    The previous code block shows how to connect to the cube testnet. To connect to the dimension_37-1 mainnet for production, use “`https://dimension-lcd.xpla.dev`”.
    You will also need to change the `chainID` from `"cube_47-5"` to `"dimension_37-1"`.
-   {{< /hint >}}
+   {{< /alert >}}
 
 ## 3. Create a Cube Testnet Wallet
 
@@ -113,11 +114,12 @@ XPLA Chain’s LCD or Light Client Daemon allows users to connect to the blockch
    const wallet = lcd.wallet(mk);
    ```
 
-   {{< hint warning >}}
+   {{< alert context="warning" >}}
    **Warning**
+
    Although this tutorial has you input your mnemonic directly, this practice should be avoided in production.
    For security reasons, it's better to store your mnemonic key data in your environment by using `process.env.SECRET_MNEMONIC` or `process.env.SECRET_PRIV_KEY`. This practice is more secure than a hard-coded string.
-   {{< /hint >}}
+   {{< /alert >}}
 
 4. Request testnet funds for your wallet by navigating to the [XPLA faucet](https://faucet.xpla.io) and inputting your wallet address. You'll need these funds to perform swaps and pay for gas fees. Once the funds are in your wallet, you’re ready to move on to the next step.
 

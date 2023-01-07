@@ -3,10 +3,11 @@ title: System Configuration
 weight: 10
 ---
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Recommended operating systems**
+
 This guide has been tested against Linux distributions only. To ensure a successful production environment setup, consider using a Linux system.
-{{< /hint >}}
+{{< /alert >}}
 
 Running a full XPLA Chain node is a resource-intensive process that requires a persistent server. If you want to use XPLA Chain without downloading the entire blockchain, use [XPLA web vault](https://vault.xpla.io/).
 
@@ -20,16 +21,17 @@ The minimum requirements for running a XPLA Chain full node are:
 | [`cube_47-5`](../join-a-network#join-a-public-network)                 | 2 (+2 threads) | 16 GB | 500 GB (SSD 1000 MB/s R/W) | 150 Mbps  |
 | [`private-network`](../join-a-network#start-your-private-xpla-network) | 1              | 2 GB  | 20 GB (SSD 500 MB/s R/W)   | N/A       |
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Storage requirements**
+
 As the network grows, the minimum hardware requirements will also grow. It is recommended that you monitor the system so you can prevent it from running out of resources.
-{{< /hint >}}
+{{< /alert >}}
 
 ## Prerequisites
 
 - [Golang v1.18+ linux/amd64](https://go.dev/dl/)
 
-  {{< expand "Installing Go for macOS & Linux" >}}
+  {{< details "Installing Go for macOS & Linux" >}}
   Go releases can be found here: [ https://go.dev/dl/ ](https://go.dev/dl/)
 
   In your browser, you can right-click the correct release (V1.18) and `Copy link`.
@@ -59,7 +61,7 @@ As the network grows, the minimum hardware requirements will also grow. It is re
   # go version go1.18.2 linux/amd64
 
   ```
-  {{< /expand >}}
+  {{< /details >}}
 
 - Linux users: `sudo apt-get install -y build-essential`
 
@@ -79,7 +81,8 @@ Additional ports:
 
 - `26657`: The default port for the RPC protocol. Because this port is used for querying and sending transactions, it must be open for serving queries from `xplad`.
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Warning**
+
 Do not open port `26657` to the public unless you plan to run a public node.
-{{< /hint >}}
+{{< /alert >}}

@@ -37,10 +37,11 @@ To learn how to stake your XPLA and earn staking rewards, visit the [XPLA Vault 
 ### Delegators
 Delegators are users who want to receive rewards from consensus without running a full node. Any user that stakes XPLA is a delegator. Delegators stake their XPLA to a validator, adding to a validator’s weight, or total stake. In return, delegators receive a portion of transaction fees as staking rewards.
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Who owns staked XPLA?**
+
 Staked XPLA never leaves the possession of the delegator. Even though it can’t be traded freely, staked XPLA is never owned by a validator. For more information, visit the [Validator FAQ]({{< ref "/docs/full-node/manage-a-validator/validator-faq#can-a-validator-run-away-with-a-delegators-xpla" >}})
-{{< /hint >}}
+{{< /alert >}}
 
 ### Phases of XPLA
 
@@ -62,11 +63,12 @@ Delegators can bond XPLA to any validator in the [active set]({{< ref "glossary#
 
 Delegators can unbond or unstake their XPLA using the undelegate function in XPLA Vault. The unbonding process takes 21 days to complete. During this period, the unbonding XPLA can't be traded, and no staking rewards accrue.
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Warning**
+
 Once started, the delegating or undelegating processes can't be stopped.
 Undelegating takes 21 days to complete. The only way to undo a delegating or undelegating transaction is to wait for the unbonding process to pass. Alternatively, you can redelegate staked XPLA to a different validator without waiting 21 days.
-{{< /hint >}}
+{{< /alert >}}
 
 The 21-day unbonding process helps the long-term stability of the XPLA Chain. The unbonding period discourages volatility by locking staked XPLA in the system for at least 21 days. In exchange, delegators receive staking rewards, further incentivizing network stability.
 
@@ -74,10 +76,11 @@ The 21-day unbonding process helps the long-term stability of the XPLA Chain. Th
 
 Redelegating instantly sends staked XPLA from one validator to another. Instead of waiting for the 21-day unstaking period, a user can redelegate their staked XPLA at any time using XPLA Vault's redelegate function. Validators receiving redelegations are barred from further redelegating any amount of XPLA to any validator for 21 days.
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Warning**
+
 When a user redelegates staked XPLA from one validator to another, the validator receiving the staked XPLA is barred from making further redelegation transactions for 21 days. This requirement only applies to the wallet that made the redelegation transaction.
-{{< /hint >}}
+{{< /alert >}}
 
 ## Rewards
 
@@ -97,10 +100,11 @@ At the end of every block, transaction fees and inflation rewards are distribute
 
 Running a validator is a big responsibility. Validators must meet strict standards and constantly monitor and participate in the consensus process. Slashing is the penalty for misbehaving validators. When a validator gets slashed, they lose a small portion of their stake as well as a small portion of their delegator's stake. Slashed validators also get jailed, or excluded, from consensus for a period of time.
 
-{{< hint danger >}}
+{{< alert context="danger" >}}
 **The risks of staking**
+
 Slashing affects validators and delegators. When a validator gets slashed, delegators who stake to that validator also get slashed. Slashing is proportional to a delegator's staked amount. Though slashing is rare and usually results in a small penalty, it does occur. Delegators should monitor their validators closely, do their research, and understand the risks of staking XPLA.
-{{< /hint >}}
+{{< /alert >}}
 
 Slashing occurs under the following conditions:
 

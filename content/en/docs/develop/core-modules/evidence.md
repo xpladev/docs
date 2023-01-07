@@ -3,10 +3,11 @@ title: Evidence
 weight: 80
 ---
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 XPLA Chain's evidence module inherits from Cosmos SDK's [`evidence`](https://docs.cosmos.network/master/modules/evidence/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
-{{< /hint >}}
+{{< /alert >}}
 
 The evidence module allows arbitrary evidence of misbehavior, such as equivocation and counterfactual signing, to be submitted and handled.
 
@@ -191,7 +192,7 @@ The stake that contributed to the infraction is slashed, even if it has been red
 
 Additionally, the validator is permanently jailed and tombstoned so that the validator cannot re-enter the validator set again.
 
-{{< expand "Equivocation evidence handling code" >}}
+{{< details "Equivocation evidence handling code" >}}
 
 ```go
 func (k Keeper) HandleEquivocationEvidence(ctx sdk.Context, evidence *types.Equivocation) {
@@ -292,6 +293,6 @@ func (k Keeper) HandleEquivocationEvidence(ctx sdk.Context, evidence *types.Equi
 	k.slashingKeeper.Tombstone(ctx, consAddr)
 }
 ```
-{{< /expand >}}
+{{< /details >}}
 
 The slashing, jailing, and tombstoning calls are delegated through the slashing module, which emits informative events and finally delegates calls to the staking module. For more information about slashing and jailing, see [transitions]({{< ref "staking#transitions" >}}).

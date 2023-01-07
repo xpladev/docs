@@ -6,22 +6,25 @@ weight: 20
 ## Migration Web Application
 Using [Migration Web Application](https://migration.c2x.world/) for token migration.
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
-The web application is only available during the migration period.
-{{< /hint >}}
 
-{{< hint warning >}}
+The web application is only available during the migration period.
+{{< /alert >}}
+
+{{< alert >}}
 **Contact**
+
 Please contact us via official [Telegram channel](https://t.me/Official_XPLA) if you are in a situation where the web application for migration is unavailable.
-{{< /hint >}}
+{{< /alert >}}
 
 ## Migration Procedure
 
-{{< hint danger >}}
+{{< alert context="warning" >}}
 **Important**
+
 You must first agree to the following disclaimer by checking the box and clicking “Agree” before you proceed with the migration. Please keep in mind that in no event XPLA is liable for any loss that occurred during the migration process, so it is very important that you follow all of the given instructions to safely complete the migration procedure. Please refer to the whitepaper for detailed tokenomics behind XPLA chain.
-{{< /hint >}}
+{{< /alert >}}
 
 {{< figure2 src="migration-1.png" width="70%" >}}
 
@@ -44,10 +47,11 @@ In “Migrate All”, you can view all of the CTX you currently hold in your C2X
 On the other hand, if you wish to migrate some of your assets first, click "Migrate by your choice" and the following screen with tick boxes will appear to the left of all of the assets you own in your C2X Station. Here, you can manually pick which assets and how many of them to migrate over to the XPLA chain.
 If you change your mind and wish to migrate everything at once, you can also do it here by clicking the button "Max".
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 You can only migrate CTX for now, you will be able to migrate other tokens and assets from games after each of them has migrated to XPLA chain.
-{{< /hint >}}
+{{< /alert >}}
 
 {{< figure2 src="migration-6.png" width="70%" >}}
 
@@ -57,15 +61,17 @@ After deciding on which tokens and how many of them to migrate, click "Next" to 
 
 If everything is correct, click "Migrate". To finalize the migration procedure, please open your C2X Station and enter the correct password and you're all set!
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
-You can claim the fee required to perform migration from https://support.c2x.world/.
-{{< /hint >}}
 
-{{< hint warning >}}
+You can claim the fee required to perform migration from https://support.c2x.world/.
+{{< /alert >}}
+
+{{< alert context="warning" >}}
 **Important**
+
 Please check the app C2X Station on your phone to finalize the migration procedure after clicking “Migrate” at the very last step.
-{{< /hint >}}
+{{< /alert >}}
 
 
 {{< figure2 src="migration-8.png" width="70%" >}}

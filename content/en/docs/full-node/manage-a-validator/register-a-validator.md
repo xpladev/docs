@@ -24,10 +24,11 @@ The Consensus PubKey of your node is required to create a new validator. Run:
 
 ## 2. Create a New Validator
 
-   {{< hint info >}}
+   {{< alert >}}
    **Get tokens**
+
    In order for xplad to recognize a wallet address it must contain tokens. For the testnet, use [the faucet](https://faucet.xpla.io/) to send XPLA to your wallet. If you are on mainnet, send funds from an existing wallet. 1-3 XPLA are sufficient for most setup processes.
-   {{< /hint >}}
+   {{< /alert >}}
 
 To create the validator and initialize it with a self-delegation, run the following command. `key-name` is the name of the Application Operator Key that is used to sign transactions.
 
@@ -44,10 +45,11 @@ xplad tx staking create-validator \
     --min-self-delegation="1"
 ```
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Warning**
+
 When you specify commission parameters, the `commission-max-change-rate` is measured as a percentage-point change of the `commission-rate`. For example, a change from 1% to 2% is a 100% rate increase, but the `commission-max-change-rate` is measured as 1%.
-{{< /hint >}}
+{{< /alert >}}
 
 ## 3. Confirm Your Validator is Active
 
@@ -59,10 +61,11 @@ xplad query tendermint-validator-set | grep "$(xplad tendermint show-validator)"
 
 You are looking for the `bech32` encoded `address` in the `~/.xpla/config/priv_validator.json` file.
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 Only the top 8 validators in voting power are included in the active validator set.
-{{< /hint >}}
+{{< /alert >}}
 
 ## 4. Secure Your Keys and Have a Backup Plan
 

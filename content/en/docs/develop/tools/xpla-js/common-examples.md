@@ -5,10 +5,11 @@ weight: 20
 
 Use the following common examples to learn how to use xpla.js. If this is your first time using xpla.js, use the [xpla.js installation guide]({{< ref "get-started-with-xpla-js" >}}).
 
-{{< hint info >}}
+{{< alert >}}
 **Tip**
+
 If you are new to XPLA Chain and don't know where to start, visit the [getting started guide]({{< ref "get-started" >}}).
-{{< /hint >}}
+{{< /alert >}}
 
 ## Configuring LCDClient
 

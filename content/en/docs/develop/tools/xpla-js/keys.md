@@ -74,12 +74,13 @@ const MNE_KEY_FULLY_RESOLVED = new MnemonicKey({
 
 `MnemonicKey` can used to recover a wallet with a particular BIP44 HD path: `m/44'/${coinType}'/${account}'/0/${index}`.
 
-{{< hint info >}}
+{{< alert >}}
 **Tip**
+
 As per [ *Cosmos HD Key Derivation* ](https://github.com/confio/cosmos-hd-key-derivation-spec):
 
 Cosmos blockchains support hierarchical deterministic key generation (HD keys) for deriving multiple cryptographic keypairs from a single secret value. This allows the user to use different keypairs for different accounts on one blockchain and create accounts on multiple blockchains without having to manage multiple secrets.
-{{< /hint >}}
+{{< /alert >}}
 
 For example, to recover a mnemonic with the old XPLA Vault HD path using coin type for ATOM (118):
 

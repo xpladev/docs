@@ -5,7 +5,7 @@ weight: 40
 
 The following information describes the most important node configuration settings found in the `~/.xpla/config/` directory. It is recommended that you update these settings with your own information.
 
-{{< expand "Structure of .xpla/config" >}}
+{{< details "Structure of .xpla/config" >}}
 ```bash
 ~/.xpla/config
 │-- addrbook.json                       # a registry of peers to connect to
@@ -16,7 +16,7 @@ The following information describes the most important node configuration settin
 │-- node_key.json                       # private key used for node authentication in the p2p protocol (its corresponding public key is the nodeid)
 └-- priv_validator_key.json             # key used by the validator on the node to sign blocks
 ```
-{{< /expand >}}
+{{< /details >}}
 
 ## Initialize and Configure Moniker
 
@@ -26,10 +26,11 @@ Initialize the node with a human-readable name:
 xplad init <your_custom_moniker> # ex., xplad init validator-joes-node
 ```
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Moniker characters**
+
 Monikers can only contain ASCII characters; using Unicode characters will render your node unreachable by other peers in the network.
-{{< /hint >}}
+{{< /alert >}}
 
 You can update your node's moniker by editing the `moniker` field in `~/.xpla/config/config.toml`
 

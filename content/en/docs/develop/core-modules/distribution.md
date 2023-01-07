@@ -3,10 +3,11 @@ title: Distribution
 weight: 70
 ---
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 XPLA Chain's distribution module inherits from Cosmos SDK's [`distribution`](https://docs.cosmos.network/master/modules/distribution/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
-{{< /hint >}}
+{{< /alert >}}
 
 The distribution module describes a mechanism that tracks collected fees and passively distributes them to validators and delegators. Additionally, the distribution module defines the community pool, which is a pool of funds under the control of on-chain governance.
 
@@ -14,10 +15,11 @@ The distribution module describes a mechanism that tracks collected fees and pas
 
 ### Validator and Delegator Rewards
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 Passive distribution means that validators and delegators need to manually collect their fee rewards by [submitting withdrawal transactions]({{< ref "subcommands#tx-distribution-withdraw-rewards" >}}).
-{{< /hint >}}
+{{< /alert >}}
 
 Collected rewards are pooled globally and distributed to validators and delegators. Each validator has the opportunity to charge delegators commission on the rewards collected on behalf of the delegators. Fees are collected directly into a global reward pool and a validator proposer-reward pool. Due to the nature of passive accounting, whenever changes to parameters which affect the rate of reward distribution occur, withdrawal of rewards must also occur.
 

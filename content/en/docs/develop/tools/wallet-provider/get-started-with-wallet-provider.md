@@ -7,10 +7,11 @@ weight: 10
 
 This guide will cover how to set up a React app, integrate Wallet Provider, check the balance of the connected account, and call a token swap. If you want to integrate XPLA Vault into an existing React app you can skip past the `Project Setup` section.
 
-{{< hint info >}}
+{{< alert >}}
 **Just want to dive in?**
+
 Check out the getting started section for the premade templates [in GitHub](https://github.com/xpladev/wallet-provider/).
-{{< /hint >}}
+{{< /alert >}}
 
 If you're using a frontend framework other than React you'll need to use [Wallet Controller](https://www.npmjs.com/package/@xpla/wallet-controller) instead. Controller provides the sub-structure of Provider.
 
@@ -75,7 +76,7 @@ Next, you'll wrap your `App` with `<WalletProvider>` to give all your components
 
 Your browser should open to `http://localhost:3000/`, and you should see the React logo with a black background and some text.
 
-{{< expand "Getting polyfill errors?" >}}
+{{< details "Getting polyfill errors?" >}}
 
 To solve these errors, can downgrade `react-scripts`: `4.0.3` in your `package.json` and reinstall your dependencies as a quick fix:
 
@@ -98,7 +99,7 @@ To solve these errors, can downgrade `react-scripts`: `4.0.3` in your `package.j
     ```
 
 Alternatively, you can configure your webpack to include the necessary fallbacks. Here's an [example](https://github.com/xpladev/wallet-provider/blob/main/templates/create-react-app/config-overrides.js) that uses [react-app-rewired](https://www.npmjs.com/package/react-app-rewired).
-{{< /expand >}}
+{{< /details >}}
 
 3.  Create a new directory called `components` in the `source` directory. This directory will house components to trigger different actions from our connected wallet.
 
@@ -250,10 +251,11 @@ You can request testnet funds from the [faucet](https://faucet.xpla.io/).
 
 A XPLA transfer transaction needs a fee and a message containing the sender address, recipient address, and send amount (in this case 1 XPLA). Once the message is constructed, the `post` method on `connectedWallet` broadcasts it to the network.
 
-{{< hint info >}}
+{{< alert >}}
 **What happens if something goes wrong?**
+
 Wallet provider also supplies useful error types. This example will handle the `UserDenied` error case. You can find other cases to handle on [GitHub](https://github.com/xpladev/wallet-provider/blob/4e601c2dece7bec92c9ce95991d2314220a2c954/packages/src/%40xpladev/wallet-controller/exception/mapExtensionTxError.ts#L23).
-{{< /hint >}}
+{{< /alert >}}
 
 1. Create a file in your `Components` folder named `Tx.js`.
 
@@ -325,10 +327,11 @@ Wallet provider also supplies useful error types. This example will handle the `
    }
    ```
 
-{{< hint info >}}
+{{< alert >}}
 **Note**
+
 Because all coins are denominated in micro-units, you will need to multiply any coins by 10 to the power of 18. For example, 1000000000000000000 axpla = 1 XPLA.
-{{< /hint >}}
+{{< /alert >}}
 
 3. Open `App.js` in your code editor and add `import Tx from './components/Tx'` to line 4, and ` <Tx />` to line 12. The whole file should look like the following:
 

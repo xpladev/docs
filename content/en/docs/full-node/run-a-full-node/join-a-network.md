@@ -21,10 +21,11 @@ The simplest XPLA Chain you can set up is a local testnet with just a single nod
    xplad keys add <account-name>
    ```
 
-{{< hint info >}}
+{{< alert >}}
 **Get tokens**
+
 In order for xplad to recognize a wallet address, it must contain tokens. For the testnet, use [the faucet](https://faucet.xpla.io/) to send XPLA to your wallet. If you are on mainnet, send funds from an existing wallet. 1-3 XPLA are sufficient for most setup processes.
-{{< /hint >}}
+{{< /alert >}}
 
 ### Add Your Account to the Genesis
 
@@ -59,10 +60,11 @@ Specify the network you want to join by choosing the corresponding **genesis fil
 | `dimension_37-1` | Mainnet | [Genesis Link](https://raw.githubusercontent.com/xpladev/mainnet/main/dimension_37-1/genesis.json) | e7b6016ce5663a69ba71a982072315545eb0d5f6@seed.xpla.delightlabs.io:26656 |
 | `cube_47-5`      | Testnet | [Genesis Link](https://raw.githubusercontent.com/xpladev/testnets/main/cube_47-5/genesis.json)     | 9ddfac28dc6b28601e3039902ee5a8915dc7891f@3.35.54.221:26656              |
 
-{{< hint info >}}
+{{< alert >}}
 **Selecting a network**
+
 Note that the versions of the network listed above are the latest versions. To find earlier versions, please consult the [testnets repo](https://github.com/xpladev/testnets) or [mainnet repo](https://github.com/xpladev/mainnet).
-{{< /hint >}}
+{{< /alert >}}
 
 ### 2. Download genesis file and address book
 
@@ -84,7 +86,7 @@ xplad status
 # It will take a few seconds for xplad to start.
 ```
 
-{{< expand "Healthy Node Status Example" >}}
+{{< details "Healthy Node Status Example" >}}
 ```json
 {
   "NodeInfo": {
@@ -125,13 +127,14 @@ xplad status
   }
 }
 ```
-{{< /expand >}}
+{{< /details >}}
 
 Your node is now syncing. This process will take a long time. Make sure you've set it up on a stable connection so this process is not interrupted.
 
-{{< hint warning >}}
+{{< alert context="warning" >}}
 **Sync start times**
+
 Nodes take at least an hour to start syncing. This wait time is normal. Before troubleshooting a sync, please wait an hour for the sync to start.
-{{< /hint >}}
+{{< /alert >}}
 
 Continue to the [Sync]({{< ref "sync" >}}) page to find out more about syncing your node.

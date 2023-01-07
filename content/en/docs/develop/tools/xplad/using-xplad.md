@@ -75,7 +75,7 @@ xplad tx bank send \
     --dry-run
 ```
 
-{{< expand "Example: simulate a XPLA transfer" >}}
+{{< details "Example: simulate a XPLA transfer" >}}
 ```bash
 xplad tx bank send \
     xpla1ru2ySENDER-EXAMPLEtf9cva9kp33h0jnsm9ss \
@@ -84,7 +84,7 @@ xplad tx bank send \
     --chain-id=cube_47-5 \
     --dry-run
 ```
-{{< /expand >}}
+{{< /details >}}
 
 ### Generating a Transaction without Sending
 
@@ -106,7 +106,7 @@ xplad tx sign \
     unsignedSendTx.json > signedSendTx.json
 ```
 
-{{< expand "Example: sign an unsigned transaction" >}}
+{{< details "Example: sign an unsigned transaction" >}}
 
 ```bash
 xplad tx sign \
@@ -164,7 +164,7 @@ A healthy response should look similar to the following:
   ]
 }
 ```
-{{< /expand >}}
+{{< /details >}}
 
 You can validate the transaction's signatures by typing the following:
 
