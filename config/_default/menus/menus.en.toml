@@ -1,9 +1,4 @@
 [[main]]
-  name = "Docs"
-  url = "/docs/learn/about-xpla-chain/"
-  weight = 10
-
-[[main]]
   name = "Home"
   weight = 20
   identifier = "xpla-home"
