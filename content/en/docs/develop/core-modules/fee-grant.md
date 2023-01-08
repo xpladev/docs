@@ -737,7 +737,7 @@ type Grant struct {
 
 A fee allowance grant will be created with the MsgGrantAllowance message.
 
-```proto
+```protobuf
 // MsgGrantAllowance adds permission for Grantee to spend up to Allowance
 // of fees from the account of Granter.
 message MsgGrantAllowance {
@@ -756,7 +756,7 @@ message MsgGrantAllowance {
 
 A fee allowance grant will be revokeed with the MsgRevokeAllowance message.
 
-```proto
+```protobuf
 // MsgRevokeAllowance removes any existing Allowance from Granter to Grantee.
 message MsgRevokeAllowance {
   // granter is the address of the user granting an allowance of their funds.
