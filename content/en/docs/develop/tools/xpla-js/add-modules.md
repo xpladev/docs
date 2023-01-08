@@ -23,9 +23,8 @@ For this example, let's assume that you are creating two new messages, `MsgHello
 import { JSONSerializable } from "../../../util/json";
 import { AccAddress } from "../../strings";
 
-/**
- * Just a simple greeting on the blockchain.
- */
+
+// Just a simple greeting on the blockchain.
 export class MsgHello extends JSONSerializable<MsgHello.Data> {
   constructor(public recipient: AccAddress) {
     super();
@@ -319,11 +318,11 @@ export class LCDClient {
   public wasm: WasmAPI;
   public tx: TxAPI;
 
-  /**
-   * Creates a new LCD client with the specified configuration.
-   *
-   * @param config LCD configuration
-   */
+  //
+  // Creates a new LCD client with the specified configuration.
+  //
+  // @param config LCD configuration
+  //
   constructor(config: LCDClientConfig) {
     this.config = {
       ...DEFAULT_LCD_OPTIONS,

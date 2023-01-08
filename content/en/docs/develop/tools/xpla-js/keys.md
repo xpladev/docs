@@ -106,14 +106,10 @@ import SHA256 from 'crypto-js/sha256';
 import * as secp256k1 from 'secp256k1';
 import { Key } from '@xpla/xpla.js';
 
-/**
- * An implementation of the Key interfaces that uses a raw private key.
- */
+// An implementation of the Key interfaces that uses a raw private key.
 export class NaiveCustomImplementation extends Key {
 
-  /**
-   * Raw private key, in bytes.
-   */
+  // Raw private key, in bytes.
   public privateKey: Buffer;
 
   constructor(privateKey: Buffer) {
