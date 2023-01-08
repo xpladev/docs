@@ -1,3 +1,99 @@
+/* noto-sans-regular - latin */
+@font-face {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    // Google Fonts NotoSans
+    local("NotoSans Regular Regular"),   // Full Name
+    local("NotoSans-Regular"),           // PostScript name
+      // indestructible NotoSans*
+    local("NotoSans* Book"),
+    local("NotoSans-Book"),
+    url("fonts/vendor/noto-sans/NotoSans-Regular.ttf") format("truetype");
+}
+
+/* noto-sans-500 - latin */
+@font-face {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    // Google Fonts NotoSans
+    local("NotoSans Regular Medium"),
+    local("NotoSans-Medium"),
+      // indestructible NotoSans*
+    local("NotoSans* Medium"),
+    local("NotoSans-Medium"),
+    url("fonts/vendor/noto-sans/NotoSans-Medium.ttf") format("truetype");
+}
+
+/* noto-sans-700 - latin */
+@font-face {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    // Google Fonts NotoSans
+    local("NotoSans Regular Bold"),
+    local("NotoSans-Bold"),
+      // indestructible NotoSans*
+    local("NotoSans* Bold"),
+    local("NotoSans-Bold"),
+    url("fonts/vendor/noto-sans/NotoSans-Bold.ttf") format("truetype");
+}
+
+/* noto-sans-italic - latin */
+@font-face {
+  font-family: Noto Sans;
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    // Google Fonts NotoSans
+    local("NotoSans Italic Italic"),
+    local("NotoSans-Italic"),
+      // indestructible NotoSans*
+    local("NotoSans* BookItalic"),
+    local("NotoSans-BookItalic"),
+    url("fonts/vendor/noto-sans/NotoSans-Italic.ttf") format("truetype");
+}
+
+/* noto-sans-500italic - latin */
+@font-face {
+  font-family: Noto Sans;
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    // Google Fonts NotoSans
+    local("NotoSans Italic Medium Italic"),
+    local("NotoSansItalic-Medium"),
+      // indestructible NotoSans*
+    local("NotoSans* Medium Italic"),
+    local("NotoSans-MediumItalic"),
+    url("fonts/vendor/noto-sans/NotoSans-MediumItalic.ttf") format("truetype");
+}
+
+/* noto-sans-700italic - latin */
+@font-face {
+  font-family: Noto Sans;
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    // Google Fonts NotoSans
+    local("NotoSans Italic Bold Italic"),
+    local("NotoSansItalic-Bold"),
+      // indestructible NotoSans*
+    local("NotoSans* Bold Italic"),
+    local("NotoSans-BoldItalic"),
+    url("fonts/vendor/noto-sans/NotoSans-BoldItalic.ttf") format("truetype");
+}
+
 /* jost-regular - latin */
 @font-face {
   font-family: Jost;
