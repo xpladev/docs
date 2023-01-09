@@ -5,7 +5,7 @@ weight: 30
 
 Use the following information to set up and manage your production-level XPLA Chain full node.
 
-For information about running a validator node, visit the [validator guide]({{< ref "manage-a-validator" >}}).
+For information about running a validator node, visit the [validator guide]({{< ref "/docs/full-node/manage-a-validator/overview" >}}).
 
 ## Create a Dedicated User
 

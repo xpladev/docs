@@ -18,9 +18,9 @@ The `verifyBytes` function then compares the original `TEST_BYTES` against the s
 {{< alert >}}
 **Tip**
 
-You can see how the `verifyBytes` function works [here](https://github.com/xpladev/wallet-provider/blob/4e601c2dece7bec92c9ce95991d2314220a2c954/packages/src/%40xpladev/wallet-controller/verifyBytes.ts#L1).
+You can see how the `verifyBytes` function works [here](https://github.com/xpladev/wallet-provider/blob/main/packages/src/%40xpla/wallet-controller/verifyBytes.ts#L1).
 {{< /alert >}}
-
+ßßß
 Wallet Provider also supplies useful error types that can be used with a `catch` statement notify the user whether the signing was successful:
 
 ```ts
@@ -101,4 +101,3 @@ export function SignBytesSample() {
   );
 }
 ```
-You can find this code used in context in [GitHub](https://github.com/xpladev/wallet-provider/blob/main/templates/create-react-app/src/components/SignBytesSample.tsx).
