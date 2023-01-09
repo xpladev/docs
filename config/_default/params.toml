@@ -82,7 +82,7 @@ repoHost = "GitHub"
 docsRepo = "https://github.com/xpladev/docs-v2"
 docsRepoBranch = "main"
 docsRepoSubPath = ""
-editPage = false
+editPage = true
 lastMod = false
 
 [sections]
