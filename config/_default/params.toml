@@ -12,7 +12,7 @@ description = ""
 ## Open Graph
 images = ["xpla.svg"]
 ogLocale = "en_US"
-domainTLD = "xpla-docs.netlify.app"
+domainTLD = "docs.xpla.io"
 titleHome = "XPLA Docs"
 
 ## Twitter Cards

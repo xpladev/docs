@@ -1,4 +1,4 @@
-baseurl = "https://xpla-docs.netlify.app/"
+baseurl = "https://docs.xpla.io/"
 canonifyURLs = false
 disableAliases = true
 disableHugoGeneratorInject = true
