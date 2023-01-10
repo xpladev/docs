@@ -75,10 +75,13 @@ As you can see, your contract was successfully instantiated with Code ID #1.
 You can check it out:
 
 ```sh
-xplad query wasm code 1
+xplad query wasm code-info 1
 codeid: 1
-codehash: KVR4SWuieLxuZaStlvFoUY9YXlcLLMTHYVpkubdjHEI=
 creator: xpla1dcegyrekltswvyy0xy69ydgxn9x8x32zdtapd8
+data_hash: 8FFA304199181220741AE8B239437CCB9A105DF1AEEEE9B1CC60729B5DD42AE4
+instantiate_permission:
+  address: ""
+  permission: Everybody
 ```
 
 ## Creating the Contract
@@ -137,11 +140,14 @@ Check out your contract information:
 
 ```sh
 xplad query wasm contract xpla18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5
-address: xpla18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5
-owner: xpla1dcegyrekltswvyy0xy69ydgxn9x8x32zdtapd8
-codeid: 1
-initmsg: eyJjb3VudCI6MH0=
-migratable: false
+contract_info:
+  admin: xpla1dcegyrekltswvyy0xy69ydgxn9x8x32zdtapd8
+  codeid: "1"
+  created: null
+  creator: xpla1dcegyrekltswvyy0xy69ydgxn9x8x32zdtapd8
+  extension: null
+  ibc_port_id: ""
+  label: COUNTER
 ```
 
 You can use the following to decode the Base64 InitMsg:
@@ -204,7 +210,7 @@ Check the result of your executions!
 ```
 
 ```sh
-xplad query wasm contract-store xpla18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5 '{"get_count":{}}'
+xplad query wasm contract-state smart xpla18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5 '{"get_count":{}}'
 ```
 
 Expected output:

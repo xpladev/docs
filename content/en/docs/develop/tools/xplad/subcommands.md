@@ -819,14 +819,14 @@ Retrieves the metadata information about an instantiated contract.
 xplad query wasm contract <contract-address>
 ```
 
-## `query wasm contract-store`
+## `query wasm contract-state smart`
 
 Retrieves data about the contract store of the address and prints the results.
 
 **Syntax**
 
 ```sh
-xplad query wasm contract-store <contract-address> <query-msg>
+xplad query wasm contract-state smart <contract-address> <query-msg>
 ```
 
 where `<query-msg>` is a JSON string that encodes the QueryMsg.
@@ -834,7 +834,7 @@ where `<query-msg>` is a JSON string that encodes the QueryMsg.
 **Example**
 
 ```sh
-xplad query wasm contract-store xpla1plju286nnfj3z54wgcggd4enwaa9fgf5kgrgzl '{"config":{}}'
+xplad query wasm contract-state smart xpla1plju286nnfj3z54wgcggd4enwaa9fgf5kgrgzl '{"config":{}}'
 ```
 
 ## `query wasm params`

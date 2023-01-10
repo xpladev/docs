@@ -24,6 +24,10 @@ In this section, you will define your expected messages alongside their implemen
 In your working directory, quickly launch your smart contract with the recommended folder structure and build options by running the following commands:
 
 ```sh
+# install cargo-generate
+cargo install cargo-generate
+
+# generate template
 cargo generate --git https://github.com/CosmWasm/cw-template.git --branch 1.0 --name my-first-contract
 cd my-first-contract
 ```
@@ -321,7 +325,7 @@ If you are on an arm64 machine:
 docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/rust-optimizer-arm64:0.12.4
+  cosmwasm/rust-optimizer-arm64:0.12.6
 ```
 
 If you are developing with a Windows exposed Docker daemon connected to WSL 1:
@@ -330,7 +334,7 @@ If you are developing with a Windows exposed Docker daemon connected to WSL 1:
 docker run --rm -v "$(wslpath -w $(pwd))":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/rust-optimizer:0.12.4
+  cosmwasm/rust-optimizer:0.12.6
 ```
 
 This will result in an optimized build of `artifacts/my_first_contract.wasm` or `artifacts/my_first_contract-aarch64.wasm` in your working directory.
