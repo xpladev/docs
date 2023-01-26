@@ -1,13 +1,7 @@
 <!doctype html>
 <html lang="{{ .Site.Params.languageTag | default "en-US" }}">
-{{ if and .IsHome (and (.Site.Params.options.alternativeHome) (ne .Site.Params.options.alternativeHome "")) }}
-<head>
-  <meta name="robots" content="noindex">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-  <meta http-equiv="refresh" content="0; url={{ .Site.Params.options.alternativeHome }}"/>
-</head>
-{{ else }}
   {{ partial "head/head.html" . }}
+  {{ if or (not .IsHome) (or (not .Site.Params.options.alternativeHome) (eq .Site.Params.options.alternativeHome "")) -}}
   {{ if eq .Kind "home" -}}
     {{ .Scratch.Set "class" "home" -}}
   {{ else if eq .Kind "404" -}}
@@ -36,5 +30,5 @@
     </div>
     {{ end }}
   </body>
+  {{ end -}}
 </html>
-{{ end }}

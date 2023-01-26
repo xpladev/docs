@@ -4,13 +4,13 @@
 title = "XPLA"
 titleSeparator = "|"
 titleAddition = ""
-description = ""
+description = "XPLA Technical Documentation"
 
 ## Documentation
 # docsVersion = "0.3"
 
 ## Open Graph
-images = ["xpla.svg"]
+images = ["xpla-opengraph-image.svg"]
 ogLocale = "en_US"
 domainTLD = "docs.xpla.io"
 titleHome = "XPLA Docs"
