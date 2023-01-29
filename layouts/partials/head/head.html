@@ -8,4 +8,9 @@
   {{ block "head/seo" . }}{{ partial "head/seo.html" . }}{{ end }}
   {{ block "head/favicons" . }}{{ partial "head/favicons.html" . }}{{ end }}
   {{ block "head/custom-head" . }}{{ partial "head/custom-head.html" . }}{{ end }}
+  {{ if and .IsHome (and (.Site.Params.options.alternativeHome) (ne .Site.Params.options.alternativeHome "")) -}}
+  <meta name="robots" content="noindex">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="refresh" content="0; url={{ .Site.Params.options.alternativeHome }}"/>
+  {{end -}}
 </head>
