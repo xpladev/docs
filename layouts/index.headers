@@ -2,7 +2,7 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
-  Content-Security-Policy: default-src 'self'; frame-ancestors https://jamstackthemes.dev; manifest-src 'self' https://*.netlify.app; connect-src 'self' https://*.netlify.app; font-src 'self' https://*.netlify.app; img-src 'self' https://*.netlify.app data: https://i.giphy.com; script-src 'self' https://*.netlify.app 'unsafe-inline'; style-src 'self' https://*.netlify.app 'unsafe-inline'; frame-src 'self' https://app.netlify.com
+  Content-Security-Policy: default-src 'self'; frame-ancestors https://jamstackthemes.dev; manifest-src 'self' https://*.netlify.app https://docs.xpla.io; connect-src 'self' https://*.netlify.app https://docs.xpla.io; font-src 'self' https://*.netlify.app https://docs.xpla.io; img-src 'self' https://*.netlify.app https://docs.xpla.io data: https://i.giphy.com; script-src 'self' https://*.netlify.app https://docs.xpla.io 'unsafe-inline'; style-src 'self' https://*.netlify.app https://docs.xpla.io 'unsafe-inline'; frame-src 'self' https://app.netlify.com https://docs.xpla.io
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin
   Feature-Policy: geolocation 'self'
