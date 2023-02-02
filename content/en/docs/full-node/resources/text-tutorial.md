@@ -1,11 +1,9 @@
 ---
-title: Resources
-weight: 30
+title: Text Tutorials
+weight: 10
 ---
 
 Use these resources to set up your full node.
 
-## Text Tutorials
-
-- [Full node tutorial]({{< ref "run-a-full-node/overview" >}})
+- [Full node tutorial]({{< ref "/docs/full-node/run-a-full-node/overview" >}})
 - [System configuration]({{< ref "system-configuration" >}})
