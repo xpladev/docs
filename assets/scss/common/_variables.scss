@@ -32,7 +32,8 @@ $color-btn-text: $white;
 
 $xpla-blue: #031435;
 $xpla-blue-navbar: rgba(3,20,53,0.90);
-
+$xpla-primary: #66B3FF;
+$primary: lighten($xpla-blue, 35%);
 // Options
 //
 // Quickly modify global styling by enabling or disabling optional features.
