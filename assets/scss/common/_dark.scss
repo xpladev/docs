@@ -8,11 +8,13 @@ $body-overlay-dark: darken($body-bg-dark, 5%);
 /*
 $border-dark: darken($body-bg-dark, 2.5%);
 */
-$border-dark: $gray-800;
+//$border-dark: $gray-800;
+$border-dark: lighten($body-bg-dark, 10%);
 $body-color-dark: $gray-300;
 $dots-dark: darken($body-color-dark, 50%);
 
-$link-color-dark: $blue-300;
+//$link-color-dark: $blue-300;
+$link-color-dark: $xpla-primary;
 $button-color-dark: $link-color-dark;
 $focus-color-dark: lighten($link-color-dark, 2.5%);
 
