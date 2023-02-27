@@ -30,44 +30,113 @@ satisfy adjust timber high purchase tuition stool faith fine install that you un
 Make sure that the **optimized build** of `my_first_contract.wasm` that you created in the last section is in your current working directory.
 
 ```sh
-xplad tx wasm store artifacts/my_first_contract.wasm --from test1 --chain-id=cube_47-5 --gas=auto --fees=100000axpla --broadcast-mode=block
+xplad tx wasm store artifacts/my_first_contract.wasm --from test1 --chain-id=cube_47-5 --gas=auto --gas-prices 850000000000axpla --gas-adjustment 1.2 --broadcast-mode=block
 ```
 Or, if you are on an arm64 machine:
 
 ```sh
-xplad tx wasm store artifacts/my_first_contract-aarch64.wasm --from test1 --chain-id=cube_47-5 --gas=auto --fees=100000axpla --broadcast-mode=block
+xplad tx wasm store artifacts/my_first_contract-aarch64.wasm --from test1 --chain-id=cube_47-5 --gas=auto --gas-prices 850000000000axpla --gas-adjustment 1.2 --broadcast-mode=block
 ```
 
 You should see output similar to the following:
 
 ```sh
-height: 6
-txhash: 83BB9C6FDBA1D2291E068D5CF7DDF7E0BE459C6AF547EC82652C52507CED8A9F
-codespace: ""
 code: 0
-data: ""
-rawlog: '[{"msg_index":0,"log":"","events":[{"type":"message","attributes":[{"key":"action","value":"store_code"},{"key":"module","value":"wasm"}]},{"type":"store_code","attributes":[{"key":"sender","value":"xpla1dcegyrekltswvyy0xy69ydgxn9x8x32zdtapd8"},{"key":"code_id","value":"1"}]}]}]'
+codespace: ""
+data: 0A250A1E2F636F736D7761736D2E7761736D2E76312E4D736753746F7265436F6465120308C702
+events:
+- attributes:
+  - index: true
+    key: c3BlbmRlcg==
+    value: eHBsYTF6Mms4NW40OHlkZnZ6c2xydWd3emw0ajJ1N3Z0ZHlmM3h2dWNtYw==
+  - index: true
+    key: YW1vdW50
+    value: MTAwMjI1MjAwMDAwMDAwMDAwMGF4cGxh
+  type: coin_spent
+- attributes:
+  - index: true
+    key: cmVjZWl2ZXI=
+    value: eHBsYTE3eHBmdmFrbTJhbWc5NjJ5bHM2Zjg0ejNrZWxsOGM1bHc3bXVxdw==
+  - index: true
+    key: YW1vdW50
+    value: MTAwMjI1MjAwMDAwMDAwMDAwMGF4cGxh
+  type: coin_received
+- attributes:
+  - index: true
+    key: cmVjaXBpZW50
+    value: eHBsYTE3eHBmdmFrbTJhbWc5NjJ5bHM2Zjg0ejNrZWxsOGM1bHc3bXVxdw==
+  - index: true
+    key: c2VuZGVy
+    value: eHBsYTF6Mms4NW40OHlkZnZ6c2xydWd3emw0ajJ1N3Z0ZHlmM3h2dWNtYw==
+  - index: true
+    key: YW1vdW50
+    value: MTAwMjI1MjAwMDAwMDAwMDAwMGF4cGxh
+  type: transfer
+- attributes:
+  - index: true
+    key: c2VuZGVy
+    value: eHBsYTF6Mms4NW40OHlkZnZ6c2xydWd3emw0ajJ1N3Z0ZHlmM3h2dWNtYw==
+  type: message
+- attributes:
+  - index: true
+    key: ZmVl
+    value: MTAwMjI1MjAwMDAwMDAwMDAwMGF4cGxh
+  - index: true
+    key: ZmVlX3BheWVy
+    value: eHBsYTF6Mms4NW40OHlkZnZ6c2xydWd3emw0ajJ1N3Z0ZHlmM3h2dWNtYw==
+  type: tx
+- attributes:
+  - index: true
+    key: YWNjX3NlcQ==
+    value: eHBsYTF6Mms4NW40OHlkZnZ6c2xydWd3emw0ajJ1N3Z0ZHlmM3h2dWNtYy80
+  type: tx
+- attributes:
+  - index: true
+    key: c2lnbmF0dXJl
+    value: VzNTZUpMbExvYUlGU21mQkJXdWl2N3dPRFd0NHdKUUhZWXRaZ0VYR1pSTktYeEplbG9jVjBmMkttOEY3VzBITktZUHVQNEk5WXlOT251R3VxdUJGdndBPQ==
+  type: tx
+- attributes:
+  - index: true
+    key: YWN0aW9u
+    value: L2Nvc213YXNtLndhc20udjEuTXNnU3RvcmVDb2Rl
+  type: message
+- attributes:
+  - index: true
+    key: bW9kdWxl
+    value: d2FzbQ==
+  - index: true
+    key: c2VuZGVy
+    value: eHBsYTF6Mms4NW40OHlkZnZ6c2xydWd3emw0ajJ1N3Z0ZHlmM3h2dWNtYw==
+  type: message
+- attributes:
+  - index: true
+    key: Y29kZV9pZA==
+    value: MzI3
+  type: store_code
+gas_used: "997846"
+gas_wanted: "1179120"
+height: "2580633"
+info: ""
 logs:
-- msgindex: 0
-  log: ""
-  events:
-  - type: message
-    attributes:
+- events:
+  - attributes:
     - key: action
-      value: store_code
+      value: /cosmwasm.wasm.v1.MsgStoreCode
     - key: module
       value: wasm
-  - type: store_code
-    attributes:
     - key: sender
-      value: xpla1dcegyrekltswvyy0xy69ydgxn9x8x32zdtapd8
+      value: xpla1z2k85n48ydfvzslrugwzl4j2u7vtdyf3xvucmc
+    type: message
+  - attributes:
     - key: code_id
-      value: "1"
-info: ""
-gaswanted: 681907
-gasused: 680262
-tx: null
+      value: "327"
+    type: store_code
+  log: ""
+  msg_index: 0
+raw_log: '[{"events":[{"type":"message","attributes":[{"key":"action","value":"/cosmwasm.wasm.v1.MsgStoreCode"},{"key":"module","value":"wasm"},{"key":"sender","value":"xpla1z2k85n48ydfvzslrugwzl4j2u7vtdyf3xvucmc"}]},{"type":"store_code","attributes":[{"key":"code_id","value":"327"}]}]}]'
 timestamp: ""
+tx: null
+txhash: FB6E917629BA304ABB6316584FA24CAEB55F772C289757D7D77E500BE364A8B9
 ```
 
 As you can see, your contract was successfully instantiated with Code ID #1.
@@ -75,10 +144,15 @@ As you can see, your contract was successfully instantiated with Code ID #1.
 You can check it out:
 
 ```sh
-xplad query wasm code 1
-codeid: 1
-codehash: KVR4SWuieLxuZaStlvFoUY9YXlcLLMTHYVpkubdjHEI=
-creator: xpla1dcegyrekltswvyy0xy69ydgxn9x8x32zdtapd8
+xplad query wasm code-info 327
+
+code_id: "327"
+creator: xpla1z2k85n48ydfvzslrugwzl4j2u7vtdyf3xvucmc
+data_hash: 1B7CD6D73B86DFEF2A06A8B67253E0039DE8C6916DB1B9A93604B8DDFBDFD677
+instantiate_permission:
+  address: ""
+  addresses: []
+  permission: Everybody
 ```
 
 ## Creating the Contract
@@ -94,54 +168,153 @@ You have now uploaded the code for your contract, but still don't have a contrac
 You can compress the JSON into 1 line with [this online tool](https://goonlinetools.com/json-minifier/).
 
 ```sh
-xplad tx wasm instantiate 1 '{"count":0}' --from test1 --chain-id=cube_47-5 --fees=10000axpla --gas=auto --broadcast-mode=block
+xplad tx wasm instantiate 327 '{"count":0}' --from test1 --chain-id=cube_47-5 --label counter --no-admin --gas auto --gas-prices 850000000000axpla --gas-adjustment 1.2 --broadcast-mode=block
 ```
 
 You should get a response like the following:
 
 ```sh
-height: 41
-txhash: AEF6F2FA570029A5D4C0DA5ACFA4A2B614D5811E29EEE10FF59F821AFECCD399
-codespace: ""
 code: 0
-data: ""
-rawlog: '[{"msg_index":0,"log":"","events":[{"type":"instantiate_contract","attributes":[{"key":"owner","value":"xpla1dcegyrekltswvyy0xy69ydgxn9x8x32zdtapd8"},{"key":"code_id","value":"1"},{"key":"contract_address","value":"xpla18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5"}]},{"type":"message","attributes":[{"key":"action","value":"instantiate_contract"},{"key":"module","value":"wasm"}]}]}]'
+codespace: ""
+data: 0A6D0A282F636F736D7761736D2E7761736D2E76312E4D7367496E7374616E7469617465436F6E747261637412410A3F78706C6131346D3067613874793466326171746568386B397A39346A6470796D687436616B6A33646D36616E6561663734736E7664326C30717135396D6C34
+events:
+- attributes:
+  - index: true
+    key: c3BlbmRlcg==
+    value: eHBsYTF6Mms4NW40OHlkZnZ6c2xydWd3emw0ajJ1N3Z0ZHlmM3h2dWNtYw==
+  - index: true
+    key: YW1vdW50
+    value: MTY4MjU5MjAwMDAwMDAwMDAwYXhwbGE=
+  type: coin_spent
+- attributes:
+  - index: true
+    key: cmVjZWl2ZXI=
+    value: eHBsYTE3eHBmdmFrbTJhbWc5NjJ5bHM2Zjg0ejNrZWxsOGM1bHc3bXVxdw==
+  - index: true
+    key: YW1vdW50
+    value: MTY4MjU5MjAwMDAwMDAwMDAwYXhwbGE=
+  type: coin_received
+- attributes:
+  - index: true
+    key: cmVjaXBpZW50
+    value: eHBsYTE3eHBmdmFrbTJhbWc5NjJ5bHM2Zjg0ejNrZWxsOGM1bHc3bXVxdw==
+  - index: true
+    key: c2VuZGVy
+    value: eHBsYTF6Mms4NW40OHlkZnZ6c2xydWd3emw0ajJ1N3Z0ZHlmM3h2dWNtYw==
+  - index: true
+    key: YW1vdW50
+    value: MTY4MjU5MjAwMDAwMDAwMDAwYXhwbGE=
+  type: transfer
+- attributes:
+  - index: true
+    key: c2VuZGVy
+    value: eHBsYTF6Mms4NW40OHlkZnZ6c2xydWd3emw0ajJ1N3Z0ZHlmM3h2dWNtYw==
+  type: message
+- attributes:
+  - index: true
+    key: ZmVl
+    value: MTY4MjU5MjAwMDAwMDAwMDAwYXhwbGE=
+  - index: true
+    key: ZmVlX3BheWVy
+    value: eHBsYTF6Mms4NW40OHlkZnZ6c2xydWd3emw0ajJ1N3Z0ZHlmM3h2dWNtYw==
+  type: tx
+- attributes:
+  - index: true
+    key: YWNjX3NlcQ==
+    value: eHBsYTF6Mms4NW40OHlkZnZ6c2xydWd3emw0ajJ1N3Z0ZHlmM3h2dWNtYy81
+  type: tx
+- attributes:
+  - index: true
+    key: c2lnbmF0dXJl
+    value: T2FnSjZWNyswemVkczNlYXgwbU50dmVFZmpEemF4NUwzZVNRRFlBS3h0VmgveGxMTEZ6R3R6VGJxL0V0bVRrUDhLb2RHL3NvTytjZW54Tm4yc1ljandFPQ==
+  type: tx
+- attributes:
+  - index: true
+    key: YWN0aW9u
+    value: L2Nvc213YXNtLndhc20udjEuTXNnSW5zdGFudGlhdGVDb250cmFjdA==
+  type: message
+- attributes:
+  - index: true
+    key: bW9kdWxl
+    value: d2FzbQ==
+  - index: true
+    key: c2VuZGVy
+    value: eHBsYTF6Mms4NW40OHlkZnZ6c2xydWd3emw0ajJ1N3Z0ZHlmM3h2dWNtYw==
+  type: message
+- attributes:
+  - index: true
+    key: X2NvbnRyYWN0X2FkZHJlc3M=
+    value: eHBsYTE0bTBnYTh0eTRmMmFxdGVoOGs5ejk0amRweW1odDZha2ozZG02YW5lYWY3NHNudmQybDBxcTU5bWw0
+  - index: true
+    key: Y29kZV9pZA==
+    value: MzI3
+  type: instantiate
+- attributes:
+  - index: true
+    key: X2NvbnRyYWN0X2FkZHJlc3M=
+    value: eHBsYTE0bTBnYTh0eTRmMmFxdGVoOGs5ejk0amRweW1odDZha2ozZG02YW5lYWY3NHNudmQybDBxcTU5bWw0
+  - index: true
+    key: bWV0aG9k
+    value: aW5zdGFudGlhdGU=
+  - index: true
+    key: b3duZXI=
+    value: eHBsYTF6Mms4NW40OHlkZnZ6c2xydWd3emw0ajJ1N3Z0ZHlmM3h2dWNtYw==
+  - index: true
+    key: Y291bnQ=
+    value: MA==
+  type: wasm
+gas_used: "180168"
+gas_wanted: "197952"
+height: "2580676"
+info: ""
 logs:
-- msgindex: 0
-  log: ""
-  events:
-  - type: instantiate_contract
-    attributes:
-    - key: owner
-      value: xpla1dcegyrekltswvyy0xy69ydgxn9x8x32zdtapd8
+- events:
+  - attributes:
+    - key: _contract_address
+      value: xpla14m0ga8ty4f2aqteh8k9z94jdpymht6akj3dm6aneaf74snvd2l0qq59ml4
     - key: code_id
-      value: "1"
-    - key: contract_address
-      value: xpla18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5
-  - type: message
-    attributes:
+      value: "327"
+    type: instantiate
+  - attributes:
     - key: action
-      value: instantiate_contract
+      value: /cosmwasm.wasm.v1.MsgInstantiateContract
     - key: module
       value: wasm
-info: ""
-gaswanted: 120751
-gasused: 120170
-tx: null
+    - key: sender
+      value: xpla1z2k85n48ydfvzslrugwzl4j2u7vtdyf3xvucmc
+    type: message
+  - attributes:
+    - key: _contract_address
+      value: xpla14m0ga8ty4f2aqteh8k9z94jdpymht6akj3dm6aneaf74snvd2l0qq59ml4
+    - key: method
+      value: instantiate
+    - key: owner
+      value: xpla1z2k85n48ydfvzslrugwzl4j2u7vtdyf3xvucmc
+    - key: count
+      value: "0"
+    type: wasm
+  log: ""
+  msg_index: 0
+raw_log: '[{"events":[{"type":"instantiate","attributes":[{"key":"_contract_address","value":"xpla14m0ga8ty4f2aqteh8k9z94jdpymht6akj3dm6aneaf74snvd2l0qq59ml4"},{"key":"code_id","value":"327"}]},{"type":"message","attributes":[{"key":"action","value":"/cosmwasm.wasm.v1.MsgInstantiateContract"},{"key":"module","value":"wasm"},{"key":"sender","value":"xpla1z2k85n48ydfvzslrugwzl4j2u7vtdyf3xvucmc"}]},{"type":"wasm","attributes":[{"key":"_contract_address","value":"xpla14m0ga8ty4f2aqteh8k9z94jdpymht6akj3dm6aneaf74snvd2l0qq59ml4"},{"key":"method","value":"instantiate"},{"key":"owner","value":"xpla1z2k85n48ydfvzslrugwzl4j2u7vtdyf3xvucmc"},{"key":"count","value":"0"}]}]}]'
 timestamp: ""
+tx: null
+txhash: 8847389C9236BD91A88C090EDE77A9B4311785B7B7546E87262463C7CBF443EE
 ```
 
-From the output, you can see that your contract was created above at: `xpla18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5`. Take note of this contract address, as you will need it for the next section.
+From the output, you can see that your contract was created above at: `xpla14m0ga8ty4f2aqteh8k9z94jdpymht6akj3dm6aneaf74snvd2l0qq59ml4`. Take note of this contract address, as you will need it for the next section.
 
 Check out your contract information:
 
 ```sh
-xplad query wasm contract xpla18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5
-address: xpla18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5
-owner: xpla1dcegyrekltswvyy0xy69ydgxn9x8x32zdtapd8
-codeid: 1
-initmsg: eyJjb3VudCI6MH0=
-migratable: false
+xplad query wasm contract xpla14m0ga8ty4f2aqteh8k9z94jdpymht6akj3dm6aneaf74snvd2l0qq59ml4
+contract_info:
+  admin: ""
+  code_id: "327"
+  created: null
+  creator: xpla1z2k85n48ydfvzslrugwzl4j2u7vtdyf3xvucmc
+  extension: null
+  ibc_port_id: ""
+  label: counter
 ```
 
 You can use the following to decode the Base64 InitMsg:
@@ -178,7 +351,7 @@ First, to burn:
 ```
 
 ```sh
-xplad tx wasm execute xpla18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5 '{"reset":{"count":5}}' --from test1 --chain-id=cube_47-5 --fees=1000000axpla --gas=auto --broadcast-mode=block
+xplad tx wasm execute xpla14m0ga8ty4f2aqteh8k9z94jdpymht6akj3dm6aneaf74snvd2l0qq59ml4 '{"reset":{"count":5}}' --from test1 --chain-id=cube_47-5 --gas auto --gas-prices 850000000000axpla --gas-adjustment 1.2 --broadcast-mode=block
 ```
 
 #### Incrementing
@@ -190,7 +363,7 @@ xplad tx wasm execute xpla18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5 '{"reset":{"co
 ```
 
 ```sh
-xplad tx wasm execute xpla18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5 '{"increment":{}}' --from test1 --chain-id=cube_47-5 --gas=auto --fees=1000000axpla --broadcast-mode=block
+xplad tx wasm execute xpla14m0ga8ty4f2aqteh8k9z94jdpymht6akj3dm6aneaf74snvd2l0qq59ml4 '{"increment":{}}' --from test1 --chain-id=cube_47-5 --gas auto --gas-prices 850000000000axpla --gas-adjustment 1.2 --broadcast-mode=block
 ```
 
 #### Querying count
@@ -204,7 +377,7 @@ Check the result of your executions!
 ```
 
 ```sh
-xplad query wasm contract-store xpla18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5 '{"get_count":{}}'
+xplad query wasm contract-state smart xpla14m0ga8ty4f2aqteh8k9z94jdpymht6akj3dm6aneaf74snvd2l0qq59ml4 '{"get_count":{}}'
 ```
 
 Expected output:
