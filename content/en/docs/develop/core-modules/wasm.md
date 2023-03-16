@@ -156,7 +156,7 @@ Uploads new code to the blockchain and results in a new code ID, if successful. 
 
 ```go
 type MsgStoreCode struct {
-	// Sender is the that actor that signed the messages
+	// Sender is the actor that signed the messages
 	Sender string `protobuf:"bytes,1,opt,name=sender,proto3" json:"sender,omitempty"`
 	// WASMByteCode can be raw or gzip compressed
 	WASMByteCode []byte `protobuf:"bytes,2,opt,name=wasm_byte_code,json=wasmByteCode,proto3" json:"wasm_byte_code,omitempty"`
@@ -177,7 +177,7 @@ Creates a new instance of a smart contract. Initial configuration is provided in
 
 ```go
 type MsgInstantiateContract struct {
-	// Sender is the that actor that signed the messages
+	// Sender is the actor that signed the messages
 	Sender string `protobuf:"bytes,1,opt,name=sender,proto3" json:"sender,omitempty"`
 	// Admin is an optional address that can execute migrations
 	Admin string `protobuf:"bytes,2,opt,name=admin,proto3" json:"admin,omitempty"`
@@ -198,7 +198,7 @@ Invokes a function defined within the smart contract. Function and parameters ar
 
 ```go
 type MsgExecuteContract struct {
-	// Sender is the that actor that signed the messages
+	// Sender is the actor that signed the messages
 	Sender string `protobuf:"bytes,1,opt,name=sender,proto3" json:"sender,omitempty"`
 	// Contract is the address of the smart contract
 	Contract string `protobuf:"bytes,2,opt,name=contract,proto3" json:"contract,omitempty"`
@@ -215,7 +215,7 @@ Can be issued by the owner of a migratable smart contract to reset its code ID t
 
 ```go
 type MsgMigrateContract struct {
-	// Sender is the that actor that signed the messages
+	// Sender is the actor that signed the messages
 	Sender string `protobuf:"bytes,1,opt,name=sender,proto3" json:"sender,omitempty"`
 	// Contract is the address of the smart contract
 	Contract string `protobuf:"bytes,2,opt,name=contract,proto3" json:"contract,omitempty"`
@@ -232,7 +232,7 @@ Can be issued by the smart contract's owner to transfer ownership.
 
 ```go
 type MsgUpdateAdmin struct {
-	// Sender is the that actor that signed the messages
+	// Sender is the actor that signed the messages
 	Sender string `protobuf:"bytes,1,opt,name=sender,proto3" json:"sender,omitempty"`
 	// NewAdmin address to be set
 	NewAdmin string `protobuf:"bytes,2,opt,name=new_admin,json=newAdmin,proto3" json:"new_admin,omitempty"`
