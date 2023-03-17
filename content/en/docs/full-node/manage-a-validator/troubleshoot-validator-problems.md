@@ -97,4 +97,4 @@ max_packet_msg_payload_size = 2048
 
     `xplad tx slashing unjail <xpla> --chain-id=<chain_id> --from=<from>`
 
-- The validator is not in the [active validator set]({{< ref "glossary#active-set" >}}). Only the top 8 validators are in this set. To fix this problem, increase your total stake to be larger than the 8th validator.
+- The validator is not in the [active validator set]({{< ref "glossary#active-set" >}}). Only the top 40 validators are in this set. To fix this problem, increase your total stake to be larger than the 8th validator.
