@@ -24,7 +24,7 @@ Running this command successfully will produce the following log:
 {{< alert >}}
 **Note**
 
-After resetting, make sure the addressbook contains peer addresses and is in the correct spot. If not, [download an adressbook](../join-a-network#1-select-a-network) and place it in `~/.xpla/config/`.
+After resetting, make sure the addressbook contains peer addresses and is in the correct spot. If not, [download an addressbook](../join-a-network#1-select-a-network) and place it in `~/.xpla/config/`.
 {{< /alert >}}
 
 ### Change Genesis

@@ -29,7 +29,7 @@ Use xpla.js to create bots, mint NFTs, and build out backend services. Follow th
 
 ## Wallet Provider and Templates
 
-Wallet Provider makes it easy to connect a React-based web app to XPLA Vault. There are multiple [templates](https://templates.xpla.io/) available for frontend frameworks like Vue, React, and Vite. Follow the [Wallet Provider tutorial]({{< ref "get-started-with-wallet-provider" >}}) to get started.
+Wallet Provider makes it easy to connect a React-based web app to XPLA Vault. Follow the [Wallet Provider tutorial]({{< ref "get-started-with-wallet-provider" >}}) to get started.
 
 ## Other Tools
 

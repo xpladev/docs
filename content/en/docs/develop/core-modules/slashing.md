@@ -6,7 +6,7 @@ weight: 130
 {{< alert >}}
 **Note**
 
-XPLA Chain's slashing module inherits from the Cosmos SDK's [`slashing`](https://docs.cosmos.network/master/modules/slashing/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+XPLA Chain's slashing module inherits from the Cosmos SDK's [`slashing`](https://docs.cosmos.network/main/modules/slashing) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
 {{< /alert >}}
 
 The slashing module enables XPLA Chain to disincentivize any attributable action by a protocol-recognized actor with value at stake by penalizing them. The penalty is called [slashing]({{< ref "glossary#slashing" >}}). XPLA Chain mainly uses the [`Staking`]({{< ref "staking" >}}) module to slash when violating validator responsibilities. This module manages lower-level penalties at the Tendermint consensus level, such as double-signing.
@@ -103,7 +103,7 @@ signInfo.Tombstoned = true
 SigningInfo.Set(val.Address, signInfo)
 ```
 
-This process ensures that offending validators are punished with the same amount whether they act as a single validator with X stake or as N validators with a collective X stake. The amount slashed for all double-signature infractions committed within a single slashing period is capped. For more information, see [tombstone caps](https://docs.cosmos.network/master/modules/slashing/01_concepts.html#tombstone-caps).
+This process ensures that offending validators are punished with the same amount whether they act as a single validator with X stake or as N validators with a collective X stake. The amount slashed for all double-signature infractions committed within a single slashing period is capped. For more information, see [tombstone caps](https://docs.cosmos.network/main/modules/slashing#tombstone-caps).
 
 #### Liveness Tracking
 
