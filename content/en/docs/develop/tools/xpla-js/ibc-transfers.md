@@ -12,10 +12,10 @@ xpla.js exports a `MsgTransfer` class that can be used to construct IBC transfer
 ```js
 new MsgTransfer(
   "transfer", // IBC port
-  "channel-1", // Outbound channel (Osmosis)
+  "channel-0", // Outbound channel (Axelar)
   new Coin("axpla", "1000000000000000000"), // 1 XPLA
   "xpla1cvw8sundusurqajhurpcfk7yvuzlh92cvkpy28", // Source Address on XPLA Chain
-  "osmo1cl4qw7u35uf77l4scjtv0qej8ycevu4mrdpvmg", // Destination address on Osmosis
+  "axelar1cl4qw7u35uf77l4scjtv0qej8ycevu4mrdpvmg", // Destination address on Axelar network
   undefined, // Timeout block height (optional)
   (Date.now() + 60 * 1000) * 1e6 // Timeout timestamp (in nanoseconds) relative to the current block timestamp.
 );
@@ -25,7 +25,7 @@ new MsgTransfer(
 
 Channels are defined when a relayer is set up between XPLA Chain and an external chain. For each new connected chain the channel ID is incremented.
 
-You can use [Map of Zones](https://mapofzones.com/zone?period=24&source=dimension_37-1&tableOrderBy=success&tableOrderSort=desc&testnet=false) to find the available channels and their IDs.
+You can use [Mintscan](https://www.mintscan.io/xpla/relayers) to find the available channels and their IDs.
 
 ## Derive Cosmos Chain Addresses from a XPLA Chain Address
 
@@ -38,12 +38,12 @@ import { bech32 } from 'bech32';
 
 const xplaAddress = 'xpla1cvw8sundusurqajhurpcfk7yvuzlh92cvkpy28';
 const decodedAddress = bech32.decode(xplaAddress);
-const osmosisAddress = bech32.encode('osmo', decodedAddress.words);
+const axelarAddress = bech32.encode('axelar', decodedAddress.words);
 ```
 
 ## Complete Example
 
-The following example demonstrates how to send 1 XPLA from XPLA Chain to the Osmosis blockchain.
+The following example demonstrates how to send 1 XPLA from XPLA Chain to the Axelar network.
 
 ```JS
 import {
@@ -61,13 +61,13 @@ const mk = new MnemonicKey({
 
 const wallet = lcd.wallet(mk);
 
-// Send 1 XPLA to the Osmosis blockchain.
+// Send 1 XPLA to the Axelar network.
 const transfer = new MsgTransfer(
  'transfer',
- 'channel-1',
+ 'channel-0',
   new Coin('axpla', '1000000000000000000'),
   'xpla1cvw8sundusurqajhurpcfk7yvuzlh92cvkpy28',
-  'osmo1cl4qw7u35uf77l4scjtv0qej8ycevu4mrdpvmg',
+  'axelar1cl4qw7u35uf77l4scjtv0qej8ycevu4mrdpvmg',
   undefined,
   (Date.now() + 60 * 1000) * 1e6,
 );
