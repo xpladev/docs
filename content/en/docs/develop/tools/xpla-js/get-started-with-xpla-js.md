@@ -19,8 +19,9 @@ In this tutorial, you'll learn how to:
 1. [Set up your project](#1-set-up-your-project)
 2. [Set up a XPLA Chain LCD (light client daemon)](#2-initialize-the-lcd)
 3. [Create and connect a wallet](#3-create-a-cube-testnet-wallet)
-4. [Query a contract](#4-query-a-contract-and-set-up-the-transaction)
-5. [Create, sign, and broadcast a transaction](#5-broadcast-the-transaction)
+4. [Find a contract address](#4-find-a-contract-address)
+5. [Query a contract](#5-query-a-contract-and-set-up-the-transaction)
+6. [Create, sign, and broadcast a transaction](#6-broadcast-the-transaction)
 
 By the end of this guide, you'll be able to execute a token swap from your application using xpla.js.
 
@@ -29,19 +30,18 @@ By the end of this guide, you'll be able to execute a token swap from your appli
 - [npm and node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - XPLA extension vault
 
-## 1. Set-up Your Project
+## 1. Set up Your Project
 
 1. Create a new directory for your project:
 
    ```sh
    mkdir my-xpla-js-project
-
    ```
 
 2. Enter your new project directory:
 
    ```sh
-   cd <my-xpla-js-project>
+   cd my-xpla-js-project
    ```
 
 3. Next, initialize npm, install the `xpla.js` package, and create an `index.js` file to house the code:
@@ -57,7 +57,7 @@ By the end of this guide, you'll be able to execute a token swap from your appli
    ```json
    {
      // ...
-     "type": "module"
+     "type": "module",
      // ...
    }
    ```
@@ -87,7 +87,6 @@ XPLA Chain’s LCD or Light Client Daemon allows users to connect to the blockch
      chainID: "cube_47-5", // Use "dimension_37-1" for production
      gasPrices: gasPricesCoins,
      gasAdjustment: "1.5", // Increase gas price slightly so transactions go through smoothly.
-     gas: 10000000,
    });
    ```
 
@@ -109,7 +108,7 @@ XPLA Chain’s LCD or Light Client Daemon allows users to connect to the blockch
    ```ts
    import { MnemonicKey } from "@xpla/xpla.js";
    const mk = new MnemonicKey({
-     mnemonic: " //Input your 24-word mnemonic key here//",
+     mnemonic: "-> Input your 24-word mnemonic key here <-",
    });
    const wallet = lcd.wallet(mk);
    ```
@@ -123,15 +122,35 @@ XPLA Chain’s LCD or Light Client Daemon allows users to connect to the blockch
 
 4. Request testnet funds for your wallet by navigating to the [XPLA faucet](https://faucet.xpla.io) and inputting your wallet address. You'll need these funds to perform swaps and pay for gas fees. Once the funds are in your wallet, you’re ready to move on to the next step.
 
-## 4. Query a Contract and Set-up the Transaction
+## 4. Find a Contract Address
 
-Before you can perform a transaction, you can check the token information
+To find the contract address for a specific Dezswap pair, visit [Dezswap](https://app.dezswap.io/)
+
+## 5. Query a Dezswap Contract and Set up the Transaction
+
+Before you can perform a swap, you’ll need a belief price. You can calculate the belief price of one token by querying simulation to the pool. The belief price +/- the `max_spread` is the range of possible acceptable prices for this swap.
 
 1. Add the following code to your `index.js` file. Make sure the contract address is correct.
 
    ```ts
-   const contract = "<TOKEN_CONTRACT_ADDRESS>"; // A token contract address on cube.
-   const info = await lcd.wasm.contractQuery(contract, { token_info: {} }); // Query
+   const contract = "<POOL_CONTRACT_ADDRESS>"; // A Dezswap pair contract address on cube_47-5(CW20 token <> XPLA)
+   const offerAmount = 1000000000000000000
+   const { asset_decimals: assetDecimals } = await lcd.wasm.contractQuery(contract, { "pair": {} }); // Query
+   const { return_amount: returnAmount } = await lcd.wasm.contractQuery( // Query
+     contract,
+     {
+       "simulation": {
+         "offer_asset": {
+           "info" : {
+             "native_token": {
+               "denom": "axpla"
+             }
+           },
+           "amount": `${offerAmount}`
+         }
+       }
+     });
+   const beliefPrice = ((offerAmount / Math.pow(10, assetDecimals[1])) / (returnAmount / Math.pow(10, assetDecimals[0]))).toFixed(assetDecimals[1]); // Calculate belief price using proportion of simulated asset amounts
    ```
 
 2. Next, generate a message to broadcast to the network:
@@ -142,15 +161,24 @@ Before you can perform a transaction, you can check the token information
      wallet.key.accAddress,
      contract,
      {
-       transfer: {
-         amount: "10",
-         recipient: "<RECIPIENT_ADDRESS>"
-       }
-     }
+       swap: {
+         max_spread: "0.005",
+         offer_asset: {
+           info: {
+             native_token: {
+               denom: "axpla",
+             },
+           },
+           amount: `${offerAmount}`,
+         },
+         belief_price: beliefPrice,
+       },
+     },
+     new Coins({ axpla: `${offerAmount}` })
    );
    ```
 
-## 5. Broadcast the Transaction
+## 6. Broadcast the Transaction
 
 1. Add the following code to `index.js` to create, sign, and broadcast the transaction. It's important to specify `axpla` as the fee denomination because XPLA is the only denomination the faucet sends.
 
@@ -169,9 +197,9 @@ Before you can perform a transaction, you can check the token information
    node index.js
    ```
 
-If successful, you'll see a log of the successful transaction in your wallet and that's it!
+If successful, you'll see a log of the successful transaction and some new tokens in your wallet.
 
-Try executing a transaction with other contracts as well for practice. Be sure to use the correct testnet or mainnet contract address.
+And that's it! You can find other pool addresses [here](https://app.dezswap.io/) to call other swaps. Be sure to use the correct testnet or mainnet contract address.
 
 ## More Examples
 
