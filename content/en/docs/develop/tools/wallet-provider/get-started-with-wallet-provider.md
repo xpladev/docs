@@ -10,7 +10,7 @@ This guide will cover how to set up a React app, integrate Wallet Provider, chec
 {{< alert >}}
 **Just want to dive in?**
 
-Check out the getting started section for the premade templates [in GitHub](https://github.com/xpladev/wallet-provider/).
+Check out the getting started section for the premade templates in [GitHub](https://github.com/xpladev/wallet-provider/).
 {{< /alert >}}
 
 If you're using a frontend framework other than React you'll need to use [Wallet Controller](https://www.npmjs.com/package/@xpla/wallet-controller) instead. Controller provides the sub-structure of Provider.
@@ -254,7 +254,7 @@ A XPLA transfer transaction needs a fee and a message containing the sender addr
 {{< alert >}}
 **What happens if something goes wrong?**
 
-Wallet provider also supplies useful error types. This example will handle the `UserDenied` error case. You can find other cases to handle on [GitHub](https://github.com/xpladev/wallet-provider/blob/4e601c2dece7bec92c9ce95991d2314220a2c954/packages/src/%40xpladev/wallet-controller/exception/mapExtensionTxError.ts#L23).
+Wallet provider also supplies useful error types. This example will handle the `UserDenied` error case. You can find other cases to handle on [GitHub](https://github.com/xpladev/wallet-provider/blob/main/packages/src/%40xpla/wallet-controller/exception/mapExtensionTxError.ts#L23).
 {{< /alert >}}
 
 1. Create a file in your `Components` folder named `Tx.js`.

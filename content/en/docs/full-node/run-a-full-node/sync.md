@@ -96,4 +96,4 @@ xplad start --x-crisis-skip-assert-invariants
 
 ## Congratulations!
 
-You've successfully joined a network as a full node operator. If you are a validator, continue to [manage a XPLA Chain validator]({{< ref "manage-a-validator" >}}) for the next steps.
+You've successfully joined a network as a full node operator. If you are a validator, continue to [manage a XPLA Chain validator]({{< ref "/docs/full-node/manage-a-validator/overview" >}}) for the next steps.

@@ -7,7 +7,7 @@ Use this glossary to learn about terms specific to the XPLA Chain.
 
 ## Active Set
 
-The top 8 [validators]({{< ref "#validator" >}}) that participate in consensus, receive rewards, and secure the blockchain.
+The top 40 [validators]({{< ref "#validator" >}}) that participate in consensus, receive rewards, and secure the blockchain.
 
 ## Blockchain
 
@@ -101,7 +101,7 @@ When a vote fails to be included in consensus.
 
 ## Module
 
-A section of the XPLA Chain core that represents a particular function of the XPLA Chain. Visit the [XPLA Chain_core module specifications]({{< ref "core-modules" >}}) for more information.
+A section of the XPLA Chain core that represents a particular function of the XPLA Chain. Visit the [XPLA Chain core module specifications]({{< ref "/docs/develop/core-modules/overview" >}}) for more information.
 
 ## dimension_37-1
 
@@ -159,7 +159,7 @@ The consensus procedure used by the XPLA Chain. First, a validator proposes a ne
 
 The official source code for the XPLA Chain.
 
-For more information on the XPLA Chain core, see [XPLA Chain core module specifications]({{< ref "core-modules" >}}).
+For more information on the XPLA Chain core, see [XPLA Chain core module specifications]({{< ref "/docs/develop/core-modules/overview" >}}).
 
 ## Mainnet
 
@@ -229,7 +229,7 @@ The amount of time a [validator]({{< ref "#validator" >}}) is active in a given 
 
 ## Validator
 
-A XPLA Chain miner responsible for verifying transactions on the blockchain. Validators run programs called full nodes that allow them to participate in consensus, verify blocks, participate in governance, and receive rewards. The top 130 validators with the highest total stake can participate in consensus.
+A XPLA Chain miner responsible for verifying transactions on the blockchain. Validators run programs called full nodes that allow them to participate in consensus, verify blocks, participate in governance, and receive rewards. The top 40 validators with the highest total stake can participate in consensus.
 
 For more information on validators, visit the [concepts page]({{< ref "about-xpla-chain#validators" >}}).
 
