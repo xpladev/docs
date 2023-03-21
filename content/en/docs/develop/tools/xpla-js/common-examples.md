@@ -200,9 +200,9 @@ const result = await lcd.tx.broadcast(tx);
 console.log(result);
 ```
 
-## Swapping a Native XPLA Chain Asset for a CW20 Token Using a common swap pair contract
+## Swapping a Native XPLA Chain Asset for a CW20 Token Using Dezswap
 
-The following code example shows how to swap a native asset for CW20 using a common swap pair contract.
+The following code example shows how to swap a native asset for CW20 using Dezswap.
 
 Run this example on mainnet.
 
@@ -223,16 +223,31 @@ const mk = new MnemonicKey({
 
 const wallet = lcd.wallet(mk);
 
-// XPLA <> OTHER_TOKEN
-const pool = "<INSERT_TOKEN_POOL_ADDRESS>";
+// XPLA <> CTXT
+const pool = "xpla1sdzaas0068n42xk8ndm6959gpu6n09tajmeuq7vak8t9qt5jrp6szltsnk";
+const xplaAmount = 1000000000000000000
 
-// Fetch the number of each asset in the pool.
-const { assets } = await lcd.wasm.contractQuery(pool, { pool: {} });
+// Fetch the decimal of each asset in the pool and simulation result with `xplaAmount`.
+const { asset_decimals: assetDecimals } = await lcd.wasm.contractQuery(pool, { "pair": {} });
+const { return_amount: returnAmount } = await lcd.wasm.contractQuery( // Query
+  pool,
+  {
+    "simulation": {
+      "offer_asset": {
+        "info" : {
+          "native_token": {
+            "denom": "axpla"
+          }
+        },
+        "amount": `${xplaAmount}`
+      }
+    }
+  });
 
 // Calculate belief price using pool balances.
-const beliefPrice = (assets[0].amount / assets[1].amount).toFixed(18);
+const beliefPrice = ((xplaAmount / Math.pow(10, assetDecimals[0])) / (returnAmount / Math.pow(10, assetDecimals[1]))).toFixed(assetDecimals[0]);
 
-// Swap 1 XPLA to SCRT with 1% slippage tolerance.
+// Swap 1 XPLA to CTXT with 1% slippage tolerance.
 const swapMsg = new MsgExecuteContract(
   wallet.key.accAddress,
   pool,
@@ -245,12 +260,12 @@ const swapMsg = new MsgExecuteContract(
             denom: "axpla",
           },
         },
-        amount: "1000000000000000000",
+        amount: `${xplaAmount}`,
       },
       belief_price: beliefPrice,
     },
   },
-  new Coins({ axpla: "1000000000000000000" })
+  new Coins({ axpla: `${xplaAmount}` })
 );
 
 const tx = await wallet.createAndSignTx({ msgs: [swapMsg] });
