@@ -6,129 +6,103 @@ weight: 130
 {{< alert >}}
 **Note**
 
-XPLA Chain's slashing module inherits from the Cosmos SDK's [`slashing`](https://docs.cosmos.network/main/modules/slashing) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+XPLA Chain's slashing module inherits from the Cosmos SDK's [`slashing`](https://docs.cosmos.network/v0.45/modules/slashing/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
 {{< /alert >}}
 
 The slashing module enables XPLA Chain to disincentivize any attributable action by a protocol-recognized actor with value at stake by penalizing them. The penalty is called [slashing]({{< ref "glossary#slashing" >}}). XPLA Chain mainly uses the [`Staking`]({{< ref "staking" >}}) module to slash when violating validator responsibilities. This module manages lower-level penalties at the Tendermint consensus level, such as double-signing.
+
+## Concepts
+
+### States
+
+At any given time, there are any number of validators registered in the state
+machine. Each block, the top `MaxValidators` (defined by `x/staking`) validators
+who are not jailed become _bonded_, meaning that they may propose and vote on
+blocks. Validators who are _bonded_ are _at stake_, meaning that part or all of
+their stake and their delegators' stake is at risk if they commit a protocol fault.
+
+For each of these validators we keep a `ValidatorSigningInfo` record that contains
+information partaining to validator's liveness and other infraction related
+attributes.
+
+### Tombstone Caps
+
+In order to mitigate the impact of initially likely categories of non-malicious
+protocol faults, the Cosmos Hub implements for each validator
+a _tombstone_ cap, which only allows a validator to be slashed once for a double
+sign fault. For example, if you misconfigure your HSM and double-sign a bunch of
+old blocks, you'll only be punished for the first double-sign (and then immediately tombstombed). This will still be quite expensive and desirable to avoid, but tombstone caps
+somewhat blunt the economic impact of unintentional misconfiguration.
+
+Liveness faults do not have caps, as they can't stack upon each other. Liveness bugs are "detected" as soon as the infraction occurs, and the validators are immediately put in jail, so it is not possible for them to commit multiple liveness faults without unjailing in between.
+
+### Infraction Timelines
+
+To illustrate how the `x/slashing` module handles submitted evidence through
+Tendermint consensus, consider the following examples:
+
+**Definitions**:
+
+_[_ : timeline start  
+_]_ : timeline end  
+_C<sub>n</sub>_ : infraction `n` committed  
+_D<sub>n</sub>_ : infraction `n` discovered  
+_V<sub>b</sub>_ : validator bonded  
+_V<sub>u</sub>_ : validator unbonded
+
+#### Single Double Sign Infraction
+
+<----------------->
+[----------C<sub>1</sub>----D<sub>1</sub>,V<sub>u</sub>-----]
+
+A single infraction is committed then later discovered, at which point the
+validator is unbonded and slashed at the full amount for the infraction.
+
+#### Multiple Double Sign Infractions
+
+<--------------------------->
+[----------C<sub>1</sub>--C<sub>2</sub>---C<sub>3</sub>---D<sub>1</sub>,D<sub>2</sub>,D<sub>3</sub>V<sub>u</sub>-----]
+
+Multiple infractions are committed and then later discovered, at which point the
+validator is jailed and slashed for only one infraction. Because the validator
+is also tombstoned, they can not rejoin the validator set.
+
 
 ## Message Types
 
 ### MsgUnjail
 
 ```go
+// MsgUnjail defines the Msg/Unjail request type
 type MsgUnjail struct {
-    ValidatorAddr sdk.ValAddress `json:"address" yaml:"address"` // address of the validator operator
+	ValidatorAddr string `protobuf:"bytes,1,opt,name=validator_addr,json=validatorAddr,proto3" json:"address" yaml:"address"`
 }
 ```
 
 ## Transitions
 
-### Begin-Block
-
-> This section was taken from the official Cosmos SDK docs, and placed here for your convenience to understand the slashing module's parameters.
-
-At the beginning of each block, the slashing module checks for evidence of infractions or downtime of validators, double-signing, and other low-level consensus penalties.
-
-#### Evidence Handling
-
-Tendermint blocks can include evidence, which indicates that a validator committed malicious
-behavior. The relevant information is forwarded to the application as ABCI Evidence
-in `abci.RequestBeginBlock` so that the validator can be punished.
-
-For some `Evidence` submitted in `block` to be valid, it must satisfy:
-
-`Evidence.Timestamp >= block.Timestamp - MaxEvidenceAge`
-
-where `Evidence.Timestamp` is the timestamp in the block at height
-`Evidence.Height`, and `block.Timestamp` is the current block timestamp.
-
-If valid evidence is included in a block, the validator's stake is reduced by
-some penalty (`SlashFractionDoubleSign` for equivocation) of what their stake was
-when the infraction occurred instead of when the evidence was discovered. We
-want to follow the stake, i.e. the stake which contributed to the infraction
-should be slashed, even if it has since been redelegated or has started unbonding.
-
-The unbondings and redelegations from the slashed validator are looped through, and the amount of stake that has moved is tracked:
-
-```go
-slashAmountUnbondings := 0
-slashAmountRedelegations := 0
-
-unbondings := getUnbondings(validator.Address)
-for unbond in unbondings {
-
-    if was not bonded before evidence.Height or started unbonding before unbonding period ago {
-        continue
-    }
-
-    burn := unbond.InitialTokens * SLASH_PROPORTION
-    slashAmountUnbondings += burn
-
-    unbond.Tokens = max(0, unbond.Tokens - burn)
-}
-
-// only care if source gets slashed because we're already bonded to destination
-// so if destination validator gets slashed the delegation just has same shares
-// of smaller pool.
-redels := getRedelegationsBySource(validator.Address)
-for redel in redels {
-
-    if was not bonded before evidence.Height or started redelegating before unbonding period ago {
-        continue
-    }
-
-    burn := redel.InitialTokens * SLASH_PROPORTION
-    slashAmountRedelegations += burn
-
-    amount := unbondFromValidator(redel.Destination, burn)
-    destroy(amount)
-}
-```
-
-The validator is slashed and [tombstoned]({{< ref "glossary#tombstone" >}}):
-
-```
-curVal := validator
-oldVal := loadValidator(evidence.Height, evidence.Address)
-
-slashAmount := SLASH_PROPORTION * oldVal.Shares
-slashAmount -= slashAmountUnbondings
-slashAmount -= slashAmountRedelegations
-
-curVal.Shares = max(0, curVal.Shares - slashAmount)
-
-signInfo = SigningInfo.Get(val.Address)
-signInfo.JailedUntil = MAX_TIME
-signInfo.Tombstoned = true
-SigningInfo.Set(val.Address, signInfo)
-```
-
-This process ensures that offending validators are punished with the same amount whether they act as a single validator with X stake or as N validators with a collective X stake. The amount slashed for all double-signature infractions committed within a single slashing period is capped. For more information, see [tombstone caps](https://docs.cosmos.network/main/modules/slashing#tombstone-caps).
+### BeginBlock
 
 #### Liveness Tracking
 
-At the beginning of each block, the `ValidatorSigningInfo` for each
-validator is updated and whether they've crossed below the liveness threshold over a
-sliding window is checked. This sliding window is defined by `SignedBlocksWindow`, and the
+At the beginning of each block, we update the `ValidatorSigningInfo` for each
+validator and check if they've crossed below the liveness threshold over a
+sliding window. This sliding window is defined by `SignedBlocksWindow` and the
 index in this window is determined by `IndexOffset` found in the validator's
 `ValidatorSigningInfo`. For each block processed, the `IndexOffset` is incremented
-regardless of whether the validator signed. After the index is determined, the
+regardless if the validator signed or not. Once the index is determined, the
 `MissedBlocksBitArray` and `MissedBlocksCounter` are updated accordingly.
 
-Finally, to determine whether a validator crosses below the liveness threshold,
-the maximum number of blocks missed, `maxMissed`, which is
-`SignedBlocksWindow - (MinSignedPerWindow * SignedBlocksWindow)`, and the minimum
-height at which liveness can be determined, `minHeight`, are fetched. If the current block is
+Finally, in order to determine if a validator crosses below the liveness threshold,
+we fetch the maximum number of blocks missed, `maxMissed`, which is
+`SignedBlocksWindow - (MinSignedPerWindow * SignedBlocksWindow)` and the minimum
+height at which we can determine liveness, `minHeight`. If the current block is
 greater than `minHeight` and the validator's `MissedBlocksCounter` is greater than
-`maxMissed`, they are slashed by `SlashFractionDowntime`, jailed
+`maxMissed`, they will be slashed by `SlashFractionDowntime`, will be jailed
 for `DowntimeJailDuration`, and have the following values reset:
 `MissedBlocksBitArray`, `MissedBlocksCounter`, and `IndexOffset`.
 
-{{< alert >}}
-**Note**
-
-Liveness slashes do not lead to tombstoning.
-{{< /alert >}}
+**Note**: Liveness slashes do **NOT** lead to a tombstombing.
 
 ```go
 height := block.Height
@@ -136,14 +110,14 @@ height := block.Height
 for vote in block.LastCommitInfo.Votes {
   signInfo := GetValidatorSigningInfo(vote.Validator.Address)
 
-  // This is a relative index, so it counts blocks the validator SHOULD have
-  // signed. The 0-value default signing info is used if no signed block is present, except for
+  // This is a relative index, so we counts blocks the validator SHOULD have
+  // signed. We use the 0-value default signing info if not present, except for
   // start height.
   index := signInfo.IndexOffset % SignedBlocksWindow()
   signInfo.IndexOffset++
 
   // Update MissedBlocksBitArray and MissedBlocksCounter. The MissedBlocksCounter
-  // just tracks the sum of MissedBlocksBitArray to avoid needing to
+  // just tracks the sum of MissedBlocksBitArray. That way we avoid needing to
   // read/write the whole array each time.
   missedPrevious := GetValidatorMissedBlockBitArray(vote.Validator.Address, index)
   missed := !signed
@@ -170,14 +144,14 @@ for vote in block.LastCommitInfo.Votes {
   minHeight := signInfo.StartHeight + SignedBlocksWindow()
   maxMissed := SignedBlocksWindow() - MinSignedPerWindow()
 
-  // If the minimum height has been reached and the validator has missed too many
+  // If we are past the minimum height and the validator has missed too many
   // jail and slash them.
   if height > minHeight && signInfo.MissedBlocksCounter > maxMissed {
     validator := ValidatorByConsAddr(vote.Validator.Address)
 
     // emit events...
 
-    // To retrieve the stake distribution which signed the block,
+    // We need to retrieve the stake distribution which signed the block, so we
     // subtract ValidatorUpdateDelay from the block height, and subtract an
     // additional 1 since this is the LastCommit.
     //
@@ -191,7 +165,7 @@ for vote in block.LastCommitInfo.Votes {
 
     signInfo.JailedUntil = block.Time.Add(DowntimeJailDuration())
 
-    // Reset the counter & array so that the validator won't be
+    // We need to reset the counter & array so that the validator won't be
     // immediately slashed for downtime upon rebonding.
     signInfo.MissedBlocksCounter = 0
     signInfo.IndexOffset = 0
@@ -202,42 +176,80 @@ for vote in block.LastCommitInfo.Votes {
 }
 ```
 
+### Hooks
+
+This section contains a description of the module's `hooks`. Hooks are operations that are executed automatically when events are raised.
+
+#### Staking hooks
+
+The slashing module implements the `StakingHooks` defined in `x/staking` and are used as record-keeping of validators information. During the app initialization, these hooks should be registered in the staking module struct.
+
+The following hooks impact the slashing state:
+
++ `AfterValidatorBonded` creates a `ValidatorSigningInfo` instance as described in the following section.
++ `AfterValidatorCreated` stores a validator's consensus key.
++ `AfterValidatorRemoved` removes a validator's consensus key.
+
+#### Validator Bonded
+
+Upon successful first-time bonding of a new validator, we create a new `ValidatorSigningInfo` structure for the
+now-bonded validator, which `StartHeight` of the current block.
+
+```
+onValidatorBonded(address sdk.ValAddress)
+
+  signingInfo, found = GetValidatorSigningInfo(address)
+  if !found {
+    signingInfo = ValidatorSigningInfo {
+      StartHeight         : CurrentHeight,
+      IndexOffset         : 0,
+      JailedUntil         : time.Unix(0, 0),
+      Tombstone           : false,
+      MissedBloskCounter  : 0
+    }
+    setValidatorSigningInfo(signingInfo)
+  }
+
+  return
+```
+
+
 ## Parameters
 
 The subspace for the slashing module is `slashing`.
 
 ```go
+// Params represents the parameters used for by the slashing module.
 type Params struct {
-	MaxEvidenceAge          time.Duration `json:"max_evidence_age" yaml:"max_evidence_age"`
-	SignedBlocksWindow      int64         `json:"signed_blocks_window" yaml:"signed_blocks_window"`
-	MinSignedPerWindow      sdk.Dec       `json:"min_signed_per_window" yaml:"min_signed_per_window"`
-	DowntimeJailDuration    time.Duration `json:"downtime_jail_duration" yaml:"downtime_jail_duration"`
-	SlashFractionDoubleSign sdk.Dec       `json:"slash_fraction_double_sign" yaml:"slash_fraction_double_sign"`
-	SlashFractionDowntime   sdk.Dec       `json:"slash_fraction_downtime" yaml:"slash_fraction_downtime"`
+	SignedBlocksWindow      int64                                  `protobuf:"varint,1,opt,name=signed_blocks_window,json=signedBlocksWindow,proto3" json:"signed_blocks_window,omitempty" yaml:"signed_blocks_window"`
+	MinSignedPerWindow      github_com_cosmos_cosmos_sdk_types.Dec `protobuf:"bytes,2,opt,name=min_signed_per_window,json=minSignedPerWindow,proto3,customtype=github.com/cosmos/cosmos-sdk/types.Dec" json:"min_signed_per_window" yaml:"min_signed_per_window"`
+	DowntimeJailDuration    time.Duration                          `protobuf:"bytes,3,opt,name=downtime_jail_duration,json=downtimeJailDuration,proto3,stdduration" json:"downtime_jail_duration" yaml:"downtime_jail_duration"`
+	SlashFractionDoubleSign github_com_cosmos_cosmos_sdk_types.Dec `protobuf:"bytes,4,opt,name=slash_fraction_double_sign,json=slashFractionDoubleSign,proto3,customtype=github.com/cosmos/cosmos-sdk/types.Dec" json:"slash_fraction_double_sign" yaml:"slash_fraction_double_sign"`
+	SlashFractionDowntime   github_com_cosmos_cosmos_sdk_types.Dec `protobuf:"bytes,5,opt,name=slash_fraction_downtime,json=slashFractionDowntime,proto3,customtype=github.com/cosmos/cosmos-sdk/types.Dec" json:"slash_fraction_downtime" yaml:"slash_fraction_downtime"`
 }
 ```
 
 ### SignedBlocksWindow
 
 - type: `int64`
-- default: `100`
+- `"signed_blocks_window": "100"`
 
 ### MinSignedPerWindow
 
 - type: `Dec`
-- default: `.05`
+- `"min_signed_per_window": "0.500000000000000000"`
 
 ### DowntimeJailDuration
 
 - type: `time.Duration` (seconds)
-- default:  600s
+- `"downtime_jail_duration": "600s"`
 
 ### SlashFractionDoubleSign
 
 - type: `Dec`
-- default: 5%
+- `"slash_fraction_double_sign": "0.050000000000000000"`
 
 ### SlashFractionDowntime
 
 - type: `Dec`
-- default: .01%
+- `"slash_fraction_downtime": "0.010000000000000000"`

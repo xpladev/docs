@@ -6,10 +6,10 @@ weight: 60
 {{< alert >}}
 **Note**
 
-XPLA Chain's crisis module inherits from the Cosmos SDK's [`crisis`](https://docs.cosmos.network/master/modules/crisis/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+XPLA Chain's crisis module inherits from the Cosmos SDK's [`crisis`](https://docs.cosmos.network/v0.45/modules/crisis/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
 {{< /alert >}}
 
-The crisis module stops block production by halting the blockchain when an invariant is broken. Invariants are set during the initialization process.
+The crisis module halts the blockchain under the circumstance that a blockchain invariant is broken. Invariants can be registered with the application during the application initialization process.
 
 ## Constant Fee
 

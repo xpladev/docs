@@ -4,9 +4,9 @@ weight: 10
 ---
 
 The XPLA Chain Core is the official Golang reference implementation of the XPLA Chain.
-The XPLA Chain Core is built using the [Cosmos SDK](https://cosmos.network/sdk), which provides a robust framework for blockchains that run atop the [Tendermint](https://tendermint.com/) consensus protocol.
+The XPLA Chain Core is built using the [Cosmos SDK](https://v1.cosmos.network/sdk), which provides a robust framework for blockchains that run atop the [Tendermint](https://tendermint.com/) consensus protocol.
 
-Before diving into the core modules, it may be useful to familiarize yourself with the [Cosmos](https://docs.cosmos.network/) and [Tendermint](https://docs.tendermint.com/master/tutorials/go.html) documentation.
+Before diving into the core modules, it may be useful to familiarize yourself with the [Cosmos](https://docs.cosmos.network/v0.45/) and [Tendermint](https://docs.tendermint.com/v0.34/) documentation.
 
 ## How to Use the XPLA Chain Core Module Specifications
 

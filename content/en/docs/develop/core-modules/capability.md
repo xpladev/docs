@@ -6,7 +6,7 @@ weight: 50
 {{< alert >}}
 **Note**
 
-XPLA Chain's capability module inherits from Cosmos SDK's [`capability`](https://docs.cosmos.network/master/modules/capability/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+XPLA Chain's capability module inherits from Cosmos SDK's [`capability`](https://docs.cosmos.network/v0.45/modules/capability/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
 {{< /alert >}}
 
 The capability module allows you to provision, track, and authenticate multiowner capabilities at runtime.
@@ -17,7 +17,7 @@ The keeper allows the creation of scoped subkeepers, which are tied to a particu
 
 The keeper provides no other core functionality that can be found in other modules, such as queriers, REST and CLI handlers, and the genesis state.
 
-## Initialization
+### Initialization
 
 When you initialize the application, the keeper must be instantiated with a persistent store key and an ephemeral in-memory store key.
 

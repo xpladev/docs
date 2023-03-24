@@ -6,14 +6,36 @@ weight: 20
 {{< alert >}}
 **Note**
 
-XPLA Chain's auth module inherits from Cosmos SDK's [`auth`](https://docs.cosmos.network/master/modules/auth/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+XPLA Chain's auth module inherits from Cosmos SDK's [`auth`](https://docs.cosmos.network/v0.45/modules/auth/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
 {{< /alert >}}
 
 XPLA Chain's Auth module extends the functionality from Cosmos SDK's `auth` module with a modified ante handler, which applies basic transaction validity checks, such as signatures, nonces, and auxiliary fields. This module also defines a special vesting account type that handles the logic for token vesting from the XPLA presale.
 
-## Gas Fee
+## Concepts
 
-Like all transactions on the XPLA Chain, [`MsgSend`]({{< ref "bank#msgsend" >}}) and [`MsgMultiSend`]({{< ref "bank#msgmultisend" >}}) incur gas fees. These fees are determined by a validator's minimum gas price and the complexity of the transaction. More complex transactions incur higher fees. Gas fees are specified by the sender when a transaction is outbound. For more information on how gas is calculated, see [fees]({{< ref "using-xplad#fees" >}}).
+**Note:** The auth module is different from the [authz module]({{< ref "authz" >}}).
+
+The differences are:
+
+* `auth` - authentication of accounts and transactions for Cosmos SDK applications and is responsible for specifying the base transaction and account types.
+* `authz` - authorization for accounts to perform actions on behalf of other accounts and enables a granter to grant authorizations to a grantee that allows the grantee to execute messages on behalf of the granter.
+
+### Gas & Fees
+
+Fees serve two purposes for an operator of the network.
+
+Fees limit the growth of the state stored by every full node and allow for general purpose censorship of transactions of little economic value. Fees are best suited as an anti-spam mechanism where validators are disinterested in the use of the network and identities of users.
+
+Fees are determined by the gas limits and gas prices transactions provide, where `fees = ceil(gasLimit * gasPrices)`. Txs incur gas costs for all state reads/writes, signature verification, as well as costs proportional to the tx size. Operators should set minimum gas prices when starting their nodes. They must set the unit costs of gas in each token denomination they wish to support:
+
+`xplad start ... --minimum-gas-prices=850000000000axpla`
+
+When adding transactions to mempool or gossipping transactions, validators check if the transaction's gas prices, which are determined by the provided fees, meet any of the validator's minimum gas prices. In other words, a transaction must provide a fee of at least one denomination that matches a validator's minimum gas price.
+
+Tendermint does not currently provide fee based mempool prioritization, and fee based mempool filtering is local to node and not part of consensus. But with minimum gas prices set, such a mechanism could be implemented by node operators.
+
+Because the market value for tokens will fluctuate, validators are expected to dynamically adjust their minimum gas prices to a level that would encourage the use of the network.
+
 
 ## Parameters
 
