@@ -15,7 +15,7 @@ The bank module is responsible for handling multi-asset coin transfers between a
 
 In addition, the bank module tracks and provides query support for the total supply of all assets used in the application.
 
-This module will be used in the Cosmos Hub.
+This module will be used in the XPLA Chain.
 
 ### Supply
 

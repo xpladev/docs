@@ -28,7 +28,7 @@ attributes.
 ### Tombstone Caps
 
 In order to mitigate the impact of initially likely categories of non-malicious
-protocol faults, the Cosmos Hub implements for each validator
+protocol faults, the XPLA Chain implements for each validator
 a _tombstone_ cap, which only allows a validator to be slashed once for a double
 sign fault. For example, if you misconfigure your HSM and double-sign a bunch of
 old blocks, you'll only be punished for the first double-sign (and then immediately tombstombed). This will still be quite expensive and desirable to avoid, but tombstone caps

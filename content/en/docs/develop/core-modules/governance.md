@@ -87,7 +87,7 @@ When a the a proposal finalized, the coins from the deposit are either refunded 
 #### Participants
 
 _Participants_ are users that have the right to vote on proposals. On the
-Cosmos Hub, participants are bonded Atom holders. Unbonded Atom holders and
+XPLA Chain, participants are bonded Atom holders. Unbonded Atom holders and
 other users do not get the right to participate in governance. However, they
 can submit and deposit on proposals.
 
