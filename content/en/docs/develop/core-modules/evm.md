@@ -1,6 +1,6 @@
 ---
 title: EVM
-weight: 170
+weight: 90
 ---
 
 This document defines the specification of the Ethereum Virtual Machine (EVM) as a Cosmos SDK module.

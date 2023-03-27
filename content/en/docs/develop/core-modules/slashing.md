@@ -1,6 +1,6 @@
 ---
 title: Slashing
-weight: 130
+weight: 140
 ---
 
 {{< alert >}}

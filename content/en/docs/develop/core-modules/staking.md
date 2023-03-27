@@ -1,6 +1,6 @@
 ---
 title: Staking
-weight: 140
+weight: 150
 ---
 
 {{< alert >}}

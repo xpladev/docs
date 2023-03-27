@@ -1,6 +1,6 @@
 ---
 title: Upgrade
-weight: 150
+weight: 160
 ---
 
 {{< alert >}}
