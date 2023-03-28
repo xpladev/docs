@@ -32,7 +32,7 @@ To submit a transaction, the signer needs to specify the `gasPrice`.
 {{< alert >}}
 The Cosmos SDK uses a different terminology for `gas` than Ethereum.
 What is called `gasLimit` on Ethereum is called `gasWanted` on Cosmos.
-You might encounter both terminologies on Evmos since it builds Ethereum on top of the SDK,
+You might encounter both terminologies on XPLA Chain since it builds Ethereum on top of the SDK,
 e.g. when using different wallets like Keplr for Cosmos and Metamask for Ethereum.
 {{< /alert >}}
 
