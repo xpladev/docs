@@ -3,17 +3,17 @@ title: Reward
 weight: 150
 ---
 
-The reward module supports settlement to validators. 
+The reward module supports settlement to validators.
 
 ## Concepts
 
-`RewardDistributeAccount` delegates to validators who will support the settlement. All delegation rewards in `RewardDistributeAccount` are used in settlement funds. These funds are collected in the `reward module account`. The collected funds are used to support their settlement.
+`RewardDistributeAccount` stakes XPLA and a portion of all delegation rewards accrued in `RewardDistributeAccount` are moved to the `reward module account` and devoted to settlement funds, which help validators to settle down on the XPLA Chain.
 
 ## Transitions
 
 ### Begin-Block
 
-Each abci begin block call, claim all rewards of `RewardDistributeAccount`. It claimed every block, and this reward is distributed to the `reward module account`, `community pool`, and `reserve account`. The ratio for each distribution follows the [parameters]({{< ref "reward#parameters" >}}). The amount collected in the `reward module account` is divided by expected blocks per year, and 1 block reward is sent to the `fee pool` and distributed to validators and delegators.
+Each abci begin block call, the reward module claims all delegation rewards of `RewardDistributeAccount`. It claims every block, and this claimed reward is distributed to the `reward module account`, `community pool`, and `reserve account`. The ratio among recipients follows the [parameters]({{< ref "reward#parameters" >}}). The amount collected in the `reward module account` is divided by the number of expected blocks per year, and 1 block reward is sent to the `fee pool`. Finally, the rewards in the `fee pool` is distributed to all the validators in the active set and their delegators.
 
 ## Parameters
 
