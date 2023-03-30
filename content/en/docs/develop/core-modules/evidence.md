@@ -6,16 +6,14 @@ weight: 80
 {{< alert >}}
 **Note**
 
-XPLA Chain's evidence module inherits from Cosmos SDK's [`evidence`](https://docs.cosmos.network/master/modules/evidence/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+XPLA Chain's evidence module inherits from Cosmos SDK's [`evidence`](https://docs.cosmos.network/v0.45/modules/evidence/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
 {{< /alert >}}
 
-The evidence module allows arbitrary evidence of misbehavior, such as equivocation and counterfactual signing, to be submitted and handled.
+The evidence module differs from standard evidence handling which typically expects the underlying consensus engine, e.g. Tendermint, to automatically submit evidence when it is discovered by allowing clients and foreign chains to submit more complex evidence directly.
 
-Typically, standard evidence handling expects the underlying consensus engine, Tendermint, to automatically submit evidence when it is discovered by allowing clients and foreign chains to submit more complex evidence directly. The evidence module operates differently.
+All concrete evidence types must implement the `Evidence` interface contract. Submitted `Evidence` is first routed through the evidence module's `Router` in which it attempts to find a corresponding registered `Handler` for that specific `Evidence` type. Each `Evidence` type must have a `Handler` registered with the evidence module's keeper in order for it to be successfully routed and executed.
 
-All concrete evidence types must implement the `Evidence` interface contract. First, submitted `Evidence` is routed through the evidence module's `Router`, where it attempts to find a corresponding registered `Handler` for that specific `Evidence` type. Each `Evidence` type must have a `Handler` registered with the evidence module's keeper for it to be successfully routed and executed.
-
-Each corresponding handler must also fulfill the `Handler` interface contract. The `Handler` for a given `Evidence` type can perform any arbitrary state transitions, such as slashing, jailing, and [tombstoning]({{< ref "glossary#tombstone" >}}).
+Each corresponding handler must also fulfill the `Handler` interface contract. The `Handler` for a given `Evidence` type can perform any arbitrary state transitions such as slashing, jailing, and tombstoning.
 
 ## Concepts
 
@@ -79,7 +77,7 @@ As defined below, the `Handler` is responsible for executing the entirety of the
 type Handler func(sdk.Context, Evidence) error
 ```
 
-### State
+## State
 
 The evidence module only stores valid submitted `Evidence` in state. The evidence state is also stored and exported in the evidence module's `GenesisState`.
 
@@ -136,13 +134,15 @@ func SubmitEvidence(ctx Context, evidence Evidence) error {
 }
 ```
 
-Valid submitted `Evidence` of the same type must not already exist. The `Evidence` is routed to the `Handler` and executed. If no error in handling the Evidence occurs, an event is emitted, and it is persisted to state.
+First, there must not already exist valid submitted `Evidence` of the exact same type. Secondly, the `Evidence` is routed to the Handler and executed. Finally, if there is no error in handling the `Evidence`, an event is emitted and it is persisted to state.
 
 ### Events
 
 The evidence module emits the following handler events:
 
-#### MsgSubmitEvidence
+#### Handlers
+
+##### MsgSubmitEvidence
 
 | Type            | Attribute Key | Attribute Value |
 | --------------- | ------------- | --------------- |
@@ -151,23 +151,25 @@ The evidence module emits the following handler events:
 | message         | sender        | {senderAddress} |
 | message         | action        | submit_evidence |
 
+## Transitions
+
 ### BeginBlock
 
 #### Evidence Handling
 
 Tendermint blocks can include
-[Evidence](https://github.com/tendermint/tendermint/blob/master/docs/spec/blockchain/blockchain.md#evidence) that indicates whether a validator acted maliciously. The relevant information is forwarded to the application as ABCI Evidence in `abci.RequestBeginBlock` so that the validator can be punished accordingly.
+Evidence that indicates if a validator committed malicious behavior. The relevant information is forwarded to the application as ABCI Evidence in `abci.RequestBeginBlock` so that the validator can be punished accordingly.
 
-#### Equivocation
+##### Equivocation
 
 Currently, the SDK handles two types of evidence inside the ABCI `BeginBlock`:
 
 - `DuplicateVoteEvidence`,
 - `LightClientAttackEvidence`.
 
-The evidence module handles these two evidence types the same way. First, the SDK converts the Tendermint concrete evidence type to an SDK `Evidence` interface by using `Equivocation` as the concrete type.
+The evidence module handles these two evidence types the same way. First, the SDK converts the Tendermint concrete evidence type to a SDK `Evidence` interface using `Equivocation` as the concrete type.
 
-```protobuf
+```proto
 // Equivocation implements the Evidence interface.
 message Equivocation {
   int64                     height            = 1;
@@ -177,22 +179,20 @@ message Equivocation {
 }
 ```
 
-For an `Equivocation` submitted in `block` to be valid, it must meet the following requirement:
+For some `Equivocation` submitted in `block` to be valid, it must satisfy:
 
 `Evidence.Timestamp >= block.Timestamp - MaxEvidenceAge`
 
-where:
+Where:
 
-- `Evidence.Timestamp` is the timestamp in the block at height `Evidence.Height`.
+- `Evidence.Timestamp` is the timestamp in the block at height `Evidence.Height`
 - `block.Timestamp` is the current block timestamp.
 
-If valid `Equivocation` evidence is included in a block, the validator's stake is
-reduced by `SlashFractionDoubleSign`, as defined by the [slashing module]({{< ref "slashing" >}}). The reduction is implemented at the point when the infraction occurred instead of when the evidence was discovered.
-The stake that contributed to the infraction is slashed, even if it has been redelegated or started unbonding.
+If valid `Equivocation` evidence is included in a block, the validator's stake is reduced (slashed) by `SlashFractionDoubleSign` as defined by the `x/slashing` module of what their stake was when the infraction occurred, rather than when the evidence was discovered. We want to "follow the stake", i.e., the stake that contributed to the infraction should be slashed, even if it has since been redelegated or started unbonding.
 
-Additionally, the validator is permanently jailed and tombstoned so that the validator cannot re-enter the validator set again.
+In addition, the validator is permanently jailed and tombstoned to make it impossible for that validator to ever re-enter the validator set.
 
-{{< details "Equivocation evidence handling code" >}}
+The `Equivocation` evidence is handled as follows:
 
 ```go
 func (k Keeper) HandleEquivocationEvidence(ctx sdk.Context, evidence *types.Equivocation) {
@@ -202,7 +202,7 @@ func (k Keeper) HandleEquivocationEvidence(ctx sdk.Context, evidence *types.Equi
 	if _, err := k.slashingKeeper.GetPubkey(ctx, consAddr.Bytes()); err != nil {
 		// Ignore evidence that cannot be handled.
 		//
-		// NOTE: Developers used to panic with:
+		// NOTE: We used to panic with:
 		// `panic(fmt.Sprintf("Validator consensus-address %v not found", consAddr))`,
 		// but this couples the expectations of the app to both Tendermint and
 		// the simulator.  Both are expected to provide the full range of
@@ -265,7 +265,8 @@ func (k Keeper) HandleEquivocationEvidence(ctx sdk.Context, evidence *types.Equi
 		"infraction_time", infractionTime,
 	)
 
-	// To retrieve the stake distribution which signed the block, subtract ValidatorUpdateDelay from the evidence height.
+	// We need to retrieve the stake distribution which signed the block, so we
+	// subtract ValidatorUpdateDelay from the evidence height.
 	// Note, that this *can* result in a negative "distributionHeight", up to
 	// -ValidatorUpdateDelay, i.e. at the end of the
 	// pre-genesis block (none) = at the beginning of the genesis block.
@@ -293,6 +294,7 @@ func (k Keeper) HandleEquivocationEvidence(ctx sdk.Context, evidence *types.Equi
 	k.slashingKeeper.Tombstone(ctx, consAddr)
 }
 ```
-{{< /details >}}
 
-The slashing, jailing, and tombstoning calls are delegated through the slashing module, which emits informative events and finally delegates calls to the staking module. For more information about slashing and jailing, see [transitions]({{< ref "staking#transitions" >}}).
+Note, the slashing, jailing, and tombstoning calls are delegated through the `x/slashing` module
+that emits informative events and finally delegates calls to the `x/staking` module. See documentation
+on slashing and jailing in [transitions]({{< ref "staking#transitions" >}}).

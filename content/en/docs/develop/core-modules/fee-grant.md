@@ -6,22 +6,16 @@ weight: 90
 {{< alert >}}
 **Note**
 
-XPLA Chain's fee grant module inherits from the Cosmos SDK's [`feegrant`](https://docs.cosmos.network/master/modules/feegrant/) module. This document is a stub and explains mainly important XPLA Chain-specific notes about how it is used.
+XPLA Chain's fee grant module inherits from the Cosmos SDK's [`feegrant`](https://docs.cosmos.network/v0.45/modules/feegrant/) module. This document is a stub and explains mainly important XPLA Chain-specific notes about how it is used.
 {{< /alert >}}
 
-This module allows an account, the granter, to permit another account, the grantee, to pay for fees from the granter's account balance. Grantees will not need to maintain their own balance for paying fees.
+This module allows accounts to grant fee allowances and to use fees from their accounts. Grantees can execute any transaction without the need to maintain sufficient fees.
 
 ## Concepts
 
 ### Grant
 
-`Grant` is stored in the KVStore to record a grant with full context.
-
-Every `grant` contains the following information:
-
-- `granter`: The account address that gives permission to the grantee.
-- `grantee`: The beneficiary account address.
-- `allowance`: The [type of fee allowance]({{< ref "#fee-allowance-types" >}}) given to the grantee. `Allowance` accepts an interface that implements `FeeAllowanceI` encoded as `Any` type, as shown in the following example:
+`Grant` is stored in the KVStore to record a grant with full context. Every grant will contain `granter`, `grantee` and what kind of `allowance` is granted. `granter` is an account address who is giving permission to `grantee` (the beneficiary account address) to pay for some or all of grantee's transaction fees. `allowance` defines what kind of fee allowance (`BasicAllowance` or `PeriodicAllowance`, see below) is granted to `grantee`. `allowance` accepts an interface which implements `FeeAllowanceI`, encoded as `Any` type. There can be only one existing fee grant allowed for a `grantee` and `granter`, self grants are not allowed.
 
   ```protobuf
     // allowance can be any of basic and filtered fee allowance.
@@ -29,7 +23,7 @@ Every `grant` contains the following information:
   }
   ```
 
-  The following example shows `FeeAllowanceI`:
+  `FeeAllowanceI` looks like:
 
   ```golang
   type FeeAllowanceI interface {
@@ -51,15 +45,13 @@ Every `grant` contains the following information:
   }
   ```
 
-Only one fee grant is allowed between a granter and a grantee. Self-grants are prohibited.
-
 ### Fee Allowance Types
 
 The following types of fee allowances can be granted.
 
 #### `BasicAllowance`
 
-`BasicAllowance` permits the grantee to pay fees by using funds from the granter's account. If the threshold for either `spend_limit` or `expiration` is met, the grant is removed from the state.
+`BasicAllowance` is permission for `grantee` to use fee from a `granter`'s account. If any of the `spend_limit` or `expiration` reaches its limit, the grant will be removed from the state.
 
 ```protobuf
 // BasicAllowance implements Allowance with a one-time grant of tokens
@@ -78,15 +70,15 @@ message BasicAllowance {
 }
 ```
 
-- `spend_limit`: The amount of tokens from the granter's account that the grantee can spend. This value is optional. If it is blank, no spend limit is assigned, and the grantee can spend any amount of tokens from the granter's account before the expiration is met.
+- `spend_limit` is the limit of coins that are allowed to be used from the `granter` account. If it is empty, it assumes there's no spend limit, `grantee` can use any number of available tokens from `granter` account address before the expiration.
 
-- `expiration`: The date and time when the grant expires. This value is optional. If it is blank, the grant does not expire.
+- `expiration`specifies an optional time when this allowance expires. If the value is left empty, there is no expiry for the grant.
 
-To restrict the grantee when values for `spend_limit` and `expiration` are blank, revoke the grant.
+- When a grant is created with empty values for `spend_limit` and `expiration`, it is still a valid grant. It won't restrict the `grantee` to use any number of tokens from `granter` and it won't have any expiration. The only way to restrict the `grantee` is by revoking the grant.
 
 #### `PeriodicAllowance`
 
-`PeriodicAllowance` is a repeating fee allowance for a specified period and for a specified maximum number of tokens that can spent within that period.
+`PeriodicAllowance` is a repeating fee allowance for the mentioned period, we can mention when the grant can expire as well as when a period can reset. We can also define the maximum number of coins that can be used in a mentioned period of time.
 
 {{< details "PeriodicAllowance code" >}}
 
@@ -650,7 +642,7 @@ func (gr GasEstimateResponse) String() string {
 }
 ```
 
-```
+```go
 func (w *wrapper) SetFeeGranter(feeGranter sdk.AccAddress) {
 	if w.tx.AuthInfo.Fee == nil {
 		w.tx.AuthInfo.Fee = &tx.Fee{}
@@ -689,7 +681,7 @@ message Fee {
 ```
 {{< /details >}}
 
-The following example shows a CLI command with the `--fee-account` flag:
+Example cmd:
 
 ```
 ./xplad tx gov submit-proposal --title="Test Proposal" --description="My awesome proposal" --type="Text" --from validator-key --fee-account=xpla1fmcjjt6yc9wqup2r06urnrd928jhrde6gcld6n --chain-id=testnet --fees="10axpla"
@@ -701,12 +693,12 @@ Fees are deducted from grants in the `auth` ante handler.
 
 ### Gas
 
-To prevent DoS attacks, using a filtered `feegrant` incurs gas. To ensure that all the grantee's transactions conform to the filter set by the granter, the SDK iterates over the allowed messages in the filter and charges 10 gas per filtered message. Then, the SDK iterates over the messages sent by the grantee to ensure the messages adhere to the filter, which also charges 10 gas per message. If the SDK finds a message that does not conform to the filter, the SDK stops iterating, and the transaction fails.
+In order to prevent DoS attacks, using a filtered `x/feegrant` incurs gas. The SDK must assure that the `grantee`'s transactions all conform to the filter set by the `granter`. The SDK does this by iterating over the allowed messages in the filter and charging 10 gas per filtered message. The SDK will then iterate over the messages being sent by the `grantee` to ensure the messages adhere to the filter, also charging 10 gas per message. The SDK will stop iterating and fail the transaction if it finds a message that does not conform to the filter.
 
 {{< alert context="warning" >}}
-**Caution**
+**Warning**
 
-Gas is charged against the granted allowance. Ensure all your existing messages conform to the filter before you send transactions using your allowance.
+The gas is charged against the granted allowance. Ensure your messages conform to the filter, if any, before sending transactions using your allowance.
 {{< /alert >}}
 
 ## State
@@ -735,7 +727,7 @@ type Grant struct {
 
 ### MsgGrantAllowance
 
-A fee allowance grant will be created with the MsgGrantAllowance message.
+A fee allowance grant will be created with the `MsgGrantAllowance` message.
 
 ```protobuf
 // MsgGrantAllowance adds permission for Grantee to spend up to Allowance
@@ -754,7 +746,7 @@ message MsgGrantAllowance {
 
 ### MsgRevokeAllowance
 
-A fee allowance grant will be revokeed with the MsgRevokeAllowance message.
+An allowed grant fee allowance can be removed with the `MsgRevokeAllowance` message.
 
 ```protobuf
 // MsgRevokeAllowance removes any existing Allowance from Granter to Grantee.

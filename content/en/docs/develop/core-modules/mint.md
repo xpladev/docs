@@ -6,37 +6,44 @@ weight: 110
 {{< alert >}}
 **Note**
 
-XPLA Chain's mint module inherits from the Cosmos SDK's [`mint`](https://docs.cosmos.network/master/modules/mint/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+XPLA Chain's mint module inherits from the Cosmos SDK's [`mint`](https://docs.cosmos.network/v0.45/modules/mint/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
 {{< /alert >}}
 
 The mint module is in charge of the creation of new XPLA through minting. At the beginning of every block, new XPLA is released by the mint module and sent to the fee collector account to be distributed to stakers as rewards.
 
 The current inflation rate is set to a fixed 0% annual inflation.
 
-## Variable Rate
+## Concepts
 
-The mint module also allows for a variable inflation rate to be used. While the current rate is fixed, these parameters can be changed through a governance vote. The following outlines the variable inflation logic.
+### The Minting Mechanism
 
-Variable inflation logic is designed to:
-- Allow for a flexible inflation rate determined by market demand targeting a particular bonded-stake ratio.
+The minting mechanism was designed to:
 
-- Affect a balance between market liquidity and staked supply.
+- allow for a flexible inflation rate determined by market demand targeting a particular bonded-stake ratio
+- effect a balance between market liquidity and staked supply
 
-To best determine the appropriate market rate for inflation rewards, a moving change rate is used. The moving change rate mechanism ensures that if the percentage bonded is either over or under the goal percentage-bonded, the inflation rate will adjust to further incentivize or disincentivize being bonded, respectively. Setting the goal percentage-bonded at less than 100% encourages the network to maintain some non-staked tokens, which helps to provide some liquidity.
+In order to best determine the appropriate market rate for inflation rewards, a
+moving change rate is used.  The moving change rate mechanism ensures that if
+the % bonded is either over or under the goal %-bonded, the inflation rate will
+adjust to further incentivize or disincentivize being bonded, respectively. Setting the goal
+%-bonded at less than 100% encourages the network to maintain some non-staked tokens
+which should help provide some liquidity.
 
-It works in the following ways:
+It can be broken down in the following way:
 
-If the inflation rate is below the goal percentage-bonded, the inflation rate increases until a maximum value is reached.
-
-If the goal percentage-bonded (67% in Cosmos-Hub) is maintained, the inflation rate stays constant.
-
-If the inflation rate is above the goal percentage-bonded, the inflation rate decreases until a minimum value is reached.
+- If the inflation rate is below the goal %-bonded the inflation rate will
+   increase until a maximum value is reached
+- If the goal % bonded (67% in Cosmos-Hub) is maintained, then the inflation
+   rate will stay constant
+- If the inflation rate is above the goal %-bonded the inflation rate will
+   decrease until a minimum value is reached
 
 ## Parameters
 
 The subspace for the Mint module is `mint`.
 
 ```go
+// Params holds parameters for the mint module.
 type Params struct {
 	// type of coin to mint
 	MintDenom string `protobuf:"bytes,1,opt,name=mint_denom,json=mintDenom,proto3" json:"mint_denom,omitempty"`
