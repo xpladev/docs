@@ -1,6 +1,6 @@
 ---
 title: CW20 Tokens
-weight: 30
+weight: 20
 ---
 
 According to the [official documentation](https://docs.rs/crate/cw20/0.2.3):

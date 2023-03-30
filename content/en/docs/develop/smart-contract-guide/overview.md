@@ -9,11 +9,10 @@ Smart contracts allow users to extend the capabilities of the XPLA Chain by intr
 
 ## Developer Tools
 
-The following table maps commonly-used Ethereum developer tools to their XPLA Chain counterparts.
+The following table describes commonly-used developer tools for building smart contract.
 
-|                   | XPLA Chain                                    | Ethereum        |
+|                   | WASM                                          | EVM             |
 |-------------------|-----------------------------------------------|-----------------|
 | Frontend SDK      | [xpla.js](https://github.com/xpladev/xpla.js) | Web3.js         |
 | Browser Extension | XPLA Vault CX                                 | MetaMask, MEW   |
 | Contract Language | [Rust](https://www.rust-lang.org/)            | Solidity, Vyper |
-

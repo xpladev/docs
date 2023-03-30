@@ -5,7 +5,7 @@ title: Build a Simple XPLA Chain dApp
 
 This tutorial is designed to acquaint you with everything you need to know to launch your own smart-contract powered applications on XPLA Chain.
 
-Using CosmWasm's default template contract as an example, this tutorial walks through the necessary steps to go from an idea to execution.
+Using Hardhat & OpenZeppelin contract as an example for EVM guide and CosmWasm’s default template contract for WASM one, this tutorial walks through the necessary steps to go from an idea to execution.
 
 In this guide, you will learn:
 
@@ -15,7 +15,8 @@ In this guide, you will learn:
 
 ## Requirements
 
-- [Docker](https://www.docker.com/)
 - Basic familiarity with the XPLA Chain ecosystem
-- Basic proficiency with [Rust](https://www.rust-lang.org/)
+- Basic proficiency with the language smart contract uses
+  - EVM: [Solidity](https://docs.soliditylang.org/) & [Node.js](https://nodejs.org/)
+  - WASM: [Rust](https://www.rust-lang.org/)
 - A desire to disrupt traditional finance
