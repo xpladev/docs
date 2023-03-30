@@ -1,6 +1,6 @@
 ---
 title: Interacting with the Contract
-weight: 70
+weight: 50
 ---
 
 {{< alert >}}

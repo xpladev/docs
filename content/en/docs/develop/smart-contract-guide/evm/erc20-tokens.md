@@ -1,6 +1,6 @@
 ---
 title: ERC20 Tokens
-weight: 30
+weight: 20
 ---
 
 According to the [OpenZepplin's documentation](https://docs.openzeppelin.com/contracts/2.x/erc20):
