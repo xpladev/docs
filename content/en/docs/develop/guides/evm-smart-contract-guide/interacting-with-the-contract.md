@@ -62,6 +62,8 @@ async function main() {
   
     const Token = await ethers.getContractFactory("Token");
     const token = await Token.deploy();
+
+    await token.deployed();
   
     console.log("Token address:", token.address);
   }
@@ -136,6 +138,59 @@ If there is an error and it says about `JsonRpcProvider`, please:
 
 And then execute the command above again!
 
-## What's Next?
+## Querying & executing on the contract
 
-Congratulations! You've finally succeeded to deploy the first EVM smart contract on your local XPLA chain network. From now, all ways to interact with EVM smart contract on XPLA chain are same as the ways of other EVM based chain. You may interact with `web3.js` and create & send transactions, or use the features from development environment tools.
+Like other EVM-based blockchain network, you may use `web3.js` to interact with EVM contracts on XPLA chain. To query and send transactions to a smart contract on the Ethereum blockchain using web3.js, you will need to do the following:
+
+- Create an instance of the web3 object and connect to an Ethereum network
+- Load the contract ABI (Application Binary Interface) and instantiate the contract object
+- Query the smart contract for information
+- Send a transaction to the smart contract
+
+### Querying
+
+XPLA chain opens `8545` port for EVM based interaction. Here's an example of how to connect to the XPLA chain:
+
+```javascript
+const Web3 = require('web3');
+const web3 = new Web3('http://localhost:8545');
+```
+
+Then, you need to load the contract ABI and instantiate the contract object.
+
+The ABI (Application Binary Interface) is a JSON file that describes the functions and variables of a smart contract. You will need to load the ABI and instantiate the contract object in order to interact with the smart contract.
+
+In your Hardhat project folder, you may find the ABI from `artifacts/contracts/Token.sol/Token.json`. You may take the file into your frontend project.
+
+Here's an example of how to load the ABI and instantiate the contract object:
+
+```javascript
+const contractABI = require('./Token.json');
+const contractAddress = '0xB1ED1d08A66067A0DA102aA50ad7e92f1AA0f5f4';
+const myContract = new web3.eth.Contract(contractABI, contractAddress);
+
+myContract.methods.balanceOf("0xabcderfgh........").call()
+  .then(result => console.log(result))
+  .catch(error => console.log(error));
+```
+
+### Executing
+
+To send a transaction to the smart contract, you can use the send method on the contract object. The send method creates a transaction on the blockchain and modifies the state of the smart contract.
+
+Here's an example of how to send a transaction to a smart contract:
+
+```javascript
+const privateKey = 'XPLA_PRIVATE_KEY';
+const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+
+myContract.methods.transfer(param1, param2).send({
+  from: account.address,
+  gas: 500000,
+  gasPrice: '20000000000'
+})
+.then(receipt => console.log(receipt))
+.catch(error => console.log(error));
+```
+
+Please fill `XPLA_PRIVATE_KEY` from the value of [Wallet credential]({{< ref "#wallet-credential" >}})
