@@ -1,6 +1,6 @@
 ---
 title: WASM
-weight: 180
+weight: 190
 ---
 
 The WASM module implements the execution environment for WebAssembly smart contracts, powered by [CosmWasm](https://cosmwasm.com).
