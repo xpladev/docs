@@ -1,6 +1,6 @@
 ---
 title: Mint
-weight: 120
+weight: 130
 ---
 
 {{< alert >}}

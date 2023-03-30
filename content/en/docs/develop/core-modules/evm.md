@@ -3,6 +3,12 @@ title: EVM
 weight: 90
 ---
 
+{{< alert >}}
+**Note**
+
+XPLA Chain's evm module inherits from Evmos's [`evm`](https://docs.evmos.org/protocol/modules/evm) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+{{< /alert >}}
+
 This document defines the specification of the Ethereum Virtual Machine (EVM) as a Cosmos SDK module.
 
 Since the introduction of Ethereum in 2015, the ability to control digital assets through [**smart contracts**](https://www.fon.hum.uva.nl/rob/Courses/InformationInSpeech/CDROM/Literature/LOTwinterschool2006/szabo.best.vwh.net/idea.html) has attracted a large community of developers to build decentralized applications on the Ethereum Virtual Machine (EVM). This community is continuously creating extensive tooling and introducing standards, which are further increasing the adoption rate of EVM compatible technology.
