@@ -24,7 +24,7 @@ The governance process is divided in a few steps that are outlined below:
 - **Proposal submission:** Proposal is submitted to the blockchain with a
   deposit.
 - **Vote:** Once deposit reaches a certain value (`MinDeposit`), proposal is
-  confirmed and vote opens. Bonded Xpla holders can then send `TxGovVote`
+  confirmed and vote opens. Bonded XPLA holders can then send `TxGovVote`
   transactions to vote on the proposal.
 - If the proposal involves a software upgrade:
     - **Signal:** Validators start signaling that they are ready to switch to the
@@ -36,7 +36,7 @@ The governance process is divided in a few steps that are outlined below:
 
 #### Right to submit a proposal
 
-Any Xpla holder, whether bonded or unbonded, can submit proposals by sending a
+Any XPLA holder, whether bonded or unbonded, can submit proposals by sending a
 `TxGovProposal` transaction. Once a proposal is submitted, it is identified by
 its unique `proposalID`.
 
@@ -87,20 +87,20 @@ When a the a proposal finalized, the coins from the deposit are either refunded 
 #### Participants
 
 _Participants_ are users that have the right to vote on proposals. On the
-XPLA Chain, participants are bonded Xpla holders. Unbonded Xpla holders and
+XPLA Chain, participants are bonded XPLA holders. Unbonded XPLA holders and
 other users do not get the right to participate in governance. However, they
 can submit and deposit on proposals.
 
 Note that some _participants_ can be forbidden to vote on a proposal under a
 certain validator if:
 
-- _participant_ bonded or unbonded Xplas to said validator after proposal
+- _participant_ bonded or unbonded XPLAs to said validator after proposal
   entered voting period.
 - _participant_ became validator after proposal entered voting period.
 
-This does not prevent _participant_ to vote with Xplas bonded to other
-validators. For example, if a _participant_ bonded some Xplas to validator A
-before a proposal entered voting period and other Xplas to validator B after
+This does not prevent _participant_ to vote with XPLAs bonded to other
+validators. For example, if a _participant_ bonded some XPLAs to validator A
+before a proposal entered voting period and other XPLAs to validator B after
 proposal entered voting period, only the vote under validator B will be
 forbidden.
 
@@ -424,7 +424,7 @@ The subspace for the Governance module is `gov`.
 type DepositParams struct {
 	//  Minimum deposit for a proposal to enter voting period.
 	MinDeposit github_com_cosmos_cosmos_sdk_types.Coins `protobuf:"bytes,1,rep,name=min_deposit,json=minDeposit,proto3,castrepeated=github.com/cosmos/cosmos-sdk/types.Coins" json:"min_deposit,omitempty" yaml:"min_deposit"`
-	//  Maximum period for Xpla holders to deposit on a proposal. Initial value: 2
+	//  Maximum period for XPLA holders to deposit on a proposal. Initial value: 2
 	//  months.
 	MaxDepositPeriod time.Duration `protobuf:"bytes,2,opt,name=max_deposit_period,json=maxDepositPeriod,proto3,stdduration" json:"max_deposit_period,omitempty" yaml:"max_deposit_period"`
 }

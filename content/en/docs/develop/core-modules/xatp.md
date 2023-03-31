@@ -7,14 +7,14 @@ The XATP(XPLA Alternative Transaction Protocol) module supports accept cw20 fee 
 
 ## Concepts
 
-The XATP module is allows for the use of tokens other than Xpla to pay transaction fees on the Xpla Chain. This makes it easier for users who do not hold Xpla to participate in the network, easier in the onboarding of new projects.
+The XATP module is allows for the use of tokens other than XPLA to pay transaction fees on the XPLA Chain. This makes it easier for users who do not hold XPLA to participate in the network, easier in the onboarding of new projects.
 
 The XATP is used through the following steps:
 
 - Token to be used as XATP is registered through a proposal
-- The XATP module owns Xpla to paid as fees
+- The XATP module owns XPLA to paid as fees
 - When a user generates a transaction, they pay a fee using XATP that is higher than the original fee by `TaxRate`
-- The paid XATP fee is sent by the XATP module and the module paid the fee using Xpla it owns to the network
+- The paid XATP fee is sent by the XATP module and the module paid the fee using XPLA it owns to the network
 - The remaining fee, equal to Tax, is distributed according to [parameters]({{< ref "xatp#parameters" >}}) to the `community pool`, `reserve account`, and `reward pool`.
 
 ## State
@@ -50,7 +50,7 @@ Token is the contract address of cw20.
 
 - type: `string`
 
-AMM's pair contract address must be a pair that can query the ratio with a pool including Xpla.
+AMM's pair contract address must be a pair that can query the ratio with a pool including XPLA.
 
 #### Decimals
 
