@@ -3,25 +3,25 @@ title: XATP
 weight: 200
 ---
 
-The XATP(XPLA Alternative Transaction Protocol) module supports accept cw20 fee payment.
+The XATP(XPLA Alternative Transaction Protocol) module supports fee payment in CW20 tokens.
 
 ## Concepts
 
-The XATP module is allows for the use of tokens other than XPLA to pay transaction fees on the XPLA Chain. This makes it easier for users who do not hold XPLA to participate in the network, easier in the onboarding of new projects.
+The XATP module allows tokens other than XPLA to be paid as transaction fees on the XPLA Chain. This feature aims to help users who do not hold XPLA to participate in the network and new projects to get onboarded into the ecosystem more seamlessly.
 
-The XATP is used through the following steps:
+The module works through the following steps:
 
-- Token to be used as XATP is registered through a proposal
-- The XATP module owns XPLA to paid as fees
-- When a user generates a transaction, they pay a fee using XATP that is higher than the original fee by `TaxRate`
-- The paid XATP fee is sent by the XATP module and the module paid the fee using XPLA it owns to the network
-- The remaining fee, equal to Tax, is distributed according to [parameters]({{< ref "xatp#parameters" >}}) to the `community pool`, `reserve account`, and `reward pool`.
+1. The token is registered through a proposal
+2. The XATP module owns an account(hereafter the module account) holding XPLA to pay fees
+3. When a user generates a transaction, the module pays its fee in a registered token that is higher value than the original one by `TaxRate`
+4. The paid fees are sent to the XATP module, and the module pays the fee in XPLA by the module account
+5. The remaining fee(equal to the user paid fee multiplies (1 - `FeePoolRate` + `TaxRate`)) is distributed to the `community pool`, `reserve account`, and `reward pool` according to the ratios in [parameters]({{< ref "xatp#parameters" >}}).
 
 ## State
 
 ### XATP
 
-XATPs objects should be primarily stored and accessed by the denom.
+XATP objects are stored and accessed by the denom.
 
 - Xatps: `0x11 | DenomLen (1 byte) | Denom -> ProtocolBuffer(XATP)`
 
@@ -38,19 +38,19 @@ type XATP struct {
 
 - type: `string`
 
-Denom recommends using a prefix that matches the number of decimal places. For example, if the decimal point of CTXT is 6, use uCTXT.
+`Denom` is highly recommended using a prefix that matches the number of decimal places. e.g. CTXT, which decimal point is 6, is uCTXT.
 
 #### Token
 
 - type: `string`
 
-Token is the contract address of cw20.
+`Token` is the contract address of CW20.
 
 #### Pair
 
 - type: `string`
 
-AMM's pair contract address must be a pair that can query the ratio with a pool including XPLA.
+AMMs(Automated Market Makers)' pair contract address should be a trading pair including XPLA and be able to query the ratio of its pool.
 
 #### Decimals
 
@@ -69,10 +69,12 @@ type RegisterXatpProposal struct {
 }
 ```
 
-Register XATP Proposal is a special type of proposal which, once passed, will automatically go into effect by allow XATP to be used as a Tx fee.
+Register XATP Proposal is a special type of proposal which, once passed, will automatically go into effect by allowing `Xatp` to be used as a transaction fee.
 
 {{< alert context="warning" >}}
-Note: If XATP of the same denom is registered, it will be overwritten.
+**Note**
+
+The denom already registered to the module will be overwritten.
 {{< /alert >}}
 
 
@@ -85,14 +87,14 @@ type UnregisterXatpProposal struct {
 }
 ```
 
-Unregister XATP Proposal is a special type of proposal which, once passed, will automatically go into effect by prevent XATP to be used as a Tx fee.
+Unregister XATP Proposal is a special type of proposal which, once passed, will automatically go into effect by preventing the token that `Denom` represents to be used as a transaction fee.
 
 
 ## Transitions
 
 ### InitGenesis
 
-`InitGenesis` initializes the XATP module genesis state by setting the `GenesisState` fields to the store. In particular, it sets the parameters and XATPs.
+`InitGenesis` initializes the XATP module genesis state by setting the `GenesisState` fields to the store. In particular, it sets the [parameters]({{< ref "xatp#parameters" >}}) and XATPs.
 
 ### ExportGenesis
 
@@ -100,7 +102,7 @@ The `ExportGenesis` ABCI function exports the genesis state of the XATP module. 
 
 ## Parameters
 
-The xatp module contains the following parameters:
+The XATP module contains the following parameters:
 
 ### Params
 ```go
@@ -119,39 +121,39 @@ type Params struct {
 - type: `sdk.Dec`
 - default: `0.2`
 
-Ratio of paying more when paying with XATP than when paying with default denom.
+The ratio of paying in XATP denom compared to the default denom, generally with a higher value than default.
 
 ### FeePoolRate
 
 - type: `sdk.Dec`
 - default: `1`
 
-Ratio of fees sent to the fee pool when fees are received with XATP
+The distribution ratio of received fees to be sent to the fee pool
 
 ### CommunityPoolRate
 
 - type: `sdk.Dec`
 - default: `0.158`
 
-Ratio of fees sent to the community pool when fees are received with XATP
+The distribution ratio of received fees to be sent to the community pool
 
 ### ReserveRate
 
 - type: `sdk.Dec`
 - default: `0.04`
 
-Ratio of fees sent to the reserve account when fees are received with XATP
+The distribution ratio of received fees to be sent to the reserve account
 
 ### RewardPoolRate
 
 - type: `sdk.Dec`
 - default: `0.002`
 
-Ratio of fees sent to the reward pool when fees are received with XATP
+The distribution ratio of received fees to be sent to the reward pool
 
 ### ReserveAccount
 
 - type: `string`
 - default: ``
 
-Reserve account address
+The reserve account address
