@@ -13,9 +13,9 @@ The module works through the following steps:
 
 1. The token is registered through a proposal
 2. The XATP module owns an account(hereafter the module account) holding XPLA to pay fees
-3. When a user generates a transaction, the module pays its fee in a registered token that is higher value than the original one by `TaxRate`
-4. The paid fees are sent to the XATP module, and the module pays the fee in XPLA by the module account
-5. The remaining fee(equal to the user paid fee multiplies (1 - `FeePoolRate` + `TaxRate`)) is distributed to the `community pool`, `reserve account`, and `reward pool` according to the ratios in [parameters]({{< ref "xatp#parameters" >}}).
+3. When a user generates a transaction, the module pays its fee corresponding to the increased value by `TaxRate` with the registered token
+4. The paid fees are sent to the XATP module, which pays the fee in XPLA by the module account.
+5. After subtracting the fee transferred to the fee pool, the remainder is distributed to the `community pool`, `reserve account`, and `reward pool` according to the ratios in [parameters]({{< ref "xatp#parameters" >}}).
 
 ## State
 
@@ -121,7 +121,7 @@ type Params struct {
 - type: `sdk.Dec`
 - default: `0.2`
 
-The ratio of paying in XATP denom compared to the default denom, generally with a higher value than default.
+The ratio of tax charged when paying in XATP denom compared to the default denom.
 
 ### FeePoolRate
 
