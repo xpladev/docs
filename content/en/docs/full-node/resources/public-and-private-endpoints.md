@@ -3,7 +3,7 @@ title: Public and Private Endpoints
 weight: 30
 ---
 
-## Private Endpoints
+## Ecosystem Endpoints
 
 - TBD
 
@@ -24,7 +24,7 @@ Public RPC endpoints should only be used in development. For live dApps, use a p
 
 ### Public RPC
 
-| endpoint | Network            |
+| Endpoint | Network            |
 | -------- | ------------------ |
 | https://dimension-rpc.xpla.dev | `dimension_37-1` mainnet |
 | https://cube-rpc.xpla.dev | `cube_47-5` testnet    |
