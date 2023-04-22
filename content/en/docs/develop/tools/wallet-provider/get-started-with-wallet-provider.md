@@ -78,6 +78,7 @@ Your browser should open to `http://localhost:3000/`, and you should see the Rea
 
 {{< details "Getting polyfill errors?" >}}
 
+### Using CRA
 To solve these errors, can downgrade `react-scripts`: `4.0.3` in your `package.json` and reinstall your dependencies as a quick fix:
 
 1.  Navigate to `my-xpla-app` in your terminal and run the following:
@@ -102,6 +103,48 @@ Alternatively, you can configure your webpack to include the necessary fallbacks
 {{< /details >}}
 
 3.  Create a new directory called `components` in the `source` directory. This directory will house components to trigger different actions from our connected wallet.
+
+### Using Vite
+
+1. Install `vite-plugin-node-polyfills`.
+
+    ```sh
+    npm install --save-dev vite-plugin-node-polyfills
+    ```
+
+2. Edit vite.config.ts
+
+    ```ts
+    // vite.config.ts
+    import { defineConfig } from 'vite'
+    import react from '@vitejs/plugin-react'
+    import { nodePolyfills } from 'vite-plugin-node-polyfills'
+    // https://vitejs.dev/config/
+    export default defineConfig({
+      plugins: [react(),nodePolyfills({
+        // Whether to polyfill `node:` protocol imports.
+        protocolImports: true,
+      }),],
+    })
+
+    ```
+3. From now on, you can use it this way.
+    ```ts
+    // Excerpt from the example Signing Bytes 
+    import {
+      SignBytesFailed,
+      SignBytesResult,
+      Timeout,
+      useConnectedWallet,
+      UserDenied,
+      verifyBytes,
+    } from '@xpla/wallet-provider';
+    import { Buffer } from 'node:buffer';
+    import React, { useCallback, useState } from 'react';
+
+    const TEST_BYTES = Buffer.from('hello'); // resolves to <Buffer 68 65 6c 6c 6f>
+    ```
+
 
 ## 3. Put `useWallet` to Work
 
