@@ -3,17 +3,17 @@ title: Zero Reward
 weight: 210
 ---
 
-The zero reward module is to support validators who want to participate in block propose without profit.
+The zero reward module is to support validators who want to participate in proposing blocks without profit.
 
 ## Concepts
 
-The zero reward module allows validators whose voting power does not enter the active set to propose blocks. These validators can be register or unregister through proposals. Commissions from these validators are sent to the community pool. It does not accept any delegation, undelegation or redelegation.
+The zero reward module allows validators whose voting power does not enter the active set to propose blocks. These validators can be registered or unregistered through proposals. Commissions earned by these validators are sent to the community pool, and they do not accept any delegation or redelegation.
 
 ## State
 
 ### Zero Reward Validator
 
-Zero reward validator objects are stored and accessed by validator address.
+Zero reward validator objects are stored and accessed by a validator address.
 - Zero Reward Validators : `0x11 | ValidatorAddrLen (1byte) | ValidatorAddr -> ProtocolBuffer(ZeroRewardValidator)`
 
 ```go
@@ -32,7 +32,7 @@ type ZeroRewardValidator struct {
 
 - type : `string`
 
-`Address` is the validator address and has a prefix of `xplavaloper1`.
+`Address` is the validator address with a prefix of `xplavaloper1`.
 
 #### Power
 
@@ -40,11 +40,11 @@ type ZeroRewardValidator struct {
 
 `Power` is the validator's voting power.
 
-#### IsDeleting 
+#### IsDeleting
 
 - type : `bool`
 
-`IsDeleting` is a reserved flag for unregister. 
+`IsDeleting` is a reserved flag for unregistration.
 
 ## Proposals
 
@@ -61,13 +61,13 @@ type RegisterZeroRewardValidatorProposal struct {
 }
 ```
 
-Register Zero Reward Proposal is a special type of proposal which, once passed, will automatically go into effect by allowing Zero Reward Validator to be propose a block.
+Register Zero Reward Proposal is a special type of proposal which, once passed, will automatically go into effect by allowing Zero Reward Validator to propose a block.
 
 
 {{< alert context="warning" >}}
 **Note**
 
-Zero Reward Validator should be created by proposal. In other words, a validator that has already been created cannot become a Zero Reward Validator.
+Zero Reward Validator should be created by proposal. In other words, a validator that has already been created cannot be designated as a Zero Reward Validator.
 {{< /alert >}}
 
 
@@ -80,7 +80,7 @@ type UnregisterZeroRewardValidatorProposal struct {
 }
 ```
 
-Unregister Zero Reward Validator Proposal is a special type of proposal which, once passed, will automatically go into effect by Zero Reward Validator unregister which means that validator can no longer be propose a block.
+Unregister Zero Reward Validator Proposal is a special type of proposal which, once passed, will automatically go into effect by Zero Reward Validator unregister. This means that the validator can no longer propose a block.
 
 ## Transitions
 
@@ -90,13 +90,13 @@ Unregister Zero Reward Validator Proposal is a special type of proposal which, o
 
 ### ExportGenesis
 
-`ExportGenesis` ABCI function exports the genesis state of the Zero Reward module.In particular, it retrieves all the Zero Reward Validators information.
+`ExportGenesis` ABCI function exports the genesis state of the Zero Reward module. In particular, it retrieves all the Zero Reward Validators' information.
 
 ### Begin Block
-Each abci begin block call, claim all commissions of `ZeroRewardValidators`. It claimed every block, and this reward is send to community pool.
+For each abci begin block call, all commissions of `ZeroRewardValidators` are claimed and sent to the community pool.
 
 ### End Block
-Each abci end block call, the operations to update Zero Reward Validator set changes are specified to execute.
+For each abci end block call, the operations to update Zero Reward Validator set changes are specified to execute.
 
 #### Validator Set Changes
 The validator's active set is determined by the staking module. When Zero Reward Validators are not part of the active set, process for adding and deleting Tendermint validators.
@@ -104,8 +104,8 @@ The validator's active set is determined by the staking module. When Zero Reward
 - In the active set
     - They all follow the operation of the staking module.
 - Not in the active set
-    - Change validator status to bonded and apply voting power to tendermint.
-    - When Zero Reward Validator go to jailed
+    - Change the validator's status to bonded and apply voting power to tendermint.
+    - When Zero Reward Validator goes to be jailed
         - change the validator to unbonding status
         - change the tendermint voting power to 0
         - update Zero Reward Validator state
