@@ -7,7 +7,7 @@ The volunteer module is to support validators who want to participate in proposi
 
 ## Concepts
 
-The volunteer module allows validators whose voting power does not enter the active set to propose blocks. These validators can be registered or unregistered through proposals. Commissions earned by these validators are sent to the community pool, and they do not accept any delegation or redelegation.
+The volunteer module allows validators whose voting power does not enter the active set to propose blocks. These validators can be registered or unregistered through proposals. Commissions earned by these validators are sent to the community pool, and they do not accept other delegators' any delegation or redelegation other than one's own delegation.
 
 ## State
 
@@ -23,8 +23,6 @@ type VolunteerValidator struct {
 	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
 	// power defines the power of the validator.
 	Power int64 `protobuf:"varint,2,opt,name=power,proto3" json:"power,omitempty"`
-	// used when unregistering, reserved for delete
-	IsDeleting bool `protobuf:"varint,3,opt,name=is_deleting,json=isDeleting,proto3" json:"is_deleting,omitempty"`
 }
 ```
 
@@ -39,12 +37,6 @@ type VolunteerValidator struct {
 - type : `int64`
 
 `Power` is the validator's voting power.
-
-#### IsDeleting
-
-- type : `bool`
-
-`IsDeleting` is a reserved flag for unregistration.
 
 ## Proposals
 
@@ -94,22 +86,3 @@ Unregister Volunteer Validator Proposal is a special type of proposal which, onc
 
 ### Begin Block
 For each abci begin block call, all commissions of `VolunteerValidators` are claimed and sent to the community pool.
-
-### End Block
-For each abci end block call, the operations to update Volunteer Validator set changes are specified to execute.
-
-#### Validator Set Changes
-The validator's active set is determined by the staking module. When Volunteer Validators are not part of the active set, process for adding and deleting Tendermint validators.
-
-- In the active set
-    - They all follow the operation of the staking module.
-- Not in the active set
-    - Change the validator's status to bonded and apply voting power to tendermint.
-    - When Volunteer Validator goes to be jailed
-        - change the validator to unbonding status
-        - change the tendermint voting power to 0
-        - update Volunteer Validator state
-    - When a Volunteer Validator unregistration is reserved
-        - change validator to unbonding status
-        - tendermint voting power to 0
-        - delete Volunteer Validator state

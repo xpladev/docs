@@ -456,6 +456,10 @@ Otherwise, the latest historical info is stored under the key `historicalInfoKey
 In most cases, this results in a single entry being pruned per block.
 However, if the parameter `HistoricalEntries` has changed to a lower value there will be multiple entries in the store that must be pruned.
 
+##### Get Last Validators
+
+This function gets the information of the bonded validator of the previous block. In the cosmos-sdk module, validator information as much as `params.MaxValidators` is provided, but in the XPLA Chain, as much as the number of Volunteer Validators is added.
+
 ### End-Block
 
 Each abci end block call, the operations to update queues and validator set
@@ -471,6 +475,7 @@ consensus layer. Operations are as following:
 
 - the new validator set is taken as the top `params.MaxValidators` number of
   validators retrieved from the `ValidatorsByPower` index
+    - regardless of power, [Volunteer Validators]({{< ref "volunteer#volunteer-validator" >}}) are always included.
 - the previous validator set is compared with the new validator set:
     - missing validators begin unbonding and their `Tokens` are transferred from the
     `BondedPool` to the `NotBondedPool` `ModuleAccount`
