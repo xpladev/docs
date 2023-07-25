@@ -7,7 +7,7 @@ The volunteer module is to support validators who want to participate in proposi
 
 ## Concepts
 
-The volunteer module allows validators whose voting power does not enter the active set to propose blocks. These validators can be registered or unregistered through proposals. Commissions earned by these validators are sent to the community pool, and they do not accept other delegators' any delegation or redelegation other than one's own delegation.
+The volunteer module allows validators whose voting power does not enter the active set to propose blocks. These validators can be registered or unregistered through proposals. Commissions earned by these validators are sent to the community pool, and they only accept their own delegation or redelegation.
 
 ## State
 

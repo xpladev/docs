@@ -456,9 +456,9 @@ Otherwise, the latest historical info is stored under the key `historicalInfoKey
 In most cases, this results in a single entry being pruned per block.
 However, if the parameter `HistoricalEntries` has changed to a lower value there will be multiple entries in the store that must be pruned.
 
-##### Get Last Validators
+##### GetLastValidators
 
-This function gets the information of the bonded validator of the previous block. In the cosmos-sdk module, validator information as much as `params.MaxValidators` is provided, but in the XPLA Chain, as much as the number of Volunteer Validators is added.
+This function gets the bonded validators of the previous block. the number of validators in the return value is the same as `params.MaxValidators` in the cosmos-sdk module, and the XPLA Chain provides as many as the number of Volunteer Validators in addition.
 
 ### End-Block
 
