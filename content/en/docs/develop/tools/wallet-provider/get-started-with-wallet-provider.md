@@ -17,7 +17,7 @@ If you're using a frontend framework other than React you'll need to use [Wallet
 
 ## Prerequisites
 
-- [XPLA Chain Chrome extension vault]({{< ref "/docs/learn/xpla-vault/vaults/extension-vault" >}})
+- [XPLA Chain Chrome extension vault]({{< ref "/learn/learn/xpla-vault/vaults/extension-vault" >}})
 - Node.js version 16+
 - [NPM](https://www.npmjs.com/)
 

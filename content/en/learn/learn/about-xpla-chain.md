@@ -1,6 +1,7 @@
 ---
 title: About XPLA Chain
 weight: 10
+type: docs
 ---
 
 ## What is XPLA Chain?

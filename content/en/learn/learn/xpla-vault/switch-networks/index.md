@@ -1,6 +1,7 @@
 ---
 title: Switch Networks
 weight: 60
+type: docs
 ---
 
 Use this guide to switch between XPLA Chain mainnet and testnet networks.

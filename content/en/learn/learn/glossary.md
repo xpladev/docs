@@ -1,6 +1,7 @@
 ---
 title: Glossary
 weight: 50
+type: docs
 ---
 
 Use this glossary to learn about terms specific to the XPLA Chain.

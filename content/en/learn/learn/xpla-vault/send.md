@@ -1,6 +1,7 @@
 ---
 title: Send
 weight: 50
+type: docs
 ---
 
 You can send tokens to other XPLA Vaults using the **Send** feature of XPLA Vault. If this is your first time using XPLA Vault, follow the [XPLA Vault tutorial]({{< ref "web-vault" >}}).

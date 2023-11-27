@@ -1,6 +1,7 @@
 ---
 title: Extension Vault
 weight: 20
+type: docs
 ---
 
 Complete this tutorial to install the XPLA extension vault for the web browser.
@@ -19,7 +20,7 @@ Complete this tutorial to install the XPLA extension vault for the web browser.
 
 ## Create a Wallet
 
-Use this tutorial to create a new wallet. To connect to an existing wallet, visit [how to connect to a wallet]({{< ref "/docs/learn/xpla-vault/wallet#connect-to-a-wallet-using-a-private-key" >}}).
+Use this tutorial to create a new wallet. To connect to an existing wallet, visit [how to connect to a wallet]({{< ref "/learn/learn/xpla-vault/wallet#connect-to-a-wallet-using-a-private-key" >}}).
 
 1. Open the browser extension and click **New wallet**.
 

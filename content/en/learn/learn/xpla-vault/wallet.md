@@ -1,6 +1,7 @@
 ---
 title: Wallet
 weight: 90
+type: docs
 ---
 
 This guide is for advanced features of the XPLA Vault. If this is your first time using XPLA Vault, follow the [XPLA Vault tutorial]({{< ref "web-vault" >}}).

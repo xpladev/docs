@@ -1,6 +1,7 @@
 ---
 title: Web Vaults
 weight: 10
+type: docs
 ---
 
 The XPLA Web Vault is the official wallet of the XPLA Chain.

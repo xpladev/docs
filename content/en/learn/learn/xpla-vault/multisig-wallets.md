@@ -1,6 +1,7 @@
 ---
 title: Multisig Wallets
 weight: 40
+type: docs
 ---
 
 Multisig wallets are an advanced feature of XPLA Vault. If you’re using XPLA Vault for the first time, follow the [XPLA Vault tutorial]({{< ref "xpla-vault" >}}).

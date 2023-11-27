@@ -1,6 +1,7 @@
 ---
 title: Mobile Vault
 weight: 30
+type: docs
 ---
 
 Complete this tutorial to get started with the XPLA mobile vault.

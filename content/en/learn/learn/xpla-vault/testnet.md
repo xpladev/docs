@@ -1,6 +1,7 @@
 ---
 title: Testnet
 weight: 80
+type: docs
 ---
 
 The testnet is the testing environment for the XPLA Chain. Use this guide to simulate transactions on the testnet.

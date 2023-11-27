@@ -1,6 +1,7 @@
 ---
 title: Manage Staking
 weight: 70
+type: docs
 ---
 
 Use this guide to manage your staking delegations in XPLA Vault. To learn how to stake or withdraw rewards, visit the [XPLA mobile vault tutorials]({{< ref "vaults/mobile-vault" >}}).

@@ -1,6 +1,7 @@
 ---
 title: Fees
 weight: 30
+type: docs
 ---
 
 On XPLA Chain, there is only one fee that applies to all transactions: the gas fee.

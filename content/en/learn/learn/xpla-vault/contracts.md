@@ -1,6 +1,7 @@
 ---
 title: Contracts
 weight: 20
+type: docs
 ---
 
 Smart contracts are an advanced feature of XPLA Vault. If you’re using XPLA Vault for the first time, follow the [XPLA Vault tutorial]({{< ref "xpla-vault" >}}).

@@ -13,7 +13,7 @@ Governance is the process through which members of the XPLA Chain community can 
 
 Check the [Governance section of the `xplad` reference]({{< ref "subcommands#tx-gov-submit-proposal" >}}) to see examples of how to participate in the Governance process.
 
-To learn how to vote with your staked XPLA or submit proposals, visit the [XPLA Vault governance guide]({{< ref "/docs/learn/xpla-vault/governance" >}}).
+To learn how to vote with your staked XPLA or submit proposals, visit the [XPLA Vault governance guide]({{< ref "/learn/learn/xpla-vault/governance" >}}).
 
 ## Concepts
 

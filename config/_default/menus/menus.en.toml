@@ -1,27 +1,42 @@
 [[main]]
-  name = "Home"
-  weight = 20
-  identifier = "xpla-home"
-  url = "https://xpla.io"
+  name = "Docs"
+  weight = 1
+  url = "/docs/develop/get-started"
 
 [[main]]
-  name = "Tools"
-  weight = 30
-  identifier = "tools"
+  name = "Learn"
+  weight = 10
+  identifier = "learn"
 
 [[main]]
-  name = "Explorer"
-  weight = 40
-  identifier = "explorer"
-  url = "https://explorer.xpla.io"
-  parent = "tools"
+  parent = "learn"
+  name = "About XPLA Chain"
+  weight = 11
+  url = "/learn/learn/about-xpla-chain"
 
 [[main]]
-  name = "Vault"
-  weight = 50
-  identifier = "vault"
-  url = "https://vault.xpla.io"
-  parent = "tools"
+  parent = "learn"
+  name = "Brand Assets"
+  weight = 12
+  url = "/learn/learn/brand-assets"
+
+[[main]]
+  parent = "learn"
+  name = "Fees"
+  weight = 13
+  url = "/learn/learn/fees"
+
+[[main]]
+  parent = "learn"
+  name = "XPLA Vault"
+  weight = 14
+  url = "/learn/learn/xpla-vault/contracts"
+
+[[main]]
+  parent = "learn"
+  name = "Glossary"
+  weight = 15
+  url = "/learn/learn/glossary"
 
 [[social]]
   name = "Twitter"

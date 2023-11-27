@@ -99,7 +99,7 @@ XPLA Chain’s LCD or Light Client Daemon allows users to connect to the blockch
 
 ## 3. Create a Cube Testnet Wallet
 
-1. You'll need a wallet to sign and submit transactions. [Create a new wallet]({{< ref "/docs/learn/xpla-vault/vaults/extension-vault" >}}) using the XPLA extension vault. Be sure to save your mnemonic key!
+1. You'll need a wallet to sign and submit transactions. [Create a new wallet]({{< ref "/learn/learn/xpla-vault/vaults/extension-vault" >}}) using the XPLA extension vault. Be sure to save your mnemonic key!
 
 2. After creating your wallet, you’ll need to set it to use the testnet. Click the gear icon in the extension and change the network from `mainnet` to `testnet`.
 

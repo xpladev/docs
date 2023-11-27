@@ -1,6 +1,7 @@
 ---
 title: Governance
 weight: 30
+type: docs
 ---
 
 If this is your first time using XPLA Vault, follow the [XPLA Vault tutorial]({{< ref "xpla-vault" >}}).
