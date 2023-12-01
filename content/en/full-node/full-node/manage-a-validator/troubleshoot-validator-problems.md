@@ -1,6 +1,7 @@
 ---
 title: Troubleshoot Validator Problems
 weight: 60
+type: docs
 ---
 
 Use this guide to solve the most common validator problems.

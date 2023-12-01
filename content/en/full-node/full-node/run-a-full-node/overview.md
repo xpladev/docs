@@ -1,6 +1,7 @@
 ---
 title: Overview
 weight: 10
+type: docs
 ---
 
 {{< alert >}}

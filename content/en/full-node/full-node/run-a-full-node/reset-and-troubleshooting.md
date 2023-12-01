@@ -1,6 +1,7 @@
 ---
 title: Reset and Troubleshooting
 weight: 80
+type: docs
 ---
 
 ## Complete Reset

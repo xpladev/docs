@@ -1,11 +1,12 @@
 ---
 title: Set-up Production Environment
 weight: 30
+type: docs
 ---
 
 Use the following information to set up and manage your production-level XPLA Chain full node.
 
-For information about running a validator node, visit the [validator guide]({{< ref "/docs/full-node/manage-a-validator/overview" >}}).
+For information about running a validator node, visit the [validator guide]({{< ref "/full-node/full-node/manage-a-validator/overview" >}}).
 
 ## Create a Dedicated User
 

@@ -1,6 +1,7 @@
 ---
 title: System Configuration
 weight: 10
+type: docs
 ---
 
 {{< alert context="warning" >}}

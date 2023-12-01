@@ -1,6 +1,7 @@
 ---
 title: Updates and Additional Settings
 weight: 70
+type: docs
 ---
 
 ## Upgrade the Testnet

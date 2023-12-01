@@ -1,6 +1,7 @@
 ---
 title: Public and Private Endpoints
 weight: 30
+type: docs
 ---
 
 ## Ecosystem Endpoints
@@ -12,7 +13,7 @@ weight: 30
 {{< alert context="warning" >}}
 **Public endpoint warning**
 
-Public RPC endpoints should only be used in development. For live dApps, use a private RPC endpoint from the list above or [set up your own endpoint]({{< ref "system-configuration" >}}).
+Public RPC endpoints should only be used in development. For live dApps, use a private RPC endpoint from the list above or [set up your own endpoint]({{< ref "/full-node/full-node/run-a-full-node/system-configuration" >}}).
 {{< /alert >}}
 
 ### Public LCD

@@ -1,6 +1,7 @@
 ---
 title: Restore A Validator
 weight: 70
+type: docs
 ---
 
 A validator can be completely restored on a new XPLA Chain node with the following set of keys:

@@ -1,6 +1,7 @@
 ---
 title: Configure General Settings
 weight: 40
+type: docs
 ---
 
 The following information describes the most important node configuration settings found in the `~/.xpla/config/` directory. It is recommended that you update these settings with your own information.

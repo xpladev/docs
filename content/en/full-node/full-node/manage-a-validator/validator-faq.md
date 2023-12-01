@@ -1,6 +1,7 @@
 ---
 title: Validator FAQ
 weight: 30
+type: docs
 ---
 
 {{< alert context="warning" >}}

@@ -1,6 +1,7 @@
 ---
 title: Implement Security Practices
 weight: 40
+type: docs
 ---
 
 Each validator candidate is encouraged to run its operations independently. Diverse individual setups increase the resilience of the network.

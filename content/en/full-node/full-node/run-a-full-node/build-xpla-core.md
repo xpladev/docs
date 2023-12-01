@@ -1,6 +1,7 @@
 ---
 title: Build XPLA Chain Core
 weight: 20
+type: docs
 ---
 
 XPLA Chain core is the official Golang reference implementation of the XPLA Chain node software. Use this guide to install XPLA Chain core and `xplad`, the command-line interface and daemon that connects to XPLA Chain and enables you to interact with the XPLA Chain.

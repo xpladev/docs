@@ -1,6 +1,7 @@
 ---
 title: Snapshots
 weight: 20
+type: docs
 ---
 
 The snapshot service for both XPLA Mainnet (dimension_37-1) and the Testnet (cube_47-5) offered by Bware Labs are accessible [here](https://bwarelabs.com/snapshots).

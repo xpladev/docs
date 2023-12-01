@@ -1,6 +1,7 @@
 ---
 title: Register a Validator
 weight: 50
+type: docs
 ---
 
 This is a detailed step-by-step guide for setting up a XPLA Chain validator. Please be aware that while it is easy to set up a rudimentary validating node, running a production-quality validator node with a robust architecture and security features requires an extensive setup.
@@ -9,7 +10,7 @@ For more information on setting up a validator, see [additional resources]({{< r
 
 ## Prerequisites
 
-- You have completed [how to run a full node]({{< ref "/docs/full-node/run-a-full-node/overview" >}}), which outlines how to install, connect, and configure a node.
+- You have completed [how to run a full node]({{< ref "/full-node/full-node/run-a-full-node/overview" >}}), which outlines how to install, connect, and configure a node.
 - You are familiar with [xplad]({{< ref "/develop/develop/tools/xplad/about-xplad" >}}).
 - You have read through [the validator FAQ]({{< ref "validator-faq" >}})
 - You understand the [different keys]({{< ref "validator-faq#validator-keys-and-states" >}}) of a validator in the FAQ

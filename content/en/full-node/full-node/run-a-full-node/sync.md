@@ -1,6 +1,7 @@
 ---
 title: Sync
 weight: 60
+type: docs
 ---
 
 ## Before Sync
@@ -96,4 +97,4 @@ xplad start --x-crisis-skip-assert-invariants
 
 ## Congratulations!
 
-You've successfully joined a network as a full node operator. If you are a validator, continue to [manage a XPLA Chain validator]({{< ref "/docs/full-node/manage-a-validator/overview" >}}) for the next steps.
+You've successfully joined a network as a full node operator. If you are a validator, continue to [manage a XPLA Chain validator]({{< ref "/full-node/full-node/manage-a-validator/overview" >}}) for the next steps.

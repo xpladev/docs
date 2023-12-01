@@ -1,6 +1,7 @@
 ---
 title: Court Delegations
 weight: 20
+type: docs
 ---
 
 Consider the following options to help improve your visibility and make yourself known to potential delegators.
