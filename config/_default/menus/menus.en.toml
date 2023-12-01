@@ -1,9 +1,4 @@
 [[main]]
-  name = "Docs"
-  weight = 1
-  url = "/docs/develop/get-started"
-
-[[main]]
   name = "Learn"
   weight = 10
   identifier = "learn"
@@ -101,6 +96,17 @@
   name = "Resources"
   weight = 33
   url = "/full-node/full-node/resources/text-tutorials"
+
+[[main]]
+  name = "Guide"
+  weight = 40
+  identifier = "guide"
+
+[[main]]
+  parent = "guide"
+  name = "Token Migration"
+  weight = 41
+  url = "/guide/guide/token-migration/about-token-migration"
 
 [[social]]
   name = "Twitter"

@@ -1,6 +1,7 @@
 ---
 title: About Token Migration
 weight: 10
+type: docs
 ---
 
 ## Dear Pilots, it’s the Explore & Play XPLA here!

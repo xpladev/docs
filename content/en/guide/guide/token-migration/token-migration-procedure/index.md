@@ -1,6 +1,7 @@
 ---
 title: Token Migration Procedure
 weight: 20
+type: docs
 ---
 
 ## Migration Web Application
