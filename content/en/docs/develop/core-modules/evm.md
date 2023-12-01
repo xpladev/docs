@@ -768,7 +768,7 @@ type Params struct {
 
 The evm denomination parameter defines the token denomination used on the EVM state transitions and gas consumption for EVM messages.
 
-For example, on Ethereum, the `evm_denom` would be `Xpla`. In the case of Ethermint, the default denomination is the **atto photon**(used on the default denom). In terms of precision, the `PHOTON` and `Xpla` share the same value, *i.e* `1 Xpla = 10^18 axpla` and `1 ETH = 10^18 wei`.
+For example, on Ethereum, the `evm_denom` would be `XPLA`. In the case of Ethermint, the default denomination is the **atto photon**(used on the default denom). In terms of precision, the `PHOTON` and `XPLA` share the same value, *i.e* `1 XPLA = 10^18 axpla` and `1 ETH = 10^18 wei`.
 
 {{< alert >}}
 Note: SDK applications that want to import the EVM module as a dependency will need to set their own `evm_denom` (i.e not `"aphoton"`).
