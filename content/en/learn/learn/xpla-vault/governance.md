@@ -66,7 +66,7 @@ To prevent unnecessary proposals or abuse of the system, all governance proposal
    **Note**
 
    Before uploading any proposal, try to get community feedback on the XPLA Chain Governance forum. The link will be unveiled in the near future.
-   Do not use text proposals to suggest parameter changes. For more information, visit the [Governance module reference page]({{< ref "/docs/develop/core-modules/governance" >}}).
+   Do not use text proposals to suggest parameter changes. For more information, visit the [Governance module reference page]({{< ref "/develop/develop/core-modules/governance" >}}).
    {{< /alert >}}
 
 3. Select the type of proposal, and enter a title, a description, and the amount of XPLA you want to deposit initially.

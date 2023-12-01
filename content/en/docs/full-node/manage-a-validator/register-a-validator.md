@@ -10,7 +10,7 @@ For more information on setting up a validator, see [additional resources]({{< r
 ## Prerequisites
 
 - You have completed [how to run a full node]({{< ref "/docs/full-node/run-a-full-node/overview" >}}), which outlines how to install, connect, and configure a node.
-- You are familiar with [xplad]({{< ref "/docs/develop/tools/xplad/about-xplad" >}}).
+- You are familiar with [xplad]({{< ref "/develop/develop/tools/xplad/about-xplad" >}}).
 - You have read through [the validator FAQ]({{< ref "validator-faq" >}})
 - You understand the [different keys]({{< ref "validator-faq#validator-keys-and-states" >}}) of a validator in the FAQ
 

@@ -89,7 +89,7 @@ The XPLA Chain incentivizes validators and delegators with staking rewards from 
 
 - [Gas]({{< ref "fees#gas" >}}): Compute fees added on to each transaction to avoid spamming. Validators set minimum gas prices and reject transactions that have implied gas prices below this threshold.
 
-- [Inflation rewards]({{< ref "docs/develop/core-modules/mint" >}}): Every block, new XPLA is minted and released to validators and delegators as staking rewards only if the inflation on the XPLA Chain exceeds 0%. As the current rate for the minting of new XPLA is fixed at 0% per year, there are no extra rewards from inflation.
+- [Inflation rewards]({{< ref "/develop/develop/core-modules/mint" >}}): Every block, new XPLA is minted and released to validators and delegators as staking rewards only if the inflation on the XPLA Chain exceeds 0%. As the current rate for the minting of new XPLA is fixed at 0% per year, there are no extra rewards from inflation.
 
 - Rewards from XPLA foundation's delegation: 20% of rewards that the foundation earns are released to validators and delegators.
 
@@ -115,7 +115,7 @@ Slashing occurs under the following conditions:
 
 Validators monitor each other closely and can submit evidence of misbehavior. Once discovered, the misbehaving validator will have a small portion of their funds slashed. Offending validators will also be jailed or excluded from consensus for a period of time. Even simple issues such as malfunctions or downtimes from upgrading can lead to slashing.
 
-For more information on slashing, visit the [slashing module]({{< ref "/docs/develop/core-modules/slashing" >}}).
+For more information on slashing, visit the [slashing module]({{< ref "/develop/develop/core-modules/slashing" >}}).
 
 ## Governance
 
@@ -137,7 +137,7 @@ The most common proposal types include:
 
 Community members vote with their staked XPLA. One staked XPLA equals one vote. If a user fails to specify a vote, their vote defaults to the validator they are staked to. Validators vote with their entire stake unless specified by delegators. For this reason, it is very important that each delegator votes according to their preferences.
 
-The following is a basic outline of the governance process. Visit the [governance module]({{< ref "/docs/develop/core-modules/governance" >}}) for more details.
+The following is a basic outline of the governance process. Visit the [governance module]({{< ref "/develop/develop/core-modules/governance" >}}) for more details.
 
 1. A user submits a proposal and a two-week deposit period begins.
 2. Users deposit XPLA as collateral to back the proposal. This period ends once a minimum threshold of 50 XPLA is deposited. Deposits are to protect against spam.

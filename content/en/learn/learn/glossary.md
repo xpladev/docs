@@ -102,7 +102,7 @@ When a vote fails to be included in consensus.
 
 ## Module
 
-A section of the XPLA Chain core that represents a particular function of the XPLA Chain. Visit the [XPLA Chain core module specifications]({{< ref "/docs/develop/core-modules/overview" >}}) for more information.
+A section of the XPLA Chain core that represents a particular function of the XPLA Chain. Visit the [XPLA Chain core module specifications]({{< ref "/develop/develop/core-modules/overview" >}}) for more information.
 
 ## dimension_37-1
 
@@ -160,7 +160,7 @@ The consensus procedure used by the XPLA Chain. First, a validator proposes a ne
 
 The official source code for the XPLA Chain.
 
-For more information on the XPLA Chain core, see [XPLA Chain core module specifications]({{< ref "/docs/develop/core-modules/overview" >}}).
+For more information on the XPLA Chain core, see [XPLA Chain core module specifications]({{< ref "/develop/develop/core-modules/overview" >}}).
 
 ## Mainnet
 
