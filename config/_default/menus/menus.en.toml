@@ -1,3 +1,4 @@
+## Learn 
 [[main]]
   name = "Learn"
   weight = 10
@@ -33,6 +34,7 @@
   weight = 15
   url = "/learn/learn/glossary"
 
+## Develop
 [[main]]
   name = "Develop"
   weight = 20
@@ -74,6 +76,7 @@
   weight = 25
   url = "/develop/develop/dev-reference/developer-resources"
 
+## Full Node
 [[main]]
   name = "Full Node"
   weight = 30
@@ -97,6 +100,7 @@
   weight = 33
   url = "/full-node/full-node/resources/text-tutorials"
 
+## Guide
 [[main]]
   name = "Guide"
   weight = 40
@@ -107,6 +111,32 @@
   name = "Token Migration"
   weight = 41
   url = "/guide/guide/token-migration/about-token-migration"
+
+## Ecosystem
+[[main]]
+  name = "Ecosystem"
+  weight = 50
+  identifier = "ecosystem"
+
+[[main]]
+  parent = "ecosystem"
+  name = "Make Together"
+  weight = 51
+  url = "/ecosystem/ecosystem/make-together"
+
+[[main]]
+  parent = "ecosystem"
+  name = "Discover Contribution"
+  weight = 52
+  url = "/ecosystem/ecosystem/discover-contribution"
+
+[[main]]
+  parent = "ecosystem"
+  name = "Code of Conduct"
+  weight = 53
+  url = "/ecosystem/ecosystem/code-of-conduct"
+
+
 
 [[social]]
   name = "X"
