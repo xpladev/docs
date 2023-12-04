@@ -57,7 +57,7 @@ When you specify commission parameters, the `commission-max-change-rate` is meas
 If running the following command returns something, your validator is active:
 
 ```bash
-xplad query tendermint-validator-set | grep "$(xplad tendermint show-validator)"
+xplad query tendermint-validator-set | grep -A 5 "$(xplad tendermint show-address)"
 ```
 
 You are looking for the `bech32` encoded `address` in the `~/.xpla/config/priv_validator.json` file.
