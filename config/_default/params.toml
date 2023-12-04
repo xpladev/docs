@@ -86,7 +86,7 @@ editPage = true
 lastMod = false
 
 [sections]
-  sectionNav = ["docs"]
+  sectionNav = ["learn", "develop", "full-node", "guide", "ecosystem"]
 
 [options]
   lazySizes = true
