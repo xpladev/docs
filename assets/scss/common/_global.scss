@@ -286,3 +286,9 @@ body {
     opacity: 0;
   }
 }
+
+body table {
+  @extend .table;
+
+  --bs-table-bg: $body-bg;
+} 

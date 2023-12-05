@@ -431,6 +431,7 @@ $navbar-dark-active-color:          $link-color-dark;
 
 [data-dark-mode] body table {
   @extend .table-dark;
+  --bs-table-bg: $body-bg-dark;
 }
 
 [data-dark-mode] body .copy-status::after {
