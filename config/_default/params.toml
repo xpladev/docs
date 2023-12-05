@@ -65,7 +65,7 @@ defaultImage = "default-image.png" # put in `./assets/images/`
 fillImage = "1270x740 Center" # normalize image size
 
 # Footer
-footer = "Powered by <a class=\"text-muted\" href=\"https://xpla.io/\">XPLA</a>"
+footer = "Powered by <a href=\"https://xpla.io/\" style=\"display: inline-block; vertical-align: middle;\"><div class=\"xpla_logo\"></div></a>"
 
 # Feed
 copyRight = "Copyright (c) 2021-2022 XPLA"
