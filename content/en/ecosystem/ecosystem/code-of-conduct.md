@@ -41,4 +41,4 @@ This Code of Conduct applies universally within all project spaces and extends t
 
 ## Acknowledgment
 
-This Code of Conduct draws inspiration from the Contributor Covenant, version 1.4. For additional information, refer to the FAQ section: https://www.contributor-covenant.org/faq.
+This Code of Conduct draws inspiration from the Contributor Covenant, version 1.4. For additional information, refer to the [FAQ section](https://www.contributor-covenant.org/faq).
