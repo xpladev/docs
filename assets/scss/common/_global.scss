@@ -286,3 +286,34 @@ body {
     opacity: 0;
   }
 }
+
+.xpla_docs_logo {
+  background-image: url("/XPLA_DOCS_white_bg.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  width: 170px;
+  height: 27px;
+}
+
+.xpla_logo {
+  background-image: url("/XPLA_white_bg.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  width: 90px;
+  height: 20px;
+  margin-bottom: 2px;
+}
+
+.nav-link {
+  color: $body-color;
+  font-size: $font-size-base;
+}
+
+body table {
+  @extend .table;
+
+  --bs-table-bg: $body-bg;
+} 
+

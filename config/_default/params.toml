@@ -65,7 +65,7 @@ defaultImage = "default-image.png" # put in `./assets/images/`
 fillImage = "1270x740 Center" # normalize image size
 
 # Footer
-footer = "Powered by <a class=\"text-muted\" href=\"https://xpla.io/\">XPLA</a>"
+footer = "Powered by <a href=\"https://xpla.io/\" style=\"display: inline-block; vertical-align: middle;\"><div class=\"xpla_logo\"></div></a>"
 
 # Feed
 copyRight = "Copyright (c) 2021-2022 XPLA"
@@ -86,7 +86,7 @@ editPage = true
 lastMod = false
 
 [sections]
-  sectionNav = ["docs"]
+  sectionNav = ["learn", "develop", "full-node", "guide", "ecosystem"]
 
 [options]
   lazySizes = true
@@ -108,7 +108,7 @@ lastMod = false
   scrollSpy = false # experimental; needs Bootstrap >= 5.2.0-beta1
   navButtonInSection = true
   disableHeaderBar = true
-  alternativeHome = "/docs/learn/about-xpla-chain/"
+  alternativeHome = "/learn/learn/about-xpla-chain/"
 
 [menu]
   [menu.section]

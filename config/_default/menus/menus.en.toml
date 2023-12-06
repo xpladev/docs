@@ -1,31 +1,146 @@
+## Learn 
 [[main]]
-  name = "Home"
+  name = "Learn"
+  weight = 10
+  identifier = "learn"
+
+[[main]]
+  parent = "learn"
+  name = "About XPLA Chain"
+  weight = 11
+  url = "/learn/learn/about-xpla-chain"
+
+[[main]]
+  parent = "learn"
+  name = "Brand Assets"
+  weight = 12
+  url = "/learn/learn/brand-assets"
+
+[[main]]
+  parent = "learn"
+  name = "Fees"
+  weight = 13
+  url = "/learn/learn/fees"
+
+[[main]]
+  parent = "learn"
+  name = "XPLA Vault"
+  weight = 14
+  url = "/learn/learn/xpla-vault/contracts"
+
+[[main]]
+  parent = "learn"
+  name = "Glossary"
+  weight = 15
+  url = "/learn/learn/glossary"
+
+## Develop
+[[main]]
+  name = "Develop"
   weight = 20
-  identifier = "xpla-home"
-  url = "https://xpla.io"
+  identifier = "develop"
 
 [[main]]
+  parent = "develop"
+  name = "Get Started"
+  weight = 21
+  url = "/develop/develop/get-started"
+
+[[main]]
+  parent = "develop"
+  name = "Guides"
+  weight = 22
+  url = "/develop/develop/guides/sign-with-a-multisig-account"
+
+[[main]]
+  parent = "develop"
+  name = "Smart Contract Guide"
+  weight = 23
+  url = "/develop/develop/smart-contract-guide/overview"
+
+[[main]]
+  parent = "develop"
   name = "Tools"
+  weight = 24
+  url = "/develop/develop/tools/which-tools-to-use"
+
+[[main]]
+  parent = "develop"
+  name = "Core Modules"
+  weight = 25
+  url = "/develop/develop/core-modules/overview"
+
+[[main]]
+  parent = "develop"
+  name = "Dev Reference"
+  weight = 25
+  url = "/develop/develop/dev-reference/developer-resources"
+
+## Full Node
+[[main]]
+  name = "Full Node"
   weight = 30
-  identifier = "tools"
+  identifier = "full-node"
 
 [[main]]
-  name = "Explorer"
+  parent = "full-node"
+  name = "Run a Full Node"
+  weight = 31
+  url = "/full-node/full-node/run-a-full-node/overview"
+
+[[main]]
+  parent = "full-node"
+  name = "Manage a Validator"
+  weight = 32
+  url = "/full-node/full-node/manage-a-validator/overview"
+
+[[main]]
+  parent = "full-node"
+  name = "Resources"
+  weight = 33
+  url = "/full-node/full-node/resources/text-tutorials"
+
+## Guide
+[[main]]
+  name = "Guide"
   weight = 40
-  identifier = "explorer"
-  url = "https://explorer.xpla.io"
-  parent = "tools"
+  identifier = "guide"
 
 [[main]]
-  name = "Vault"
+  parent = "guide"
+  name = "Token Migration"
+  weight = 41
+  url = "/guide/guide/token-migration/about-token-migration"
+
+## Ecosystem
+[[main]]
+  name = "Ecosystem"
   weight = 50
-  identifier = "vault"
-  url = "https://vault.xpla.io"
-  parent = "tools"
+  identifier = "ecosystem"
+
+[[main]]
+  parent = "ecosystem"
+  name = "Make Together"
+  weight = 51
+  url = "/ecosystem/ecosystem/make-together"
+
+[[main]]
+  parent = "ecosystem"
+  name = "Discover Contribution"
+  weight = 52
+  url = "/ecosystem/ecosystem/discover-contribution"
+
+[[main]]
+  parent = "ecosystem"
+  name = "Code of Conduct"
+  weight = 53
+  url = "/ecosystem/ecosystem/code-of-conduct"
+
+
 
 [[social]]
-  name = "Twitter"
-  pre = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-twitter\"><path d=\"M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z\"></path></svg>"
+  name = "X"
+  pre = '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg>'
   url = "https://twitter.com/xpla_official"
   weight = 10
 

@@ -431,6 +431,7 @@ $navbar-dark-active-color:          $link-color-dark;
 
 [data-dark-mode] body table {
   @extend .table-dark;
+  --bs-table-bg: $body-bg-dark;
 }
 
 [data-dark-mode] body .copy-status::after {
@@ -582,3 +583,13 @@ $navbar-dark-active-color:          $link-color-dark;
   background: $body-overlay-dark;
   border: 1px solid $body-overlay-dark;
 }
+
+[data-dark-mode] .xpla_docs_logo {
+  background-image: url("/XPLA_DOCS_black_bg.svg");
+}
+
+[data-dark-mode] .xpla_logo {
+  background-image: url("/XPLA_black_bg.svg");
+}
+
+
