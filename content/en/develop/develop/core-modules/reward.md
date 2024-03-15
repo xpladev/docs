@@ -25,7 +25,7 @@ Each abci begin block call, the reward module claims all delegation rewards of `
 flowchart TD
   direction LR
   T((tx fees)) --> F(fee pool)
-  F --> D(distribution account)
+  F --> D(distribution module account)
   subgraph distribution module
     D --"block proposer reward 5%
         (base 1% + bonus 4%)"--> P(["validator(proposer)"])
@@ -51,14 +51,14 @@ flowchart TD
 ### Addresses
 
 - `fee pool`: xpla17xpfvakm2amg962yls6f84z3kell8c5lw7muqw
-- `distribution account`: xpla1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8ecuqzv
+- `distribution module account`: xpla1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8ecuqzv
 - `reward distribute account`: xpla19dacf8gzsvuj9txzw0wmtfpdg8swpd4jxl3ks2
 
 - `reserve`: xpla10ksn9528f82uwnmz3sgr4n42l0nucmzntjrg00
 - `community pool`: xpla1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8ecuqzv
 - `reward module account`: xpla1w6t0l7z0yerj49ehnqwqaayxqpe3u7e20745sw
 
-  **Note**: `distribution account` and `community pool` are the same address.
+  **Note**: The amount of the `community pool` is managed together in the `distribution module account`
   
 ### Reward Type
 
