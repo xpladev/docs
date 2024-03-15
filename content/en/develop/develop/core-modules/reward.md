@@ -48,6 +48,18 @@ flowchart TD
   RA --divided by 6,311,520--> F
 {{< /mermaid >}}
 
+### Addresses
+
+- `fee pool`: xpla17xpfvakm2amg962yls6f84z3kell8c5lw7muqw
+- `distribution account`: xpla1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8ecuqzv
+- `reward distribute account`: xpla19dacf8gzsvuj9txzw0wmtfpdg8swpd4jxl3ks2
+
+- `reserve`: xpla10ksn9528f82uwnmz3sgr4n42l0nucmzntjrg00
+- `community pool`: xpla1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8ecuqzv
+- `reward module account`: xpla1w6t0l7z0yerj49ehnqwqaayxqpe3u7e20745sw
+
+  **Note**: `distribution account` and `community pool` are the same address.
+  
 ### Reward Type
 
 1. block `proposer` reward: The block proposer reward consists of base proposer reward and bonus proposer reward, see the [Distribution Scheme](https://docs.xpla.io/develop/develop/core-modules/distribution/#the-distribution-scheme)
