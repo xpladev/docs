@@ -1,6 +1,6 @@
 ---
 title: Fees
-weight: 30
+weight: 40
 type: docs
 ---
 
