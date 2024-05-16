@@ -28,7 +28,7 @@ Your vote will be submitted.
 
 ## Deposit XPLA to a Proposal
 
-Users can vote on a proposal after a minimum deposit of 10 XPLA is reached. To help push a proposal forward to a vote, deposit XPLA to the proposal.
+Users can vote on a proposal after a minimum deposit of 300 XPLA is reached. To help push a proposal forward to a vote, deposit XPLA to the proposal.
 
 {{< alert context="warning" >}}
 **Warning**
@@ -55,7 +55,7 @@ Your deposit will be added to the proposal.
 {{< alert context="warning" >}}
 **Avoid unnecessary proposals**
 
-To prevent unnecessary proposals or abuse of the system, all governance proposals must obtain a minimum deposit of 10 XPLA. If 33.4% of the total vote is `NoWithVeto`, `quorum` is not met, or the minimum deposit isn't reached, the deposit will be burned. All other vote outcomes get their deposits refunded. For more information on deposits and refunds, visit the [governance overview]({{< ref "about-xpla-chain#governance" >}}).
+To prevent unnecessary proposals or abuse of the system, all governance proposals must obtain a minimum deposit of 300 XPLA. If 33.4% of the total vote is `NoWithVeto`, `quorum` is not met, or the minimum deposit isn't reached, the deposit will be burned. All other vote outcomes get their deposits refunded. For more information on deposits and refunds, visit the [governance overview]({{< ref "about-xpla-chain#governance" >}}).
 {{< /alert >}}
 
 1. Open XPLA Vault and connect your wallet. In the sidebar, click **Governance**.
@@ -73,4 +73,4 @@ To prevent unnecessary proposals or abuse of the system, all governance proposal
 
 4. Enter your password and click **Submit**.
 
-Your proposal will enter the two-week deposit period. After a minimum deposit of 10 XPLA has been reached, your proposal will enter a one-week voting period. For more information on governance and voting options, visit the [governance overview]({{< ref "about-xpla-chain#governance" >}}).
+Your proposal will enter the two-week deposit period. After a minimum deposit of 300 XPLA has been reached, your proposal will enter a one-week voting period. For more information on governance and voting options, visit the [governance overview]({{< ref "about-xpla-chain#governance" >}}).
