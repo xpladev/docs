@@ -454,10 +454,10 @@ type VotingParams struct {
 
 - type: `Coins`
 - denom: `axpla`
-- amount: `10000000000000000000`
+- amount: `300000000000000000000`
 
 
-The minimum deposit amount for a proposal to enter a voting period. Currently 10 XPLA.
+The minimum deposit amount for a proposal to enter a voting period. Currently 300 XPLA.
 
 ### MaxDepositPeriod
 
