@@ -1,23 +1,23 @@
 ---
-title: Send
+title: 송금
 weight: 50
 type: docs
 ---
 
-You can send tokens to other XPLA Vaults using the **Send** feature of XPLA Vault. If this is your first time using XPLA Vault, follow the [XPLA Vault tutorial]({{< ref "web-vault" >}}).
+XPLA 볼트의 **Send**기능을 사용하여 다른 XPLA 볼트로 토큰을 보낼 수 있습니다. XPLA 볼트를 처음 사용하는 경우, [XPLA 볼트 튜토리얼]({{< ref "web-vault" >}})을 따르세요.
 
-1. Open XPLA Vault and connect to your wallet.
+1. XPLA Vault를 열고 지갑에 연결합니다.
 
-1. Click **Wallet** in the navigation bar.
+2. 탐색바에서 **Wallet**을 클릭합니다.
 
-1. Click **Send** next to the token you want to send.
+3. 전송하려는 토큰 옆의 **Send**를 클릭합니다.
 
-1. Enter the address of the wallet you want to send tokens to.
+4. 토큰을 전송할 지갑의 주소를 입력합니다.
 
-1. Enter the amount you want to send. You can also add a memo for the transaction.
+5. 송금하고자 하는 금액을 입력합니다. 트랜잭션에 대한 메모를 추가할 수도 있습니다.
 
-1. Verify the transaction amounts and specify which token you want to pay fees in. Remember to always leave enough tokens in your account for other transactions.
+6. 거래 금액을 확인하고 수수료를 지불할 토큰을 지정합니다. 다른 거래를 위해 항상 계정에 충분한 토큰을 남겨두는 것을 잊지마세요.
 
-1.  Enter your password and click **Submit**.
+7. 비밀번호를 입력하고 **Submit**을 클릭합니다.
 
-After a few moments, the tokens will appear in the receiver's wallet.
+잠시 후 토큰이 수취인의 지갑에 나타납니다.

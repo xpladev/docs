@@ -1,89 +1,89 @@
 ---
-title: Multisig Wallets
+title: 다중서명 지갑
 weight: 40
 type: docs
 ---
 
-Multisig wallets are an advanced feature of XPLA Vault. If you’re using XPLA Vault for the first time, follow the [XPLA Vault tutorial]({{< ref "xpla-vault" >}}).
+다중서명 지갑은 XPLA 볼트의 고급 기능입니다. XPLA 볼트를 처음 사용하는 경우, [XPLA 볼트 튜토리얼]({{< ref "xpla-vault" >}})을 따르세요.
 
-Multisig wallets enable a wallet to be controlled by multiple parties. A wallet manager creates a transaction and sends an encoded transaction message to the wallet signers. The signers sign the transaction and send back their signatures. The wallet manager then inputs the encoded transaction message along with the received signatures to complete the transaction.
+다중서명 지갑을 사용하면 여러 참여자가 지갑을 제어할 수 있습니다. 지갑 관리자가 트랜잭션을 생성하고 인코딩된 트랜잭션 메시지를 지갑 서명자에게 보냅니다. 서명자는 트랜잭션에 서명하고 서명을 다시 보냅니다. 그러면 지갑 관리자는 받은 서명과 함께 인코딩된 트랜잭션 메시지를 입력해 트랜잭션을 완료합니다.
 
-## Prerequisites
+## 전제조건
 
-- Download the [XPLA extension vault]({{< ref "vaults/extension-vault" >}})
+- [XPLA 익스텐션 볼트]({{< ref "vaults/extension-vault" >}})를 다운로드하세요.
 
-## Create a Multisig Wallet
+## 다중서명 지갑 만들기
 
-1. Open the XPLA extension vault and click **New multisig wallet**.
+1. XPLA 확장 볼트를 열고 **New multisig wallet**을 클릭합니다.
 
-2. Enter the wallet addresses of each multisig user in the correct order.
+2. 각 다중서명 사용자의 지갑 주소를 올바른 순서로 입력합니다.
 
    {{< alert context="warning" >}}
-   **Warning**
+   **경고**
 
-   Each wallet added must have a transaction history of at least one transaction before it can be added to a multisig wallet.
+   추가된 각 지갑은 다중서명 지갑에 추가하기 전에 최소 한 번 이상의 거래 내역이 있어야 합니다.
    {{< /alert >}}
 
-3. Enter the number of signatures needed to post a transaction in the **Threshold** field.
+3. **Threshold** 필드에 트랜잭션을 게시하는데 필요한 서명 수를 입력합니다.
 
-4. Click **Submit**.
+4. **Submit**을 클릭합니다..
 
-5. Enter a wallet name and click **Submit**.
+5. 지갑 이름을 입력하고 **Submit**을 클릭합니다.
 
-## Create a Multisig Transaction
+## 다중서명 트랜잭션 만들기
 
-Multisig wallet managers initiate transactions and send coded strings for multisig participants to sign.
+다중서명 지갑 관리자는 거래를 시작하고 다중 서명 참여자가 서명할 수 있도록 코드화된 문자열을 보냅니다.
 
-1. Open the XPLA extension vault and connect to your multisig wallet.
+1. XPLA 익스텐션 볼트를 열고 다중 서명 지갑에 연결합니다.
 
-2. Make a transaction using your multisig wallet.
+2. 다중서명 지갑을 사용해 트랜잭션을 생성합니다.
 
    {{< alert >}}
-   **Note**
+   **주의**
 
-   Brand new multisig wallets have no transaction histories. After your first transaction, you will be prompted to provide the wallet addresses again for the multisig wallet. Provide the wallet addresses used to create the wallet to proceed with your transaction.
+   새로운 다중서명 지갑에는 거래내역이 없습니다. 첫 번째 거래 후 다중서명 지갑의 지갑 주소를 다시 입력하라는 메시지가 표시됩니다. 지갑을 만들 때 사용한 지갑 주소를 제공해야 거래를 진행할 수 있습니다.
    {{< /alert >}}
 
-3. After submitting your transaction, you will be taken to the **Post a multisig tx** page.
+3. 트랜잭션을 제출하면 **Post a multisig tx** 페이지로 이동합니다.
 
-4. Copy the multisig wallet address and the encoded string in the **Tx** box and send both to each of the multisig wallet signers.
+4. 다중서명 지갑 주소와 인코딩된 문자열을 **Tx** 상자에 복사하고 두 가지를 각 다중서명 지갑 서명자에게 보냅니다.
 
    {{< alert >}}
-   **Sending multisig strings**
+   **다중서명 문자열 보내기**
 
-   Encoded multisig transaction strings can be sent using a regular messenger, as they are not sensitive information. They contain a simple description of the transaction.
+   인코딩된 다중서명 트랜잭션 문자열은 민감한 정보가 아니므로 일반 메신저를 사용해 전송할 수 있습니다. 여기에는 트랜잭션에 대한 간단한 설명이 포함됩니다.
    {{< /alert >}}
 
-## Sign a Multisig Transaction
+## 다중서명 트랜잭션 서명
 
-Upon receiving an encoded transaction string, multisig signers can use the following steps to sign:
+인코딩된 트랜잭션 문자열을 받으면 다중 서명 서명자는 다음 단계를 사용해 서명할 수 있습니다:
 
-1. Open the XPLA extension vault and connect to the wallet you provided to create the multisig wallet.
+1. XPLA 익스텐션 볼트를 열고 제공한 지갑에 연결하여 다중 서명 지갑을 생성합니다.
 
-2. Click the three vertical dots located to the right of your wallet name.
+2. 지갑 이름 오른쪽에 있는 세로 점 3개를 클릭합니다.
 
-3. Click **Sign a multisig tx**.
+3. **Sign a multisig tx**를 클릭합니다.
 
-4. Enter the multisig wallet address and the encoded multisig transaction string you received from the multisig wallet manager.
+4. 다중서명 지갑 주소와 다중서명 지갑 관리자로부터 받은 인코딩된 다중서명 트랜잭션 문자열을 입력합니다.
 
-5. Enter your password and click **Submit**.
+5. 비밀번호를 입력하고 **Submit**을 클릭합니다.
 
-6. Copy the signature string provided and send it to the multisig wallet manager.
+6. 제공된 서명 문자열을 복사하여 다중서명 지갑 관리자에게 보냅니다.
 
-## Post a Multisig Transaction
+## 다중서명 트랜잭션 게시
 
-The final step in a multisig transaction is for the wallet manager to input the signatures:
+다중서명 트랜잭션의 마지막 단계는 지갑 관리자가 서명을 입력하는 것입니다:
 
-1. Open the XPLA extension vault and connect to the multisig wallet you created.
+1. XPLA 익스텐션 볼트를 열고 생성한 다중서명 지갑에 연결합니다.
 
-2. Click the three vertical dots located to the right of your wallet name.
+2. 지갑 이름 오른쪽에 있는 세로 점 3개를 클릭합니다.
 
-3. Click **Post a multisig tx**.
+3. **Post a multisig tx**클릭합니다.
 
-4. If this is your first transaction for the wallet, enter the wallet addresses used to create the multisig wallet. Otherwise, proceed to step 5.
+4. 지갑의 첫 거래인 경우 다중서명 지갑을 만드는데 사용한 지갑 주소를 입력합니다. 그렇지 않은 경우 5단계로 진행합니다.
 
-5. Enter the multisig wallet address, the initial encoded transaction string, and the signatures sent to you by the multisig signers.
+5. 다중서명 지갑 주소, 초기 인코딩된 트랜잭션 문자열, 다중서명 서명자가 보낸 서명을 입력합니다.
 
-6. Click **Submit**. Your transaction should begin processing.
+**Submit**을 클릭합니다. 트랜잭션 처리가 시작됩니다.
 
-Congratulations, you just completed a multisig transaction!
+멀티서명 트랜잭션을 완료했습니다!

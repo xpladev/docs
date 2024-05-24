@@ -1,40 +1,40 @@
 ---
-title: Wallet
+title: 지갑
 weight: 90
 type: docs
 ---
 
-This guide is for advanced features of the XPLA Vault. If this is your first time using XPLA Vault, follow the [XPLA Vault tutorial]({{< ref "web-vault" >}}).
+이 가이드는 XPLA 볼트의 고급 기능에 대한 설명입니다. XPLA 볼트를 처음 사용하시는 경우, [XPLA 볼트 튜토리얼]({{< ref "web-vault" >}})을 따르세요.
 
-For information on using multisig wallets in XPLA Vault, see [Multisig wallets]({{< ref "multisig-wallets" >}})
+XPLA 볼트에서 다중서명 지갑을 사용하는 방법에 대한 자세한 내용은 [다중서명 지갑]({{< ref "multisig-wallets" >}})을 참조하세요.
 
-## Create a wallet
+## 지갑 만들기
 
-1. Open the XPLA web vault and click **New wallet**.
+1. XPLA 웹 볼트를 열고 **New wallet**을 클릭합니다.
 
-1. Type in a secure wallet name and password.
+2. 보안 지갑 이름과 비밀번호를 입력합니다.
 
-1. Confirm your password.
+3. 비밀번호를 확인합니다.
 
-1. Using a pen and paper, write down your 24-word mnemonic exactly as it appears. Number each word to make verifying easier.
+4. 펜과 종이를 사용해 24단어 니모닉을 보이는 대로 정확하게 적습니다. 각 단어에 번호를 매겨 쉽게 확인할 수 있도록 합니다.
 
    {{< alert context="danger" >}}
-   **Danger**
+   **위험**
 
-   Anyone with your mnemonic phrase can access your money, and there is no recourse for someone stealing your mnemonic phrase. To protect your mnemonic phrase, consider the following tips:
-   - Never save or store your mnemonic phrase as a digital file on any device.
-   - Always write down your mnemonic phrase with a pen and paper.
-   - Store the paper with your mnemonic phrase on it somewhere safe.
-   - Never give your mnemonic phrase to anyone, not even support staff.
+   니모닉 문구를 아는 사람은 누구나 내 돈에 엑세스할 수 있으며, 누군가 니모닉 문구를 훔쳐가도 구제할 방법이 없습니다. 니모닉 문구를 보호하려면 다음 팁을 참고하세요:
+   - 니모닉 문구를 어떤 디바이스에도 디지털 파일로 저장하지 마세요.
+   - 항상 펜과 종이를 사용하여 니모닉 문구를 적으세요.
+   - 니모닉 문구가 적힌 종이는 안전한 곳에 보관하세요.
+   - 직원을 포함하여 누구에게도 니모닉 문구를 알려주지 마세요.
    {{< /alert >}}
 
 1. Verify your writing to make sure every word is spelled correctly and in the right order. If you numbered your phrase, it can be helpful to verify it backward.
 
-1. Check the box ensuring you wrote down your mnemonic phrase, and click **Next**.
+2. Check the box ensuring you wrote down your mnemonic phrase, and click **Next**.
 
-1. Confirm your mnemonic phrase by typing or selecting the correct words in each prompt.
+3. Confirm your mnemonic phrase by typing or selecting the correct words in each prompt.
 
-1. Click **Create a wallet**.
+4. Click **Create a wallet**.
 
 Congratulations! You have just created a XPLA Vault.
 

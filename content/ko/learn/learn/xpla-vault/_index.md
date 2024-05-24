@@ -2,6 +2,6 @@
 bookCollapseSection: true
 bookFlatSection: false
 weight: 40
-title: XPLA Vault
+title: XPLA 볼트
 type: docs
 ---

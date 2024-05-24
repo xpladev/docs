@@ -1,8 +1,8 @@
 ---
-title: Multisig Desktop
+title: 다중서명 데스크탑
 weight: 1020
 draft: true
 type: docs
 ---
 
-# Multisig Desktop Tutorial
+# 다중서명 데스크탑 튜토리얼

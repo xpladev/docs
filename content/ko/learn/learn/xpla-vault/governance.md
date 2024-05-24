@@ -1,76 +1,76 @@
 ---
-title: Governance
+title: 거버넌스
 weight: 30
 type: docs
 ---
 
-If this is your first time using XPLA Vault, follow the [XPLA Vault tutorial]({{< ref "xpla-vault" >}}).
+XPLA Vault를 처음 사용하는 경우 [XPLA 볼트 튜토리얼]({{< ref "xpla-vault" >}})을 따르세요.
 
-Governance is an important part of being involved in the XPLA Chain community. Use the following information to learn how to vote on and submit governance proposals in XPLA Vault. For more information on governance and voting options, visit [the governance overview]({{< ref "about-xpla-chain#governance" >}}).
+거버넌스는 XPLA 체인 커뮤니티에 참여하는 데 있어 중요한 부분입니다. 다음 정보를 사용하여 XPLA 볼트에서 거버넌스 제안에 투표하고 제출하는 방법을 알아보세요. 거버넌스 및 투표 옵션에 대한 자세한 내용은 [거버넌스 개요]({{< ref "about-xpla-chain#governance" >}})를 참조하시기 바랍니다.
 
-## Vote on a Proposal
+## 제안에 투표하기
 
-Voting is an important way for community members to help the XPLA Chain evolve. Follow these steps to vote with your staked XPLA.
+투표는 커뮤니티 구성원이 XPLA 체인의 발전을 도울 수 있는 중요한 방법입니다. 스테이킹한 XPLA로 투표하려면 다음 단계를 따르세요.
 
-1. Open XPLA Vault and connect your wallet. In the sidebar, click **Governance**.
+1. XPLA 볼트를 열고 지갑을 연결합니다. 사이드바에서 **Governance**를 클릭합니다.
 
-2. Click on **Voting** to view the active proposals.
+2. **Voting**를 클릭하여 활성 제안을 확인합니다.
 
-3. Click on the proposal you want to vote on.
+3. 투표하려는 제안서를 클릭합니다.
 
-4. In the upper right corner, click **Vote**.
+4. 오른쪽 상단에서 **Vote**를 클릭합니다.
 
-5. Select your vote and enter your password.
+5. 투표를 선택하고 비밀번호를 입력합니다.
 
-6. Click **Submit**.
+6. **Submit**을 클릭합니다.
 
-Your vote will be submitted.
+투표가 제출됩니다.
 
-## Deposit XPLA to a Proposal
+## 제안서에 XPLA 입금하기
 
-Users can vote on a proposal after a minimum deposit of 300 XPLA is reached. To help push a proposal forward to a vote, deposit XPLA to the proposal.
-
-{{< alert context="warning" >}}
-**Warning**
-
-While most deposits get refunded, some deposits get burned. For more information on which deposits get burned, visit the [governance section]({{< ref "about-xpla-chain#governance" >}}) of the concepts page.
-{{< /alert >}}
-
-1. Open XPLA Vault and connect your wallet. In the sidebar, click **Governance**.
-
-2. Click on **Deposit** to view the proposals still in the deposit period.
-
-3. Click on the proposal you want to deposit to.
-
-4. In the upper right corner, click **Deposit**.
-
-5. Enter the amount of XPLA you want to deposit and enter your password.
-
-6.  Click **Submit**.
-
-Your deposit will be added to the proposal.
-
-## Create a New Proposal
+사용자는 최소 300 XPLA를 입금한 후에 제안서에 투표할 수 있습니다. 제안을 투표로 진행하려면 제안에 XPLA를 입금하세요.
 
 {{< alert context="warning" >}}
-**Avoid unnecessary proposals**
+**경고**
 
-To prevent unnecessary proposals or abuse of the system, all governance proposals must obtain a minimum deposit of 300 XPLA. If 33.4% of the total vote is `NoWithVeto`, `quorum` is not met, or the minimum deposit isn't reached, the deposit will be burned. All other vote outcomes get their deposits refunded. For more information on deposits and refunds, visit the [governance overview]({{< ref "about-xpla-chain#governance" >}}).
+대부분의 예치금은 환불되지만, 일부 예치금은 소각됩니다. 소각되는 예치금에 대한 자세한 내용은 개념 페이지의 [거버넌스 섹션]({{< ref "about-xpla-chain#governance" >}})에서 확인하실 수 있습니다.
 {{< /alert >}}
 
-1. Open XPLA Vault and connect your wallet. In the sidebar, click **Governance**.
+1. XPLA 볼트를 열고 지갑을 연결합니다. 사이드바에서 **Governance**를 클릭합니다.
 
-2. Click on **New proposal**.
+2. **Deposit**을 클릭하면 아직 입금 기간에 있는 제안서를 확인할 수 있습니다.
+
+3. 입금하려는 제안서를 클릭합니다.
+
+4. 오른쪽 상단에서 **Deposit**을 클립합니다.
+
+5. 입금할 XPLA 금액을 입력하고 비밀번호를 입력합니다.
+
+6. **Submit**을 클릭합니다.
+
+보증금이 제안서에 추가됩니다.
+
+## 새 제안서 만들기
+
+{{< alert context="warning" >}}
+**불필요한 제안 피하기**
+
+불필요한 제안이나 시스템 남용을 방지하기 위해 모든 거버넌스 제안은 최소 300 XPLA의 예치금을 확보해야 합니다. 총 투표의 33.4%가 `NoWithVeto`또는 `quorum` 충족되지 않거나 최소 예치금에 도달하지 못하면 예치금은 소각됩니다. 그 외의 모든 투표 결과는 예치금을 환불받게 됩니다. 예치금 환불에 대한 자세한 내용은 [거버넌스 개요]({{< ref "about-xpla-chain#governance" >}})를 참조하세요.
+{{< /alert >}}
+
+1. XPLA 볼트를 열고 지갑을 연결합니다. 사이드바에서 **Governance**를 클릭합니다.
+
+2. **New proposal**을 클릭합니다.
 
    {{< alert >}}
-   **Note**
+   **주의**
 
-   Before uploading any proposal, try to get community feedback on the XPLA Chain Governance forum. The link will be unveiled in the near future.
-   Do not use text proposals to suggest parameter changes. For more information, visit the [Governance module reference page]({{< ref "/develop/develop/core-modules/governance" >}}).
+   제안을 업로드하기 전에 XPLA 체인 거버넌스 포럼에서 커뮤니티 피드백을 받아보세요. 링크는 가까운 시일 내에 공개될 예정입니다.
+   매개변수 변경을 제안할 때는 텍스트 제안을 사용하지 마세요. 자세한 내용은 [거버넌스 모듈 참조 페이지]({{< ref "/develop/develop/core-modules/governance" >}})를 참조하세요.
    {{< /alert >}}
 
-3. Select the type of proposal, and enter a title, a description, and the amount of XPLA you want to deposit initially.
+3. 제안 유형을 선택하고 제목, 설명, 초기에 입금할 XPLA 금액을 입력합니다.
 
-4. Enter your password and click **Submit**.
+4. 비밀번호를 입력하고 **Submit**을 클릭합니다..
 
-Your proposal will enter the two-week deposit period. After a minimum deposit of 300 XPLA has been reached, your proposal will enter a one-week voting period. For more information on governance and voting options, visit the [governance overview]({{< ref "about-xpla-chain#governance" >}}).
+제안서가 2주간의 입금 기간에 들어갑니다. 최소 입금 금액인 300XPLA에 도달하면 제안은 1주간의 투표 기간에 들어갑니다. 거버넌스 및 투표 옵션에 대한 자세한 내용은 [governance overview]({{< ref "about-xpla-chain#governance" >}})를 참조하시기 바랍니다.

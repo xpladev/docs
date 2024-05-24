@@ -1,8 +1,8 @@
 ---
-title: Multisig Browser
+title: 다중서명 브라우저
 weight: 1010
 draft: true
 type: docs
 ---
 
-# Multisig Browser Tutorial
+# 다중서명 브라우저 튜토리얼

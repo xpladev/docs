@@ -1,57 +1,57 @@
 ---
-title: Contracts
+title: 컨트랙트
 weight: 20
 type: docs
 ---
 
-Smart contracts are an advanced feature of XPLA Vault. If you’re using XPLA Vault for the first time, follow the [XPLA Vault tutorial]({{< ref "xpla-vault" >}}).
+스마트 컨트랙트는 XPLA 볼트의 고급 기능입니다. XPLA 볼트를 처음 사용하는 경우, [XPLA 볼트 튜토리얼]({{< ref "xpla-vault" >}})을 참조하세요.
 
-## Prerequisites
+## 전제 조건
 
-Compile a contract locally and create a `.wasm` file.
+로컬에서 컨트랙트를 컴파일하고 `.wasm` 파일을 생성합니다.
 
-## Upload
+## 업로드
 
-Deploy a contract by uploading your `.wasm` file to XPLA Vault.
+`.wasm` 파일을 XPLA 볼트에 업로드하여 컨트랙트를 배포합니다.
 
-1. Open XPLA Vault and connect your wallet. Click **Contracts**.
+1. XPLA 볼트를 열고 지갑을 연결합니다. **Contract**을 클릭합니다.
 
-2. Click **Upload**.
+2. **Upload**를 클릭합니다.
 
-3. Upload your `.wasm` file and enter your password.
+3. `.wasm` 파일을 업로드하고 비밀번호를 입력합니다.
 
-4. Click **Submit**.
+4. **Submit**을 클릭합니다.
 
-Your contract is now uploaded, and you received a contract code ID.
+이제 컨트랙트가 업로드되었으며 컨트랙트 코드 ID를 받았습니다.
 
-## Instantiate
+## 인스턴스화
 
-Use **Instantiate** to initialize your contract after uploading.
+업로드 후 **실행**을 사용하여 컨트랙트를 초기화합니다.
 
-1. Click **Create**.
+1. **Create**을 클릭합니다.
 
-2. Enter your contract code ID, `InitMsg JSON`, name, and description.
+2. 컨트랙트 코드 ID, `InitMsg JSON`, 이름 및 설명을 입력합니다.
 
-3. Confirm the fee amounts and enter your password. Click **Submit**.
+3. 수수료 금액을 확인하고 비밀번호를 입력합니다. **Submit**을 클릭합니다.
 
-Your contract is now initialized.
+이제 계약이 초기화되었습니다.
 
 ## Query
 
-Use **Query** to find out contract values. Querying does not cost anything.
+**Query**를 사용하여 컨트랙트 값을 확인합니다. 쿼리에는 비용이 들지 않습니다.
 
-1. Click **Query** located under your contract address.
+1. 계약 주소 아래에 있는 **Query**를 클릭합니다.
 
-2. Enter your `Input`. Click **Submit**.
+2. `Input`을 입력합니다. **Submit**을 클릭합니다.
 
-XPLA Vault will show your query result.
+XPLA 볼트에 Query 결과가 표시됩니다.
 
 ## Execute
 
-Use **Execute** to use the contract. Interacting will spend gas.
+컨트랙트를 사용하려면 **Execute**을 사용하세요. 상호작용하면 가스가 소모됩니다.
 
-1. Click **Execute** located under your contract address.
+1. 계약 주소 아래에 있는 **Execute**을 클릭합니다.
 
-2. Enter your `Msg`.
+2. `Msg`를 입력합니다.
 
-3. Confirm the fee amounts and click **Submit**.
+3. 수수료 금액을 확인하고 **Submit**을 클릭합니다.

@@ -1,115 +1,115 @@
 ---
-title: Mobile Vault
+title: 모바일 볼트
 weight: 30
 type: docs
 ---
 
-Complete this tutorial to get started with the XPLA mobile vault.
+이 튜토리얼을 완료하여 XPLA 모바일 볼트를 시작하세요.
 
-## Download the XPLA Mobile Vault
+## XPLA 모바일 볼트 다운로드
 
-1. Tap the download link for your operating system. Your device’s app store will open. The download links will be released soon.
-   * [XPLA Vault for iOS](https://apps.apple.com/app/xpla-vault/id1640593143)
-   * [XPLA Vault for Android](https://play.google.com/store/apps/details?id=xpla.android)
+1. 사용 중인 운영 체제의 다운로드 링크를 탭합니다. 기기의 앱 스토어가 열립니다. 다운로드 링크가 곧 열립니다.
+   * [iOS용 XPLA 볼트](https://apps.apple.com/app/xpla-vault/id1640593143)
+   * [Android용 XPLA 볼트](https://play.google.com/store/apps/details?id=xpla.android)
 
-1. Install the XPLA mobile vault on your phone.
+2. 휴대폰에 XPLA 모바일 볼트를 설치합니다.
 
-## Create a New Wallet
+## 새 지갑 만들기
 
-1. Launch the XPLA mobile vault and select **New wallet**
+1. XPLA 모바일 볼트를 실행하고 **New wallet**을 선택합니다.
 
    {{< figure2 src="new_wallet1.jpeg" width="30%" >}}
 
-1. Enter a name for your wallet and a secure password and confirm your password.
+2. 지갑의 이름과 보안 비밀번호를 입력하고 비밀번호를 확인합니다.
 
    {{< figure2 src="new_wallet2.jpeg" width="30%" >}}
 
-1. Using a pen and paper, write down your 24-word mnemonic exactly as it appears. Number each word to make verifying easier.
+3. 펜과 종이를 사용해 24단어 니모닉을 보이는대로 정확하게 적습니다. 쉽게 확인할 수 있도록
 
    {{< alert context="danger" >}}
-   **Protect your mnemonic keys**
+   **니모닉 키 보호하기**
 
-   Anyone with your mnemonic phrase can access your money, and there is no recourse for someone stealing your mnemonic phrase. To protect your mnemonic phrase, consider the following tips:
-   - Never save or store your mnemonic phrase as a digital file on any device.
-   - Always write down your mnemonic phrase with a pen and paper.
-   - Store the paper with your mnemonic phrase on it somewhere safe.
-   - Never give your mnemonic phrase to anyone, not even support staff.
+   니모닉 문구를 가진 사람은 누구나 내 돈에 엑세스할 수 있으며, 누군가 니모닉 문구를 훔쳐가도 구제할 방법이 없습니다. 니모닉 문구를 보호하려면 다음 팁을 참고하세요:
+   - 니모닉 문구를 어떤 디바이스에도 디지털 파일로 저장하지 마세요.
+   - 항상 펜과 종이를 사용하여 니모닉 문구를 적으세요.
+   - 니모닉 문구가 적힌 종이는 안전한 곳에 보관하세요.
+   - 직원을 포함하여 누구에게도 니모닉 문구를 알려주지 마세요.
    {{< /alert >}}
 
-1. Verify your writing to make sure every word is spelled correctly and in the right order. If you numbered your phrase, it can be helpful to verify it backward.
+1. 모든 단어의 철자가 정확하고 올바른 순서로 쓰여 있는지 확인합니다. 문구에 번호를 매겼다면 거꾸로 확인하면 도움이 될 수 있습니다.
 
-1. Tap **I have written down the mnemonic** and tap **Submit**.
+2. **I have written down the mnemonic**을 탭하고 and **Submit**을 탭합니다.
 
    {{< figure2 src="new_wallet3.jpeg" width="30%" >}}
 
-1. Confirm your mnemonic phrase by typing or selecting the correct words in each prompt.
+3. 각 프롬프트에서 올바른 단어를 입력하거나 선택하여 니모닉 문구를 확인합니다.
 
    {{< figure2 src="new_wallet4.jpeg" width="30%" >}}
 
-1. Tap **Submit** and finish.
+4. **Submit**을 탭하고 완료합니다.
 
-Congratulations, you have just created a wallet!
+축하합니다! 방금 지갑을 만들었습니다.
 
-## Send Tokens
+## 토큰 전송
 
-1. Open the XPLA extension vault and connect to your wallet.
+1. XPLA 확장 볼트를 열고 지갑에 연결합니다.
 
-1. Tap on the token in your available balance that you want to send.
+2. 사용 가능한 잔액에서 보내려는 토큰을 탭합니다.
 
-1. Enter the address of the wallet you want to send tokens to.
+3. 토큰을 전송할 지갑의 주소를 입력합니다.
 
-1. Enter the amount you want to send. You can also add a memo to specify what the transaction is for.
+4. 송금하고자 하는 금액을 입력합니다. 메모를 추가하여 트랜잭션의 용도를 지정할 수도 있습니다.
 
-1. Tap **Next**.
+5. **Next**을 탭합니다.
 
-1. Verify the transaction amounts and specify which token you want to pay fees in. Remember to always leave enough tokens in your account for other transactions.
-
-   {{< alert context="warning" >}}
-   **Keep tokens for fees**
-
-   Always keep some tokens to pay fees with. Never spend your entire wallet amount. Without money for fees, you can't make any transactions.
-   {{< /alert >}}
-
-1.  Enter your password and tap **Submit**. Wait for the transaction to process. This generally takes a few seconds.
-
-## Stake XPLA
-
-1. Open the XPLA extension vault and connect to your wallet. Make sure you have XPLA in your wallet to stake.
-
-1. Tap **Staking**.
-
-1. Browse the list and tap on the validator you would like to stake to.
-
-1. Tap **Delegate**
-
-1. Enter the amount of XPLA you want to delegate. Tap **Next**.
-
-1. Confirm the amount and select the coin you want to pay fees in.
+6. 거래 금액을 확인하고 수수료를 지불할 토큰을 지정합니다. 다른 트랜잭션을 위해 항상 계정에 충분한 토큰을 남겨두는 것을 잊지 마세요.
 
    {{< alert context="warning" >}}
-   **Keep tokens for fees**
+   **수수료 지불을 위한 토큰 보관하기**
 
-   Always keep some tokens to pay fees with. Never spend your entire wallet amount. Without money for fees, you can't make any transactions.
+   수수료 지불을 위해 항상 토큰을 일부 남겨두세요. 지갑 금액을 모두 사용하지 마세요. 수수료로 사용할 돈이 없으면 거래를 할 수 없습니다.
    {{< /alert >}}
 
-1. Tap **Submit** and wait for your transaction to process.
+7. 비밀번호를 입력하고 **Submit**을 탭합니다. 거래가 처리될 때까지 기다립니다. 일반적으로 몇 초 정도 걸립니다.
 
-Your XPLA is now staked to a validator.
+## XPLA 스테이크
 
-## Withdraw Staking Rewards
+1. XPLA 익스텐션 볼트를 열고 지갑에 연결합니다. 지갑에 스테이킹할 XPLA가 있는지 확인합니다.
 
-Rewards start accruing the moment you stake XPLA. Monitor your rewards in the staking section of XPLA Vault. Once you have sufficient rewards, follow these steps to withdraw them:
+2. **Staking**을 탭합니다.
 
-1. Open the XPLA Vault. Connect to a wallet and tap **Staking**.
+3. 목록을 탐색하고 스테이킹하려는 검증인을 탭합니다.
 
-1. To claim all rewards, tap **Withdraw all rewards** at the top of the staking page.
+4. **Delegate**을 탭합니다.
 
-1. Review the amounts and specify which coin you want to pay fees in.
+5. 위임할 XPLA의 양을 입력합니다. **Next**을 탭합니다.
 
-1. Enter your password and tap **Submit**.
+6. 금액을 확인하고 수수료를 지불할 코인을 선택합니다.
 
-Congratulations, you've just withdrawn your staking rewards!
+   {{< alert context="warning" >}}
+   **수수료 지불을 위한 토큰 보관하기**
 
-## Next Steps
+   수수료를 지불할 토큰을 항상 일부 남겨두세요. 지갑 금액을 모두 사용하지 마세요. 수수료로 사용할 돈이 없으면 거래를 할 수 없습니다.
+   {{< /alert >}}
 
-To use XPLA Vault on your computer, visit the [Web wallet tutorial]({{< ref "extension-vault" >}} ). To learn how to use other wallet features, visit the [XPLA Vault guides]({{< ref "xpla-vault" >}}).
+7. **Submit**을 탭하고 트랜잭션이 처리될 때까지 기다립니다.
+
+이제 XPLA가 검증자에게 스테이킹 되었습니다.
+
+## 스테이킹 보상 인출하기
+
+보상은 XPLA를 스테이킹하는 순간 적립되기 시작합니다. XPLA 볼트의 스테이킹 섹션에서 보상을 모니터링하세요. 보상이 충분하면 다음 단계에 따라 보상을 인출하세요:
+
+1. XPLA 볼트를 엽니다. 지갑에 연결하고 **Staking**을 탭합니다.
+
+2. 모든 보상을 수령하려면 스테이킹 페이지 상단의 **Withdraw all rewards**을 탭합니다.
+
+3. 금액을 검토하고 수수료를 지불할 코인을 지정합니다.
+
+4. 비밀번호를 입력하고 **Submit**을 탭합니다.
+
+축하합니다! 스테이킹 보상을 인출하셨습니다.
+
+## 다음 단계
+
+컴퓨터에서 XPLA 볼트를 이용하려면 [웹 지갑 튜토리얼]({{< ref "extension-vault" >}} )을 참조 하세요. 다른 지갑 기능을 사용하는 방법을 알아보려면 [XPLA 볼트 가이드]({{< ref "xpla-vault" >}})를 참조하세요.
