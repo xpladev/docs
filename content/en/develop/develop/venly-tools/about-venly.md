@@ -53,3 +53,23 @@ Robust tokenization is based on industry standards and is secured by several cod
 ### [Payments](https://docs.venly.io/docs/pay-api-overview)
 
 With PAY, our platform offers a low-code payment integration that creates a customizable form for collecting payments. You can embed Pay directly on your website or redirect customers to a hosted payment page. It offers a wide range of payment methods, from credit cards to PayPal, Apple Pay, Google Pay, instant bank transfers, and more, enabling customers to choose their preferred option.
+
+## Product Specific Documentation
+
+| Category        | Product                         | Documentation                                                                  |
+| :-------------- | :------------------------------ | :----------------------------------------------------------------------------- |
+| Digital Wallets | Widget                          | [API Reference](https://venly.readme.io/docs/product-overview)                 |
+| Digital Wallets | Wallet API                      | [API Reference](https://venly.readme.io/reference/viewwallet)                  |
+| Digital Assets  | NFT API                         | [API Reference](https://docs.venly.io/reference/getcontracts-1)                |
+| Digital Assets  | Shopify NFT Minting Application | [App Store](https://apps.shopify.com/partners/arkane-network1)                 |
+| Digital Assets  | Zapier Integration              | [Documentation](https://docs.venly.io/docs/zapier-integration)                 |
+| Digital Assets  | SiteManager                     | [Documentation](https://docs.venly.io/docs/sitemanager)                        |
+| Payments        | Venly PAY                       | [API Reference](https://docs.venly.io/docs/pay-api-overview)                   |
+| Gaming SDK      | Unity                           | [Documentation](https://docs.venly.io/docs/getting-started-with-unity)         |
+| Gaming SDK      | Unreal Engine                   | [Documentation](https://docs.venly.io/docs/getting-started-with-unreal-engine) |
+
+## Venly - XPLA
+
+Venly supports the XPLA chain on its Wallet API which allows you to create wallets on the XPLA chain. You can send and receive funds to/from XPLA wallets directly through the Wallet API, enabling seamless integration with applications using the XPLA blockchain.
+
+> Read the next guide to learn how to create and manage XPLA wallets with the Wallet API.
