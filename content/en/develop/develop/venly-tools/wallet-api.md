@@ -13,7 +13,7 @@ The Wallet API allows developers to interact with blockchain networks and offer 
 - You and your users have complete control over digital assets without any third-party interference. Securely manage wallets with complete autonomy and privacy.
 - In the event of loss of login credentials, you and your users can recover access to wallets with a security code or biometric verification.
 
-![Wallet-api-venly](image.png)
+![Wallet-API](https://github.com/abdullahvenly/docs/assets/139292301/3a1bedff-86e4-4cd9-85d6-edd11090c98d)
 
 ## Key features
 
