@@ -13,8 +13,6 @@ The Wallet API allows developers to interact with blockchain networks and offer 
 - You and your users have complete control over digital assets without any third-party interference. Securely manage wallets with complete autonomy and privacy.
 - In the event of loss of login credentials, you and your users can recover access to wallets with a security code or biometric verification.
 
-![Wallet-API](https://github.com/abdullahvenly/docs/assets/139292301/3a1bedff-86e4-4cd9-85d6-edd11090c98d)
-
 ## Key features
 
 | Features | Description |
@@ -27,15 +25,14 @@ The Wallet API allows developers to interact with blockchain networks and offer 
 | User experience enhancement | It can contribute to a smoother and more user-friendly interaction with blockchain applications.                                                                            |
 | Multi-blockchain support    | Venly supports multiple blockchain networks, allowing developers to offer wallets for different cryptocurrencies. |
 
-## Prerequisites
+## Creating an XPLA wallet
+### Prerequisites
 
 1.  You need a Venly business account. If you don't have one, click to register in our [Developer Portal](https://portal.venly.io), or follow our [Getting Started with Venly](https://venly.readme.io/docs/getting-started) guide.
 
 2. You need your client ID and client secret which can be obtained from the [Portal](https://portal.venly.io/).
 
 3. You need a bearer token to authenticate API calls. Click [here](https://docs.venly.io/docs/authentication) to read how to authenticate.
-
-## Creating an XPLA wallet
 
 ### Request Endpoint: [reference](https://docs.venly.io/reference/createwallet)
 
