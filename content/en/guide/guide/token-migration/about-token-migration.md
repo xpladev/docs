@@ -10,7 +10,7 @@ Token migration for XPLA is scheduled to take place starting from October 21st, 
 During the migration period, you can migrate not only the CTX, but also all the other digital assets including game tokens or NFTs that you own in your C2X Station. Please read below for more details on how you can swiftly undergo migration.
 
 ## Migration Period
-2022 Oct 21 14:00:00 UTC ~ 2023 April 14 06:00:00 UTC
+2022 Oct 21 14:00:00 UTC ~ 2024 July 02 05:59:59 UTC
 
 ## Migration Web Application
 Migrate your `CTX` and other assets from [Migration Web Application](https://migration.c2x.world/).
