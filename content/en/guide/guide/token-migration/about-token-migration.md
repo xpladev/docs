@@ -6,7 +6,7 @@ type: docs
 
 ## Dear Pilots, it’s the Explore & Play XPLA here!
 
-Token migration for XPLA is scheduled to take place starting from October 21st, 2022 and end by January 19th, 2023.
+Token migration for XPLA is scheduled to take place starting from October 21st, 2022 and end by July 2nd, 2024.
 During the migration period, you can migrate not only the CTX, but also all the other digital assets including game tokens or NFTs that you own in your C2X Station. Please read below for more details on how you can swiftly undergo migration.
 
 ## Migration Period
