@@ -24,7 +24,8 @@ All materials related to frameworks, libraries, and documentation that improve a
 
 | Contribution Title | Description | Author | Tutorial / Document of Contribution | Date Added / Updated |
 | --- | --- | --- | --- | --- |
-| [xpla.go](https://github.com/xpladev/xpla.go) | "xpla.go" is a Golang SDK for writing applications that interact with the XPLA blockchain and provides simple abstractions over core data structures, serialization, key management, and API request generation. | [Moonyongjung](https://github.com/Moonyongjung) | [README.md](https://github.com/xpladev/xpla.go#readme) | 08 / 09 / 2023 |
+| [xpla.go](https://github.com/xpladev/xpla.go) | "xpla.go" is a Golang SDK for writing applications that interact with the XPLA blockchain and provides simple abstractions over core data structures, serialization, key management, and API request generation. | [Moonyongjung](https://github.com/Moonyongjung) | [README.md](https://github.com/xpladev/xpla.go#readme) | 08 / 09 / 2023 | 
+[Venly](https://docs.venly.io/docs/what-is-venly) | Venly is an complete developer platform that enables you to build your business on blockchain and simplifies digital asset management. It's distinguished by its high performance and robust security layers. Venly's self-custodian solution ensures you always maintain full ownership and control of your assets. | [Abdullah](https://github.com/abdullahvenly) | [Venly Docs](https://docs.venly.io/docs/what-is-venly) | 26/06/2024 |
 
 {{< alert >}}
 Add your Tool Kit via [GitHub](https://github.com/xpladev/docs/blob/main/content/en/ecosystem/ecosystem/discover-contribution.md).
