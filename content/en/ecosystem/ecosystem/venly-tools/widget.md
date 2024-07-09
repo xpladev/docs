@@ -9,6 +9,7 @@ type: docs
 Venly Widget is a powerful javascript SDK created to streamline everyday blockchain tasks. Its purpose is to enable functionalities otherwise restricted due to security implications, such as creating signatures. By encapsulating Venly's extensive capabilities within a user-friendly JavaScript layer, Venly Widget empowers developers and simplifies the development process.
 
 > If you are new to Web3 and don't have experience with blockchain technologies, we recommend you use the Venly [Widget](https://docs.venly.io/docs/widget-overview) natively for a better developer experience.
+
 ## Create XPLA wallets with Venly widget
 
 Venly Wallet allows you to create and manage wallets on the XPLA network. You can send and receive native XPLA and ERC20 tokens. Apart from this, the Venly Widget also supports:
@@ -22,16 +23,6 @@ Venly Wallet allows you to create and manage wallets on the XPLA network. You ca
 - Support web and mobile
 - Offers social logins
 
-## Look and feel
-
-As the Widget is a product that incorporates a user interface (UI), let's look at how some of the more regular flows would appear for an end user.
-
-### Token transfer
-
-The application prompts the user to transfer a token from their wallet to a different destination in this flow.
-
-![transfer-xpla-tokens](/content/en/ecosystem/ecosystem/venly-tools/transfer%20xpla%20tokens.png)
-
 ## Different integration options
 
 Multiple integration options are available to incorporate the Venly Widget into your application. Here is a brief overview of some of these options:
@@ -44,16 +35,12 @@ Multiple integration options are available to incorporate the Venly Widget into 
 
 These are just a few integration options to incorporate the Venly Widget into your application. The choice of integration method depends on your specific requirements, preferences, and the existing infrastructure of your application.
 
-![integration-options](/content/en/ecosystem/ecosystem/venly-tools/integration%20options.png)
-
 ## When to choose what?
 
 If you want to build your wallet app for users to interact with, you should use the [Wallet API](https://venly.readme.io/docs/overview).
 
 If you want to integrate an existing, full-fletched wallet solution, you can use the Venly Widget.  
 There are multiple ways to integrate it - natively or by using another library (which also uses the Venly Widget in the background):
-
-![choosing-an-integration](/content/en/ecosystem/ecosystem/venly-tools/when%20to%20choose%20what.png)
 
 | Integration Type                                                    | Description                                                                                                                                                     | UI Flexibility                                                                                                                                                                                                | Blockchains          |
 | :------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------- |
