@@ -14,7 +14,8 @@ Venly Widget is a powerful javascript SDK created to streamline everyday blockch
 
 Venly Wallet allows you to create and manage wallets on the XPLA network. You can send and receive native XPLA and ERC20 tokens. Apart from this, the Venly Widget also supports:
 
-![create-xpla-wallet](https://github.com/xpladev/docs/assets/139292301/47143857-c296-4b3e-8a36-cac20c323023)
+![create-xpla-wallet](https://github.com/abdullahvenly/docs/assets/139292301/c109d576-291f-49f6-b505-dc42802de3be)
+
 
 ## Features
 - Multiple blockchains
@@ -24,6 +25,7 @@ Venly Wallet allows you to create and manage wallets on the XPLA network. You ca
 - Importing wallets
 - Support web and mobile
 - Offers social logins
+- Mobile App Authentication
 
 ## Look and feel
 
@@ -33,7 +35,8 @@ As the Widget is a product that incorporates a user interface (UI), let's look a
 
 The application prompts the user to transfer a token from their wallet to a different destination in this flow.
 
-![transferring-xpla-tokens](https://github.com/xpladev/docs/assets/139292301/acb03eb3-6f41-417a-a39e-9335ae9e2941)
+![transferring-xpla-tokens](https://github.com/abdullahvenly/docs/assets/139292301/066716b7-7e6a-4812-a1b2-9e31a8aa392c)
+
 
 ## Different integration options
 
@@ -47,7 +50,7 @@ Multiple integration options are available to incorporate the Venly Widget into 
 
 These are just a few integration options to incorporate the Venly Widget into your application. The choice of integration method depends on your specific requirements, preferences, and the existing infrastructure of your application.
 
-![integration-options](https://github.com/xpladev/docs/assets/139292301/1bbaadfa-dd9c-40ff-8dfe-c0513893f72e)
+![integration-options](https://github.com/abdullahvenly/docs/assets/139292301/f5166189-177b-46a9-8b3d-459e1781f29e)
 
 ## When to choose what?
 
@@ -56,7 +59,8 @@ If you want to build your wallet app for users to interact with, you should use 
 If you want to integrate an existing, full-fletched wallet solution, you can use the Venly Widget.  
 There are multiple ways to integrate it - natively or by using another library (which also uses the Venly Widget in the background):
 
-![choosing-integration-options](https://github.com/xpladev/docs/assets/139292301/f6f554d0-21fe-4a89-9e04-2c42a6bccb3c)
+![choosing-integration-options](https://github.com/abdullahvenly/docs/assets/139292301/2742b5d0-a998-4a25-b211-59ae9ae3faf8)
+
 
 | Integration Type                                                    | Description                                                                                                                                                     | UI Flexibility                                                                                                                                                                                                | Blockchains          |
 | :------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------- |
