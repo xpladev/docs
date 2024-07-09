@@ -13,8 +13,6 @@ Venly Widget is a powerful javascript SDK created to streamline everyday blockch
 
 Venly Wallet allows you to create and manage wallets on the XPLA network. You can send and receive native XPLA and ERC20 tokens. Apart from this, the Venly Widget also supports:
 
-![create-xpla-wallet](/content/en/ecosystem/ecosystem/venly-tools/create%20xpla%20wallet.png)
-
 ## Features
 - Multiple blockchains
 - Native token swap functionality
