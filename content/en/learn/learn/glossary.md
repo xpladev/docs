@@ -64,7 +64,7 @@ A user who [delegates]({{< ref "#delegate" >}}), bonds, or stakes [XPLA]({{< ref
 
 ## Fees
 
-- **Gas**: Compute fees added on to all transactions to avoid spamming. [Validators]({{< ref "#validator" >}}) set minimum gas prices and reject transactions that have implied gas prices below this threshold.
+- **Gas**: Compute fees added on to all transactions to avoid spamming. [Validators]({{< ref "#validator" >}}) check minimum gas prices and reject transactions that have implied gas prices below this threshold.
 
 For more information on fees, visit [Fees]({{< ref "fees" >}}).
 
