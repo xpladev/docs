@@ -85,9 +85,9 @@ When a user redelegates staked XPLA from one validator to another, the validator
 
 ## Rewards
 
-The XPLA Chain incentivizes validators and delegators with staking rewards from gas fees and inflation rewards:
+The XPLA Chain incentivizes validators and delegators with staking reward from gas fees:
 
-- [Gas]({{< ref "fees#gas" >}}): Compute fees added on to each transaction to avoid spamming. Validators set minimum gas prices and reject transactions that have implied gas prices below this threshold.
+- [Gas]({{< ref "fees#gas" >}}): Compute fees added on to each transaction to avoid spamming. Validators check minimum gas prices and reject transactions that have implied gas prices below this threshold.
 
 - [Inflation rewards]({{< ref "/develop/develop/core-modules/mint" >}}): Every block, new XPLA is minted and released to validators and delegators as staking rewards only if the inflation on the XPLA Chain exceeds 0%. As the current rate for the minting of new XPLA is fixed at 0% per year, there are no extra rewards from inflation.
 

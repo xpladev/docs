@@ -65,9 +65,9 @@ Typically smart contracts expose a public ABI, which is a list of supported ways
 
 #### Executing EVM bytecode
 
-A contract's EVM bytecode consists of basic operations (add, multiply, store, etc...), called **Opcodes**. Each Opcode execution requires gas that needs to be payed with the tx. The EVM is therefore considered quasi-turing complete, as it allows any arbitrary computation, but the amount of computations during a contract execution is limited to the amount of gas provided in the tx. Each Opcode's [**gas cost**](https://www.evm.codes/) reflects the cost of running these operations on actual computer hardware (e.g. `ADD = 3gas` and `SSTORE = 100gas`). To calculate the gas consumption of a tx, the gas cost is multiplied by the **gas price**, which can change depending on the demand of the network at the time. If the network is under heavy load, you might have to pay a highter gas price to get your tx executed. If the gas limit is hit (out of gas execption) no changes to the Ethereum state are applied, except that the sender's nonce increments and their balance goes down to pay for wasting the EVM's time.
+A contract's EVM bytecode consists of basic operations (add, multiply, store, etc...), called **Opcodes**. Each Opcode execution requires gas that needs to be payed with the tx. The EVM is therefore considered quasi-turing complete, as it allows any arbitrary computation, but the amount of computations during a contract execution is limited to the amount of gas provided in the tx. Each Opcode's [**gas cost**](https://www.evm.codes/) reflects the cost of running these operations on actual computer hardware (e.g. `ADD = 3gas` and `SSTORE = 100gas`). To calculate the gas consumption of a tx, the gas cost is multiplied by the **gas price**, which can change depending on the demand of the network at the time. If the network is under heavy load, you might have to pay a higher gas price to get your tx executed. If the gas limit is hit (out of gas exception) no changes to the Ethereum state are applied, except that the sender's nonce increments and their balance goes down to pay for wasting the EVM's time.
 
-Smart contracts can also call other smart contracts. Each call to a new contract creates a new instance of the EVM (including a new stack and memory). Each call passes the sandbox state to the next EVM. If the gas runs out, all state changes are discareded. Otherwise they are kept.
+Smart contracts can also call other smart contracts. Each call to a new contract creates a new instance of the EVM (including a new stack and memory). Each call passes the sandbox state to the next EVM. If the gas runs out, all state changes are discarded. Otherwise they are kept.
 
 For further reading, please refer to:
 
@@ -91,7 +91,7 @@ The JSON-RPC method [`eth_call`](https://docs.evmos.org/develop/api/ethereum-jso
 In the Geth implementation, calling the endpoint roughly goes through the following steps:
 
 1. The `eth_call` request is transformed to call the `func (s *PublicBlockchainAPI) Call()` function using the `eth` namespace
-2. [`Call()`](https://github.com/ethereum/go-ethereum/blob/master/internal/ethapi/api.go#L982) is given the transaction arguments, the block to call against and optional overides that modify the state to call against. It then calls `DoCall()`
+2. [`Call()`](https://github.com/ethereum/go-ethereum/blob/master/internal/ethapi/api.go#L982) is given the transaction arguments, the block to call against and optional overrides that modify the state to call against. It then calls `DoCall()`
 3. [`DoCall()`](https://github.com/ethereum/go-ethereum/blob/d575a2d3bc76dfbdefdd68b6cffff115542faf75/internal/ethapi/api.go#L891) transforms the arguments into a `ethtypes.message`, instantiates an EVM and applies the message with `core.ApplyMessage`
 4. [`ApplyMessage()`](https://github.com/ethereum/go-ethereum/blob/d575a2d3bc76dfbdefdd68b6cffff115542faf75/core/state_transition.go#L180) calls the state transition `TransitionDb()`
 5. [`TransitionDb()`](https://github.com/ethereum/go-ethereum/blob/d575a2d3bc76dfbdefdd68b6cffff115542faf75/core/state_transition.go#L275) either `Create()`s a new contract or `Call()`s a contract
@@ -361,7 +361,7 @@ It is also important to note that since the `auth` module on the Cosmos SDK mana
 
 ```go
 type GenesisAccount struct {
-  // address defines an ethereum hex formated address of an account
+  // address defines an ethereum hex formatted address of an account
   Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
   // code defines the hex bytes of the account code.
   Code string `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
@@ -438,7 +438,7 @@ After authentication through the `antehandler`, each `sdk.Msg` (in this case `Ms
     5. Confirm that EVM params for contract creation (`EnableCreate`) and contract execution (`EnableCall`) are enabled
     6. Apply message. If `To` address is `nil`, create new contract using code as deployment code. Else call contract at given address with the given input as parameters
     7. Calculate gas used by the evm operation
-3. If `Tx` applied sucessfully
+3. If `Tx` applied successfully
     1. Execute EVM `Tx` postprocessing hooks. If hooks return error, revert the whole `Tx`
     2. Refund gas according to Ethereum gas accounting rules
     3. Update block bloom filter value using the logs generated from the tx
@@ -483,7 +483,7 @@ The transaction execution is expected to fail if:
 
 #### Conversion
 
-The `MsgEthreumTx` can be converted to the go-ethereum `Transaction` and `Message` types in order to create and call evm contracts.
+The `MsgEthereumTx` can be converted to the go-ethereum `Transaction` and `Message` types in order to create and call evm contracts.
 
 ```go
 // AsTransaction creates an Ethereum Transaction type from the msg fields
@@ -593,9 +593,9 @@ type LegacyTx struct {
 
 This message field validation is expected to fail if:
 
-- `GasPrice` is invalid (`nil` , negaitve or out of int256 bound)
+- `GasPrice` is invalid (`nil` , negative or out of int256 bound)
 - `Fee` (gasprice * gaslimit) is invalid
-- `Amount` is invalid (negaitve or out of int256 bound)
+- `Amount` is invalid (negative or out of int256 bound)
 - `To` address is invalid (non valid ethereum hex address)
 
 #### DynamicFeeTx
