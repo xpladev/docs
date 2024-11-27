@@ -1,0 +1,17 @@
+- id: get-started
+  translation: "시작하기"
+
+- id: on-this-page
+  translation: "이 페이지에서"
+
+- id: search-text
+  translation: "문서 검색..."
+
+- id: 404-title
+  translation: "페이지를 찾을 수 없습니다. :("
+
+- id: 404-text
+  translation: "찾고 계신 페이지가 존재하지 않거나 이동되었습니다."
+
+- id: browse
+  translation: "찾아보기"
