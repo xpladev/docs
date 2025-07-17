@@ -4,7 +4,7 @@ weight: 20
 type: docs
 ---
 
-Use the following common examples to learn how to use xpla.js. If this is your first time using xpla.js, use the [xpla.js installation guide]({{< ref "get-started-with-xpla-js" >}}).
+Use the following common examples to learn how to use xpla.js. If this is your first time using xpla.js, use the [xpla.js installation guide]({{< ref "/develop/develop/tools/xpla-js/get-started-with-xpla-js" >}}).
 
 {{< alert >}}
 **Tip**

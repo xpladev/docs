@@ -38,7 +38,9 @@
 
 {{ if $showFlexSearch -}}
   {{ $flexSearch := resources.Get "js/vendor/flexsearch/dist/flexsearch.bundle.js" -}}
-  {{ $slice = $slice | append $flexSearch -}}
+  {{ if $flexSearch -}}
+    {{ $slice = $slice | append $flexSearch -}}
+  {{ end -}}
   {{ if and (isset .Site.Params.options "searchsectionsshow") (not (eq .Site.Params.options.searchSectionsShow "ALL")) -}}
   {{ $showFlexSearch = or (eq (len .Site.Params.options.searchSectionsShow) 0) (in .Site.Params.options.searchSectionsShow .Section) (and .IsHome (in .Site.Params.options.searchSectionsShow "HomePage")) -}}
   {{ end -}}
@@ -58,8 +60,10 @@
 
 {{ if .Site.Params.options.kaTex -}}
   {{ $katexConfig := resources.Get "js/katex.js" -}}
-  {{ $katexConfig := $katexConfig | js.Build -}}
-  {{ $slice = $slice | append $katexConfig -}}
+  {{ if $katexConfig -}}
+    {{ $katexConfig := $katexConfig | js.Build -}}
+    {{ $slice = $slice | append $katexConfig -}}
+  {{ end -}}
 {{ end -}}
 
 {{ $scrollLock := resources.Get "js/scroll-lock.js" | js.Build -}}
@@ -80,7 +84,7 @@
   {{ if .Site.Params.options.highLight -}}
     <script src="{{ $highlight.RelPermalink }}" defer></script>
   {{ end -}}
-  {{ if .Site.Params.options.kaTex -}}
+  {{ if and .Site.Params.options.kaTex $katex $katexAutoRender -}}
     <script src="{{ $katex.RelPermalink }}" defer></script>
     <script src="{{ $katexAutoRender.RelPermalink }}" onload="renderMathInElement(document.body);" defer></script>
   {{ end -}}
@@ -105,7 +109,7 @@
   {{ if .Site.Params.options.highLight -}}
     <script src="{{ $highlight.RelPermalink }}" integrity="{{ $highlight.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end -}}
-  {{ if .Site.Params.options.kaTex -}}
+  {{ if and .Site.Params.options.kaTex $katex $katexAutoRender -}}
     <script src="{{ $katex.RelPermalink }}" integrity="{{ $katex.Data.Integrity }}" crossorigin="anonymous" defer></script>
     <script src="{{ $katexAutoRender.RelPermalink }}" integrity="{{ $katexAutoRender.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end -}}

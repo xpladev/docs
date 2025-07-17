@@ -26,7 +26,7 @@ XPLA Chain Development Suite
 
 ## xpla.js
 
-Use xpla.js to create bots, mint NFTs, and build out backend services. Follow the [xpla.js tutorial]({{< ref "get-started-with-xpla-js" >}}) to get started.
+Use xpla.js to create bots, mint NFTs, and build out backend services. Follow the [xpla.js tutorial]({{< ref "/develop/develop/tools/xpla-js/get-started-with-xpla-js" >}}) to get started.
 
 ## Wallet Provider and Templates
 

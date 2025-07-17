@@ -18,11 +18,11 @@ This is an in-depth guide on how to use the `xplajs` SDK.
 In this tutorial, you'll learn how to:
 
 1. [Set up your project](#1-set-up-your-project)
-2. [Set up a XPLA Chain RPC connection](#2-initialize-the-rpc)
+2. [Initialize the RPC](#2-initialize-the-rpc)
 3. [Create and connect a wallet](#3-create-a-cube-testnet-wallet)
 4. [Find a contract address](#4-find-a-contract-address)
 5. [Query a contract](#5-query-a-contract-and-set-up-the-transaction)
-6. [Create, sign, and broadcast a transaction](#6-broadcast-the-transaction)
+6. [Broadcast the Transaction](#6-broadcast-the-transaction)
 
 By the end of this guide, you'll be able to execute a token swap from your application using xplajs.
 
@@ -108,9 +108,7 @@ XPLA Chain's RPC allows users to connect to the blockchain, make queries, create
    
    const signer = new DirectSigner(auth, toEncoders(MsgExecuteContract), Network.Testnet.rpc);
    
-   signer.getAddress().then((address) => {
-     console.log(address);
-   });
+   const address = await signer.getAddress();
    ```
 
    This code creates a wallet instance using the new xplajs architecture. The `EthSecp256k1Auth` handles authentication using your mnemonic phrase, while `DirectSigner` provides the signing capabilities. 
@@ -172,7 +170,6 @@ Before you can perform a swap, you'll need a belief price. You can calculate the
 
    const Decimal18 = Decimal.set({ precision: 18, rounding: Decimal.ROUND_DOWN });
    const beliefPrice = new Decimal18(offerAmount).dividedBy(10 ** assetDecimals[0]).dividedBy(new Decimal18(returnAmount).dividedBy(10 ** assetDecimals[1]));
-   console.log(`beliefPrice : `, beliefPrice.toString());
    ```
 
    This code performs two key operations: first, it queries the pool contract to get asset decimals information, then it simulates the swap to calculate the expected return amount. The belief price is calculated using precise decimal arithmetic to ensure accurate swap execution. The `Decimal.js` library is used for high-precision calculations to avoid floating-point errors.
@@ -217,10 +214,8 @@ Before you can perform a swap, you'll need a belief price. You can calculate the
    const msg = await executeContract(executeContractMsg);
    
    const fee: StdFee = await signer.estimateFee({messages: [msg]});
-   console.log(fee);
    
    const tx = await signer.signAndBroadcast({messages: [msg], fee});
-   console.log(tx);
    ```
 
    This final step completes the transaction process. The `MessageComposer.fromPartial` creates the properly formatted message, `estimateFee` calculates the appropriate gas fees, and `signAndBroadcast` signs the transaction with your private key and submits it to the network. The transaction will be processed by the XPLA Chain validators and the swap will be executed if all conditions are met.
