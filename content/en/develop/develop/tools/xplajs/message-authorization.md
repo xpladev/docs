@@ -1,6 +1,6 @@
 ---
 title: Message Authorization
-weight: 60
+weight: 90
 type: docs
 ---
 
