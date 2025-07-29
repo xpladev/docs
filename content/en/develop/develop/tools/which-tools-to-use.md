@@ -11,6 +11,8 @@ If you are new to XPLA Chain, start with the [beginner's guide]({{< ref "get-sta
 ```
 XPLA Chain Development Suite
 │
+├── xplajs: JavaScript SDK.
+│
 ├── xpla.js: JavaScript SDK.
 │
 ├── Wallet Provider: React tooling for frontend integrations.
@@ -23,6 +25,13 @@ XPLA Chain Development Suite
     │
     └── Faucet: Get testnet funds.
 ```
+
+## xplajs
+
+xplajs is generated code through hyperweb-io's telescope, which replaces the existing xpla.js library. It is compatible with interchain-kit and interchain-js, providing a more modular and maintainable approach to interacting with the XPLA blockchain.
+
+Use xplajs to create bots, mint NFTs, and build out backend services. Follow the [xplajs tutorial]({{< ref "/develop/develop/tools/xplajs/get-started-with-xpla-js" >}}) to get started.
+
 
 ## xpla.js
 
