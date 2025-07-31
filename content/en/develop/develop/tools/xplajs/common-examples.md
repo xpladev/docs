@@ -111,32 +111,32 @@ Example response (modified for readability):
 ## Get Link to Transaction
 
 ```js
-const getTransactionLink = (hash, chainID) =>
-  `https://explorer.xpla.io/${chainID}/tx/${hash}`;
+const getTransactionLink = (hash, network) =>
+  `https://explorer.xpla.io/${network}/tx/${hash}`;
 const hash = "CAB264B3D92FF3DFE209DADE791A866876DE5DD2A320C1200F9C5EC5F0E7B14B";
 
-console.log(getTransactionLink(hash, "cube_47-5"));
+console.log(getTransactionLink(hash, "testnet"));
 ```
 
 Example response:
 
 ```
-https://explorer.xpla.io/cube_47-5/tx/CAB264B3D92FF3DFE209DADE791A866876DE5DD2A320C1200F9C5EC5F0E7B14B
+https://explorer.xpla.io/testnet/tx/CAB264B3D92FF3DFE209DADE791A866876DE5DD2A320C1200F9C5EC5F0E7B14B
 ```
 
 ## Get Link to Wallet Address
 
 ```js
-const getWalletLink = (address, chainID) =>
-  `https://explorer.xpla.io/${chainID}/address/${address}`;
+const getWalletLink = (address, network) =>
+  `https://explorer.xpla.io/${network}/address/${address}`;
 const address = "xpla1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-console.log(getWalletLink(address, "cube_47-5"));
+console.log(getWalletLink(address, "testnet"));
 ```
 
 Example response:
 
 ```
-https://explorer.xpla.io/cube_47-5/address/xpla1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+https://explorer.xpla.io/testnet/address/xpla1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 ## Sending Native Tokens
@@ -203,7 +203,7 @@ console.log(tx)
 
 The following code example shows how to swap a native asset for CW20 using Dezswap.
 
-Run this example on mainnet.
+Run this example on testnet.
 
 ```ts
 import { createRPCQueryClient } from "@xpla/xplajs/xpla/rpc.query";

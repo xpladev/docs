@@ -48,9 +48,10 @@ By the end of this guide, you'll be able to execute a token swap from your appli
 3. Next, initialize yarn, install the `xplajs` package, and create an `index.js` file to house the code:
 
    ```sh
+   corepack enable
    yarn init -y
    yarn add @xpla/xplajs @xpla/xpla
-   touch index.js
+   touch index.ts
    ```
 
    The `@xpla/xplajs` package provides the core functionality for interacting with the XPLA Chain, while `@xpla/xpla` contains the signing and transaction utilities.
@@ -93,7 +94,7 @@ XPLA Chain's RPC allows users to connect to the blockchain, make queries, create
 
 2. After creating your wallet, you'll need to set it to use the testnet. Click the gear icon in the extension and change the network from `mainnet` to `testnet`.
 
-3. Add the following code to your `index.js` file and input your mnemonic key:
+3. Add the following code to your `index.ts` file and input your mnemonic key:
 
    ```ts
    import { EthSecp256k1Auth } from "@interchainjs/auth/ethSecp256k1";
@@ -130,13 +131,13 @@ XPLA Chain's RPC allows users to connect to the blockchain, make queries, create
 
 ## 4. Find a Contract Address
 
-To find the contract address for a specific Dezswap pair, visit [Dezswap](https://app.dezswap.io/)
+To find the contract address for a specific Dezswap pair [Dezswap Pair API](https://dimension-api.dezswap.io/v1/pairs)
 
 ## 5. Query a Dezswap Contract and Set up the Transaction
 
 Before you can perform a swap, you'll need a belief price. You can calculate the belief price of one token by querying simulation to the pool. The belief price +/- the `max_spread` is the range of possible acceptable prices for this swap.
 
-1. Add the following code to your `index.js` file. Make sure the contract address is correct.
+1. Add the following code to your `index.ts` file. Make sure the contract address is correct.
 
    ```ts
    import { Decimal } from 'decimal.js';
@@ -205,7 +206,7 @@ Before you can perform a swap, you'll need a belief price. You can calculate the
 
 ## 6. Broadcast the Transaction
 
-1. Add the following code to `index.js` to create, sign, and broadcast the transaction:
+1. Add the following code to `index.ts` to create, sign, and broadcast the transaction:
 
    ```ts
    import { StdFee } from "@xpla/xplajs/types";
