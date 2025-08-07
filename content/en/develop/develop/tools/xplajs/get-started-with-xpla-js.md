@@ -55,6 +55,16 @@ By the end of this guide, you'll be able to execute a token swap from your appli
    ```
 
    The `@xpla/xplajs` package provides the core functionality for interacting with the XPLA Chain, while `@xpla/xpla` contains the signing and transaction utilities.
+  {{< alert context="warning" >}}
+   **Note for Yarn Berry users**
+   
+   If you're using Yarn Berry (Yarn 2+), you need to add `nodeLinker: node-modules` to your `.yarnrc.yaml` file. PnP (Plug'n'Play) mode is currently not supported.
+
+   ```yaml
+   # .yarnrc.yaml
+   nodeLinker: node-modules
+   ```
+   {{</alert>}}
 
 4. Open the `package.json` file in a code editor and add `"type": "module",`.
 
