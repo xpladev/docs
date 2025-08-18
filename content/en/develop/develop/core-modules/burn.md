@@ -17,51 +17,49 @@ Burn proposals are special governance proposals that, when passed, automatically
 
 ## State
 
-### Ongoing Burn Proposal
+### BurnProposal
 
-The burn module tracks ongoing burn proposals to ensure proper execution when proposals pass.
+`BurnProposal` represents an ongoing burn proposal that is being tracked by the burn module. This structure contains the proposal details and is stored in the module's state.
 
 ```go
-// OngoingBurnProposal represents a burn proposal that is currently being processed
-type OngoingBurnProposal struct {
-    // Proposal ID of the burn proposal
-    ProposalId uint64 `protobuf:"varint,1,opt,name=proposal_id,json=proposalId,proto3" json:"proposal_id,omitempty"`
-    // Amount of tokens to be burned
-    Amount github_com_cosmos_cosmos_sdk_types.Coins `protobuf:"bytes,2,rep,name=amount,proto3,castrepeated=github.com/cosmos/cosmos-sdk/types.Coins" json:"amount"`
+// BurnProposal defines an ongoing burn proposal
+type BurnProposal struct {
+	ProposalId uint64                                   `protobuf:"varint,1,opt,name=proposal_id,json=proposalId,proto3" json:"proposal_id,omitempty"`
+	Proposer   string                                   `protobuf:"bytes,2,opt,name=proposer,proto3" json:"proposer,omitempty"`
+	Amount     github_com_cosmos_cosmos_sdk_types.Coins `protobuf:"bytes,3,rep,name=amount,proto3,castrepeated=github.com/cosmos/cosmos-sdk/types.Coins" json:"amount"`
 }
 ```
+
+#### Fields
+
+- **ProposalId**: The unique identifier of the governance proposal
+- **Proposer**: The address of the account that submitted the burn proposal
+- **Amount**: The amount of tokens to be burned if the proposal passes
 
 ## Message Types
 
 ### MsgBurn
 
-`MsgBurn` is the message type used to execute token burning operations. This message is typically executed automatically when a burn proposal passes.
+`MsgBurn` is the message type used to execute token burning operations. This message is submitted as part of a governance proposal and is executed automatically when the proposal passes.
 
 ```go
-// MsgBurn represents a message to burn tokens
+// MsgBurn represents a message to burn coins from an account.
 type MsgBurn struct {
-    // Address that initiated the burn operation
-    FromAddress string `protobuf:"bytes,1,opt,name=from_address,json=fromAddress,proto3" json:"from_address,omitempty"`
+    // authority is the address of the governance account.
+	Authority string                                   `protobuf:"bytes,1,opt,name=authority,proto3" json:"authority,omitempty" yaml:"authority"`
     // Amount of tokens to burn
     Amount github_com_cosmos_cosmos_sdk_types.Coins `protobuf:"bytes,2,rep,name=amount,proto3,castrepeated=github.com/cosmos/cosmos-sdk/types.Coins" json:"amount"`
 }
 ```
 
+#### Fields
+
+- **Authority**: The address of the governance module account that has permission to execute burn operations
+- **Amount**: The amount of tokens to be burned from the total supply
+
 ## Proposals
 
-### BurnProposal
 
-Burn proposals are governance proposals that allow the community to vote on token burning operations. When a burn proposal passes, it automatically executes the burn operation.
-
-```go
-// BurnProposal defines a proposal to burn tokens
-type BurnProposal struct {
-    Title       string `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
-    Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-    // Amount of tokens to burn if the proposal passes
-    Amount github_com_cosmos_cosmos_sdk_types.Coins `protobuf:"bytes,3,rep,name=amount,proto3,castrepeated=github.com/cosmos/cosmos-sdk/types.Coins" json:"amount"`
-}
-```
 
 {{< alert context="warning" >}}
 **Note**
@@ -78,6 +76,75 @@ Burn proposals follow the same governance process as other proposal types. They 
 ### ExportGenesis
 
 `ExportGenesis` exports the genesis state of the burn module, including any ongoing burn proposals.
+
+## Hooks
+
+The burn module implements governance hooks to handle the lifecycle of burn proposals. These hooks are automatically triggered by the governance module at specific points during the proposal process.
+
+### GovHooks Implementation
+
+The burn module implements the `govtypes.GovHooks` interface to handle governance proposal events:
+
+```go
+type BankGovHooks struct {
+    keeper     Keeper
+    bankKeeper types.BankKeeper
+    govKeeper  types.GovKeeper
+}
+```
+
+### Hook Types
+
+#### AfterProposalSubmission
+
+This hook is triggered immediately after a proposal is submitted. For burn proposals, it:
+
+1. Extracts the `MsgBurn` from the proposal messages
+2. Creates a `BurnProposal` record and stores it in the module state
+3. Transfers the burn amount from the proposer to the burn module account
+
+```go
+func (h BankGovHooks) AfterProposalSubmission(ctx context.Context, proposalID uint64) error {
+    // Extract MsgBurn from proposal
+    // Create BurnProposal record
+    // Transfer burn amount to module account
+}
+```
+
+#### AfterProposalFailedMinDeposit
+
+This hook is triggered when a proposal fails to reach the minimum deposit requirement. For burn proposals, it:
+
+1. Retrieves the stored `BurnProposal` record
+2. Returns the burn amount to the original proposer
+3. Removes the proposal from the ongoing burn proposals state
+
+```go
+func (h BankGovHooks) AfterProposalFailedMinDeposit(ctx context.Context, proposalID uint64) error {
+    // Return burn amount to proposer
+    // Remove from ongoing burn proposals
+}
+```
+
+#### AfterProposalVotingPeriodEnded
+
+This hook is triggered when the voting period for a proposal ends. For burn proposals, it:
+
+1. Removes the proposal from the ongoing burn proposals state
+2. If the proposal passed, the burn amount remains in the module account (will be burned)
+3. If the proposal failed, returns the burn amount to the proposer
+
+```go
+func (h BankGovHooks) AfterProposalVotingPeriodEnded(ctx context.Context, proposalID uint64) error {
+    // Remove from ongoing burn proposals
+    // If passed: keep amount for burning
+    // If failed: return amount to proposer
+}
+```
+
+### Hook Registration
+
+The burn module hooks are registered with the governance module during application initialization to ensure proper handling of burn proposal lifecycle events.
 
 ## Integration with Governance
 
@@ -108,6 +175,7 @@ sequenceDiagram
     Proposer->>GovModule: Submit Proposal with MsgBurn
     
     Note over Proposer, GovModule: AfterProposalSubmission Hook
+    GovModule->>BurnModule: Extract MsgBurn & Create BurnProposal
     Proposer->>BurnModule: Transfer burnAmount 100 XPLA 
     Note over Proposer: 10 XPLA
     Note over BurnModule: 100 XPLA (burn amount)
@@ -122,6 +190,8 @@ sequenceDiagram
     Note over GovModule: Voting Period Ends
     Note over GovModule: Proposal Status: PASSED
 
+    Note over GovModule: AfterProposalVotingPeriodEnded Hook
+    GovModule->>BurnModule: Remove from OngoingBurnProposals
     Note over GovModule: Execute Burn Proposal
     GovModule->>BurnModule: Execute MsgBurn
     BurnModule->>BankModule: Burn 100 XPLA burnAmount
@@ -133,4 +203,23 @@ sequenceDiagram
 
 The burn module provides query endpoints to retrieve information about burn operations and proposals:
 
-- Query ongoing burn proposals
+### QueryOngoingProposal
+
+This query allows users to retrieve information about ongoing burn proposals by proposal ID.
+
+```go
+// QueryOngoingProposalRequest is the request type for the Query/OngoingProposal RPC method.
+type QueryOngoingProposalRequest struct {
+    ProposalId uint64 `protobuf:"varint,1,opt,name=proposal_id,json=proposalId,proto3" json:"proposal_id,omitempty"`
+}
+
+// QueryOngoingProposalResponse is the response type for the Query/OngoingProposal RPC method.
+type QueryOngoingProposalResponse struct {
+    Proposal *BurnProposal `protobuf:"bytes,1,opt,name=proposal,proto3" json:"proposal,omitempty"`
+}
+```
+
+### Available Queries
+
+- **QueryOngoingProposal**: Retrieve details of a specific ongoing burn proposal by proposal ID
+- **QueryOngoingProposals**: List all ongoing burn proposals
