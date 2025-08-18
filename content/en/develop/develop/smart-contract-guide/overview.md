@@ -14,6 +14,6 @@ The following table describes commonly-used developer tools for building smart c
 
 |                   | WASM                                          | EVM             |
 |-------------------|-----------------------------------------------|-----------------|
-| Frontend SDK      | [xpla.js](https://github.com/xpladev/xpla.js) | Web3.js         |
+| Frontend SDK      | [@xpla/xpla-react](https://www.npmjs.com/package/@xpla/xpla-react), [@xpla/xplajs](https://www.npmjs.com/package/@xpla/xplajs), [@xpla/xpla](https://www.npmjs.com/package/@xpla/xpla), [xpla.js](https://github.com/xpladev/xpla.js) | ethers, Web3.js, [@xpla/evm](https://www.npmjs.com/package/@xpla/evm)         |
 | Browser Extension | XPLA Vault CX                                 | MetaMask, MEW   |
-| Contract Language | [Rust](https://www.rust-lang.org/)            | Solidity, Vyper |
+| Contract Language | [Rust](https://www.rust-lang.org/), CosmWasm            | Solidity, Vyper, [@xpla/contracts](https://www.npmjs.com/package/@xpla/contracts) |
