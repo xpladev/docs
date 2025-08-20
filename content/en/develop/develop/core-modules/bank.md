@@ -126,3 +126,71 @@ type Output struct {
 ```
 
 To send multiple transactions at once, use `MsgMultiSend`. For each transaction, `Inputs` contains the incoming transactions, and `Outputs` contains the outgoing transactions. The `Inputs` coin balance must exactly match the `Outputs` coin balance. Batching transactions via `MsgMultiSend` conserves gas fees and network bandwidth. Fees already paid through failed transactions are not refunded.
+
+## CW20 & ERC20 Support
+
+XPLA Chain's bank module has been extended to support both CosmWasm cw20 tokens and EVM erc20 tokens, allowing users to interact with these tokens using standard bank module commands without additional configuration.
+
+### Supported Token Types
+
+- **cw20 tokens**: Use denom format `xcw20/<contract address>`
+- **erc20 tokens**: Use denom format `xerc20/<contract address>`
+
+### How to Use
+
+#### 1. Balance Queries
+
+Query the balance of a specific token for an account:
+
+```bash
+# cw20 token balance
+xplad q bank balance <account_address> xcw20/<contract_address>
+
+# erc20 token balance  
+xplad q bank balance <account_address> xerc20/<contract_address>
+```
+
+Example:
+```bash
+xplad q bank balance xpla1xr3rq8yvd7qplsw5yx90ftsr2zdhg4e9z60h5duusgxpv72hud3s5c7wrn xerc20/B99a63f7e1BD195f65e2EBFcFC393897D73F24c9
+```
+
+#### 2. Total Supply Queries
+
+Query the total supply of a specific token:
+
+```bash
+# cw20 token total supply
+xplad q bank total-supply-of xcw20/<contract_address>
+
+# erc20 token total supply
+xplad q bank total-supply-of xerc20/<contract_address>
+```
+
+Example:
+```bash
+xplad q bank total-supply-of xerc20/B99a63f7e1BD195f65e2EBFcFC393897D73F24c9
+```
+
+#### 3. Token Transfers
+
+Send tokens between accounts using the standard bank send command:
+
+```bash
+# cw20 token transfer
+xplad tx bank send <sender> <recipient> <amount>xcw20/<contract_address> --from <sender> --gas auto --gas-adjustment 1.4
+
+# erc20 token transfer
+xplad tx bank send <sender> <recipient> <amount>xerc20/<contract_address> --from <sender> --gas auto --gas-adjustment 1.4
+```
+
+Example:
+```bash
+xplad tx bank send sender1 xpla14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9s525s0h 1xerc20/B99a63f7e1BD195f65e2EBFcFC393897D73F24c9 --from sender1 --gas auto --gas-adjustment 1.4
+```
+
+### Advantages
+
+- **Unified Interface**: Use the same bank module commands for native XPLA tokens, cw20 tokens, and erc20 tokens
+- **No Additional Configuration**: Works out of the box without requiring special setup
+- **Standard Operations**: All standard bank module operations (balance, send, multi send, supply of) are supported
