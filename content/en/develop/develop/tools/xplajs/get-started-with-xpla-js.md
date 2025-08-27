@@ -114,12 +114,25 @@ XPLA Chain's RPC allows users to connect to the blockchain, make queries, create
    import { MsgExecuteContract } from "@xpla/xplajs/cosmwasm/wasm/v1/tx";
    import { Network } from "@xpla/xpla/defaults";
 
+   const queryClient = await createCosmosQueryClient("https://cube-rpc.xpla.io");
    const mnemonic = "-> Input your 24-word mnemonic key here <-";
-   const [auth] = EthSecp256k1Auth.fromMnemonic(mnemonic, [HDPath.eth().toString()]);
-   
-   const signer = new DirectSigner(auth, toEncoders(MsgExecuteContract), Network.Testnet.rpc);
-   
-   const address = await signer.getAddress();
+   const wallet = await EthSecp256k1HDWallet.fromMnemonic(mnemonic, {derivations: [{
+        prefix: "xpla",
+        hdPath: HDPath.eth().toString()
+    }]});
+
+    const baseSignConfig = {
+        queryClient: queryClient,
+        chainId: "cube_47-5",
+        addressPrefix: "xpla",
+    }
+    const signerConfig = {
+        ...DEFAULT_COSMOS_EVM_SIGNER_CONFIG,
+        ...baseSignConfig
+    }
+
+    const signer = new DirectSigner(wallet, signerConfig);
+    const signerAddress = (await signer.getAddresses())[0]
    ```
 
    This code creates a wallet instance using the new xplajs architecture. The `EthSecp256k1Auth` handles authentication using your mnemonic phrase, while `DirectSigner` provides the signing capabilities. 
@@ -219,17 +232,35 @@ Before you can perform a swap, you'll need a belief price. You can calculate the
 1. Add the following code to `index.ts` to create, sign, and broadcast the transaction:
 
    ```ts
-   import { StdFee } from "@xpla/xplajs/types";
+   import { TxBody as CosmosTxBody } from "@interchainjs/cosmos-types";
+   import { MessageComposer } from "@xpla/xplajs/cosmwasm/wasm/v1/tx.registry";
+   import { encodeCosmosEvmPublicKey } from "@xpla/xpla/signers/config";
 
-   const { executeContract } = MessageComposer.fromPartial;
+   const { executeContract } = MessageComposer.encoded;
    const msg = await executeContract(executeContractMsg);
    
-   const fee: StdFee = await signer.estimateFee({messages: [msg]});
-   
-   const tx = await signer.signAndBroadcast({messages: [msg], fee});
+   const txBody = CosmosTxBody.fromPartial({
+        messages: [msg],
+    })
+
+    const accounts = await signer.getAccounts()
+    const publicKey = accounts[0].getPublicKey()
+    const publicKeyBytes = encodeCosmosEvmPublicKey(publicKey.value.value)
+    const sequence = await signer.getSequence(signerAddress)
+
+    const simulateResult = await signer.simulateByTxBody(txBody, [SignerInfo.fromPartial({
+        publicKey: publicKeyBytes,
+        sequence,
+        modeInfo: ModeInfo.fromPartial({
+            single: ModeInfo_Single.fromPartial({
+                mode: SignMode.SIGN_MODE_DIRECT
+            })
+        })
+    })])
+    console.log(simulateResult)
    ```
 
-   This final step completes the transaction process. The `MessageComposer.fromPartial` creates the properly formatted message, `estimateFee` calculates the appropriate gas fees, and `signAndBroadcast` signs the transaction with your private key and submits it to the network. The transaction will be processed by the XPLA Chain validators and the swap will be executed if all conditions are met.
+   This final step completes the transaction process. The `MessageComposer.encoded.executeContract` creates the properly formatted message, `simulateByTxBody` simulates the transaction to estimate gas fees, and the transaction can then be signed and broadcast to the network. The transaction will be processed by the XPLA Chain validators and the swap will be executed if all conditions are met.
 
 2. Run the code in your terminal:
 

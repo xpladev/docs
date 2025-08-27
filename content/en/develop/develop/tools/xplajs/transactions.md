@@ -22,9 +22,26 @@ The messages included in a transaction contain the information that will be rout
 You will first want to create a signer which you can use to sign transactions.
 
 ```ts
+const queryClient = await createCosmosQueryClient("https://cube-rpc.xpla.io");
 const mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
-const [auth] = EthSecp256k1Auth.fromMnemonic(mnemonic, [HDPath.eth().toString()]);
-const signer = new DirectSigner(auth, toEncoders(MsgSend), Network.Testnet.rpc);
+const wallet = await EthSecp256k1HDWallet.fromMnemonic(mnemonic, {
+    derivations: [{
+        prefix: "xpla",
+        hdPath: HDPath.eth().toString()
+    }]
+})
+
+const baseSignConfig = {
+    queryClient: queryClient,
+    chainId: "cube_47-5",
+    addressPrefix: "xpla",
+}
+const signerConfig = {
+    ...DEFAULT_COSMOS_EVM_SIGNER_CONFIG,
+    ...baseSignConfig
+}
+
+const signer = new DirectSigner(wallet, signerConfig);
 ```
 
 ### Create Messages

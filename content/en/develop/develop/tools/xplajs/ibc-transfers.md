@@ -48,37 +48,58 @@ The following example demonstrates how to send 1 XPLA from XPLA Chain to the Axe
 
 ```JS
 
-import { EthSecp256k1Auth } from "@interchainjs/auth/ethSecp256k1"
+import { EthSecp256k1HDWallet } from "@xpla/xpla"
 import { HDPath } from "@interchainjs/types"
-import { DirectSigner } from "@xpla/xpla/signers/direct"
-import { toEncoders } from "@interchainjs/cosmos/utils"
-import { MsgTransfer } from "@xpla/xplajs/ibc/applications/transfer/v1/tx";
-import { Network } from "@xpla/xpla/defaults"
-import { Coin } from "@xpla/xplajs/cosmos/base/v1beta1/coin";
-import { MessageComposer } from "@xpla/xplajs/ibc/applications/transfer/v1/tx.registry";
-import { StdFee } from "@xpla/xplajs/types";
+import { DirectSigner } from "@interchainjs/cosmos"
+import { createCosmosQueryClient } from "@interchainjs/cosmos"
+import { DEFAULT_COSMOS_EVM_SIGNER_CONFIG, encodeCosmosEvmPublicKey } from "@xpla/xpla/signers/config";
+import { MsgTransfer } from "@xpla/xplajs";
 import { fromBech32, toBech32 } from "@interchainjs/encoding/bech32";
+import { transfer } from "@xpla/xplajs"
+
+const queryClient = await createCosmosQueryClient("https://cube-rpc.xpla.io");
 
 const mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
-const [auth] = EthSecp256k1Auth.fromMnemonic(mnemonic, [HDPath.eth().toString()]);
-const signer = new DirectSigner(auth, toEncoders(MsgTransfer), Network.Testnet.rpc);
+const wallet = await EthSecp256k1HDWallet.fromMnemonic(mnemonic, {derivations: [{
+    prefix: "xpla",
+    hdPath: HDPath.eth().toString()
+}]});
 
-const address = await signer.getAddress()
-const {prefix, data: hex} = fromBech32(address)
+const baseSignConfig = {
+    queryClient: queryClient,
+    chainId: "cube_47-5",
+    addressPrefix: "xpla",
+}
+const signerConfig = {
+    ...DEFAULT_COSMOS_EVM_SIGNER_CONFIG,
+    ...baseSignConfig
+}
+
+const signer = new DirectSigner(wallet, signerConfig);
+const signerAddress = (await signer.getAddresses())[0]
+
+const {prefix, data: hex} = fromBech32(signerAddress)
 const receiver = toBech32("axelar", hex)
 
+const tx = await transfer(
+    signer, 
+    signerAddress,
+    MsgTransfer.fromPartial({
+        sourcePort: "transfer", // IBC port
+        sourceChannel: "channel-0", // Outbound channel (Axelar)
+        token: {denom: "axpla", amount: "1000000000000000000"},
+        sender: signerAddress, // Source Address on XPLA Chain
+        receiver: receiver, // Destination address on Axelar network
+        memo: "",
+        timeoutTimestamp: BigInt(Date.now() + 60 * 60 * 10 ** 3) * (10n ** 6n) // Timeout timestamp (in nanoseconds) relative to the current block timestamp.
+    }),
+    {
+        amount: [{denom: "axpla", amount: "56000000000000000"}],
+        gas: "200000",
+    },
+    ""
+)
 
-const msgTransfer = MsgTransfer.fromPartial({
-    sourcePort: "transfer", // IBC port
-    sourceChannel: "channel-0", // Outbound channel (Axelar)
-    token: {denom: "axpla", amount: "1000000000000000000"},
-    sender: address, // Source Address on XPLA Chain
-    receiver: receiver, // Destination address on Axelar network
-    memo: "",
-    timeoutTimestamp: BigInt(Date.now() + 60 * 60 * 10 ** 3) * (10n ** 6n) // Timeout timestamp (in nanoseconds) relative to the current block timestamp.
-})
-
-const msg = MessageComposer.fromPartial.transfer(msgTransfer);
-const tx = await signer.signAndBroadcast({messages: [msg]})
-console.log(tx)
+const res = await tx.wait()
+console.log(res)
 ```

@@ -7,25 +7,31 @@ type: docs
 To perform actions using an account and private-public key pairs with xplajs, you need an implementation of the [ *Key* ](https://github.com/xpladev/xpla.js/blob/main/src/key/Key.ts) class, which provides an abstraction around the signing functions of an account.
 
 
-## EthSecp256k1Auth from Key
+## EthSecp256k1HDWallet from PrivateKey
 
-The most basic implementation of a `Key`, which is created using a plain private key. `Key`  wraps the 32 bytes of a private key and supplies a corresponding public key:
+The most basic implementation of a `PrivateKey`, which is created using a plain private key. `PrivateKey`  wraps the 32 bytes of a private key and supplies a corresponding public key:
 
 ```ts
+import { createCosmosEvmConfig, EthSecp256k1HDWallet } from "@xpla/xpla"
+import { HDPath } from "@interchainjs/types"
 import { Random } from "@interchainjs/crypto/random";
-import { Key } from "@interchainjs/utils";
-import { Secp256k1 } from "@interchainjs/crypto/secp256k1"
-import { EthAccount } from "@xpla/xpla/accounts/eth-account";
+import { PrivateKey } from "@interchainjs/auth";
+import { BaseCryptoBytes } from "@interchainjs/utils"
 
-const key = new Key(Random.getBytes(32))
-const keyPair = new EthSecp256k1Auth(key, HDPath.eth().toString())
-const publicKey = keyPair.getPublicKey()
-console.log(publicKey)  // Key { value: Uint8Array(33) [2, 249,  28,  32, 171, 207, 122, 153, 132, 198, 250, 177, 126, 136,  13,  66, 113, 170,  65,  10, 205,  50, 169, 229, 183,  11, 188, 210,  29, 210,  75, 252,  31]}
-const ethAccount = new EthAccount("xpla", keyPair)
-console.log(ethAccount.getAddressByPubKey())    // xpla1tw7n4xyl7myx7mzn5sdh5prz3wswk83qr9ejp7
+const cryptoBytes = BaseCryptoBytes.from(Random.getBytes(32))
+const key = PrivateKey.fromBytes(cryptoBytes, createCosmosEvmConfig().privateKeyConfig)
+const wallet = new EthSecp256k1HDWallet([key], {
+    derivations: [{
+        prefix: "xpla",
+        hdPath: HDPath.eth().toString()
+    }]
+})
+
+const account = (await wallet.getAccounts())[0]
+console.log(account.address)    // xpla1tw7n4xyl7myx7mzn5sdh5prz3wswk83qr9ejp7
 ```
 
-## EthSecp256k1Auth from Mnemonic
+## EthSecp256k1HDWallet from Mnemonic
 
 
 A `Mnemonic` derives itself from a 24-word  [ BIP-39 ](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) mnemonic as opposed to the bytes of a  private key.
@@ -35,17 +41,22 @@ A `MnemonicKey` has various levels of definition:
 - Supply a full HD path (using either a  random or particular mnenomic).
 
 ```ts
-import { Bip39, Random } from '@interchainjs/crypto';
-import { EthAccount } from "@xpla/xpla/accounts/eth-account";
-import { EthSecp256k1Auth } from "@interchainjs/auth/ethSecp256k1"
+import { EthSecp256k1HDWallet } from "@xpla/xpla"
+import { HDPath } from "@interchainjs/types"
+import { Bip39, Random } from "@interchainjs/crypto";
 
 const mnemonic = Bip39.encode(Random.getBytes(32)).toString();
 console.log(mnemonic) // grant hip garden wedding bicycle earth insect hobby assault mosquito cross make slam badge grace version cattle survey age mobile toe add reopen transfer
 
-const keyPair = EthSecp256k1Auth.fromMnemonic(mnemonic, [HDPath.eth().toString()]);
-console.log(keyPair[0].getPublicKey())  // Key { value: Uint8Array(33) [ 3, 212, 135,  21, 224,   2, 162,  63, 94,  74,  72, 144, 171, 122, 103,  21, 116,  14, 158, 227,  60, 128, 219,  40, 106, 233,  83,   6, 153,  36, 208, 241, 235 ] }
-const ethAccount = new EthAccount("xpla", keyPair[0])
-console.log(ethAccount.getAddressByPubKey()) // xpla1azetrlgvwhzdva9pax3jxw0dvfrqvyvjse3ry9
+const wallet = await EthSecp256k1HDWallet.fromMnemonic(mnemonic, {
+    derivations: [{
+        prefix: "xpla",
+        hdPath: HDPath.eth().toString()
+    }]
+})
+
+const account = (await wallet.getAccounts())[0]
+console.log(account.address) // xpla1azetrlgvwhzdva9pax3jxw0dvfrqvyvjse3ry9
 
 ```
 
@@ -65,9 +76,14 @@ Cosmos blockchains support hierarchical deterministic key generation (HD keys) f
 For example, to recover a mnemonic with the old XPLA Vault HD path using coin type for ATOM (118):
 
 ```ts
-const mne_key = EthSecp256k1Auth.fromMnemonic(
+const mne_key = EthSecp256k1HDWallet.fromMnemonic(
     mnemonic, 
-    [HDPath.cosmos().toString()]    // Cosmos(118)' coin type ( XPLA Chain had inherited initially )
+    {
+        derivations: [{
+            prefix: "cosmos",
+            hdPath: HDPath.cosmos().toString()
+        }]    // Cosmos(118)' coin type ( XPLA Chain had inherited initially )
+    }
 )
 ```
 

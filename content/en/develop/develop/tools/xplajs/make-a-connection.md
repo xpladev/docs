@@ -28,14 +28,30 @@ To broadcast transactions to the blockchain, you need to create a signer that ca
 The `DirectSigner` uses the newer Protobuf-based signing method, which is more efficient and is the recommended approach for most applications:
 
 ```ts
-import { DirectSigner } from "@xpla/xpla/signers/direct"
-import { MsgSend } from "@xpla/xplajs/cosmos/bank/v1beta1/tx"
-import { EthSecp256k1Auth } from "@interchainjs/auth/ethSecp256k1"
-import { HDPath } from "@interchainjs/types";
-import { Network } from "@xpla/xpla/defaults"
+import { EthSecp256k1HDWallet } from "@xpla/xpla"
+import { HDPath } from "@interchainjs/types"
+import { DirectSigner } from "@interchainjs/cosmos"
+import { createCosmosQueryClient } from "@interchainjs/cosmos"
+import { DEFAULT_COSMOS_EVM_SIGNER_CONFIG } from "@xpla/xpla/signers/config";
 
-const [auth] = EthSecp256k1Auth.fromMnemonic("<MNEMONIC>", [HDPath.eth().toString()])
-const signer = new DirectSigner(auth, toEncoders(MsgSend), Network.Testnet.rpc)
+const queryClient = await createCosmosQueryClient("https://cube-rpc.xpla.io");
+const mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
+const wallet = await EthSecp256k1HDWallet.fromMnemonic(mnemonic, {derivations: [{
+    prefix: "xpla",
+    hdPath: HDPath.eth().toString()
+}]});
+
+const baseSignConfig = {
+    queryClient: queryClient,
+    chainId: "cube_47-5",
+    addressPrefix: "xpla",
+}
+const signerConfig = {
+    ...DEFAULT_COSMOS_EVM_SIGNER_CONFIG,
+    ...baseSignConfig
+}
+
+const signer = new DirectSigner(wallet, signerConfig);
 
 ```
 
@@ -44,12 +60,28 @@ const signer = new DirectSigner(auth, toEncoders(MsgSend), Network.Testnet.rpc)
 The `AminoSigner` uses the legacy Amino-based signing method, which is maintained for compatibility with older wallets and applications:
 
 ```ts
-import { AminoSigner } from "@xpla/xpla/signers/amino"
-import { MsgSend } from "@xpla/xplajs/cosmos/bank/v1beta1/tx"
-import { EthSecp256k1Auth } from "@interchainjs/auth/ethSecp256k1"
-import { HDPath } from "@interchainjs/types";
-import { Network } from "@xpla/xpla/defaults"
+import { EthSecp256k1HDWallet } from "@xpla/xpla"
+import { HDPath } from "@interchainjs/types"
+import { AminoSigner } from "@interchainjs/cosmos"
+import { createCosmosQueryClient } from "@interchainjs/cosmos"
+import { DEFAULT_COSMOS_EVM_SIGNER_CONFIG } from "@xpla/xpla/signers/config";
 
-const [auth] = EthSecp256k1Auth.fromMnemonic("<MNEMONIC>", [HDPath.eth().toString()])
-const signer = new AminoSigner(auth, toEncoders(MsgSend), toConverters(MsgSend), Network.Testnet.rpc)
+const queryClient = await createCosmosQueryClient("https://cube-rpc.xpla.io");
+const mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
+const wallet = await EthSecp256k1HDWallet.fromMnemonic(mnemonic, {derivations: [{
+    prefix: "xpla",
+    hdPath: HDPath.eth().toString()
+}]});
+
+const baseSignConfig = {
+    queryClient: queryClient,
+    chainId: "cube_47-5",
+    addressPrefix: "xpla",
+}
+const signerConfig = {
+    ...DEFAULT_COSMOS_EVM_SIGNER_CONFIG,
+    ...baseSignConfig
+}
+
+const signer = new AminoSigner(wallet, signerConfig);
 ```

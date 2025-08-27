@@ -7,23 +7,15 @@ type: docs
 This example demonstrates how to use message authorization in xplajs, allowing one account (grantee) to execute transactions on behalf of another account (granter) within specified limits.
 
 ```ts
-import { EthSecp256k1Auth } from "@interchainjs/auth/ethSecp256k1"
+import { EthSecp256k1HDWallet } from "@xpla/xpla"
 import { HDPath } from "@interchainjs/types"
-import { DirectSigner } from "@xpla/xpla/signers/direct"
-import { toEncoders } from "@interchainjs/cosmos/utils"
-import { Network } from "@xpla/xpla/defaults"
-import { Coin } from "@xpla/xplajs/cosmos/base/v1beta1/coin"
-import { MsgSend } from "@xpla/xplajs/cosmos/bank/v1beta1/tx"
-import { MsgGrant } from "@xpla/xplajs/cosmos/authz/v1beta1/tx"
-import { MsgExec } from "@xpla/xplajs/cosmos/authz/v1beta1/tx"
-import { SendAuthorization } from "@xpla/xplajs/cosmos/bank/v1beta1/authz"
-import { MessageComposer } from "@xpla/xplajs/cosmos/bank/v1beta1/tx.registry"
-import { MessageComposer as AuthzMessageComposer } from "@xpla/xplajs/cosmos/authz/v1beta1/tx.registry"
-import { StdFee } from "@xpla/xplajs/types"
-import { Duration } from "@xpla/xplajs/google/protobuf/duration"
-import { Grant, GenericAuthorization } from "@xpla/xplajs/cosmos/authz/v1beta1/authz"
-import { Any } from "@xpla/xplajs/google/protobuf/any"
-import { createRPCQueryClient } from "@xpla/xplajs/xpla/rpc.query"
+import { DirectSigner } from "@interchainjs/cosmos"
+import { createCosmosQueryClient } from "@interchainjs/cosmos"
+import { DEFAULT_COSMOS_EVM_SIGNER_CONFIG } from "@xpla/xpla/signers/config";
+import { Any, Coin } from "@xpla/xplajs";
+import { grant, Grant, SendAuthorization, exec, MsgSend } from "@xpla/xplajs";
+import { MessageComposer } from "@xpla/xplajs/cosmos/bank/v1beta1/tx.registry";
+
 
 // Granter mnemonic
 const granterMnemonic = "notice oak worry limit wrap speak medal online prefer cluster roof addict wrist behave treat actual wasp year salad speed social layer crew genius"
@@ -37,6 +29,7 @@ async function grantAuthorization(
   spendLimit: Coin,
   duration: Date
 ) {
+const granterAddress = (await granterSigner.getAddresses())[0]
   const sendAuth = SendAuthorization.fromPartial({
     spendLimit: [spendLimit]
   })
@@ -46,20 +39,25 @@ async function grantAuthorization(
     value: SendAuthorization.encode(sendAuth).finish()
   })
 
-  const grant = Grant.fromPartial({
-    authorization: authAny,
-    expiration: duration
-  })
-
-  const msgGrant = MsgGrant.fromPartial({
-    granter: await granterSigner.getAddress(),
-    grantee: granteeAddress,
-    grant,
-  })
-
-  const msg = AuthzMessageComposer.fromPartial.grant(msgGrant)
+const tx = await grant(
+    granterSigner,
+    granterAddress,
+    {
+        granter: granterAddress,
+        grantee: granteeAddress,
+        grant: Grant.fromPartial({
+            authorization: authAny,
+            expiration: duration
+            }),
+        },
+        {
+        amount: [{denom: "axpla", amount: "56000000000000000"}],
+        gas: "200000",
+        },
+        ""
+)
   
-  return await granterSigner.signAndBroadcast({messages: [msg]})
+  return tx
 }
 
 async function sendAuthorized(
@@ -68,37 +66,67 @@ async function sendAuthorized(
   toAddress: string,
   amount: Coin
 ) {
+    const granteeAddress = (await granteeSigner.getAddresses())[0]
   const msgSend = MsgSend.fromPartial({
     fromAddress: granterAddress,
     toAddress: toAddress,
     amount: [amount]
   })
 
-  const sendMsg = MessageComposer.fromPartial.send(msgSend)
-
   const sendMsgAny = Any.fromPartial({
     typeUrl: "/cosmos.bank.v1beta1.MsgSend",
     value: MsgSend.encode(msgSend).finish()
   })
 
-  const msgExec = MsgExec.fromPartial({
-    grantee: await granteeSigner.getAddress(),
-    msgs: [sendMsgAny]
-  })
+  const tx = await exec(
+    granteeSigner,
+    granteeAddress,
+    {
+        grantee: granteeAddress,
+        msgs: [sendMsgAny]
+      },
+      {
+        amount: [{denom: "axpla", amount: "56000000000000000"}],
+        gas: "200000",
+      },
+      ""
+  )
 
-  const msg = AuthzMessageComposer.fromPartial.exec(msgExec)
-  
-  return await granteeSigner.signAndBroadcast({messages: [msg]})
+  return tx
 }
 
 async function main() {
+    const prefix = "xpla"
+    const queryClient = await createCosmosQueryClient("https://cube-rpc.xpla.io");
+    const baseSignConfig = {
+        queryClient: queryClient,
+        chainId: "cube_47-5",
+        addressPrefix: prefix,
+    }
+    const signerConfig = {
+        ...DEFAULT_COSMOS_EVM_SIGNER_CONFIG,
+        ...baseSignConfig
+    }
+
   // Create granter signer (xpla16wx7ye3ce060tjvmmpu8lm0ak5xr7gm2dp0kpt)
-  const [granterAuth] = EthSecp256k1Auth.fromMnemonic(granterMnemonic, [HDPath.eth().toString()])
-  const granterSigner = new DirectSigner(granterAuth, toEncoders(MsgGrant, Any), Network.Testnet.rpc)
+  const granterWallet = await EthSecp256k1HDWallet.fromMnemonic(granterMnemonic, {
+    derivations: [{
+      prefix,
+      hdPath: HDPath.eth().toString()
+    }]
+  })
+  const granterSigner = new DirectSigner(granterWallet, signerConfig)
+  const granterAddress = (await granterSigner.getAddresses())[0]
 
   // Create grantee signer (xpla1pe9mc2q72u94sn2gg52ramrt26x5efw6hr5gt4)
-  const [granteeAuth] = EthSecp256k1Auth.fromMnemonic(granteeMnemonic, [HDPath.eth().toString()])
-  const granteeSigner = new DirectSigner(granteeAuth, toEncoders(MsgExec, Any), Network.Testnet.rpc)
+  const granteeWallet = await EthSecp256k1HDWallet.fromMnemonic(granteeMnemonic, {
+    derivations: [{
+      prefix,
+      hdPath: HDPath.eth().toString()
+    }]
+  })
+  const granteeSigner = new DirectSigner(granteeWallet, signerConfig)
+  const granteeAddress = (await granteeSigner.getAddresses())[0]
 
   try {
     // Grant authorization

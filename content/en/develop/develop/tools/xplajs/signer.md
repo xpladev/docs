@@ -6,27 +6,39 @@ type: docs
 
 ## Create a Singer
 
-Use `EthSecp256k1Auth` to create a `signer` from a `Key`.
+Use `EthSecp256k1HDWallet` to create a `signer` from a `PrivateKey`.
 
 ```ts
+import { createCosmosEvmConfig, EthSecp256k1HDWallet } from "@xpla/xpla"
+import { HDPath } from "@interchainjs/types"
 import { Random } from "@interchainjs/crypto/random";
-import { Key } from "@interchainjs/utils";
-import { Secp256k1 } from "@interchainjs/crypto/secp256k1"
-import { EthAccount } from "@xpla/xpla/accounts/eth-account";
+import { PrivateKey } from "@interchainjs/auth";
+import { BaseCryptoBytes } from "@interchainjs/utils"
 
-const key = new Key(Random.getBytes(32))
-const signer = new EthSecp256k1Auth(key, HDPath.eth().toString())
+const cryptoBytes = BaseCryptoBytes.from(Random.getBytes(32))
+const key = PrivateKey.fromBytes(cryptoBytes, createCosmosEvmConfig().privateKeyConfig)
+const wallet = new EthSecp256k1HDWallet([key], {
+    derivations: [{
+        prefix: "xpla",
+        hdPath: HDPath.eth().toString()
+    }]
+})
 ```
 
-Use `EthSecp256k1Auth` to create a `signer` from a `Mnemonic`.
+Use `EthSecp256k1HDWallet` to create a `signer` from a `Mnemonic`.
 
 ```ts
-import { Bip39, Random } from '@interchainjs/crypto';
-import { EthAccount } from "@xpla/xpla/accounts/eth-account";
-import { EthSecp256k1Auth } from "@interchainjs/auth/ethSecp256k1"
+import { EthSecp256k1HDWallet } from "@xpla/xpla"
+import { HDPath } from "@interchainjs/types"
+import { Bip39, Random } from "@interchainjs/crypto";
 
 const mnemonic = Bip39.encode(Random.getBytes(32)).toString();
-const signer = EthSecp256k1Auth.fromMnemonic(mnemonic, [HDPath.eth().toString()]);
+const signer = await EthSecp256k1HDWallet.fromMnemonic(mnemonic, {
+    derivations: [{
+        prefix: "xpla",
+        hdPath: HDPath.eth().toString()
+    }]
+})
 ```
 
 ## Usage
@@ -36,9 +48,20 @@ const signer = EthSecp256k1Auth.fromMnemonic(mnemonic, [HDPath.eth().toString()]
 A wallet is connected to the XPLA Chain and can poll the values of an account's account number and sequence directly:
 
 ```ts
-const address = await signer.getAddress()
-const accountNumber = await signer.queryClient.getAccountNumber(address)
-const accountSequence = await signer.queryClient.getSequence(address)
+const baseSignConfig = {
+    queryClient: queryClient,
+    chainId: "cube_47-5",
+    addressPrefix: "xpla",
+}
+const signerConfig = {
+    ...DEFAULT_COSMOS_EVM_SIGNER_CONFIG,
+    ...baseSignConfig
+}
+
+const signer = new DirectSigner(wallet, signerConfig);
+const address = (await signer.getAddresses())[0]
+const accountNumber = await signer.getAccountNumber(address)
+const sequence = await signer.getSequence(address)
 ```
 
 ### Creating Transactions

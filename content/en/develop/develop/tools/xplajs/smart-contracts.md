@@ -15,35 +15,56 @@ The process involves creating a DirectSigner, reading the compiled WASM binary f
 **Note**: The `counter.wasm` file in this example is compiled from the [CosmWasm cw-template](https://github.com/CosmWasm/cw-template), which provides a quickstart template for building smart contracts in Rust.
 
 ```ts
-import { createRPCQueryClient } from "@xpla/xplajs/xpla/rpc.query";
-import { EthSecp256k1Auth } from "@interchainjs/auth/ethSecp256k1"
+import { DEFAULT_COSMOS_EVM_SIGNER_CONFIG, EthSecp256k1HDWallet } from "@xpla/xpla"
 import { HDPath } from "@interchainjs/types"
-import { DirectSigner } from "@xpla/xpla/signers/direct"
-import { Network } from "@xpla/xpla/defaults"
-import { MsgStoreCode, MsgInstantiateContract, MsgExecuteContract } from "@xpla/xplajs/cosmwasm/wasm/v1/tx";
-import { MessageComposer } from "@xpla/xplajs/cosmwasm/wasm/v1/tx.registry";
-import { toEncoders } from "@interchainjs/cosmos/utils"
+import { createCosmosQueryClient, DirectSigner } from "@interchainjs/cosmos";
 import fs from "fs"
+import { storeCode } from "@xpla/xplajs";
+import { createRPCQueryClient } from "@xpla/xplajs/xpla/rpc.query";
 
-const mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
-const [auth] = EthSecp256k1Auth.fromMnemonic(mnemonic, [HDPath.eth().toString()]);
-const signer = new DirectSigner(auth, toEncoders(MsgStoreCode, MsgInstantiateContract, MsgExecuteContract), Network.Testnet.rpc);
+const queryClient = await createCosmosQueryClient("https://cube-rpc.xpla.io");
+    const mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
+    const wallet = await EthSecp256k1HDWallet.fromMnemonic(mnemonic, {
+        derivations: [{
+            prefix: "xpla",
+            hdPath: HDPath.eth().toString()
+        }]
+    })
 
-const msgStoreCode = MsgStoreCode.fromPartial({
-    sender: await signer.getAddress(),
-    wasmByteCode: Buffer.from(fs.readFileSync("./counter.wasm"))
-})
-const { storeCode } = await MessageComposer.fromPartial
-const msg = await storeCode(msgStoreCode)
-const txResponse = await signer.signAndBroadcast({messages: [msg]})
+    const baseSignConfig = {
+        queryClient: queryClient,
+        chainId: "cube_47-5",
+        addressPrefix: "xpla",
+    }
+    const signerConfig = {
+        ...DEFAULT_COSMOS_EVM_SIGNER_CONFIG,
+        ...baseSignConfig
+    }
+    
+    const signer = new DirectSigner(wallet, signerConfig);
+    const address = (await signer.getAddresses())[0]
+    
+    const tx = await storeCode(
+        signer,
+        address, 
+        {
+            sender: address,
+            wasmByteCode: Buffer.from(fs.readFileSync("./counter.wasm"))
+        },
+        {
+            gas: "2000000",
+            amount: [{denom: "axpla", amount: "560000000000000000"}],
+        },
+        ""
+    )
+    
+    console.log("Waiting for transaction to be included in block...")
+    await tx.wait()
 
-console.log("Waiting for transaction to be included in block...")
-await new Promise(resolve => setTimeout(resolve, 10000))
-
-const client = await createRPCQueryClient({rpcEndpoint: Network.Testnet.rpc})
-const res = await client.cosmos.tx.v1beta1.getTx({hash: txResponse.hash || ""})
-const codeId = res.txResponse?.events.find(e => e.type === "store_code")?.attributes.find(a => a.key === "code_id")?.value
-console.log(codeId)
+    const client = await createRPCQueryClient({rpcEndpoint: "https://cube-rpc.xpla.io"})
+    const res = await client.cosmos.tx.v1beta1.getTx({hash: tx.transactionHash || ""})
+    const codeId = res.txResponse?.events.find(e => e.type === "store_code")?.attributes.find(a => a.key === "code_id")?.value
+    console.log(codeId)
 ```
 
 ## Create a Contract
@@ -54,23 +75,29 @@ To create or instantiate a smart contract, you must first know the code ID of an
 
 ```ts
 const codeId = 1761n
-const sender = await signer.getAddress()
-const msgInstantiateContract = MsgInstantiateContract.fromPartial({
-    sender,
-    codeId,
-    label: "counter",
-    msg: new Uint8Array(Buffer.from(`{"count": 0}`)),
-    admin: sender 
-})
-const { instantiateContract } = await MessageComposer.fromPartial
-const msg = await instantiateContract(msgInstantiateContract)
-const txResponse = await signer.signAndBroadcast({messages: [msg]})
+const tx = await instantiateContract(
+    signer,
+    address, 
+    {
+        sender: address,
+        codeId,
+        label: "counter",
+        msg: new Uint8Array(Buffer.from(`{"count": 0}`)),
+        admin: address,
+        funds: [],
+    },
+    {
+        gas: "2000000",
+        amount: [{denom: "axpla", amount: "560000000000000000"}],
+    },
+    ""
+)
 
 console.log("Waiting for transaction to be included in block...")
-await new Promise(resolve => setTimeout(resolve, 10000))
+await tx.wait()
 
-const client = await createRPCQueryClient({rpcEndpoint: Network.Testnet.rpc})
-const res = await client.cosmos.tx.v1beta1.getTx({hash: txResponse.hash || ""})
+const client = await createRPCQueryClient({rpcEndpoint: "https://cube-rpc.xpla.io"})
+const res = await client.cosmos.tx.v1beta1.getTx({hash: tx.transactionHash || ""})
 const contractAddress = res.txResponse?.events.find(e => e.type === "instantiate")?.attributes.find(a => a.key === "_contract_address")?.value
 console.log(contractAddress)
 ```
@@ -81,16 +108,25 @@ Smart contracts respond to JSON messages called **HandleMsg** which can exist as
 
 ```ts
 const contractAddress = "xpla1cspdyqa2722k5e5wfhhuf9tehy4yh5ngy83yd0gg48x7emjvjjasmg76fz"
-const sender = await signer.getAddress()
-const msgExecuteContract = MsgExecuteContract.fromPartial({
-    sender,
-    contract: contractAddress,
-    msg: new Uint8Array(Buffer.from(`{"increment": {}}`))
-})
-const { executeContract } = await MessageComposer.fromPartial
-const msg = await executeContract(msgExecuteContract)
-const txResponse = await signer.signAndBroadcast({messages: [msg]})
-console.log(txResponse)
+const tx = await executeContract(
+    signer,
+    address, 
+    {
+        sender: address,
+        contract: contractAddress,
+        msg: new Uint8Array(Buffer.from(`{"increment": {}}`)),
+        funds: [],
+    },
+    {
+        gas: "2000000",
+        amount: [{denom: "axpla", amount: "560000000000000000"}],
+    },
+    ""
+)
+
+console.log("Waiting for transaction to be included in block...")
+await tx.wait()
+console.log(tx)
 ```
 
 ## Query Data from a Contract

@@ -14,6 +14,16 @@ If you are new to XPLA Chain and don't know where to start, visit the [getting s
 
 ## Configuring LCDClient
 
+The following code example shows how to initialize the LCDClient. The rest of the examples assume you initialized it by using this example or similar code.
+
+```ts
+import { createLCDClient } from "@xpla/xplajs/xpla/lcd";
+
+const lcd = await createLCDClient({restEndpoint: "https://cube-lcd.xpla.io"})
+```
+
+## Configuring RPCClient
+
 The following code example shows how to initialize the RPCClient. The rest of the examples assume you initialized it by using this example or similar code.
 
 ```ts
@@ -144,27 +154,54 @@ https://explorer.xpla.io/testnet/address/xpla1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 The following code example shows how to send native tokens:
 
 ```ts
-import { EthSecp256k1Auth } from "@interchainjs/auth/ethSecp256k1"
+import { EthSecp256k1HDWallet } from "@xpla/xpla"
 import { HDPath } from "@interchainjs/types"
-import { DirectSigner } from "@xpla/xpla/signers/direct"
-import { toEncoders } from "@interchainjs/cosmos/utils"
-import { MsgSend } from "@xpla/xplajs/cosmos/bank/v1beta1/tx";
-import { Network } from "@xpla/xpla/defaults"
-import { Coin, DecCoin } from "@xpla/xplajs/cosmos/base/v1beta1/coin";
-import { MessageComposer } from "@xpla/xplajs/cosmos/bank/v1beta1/tx.registry";
+import { DirectSigner } from "@interchainjs/cosmos"
+import { createCosmosQueryClient } from "@interchainjs/cosmos"
+import { DEFAULT_COSMOS_EVM_SIGNER_CONFIG } from "@xpla/xpla/signers/config";
+import { send } from "@xpla/xplajs";
 
+const queryClient = await createCosmosQueryClient("https://cube-rpc.xpla.io");
 const mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
-const [auth] = EthSecp256k1Auth.fromMnemonic(mnemonic, [HDPath.eth().toString()]);
-const signer = new DirectSigner(auth, toEncoders(MsgSend), Network.Testnet.rpc);
-const msgSend = MsgSend.fromPartial({
-    fromAddress: await signer.getAddress(),
-    toAddress: "xpla1888g76xr3phk7qkfknnn8hvxyzfj0e2vuh4jmw",
-    amount: [Coin.fromPartial({denom: "axpla", amount: "1000000000000000000"})]
-})
+const wallet = await EthSecp256k1HDWallet.fromMnemonic(mnemonic, {derivations: [{
+    prefix: "xpla",
+    hdPath: HDPath.eth().toString()
+}]});
 
-const { send } = MessageComposer.fromPartial;
-const msg = await send(msgSend);
-const tx = await signer.signAndBroadcast({messages: [msg]})
+const baseSignConfig = {
+    queryClient: queryClient,
+    chainId: "cube_47-5",
+    addressPrefix: "xpla",
+}
+const signerConfig = {
+    ...DEFAULT_COSMOS_EVM_SIGNER_CONFIG,
+    ...baseSignConfig
+}
+
+const signer = new DirectSigner(wallet, signerConfig);
+const signerAddress = (await signer.getAddresses())[0]
+
+const tx = await send(
+    signer,
+    signerAddress,
+    {
+        fromAddress: signerAddress,
+        toAddress: "xpla1888g76xr3phk7qkfknnn8hvxyzfj0e2vuh4jmw",
+        amount: [{denom: "axpla", amount: "1000000000000000000"}]
+    },
+    {
+        amount: [{denom: "axpla", amount: "56000000000000000"}],
+        gas: "200000"
+    },
+    ""
+
+)
+
+try {
+    await tx.wait()
+} catch (error) {
+    console.log(error)
+}
 console.log(tx)
 ```
 
@@ -173,29 +210,56 @@ console.log(tx)
 The following code example shows how to send CW20 tokens:
 
 ```ts
-import { EthSecp256k1Auth } from "@interchainjs/auth/ethSecp256k1"
+import { EthSecp256k1HDWallet } from "@xpla/xpla"
 import { HDPath } from "@interchainjs/types"
-import { DirectSigner } from "@xpla/xpla/signers/direct"
-import { toEncoders } from "@interchainjs/cosmos/utils"
-import { MsgExecuteContract } from "@xpla/xplajs/cosmwasm/wasm/v1/tx";
-import { Network } from "@xpla/xpla/defaults"
-import { MessageComposer } from "@xpla/xplajs/cosmwasm/wasm/v1/tx.registry";
+import { DirectSigner } from "@interchainjs/cosmos"
+import { createCosmosQueryClient } from "@interchainjs/cosmos"
+import { DEFAULT_COSMOS_EVM_SIGNER_CONFIG } from "@xpla/xpla/signers/config";
+import { executeContract } from "@xpla/xplajs";
 
-const rpcClient = await createRPCQueryClient({ rpcEndpoint: "https://cube-rpc.xpla.io" });
-
+const queryClient = await createCosmosQueryClient("https://cube-rpc.xpla.io");
 const mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
-const [auth] = EthSecp256k1Auth.fromMnemonic(mnemonic, [HDPath.eth().toString()]);
-const signer = new DirectSigner(auth, toEncoders(MsgExecuteContract), Network.Testnet.rpc);
-const tokenAddress = "xpla19w8vmg7tmh07ztr3v7lq8sdny6jjkj6pk03a7fk52gpgepfxnlgq8g7r50";
-const msgExecuteContract = MsgExecuteContract.fromPartial({
-    sender: await signer.getAddress(),
-    contract: tokenAddress,
-    msg: new Uint8Array(Buffer.from(`{"transfer": {"recipient": "xpla1888g76xr3phk7qkfknnn8hvxyzfj0e2vuh4jmw", "amount": "1"}}`))
-})
+const wallet = await EthSecp256k1HDWallet.fromMnemonic(mnemonic, {derivations: [{
+    prefix: "xpla",
+    hdPath: HDPath.eth().toString()
+}]});
 
-const { executeContract } = MessageComposer.fromPartial;
-const msg = await executeContract(msgExecuteContract);
-const tx = await signer.signAndBroadcast({messages: [msg]})
+const baseSignConfig = {
+    queryClient: queryClient,
+    chainId: "cube_47-5",
+    addressPrefix: "xpla",
+}
+const signerConfig = {
+    ...DEFAULT_COSMOS_EVM_SIGNER_CONFIG,
+    ...baseSignConfig
+}
+
+const signer = new DirectSigner(wallet, signerConfig);
+const signerAddress = (await signer.getAddresses())[0]
+
+const tokenAddress = "xpla19w8vmg7tmh07ztr3v7lq8sdny6jjkj6pk03a7fk52gpgepfxnlgq8g7r50";
+
+const tx = await executeContract(
+    signer,
+    signerAddress,
+    {
+        sender: signerAddress,
+        contract: tokenAddress,
+        msg: new Uint8Array(Buffer.from(`{"transfer": {"recipient": "xpla1888g76xr3phk7qkfknnn8hvxyzfj0e2vuh4jmw", "amount": "1"}}`)),
+        funds: []
+    },
+    {
+        amount: [{denom: "axpla", amount: "56000000000000000"}],
+        gas: "200000"
+    },
+    ""
+)
+
+try {
+    await tx.wait()
+} catch (error) {
+    console.log(error)
+}
 console.log(tx)
 ```
 
@@ -207,25 +271,41 @@ Run this example on testnet.
 
 ```ts
 import { createRPCQueryClient } from "@xpla/xplajs/xpla/rpc.query";
-import { EthSecp256k1Auth } from "@interchainjs/auth/ethSecp256k1"
+import { EthSecp256k1HDWallet } from "@xpla/xpla"
 import { HDPath } from "@interchainjs/types"
-import { DirectSigner } from "@xpla/xpla/signers/direct"
-import { toEncoders } from "@interchainjs/cosmos/utils"
-import { MsgExecuteContract } from "@xpla/xplajs/cosmwasm/wasm/v1/tx";
-import { Network } from "@xpla/xpla/defaults"
-import { MessageComposer } from "@xpla/xplajs/cosmwasm/wasm/v1/tx.registry";
+import { DirectSigner } from "@interchainjs/cosmos"
+import { createCosmosQueryClient } from "@interchainjs/cosmos"
 import { Decimal } from 'decimal.js'
 import { Coin } from "@xpla/xplajs/cosmos/base/v1beta1/coin";
+import { DEFAULT_COSMOS_EVM_SIGNER_CONFIG } from "@xpla/xpla/signers/config";
+import { executeContract } from "@xpla/xplajs";
 
-const rpcClient = await createRPCQueryClient({ rpcEndpoint: "https://cube-rpc.xpla.io" });
+const queryClient = await createCosmosQueryClient("https://cube-rpc.xpla.io");
 
 const mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
-const [auth] = EthSecp256k1Auth.fromMnemonic(mnemonic, [HDPath.eth().toString()]);
-const signer = new DirectSigner(auth, toEncoders(MsgExecuteContract), Network.Testnet.rpc);
+const wallet = await EthSecp256k1HDWallet.fromMnemonic(mnemonic, {derivations: [{
+    prefix: "xpla",
+    hdPath: HDPath.eth().toString()
+}]});
+
+const baseSignConfig = {
+    queryClient: queryClient,
+    chainId: "cube_47-5",
+    addressPrefix: "xpla",
+}
+const signerConfig = {
+    ...DEFAULT_COSMOS_EVM_SIGNER_CONFIG,
+    ...baseSignConfig
+}
+
+const signer = new DirectSigner(wallet, signerConfig);
+const signerAddress = (await signer.getAddresses())[0]
 
 // XPLA <> CTXT
 const pool = "xpla1vgay526xzh725vpur7drsyxhlvg4fxfvu5dczcctz35ct23q4vpqxqdemw";
 const xplaAmount = 1000000000000000000
+
+const rpcClient = await createRPCQueryClient({rpcEndpoint: "https://cube-rpc.xpla.io"})
 
 // Fetch the decimal of each asset in the pool and simulation result with `xplaAmount`.
 const res = await rpcClient.cosmwasm.wasm.v1.smartContractState({
@@ -271,16 +351,28 @@ const swapMsg = {
     }
 };
 
-const msgExecuteContract = MsgExecuteContract.fromPartial({
-    sender: await signer.getAddress(),
-    contract: pool,
-    msg: new Uint8Array(Buffer.from(JSON.stringify(swapMsg))),
-    funds: [Coin.fromPartial({denom: "axpla", amount: xplaAmount.toString()})]
-})
+const tx = await executeContract(
+    signer,
+    signerAddress,
+    {
+        sender: signerAddress,
+        contract: pool,
+        msg: new Uint8Array(Buffer.from(JSON.stringify(swapMsg))),
+        funds: [Coin.fromPartial({denom: "axpla", amount: xplaAmount.toString()})]
+    },
+    {
+        amount: [{denom: "axpla", amount: "112000000000000000"}],
+        gas: "400000"
+    },
+    ""
 
-const { executeContract } = MessageComposer.fromPartial;
-const msg = await executeContract(msgExecuteContract);
-const tx = await signer.signAndBroadcast({messages: [msg]})
+)
+
+try {
+    await tx.wait()
+} catch (error) {
+    console.log(error)
+}
 console.log(tx)
 ```
 
@@ -309,7 +401,7 @@ function isValid(address) {
   }
 }
 
-console.log(isValid("xpla1dcegyrekltswvyy0xy69ydgxn9x8x32zdtapd8")); // true
+console.log(isValid("xpla1dcegyrekltswvyy0xy69ydgxn9x8x32z4glay5")); // true
 console.log(isValid("xpla1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")); // false
 console.log(isValid("cosmos1zz22dfpvw3zqpeyhvhmx944a588fgcalw744ts")); // false
 console.log(isValid("random string")); // false
