@@ -82,7 +82,7 @@ const tx = await instantiateContract(
         sender: address,
         codeId,
         label: "counter",
-        msg: new Uint8Array(Buffer.from(`{"count": 0}`)),
+        msg: new TextEncoder().encode(`{"count": 0}`),
         admin: address,
         funds: [],
     },
@@ -114,7 +114,7 @@ const tx = await executeContract(
     {
         sender: address,
         contract: contractAddress,
-        msg: new Uint8Array(Buffer.from(`{"increment": {}}`)),
+        msg: new TextEncoder().encode(`{"increment": {}}`),
         funds: [],
     },
     {
@@ -137,7 +137,7 @@ A contract can define a query handler, which understands requests for data speci
 const contractAddress = "xpla1cspdyqa2722k5e5wfhhuf9tehy4yh5ngy83yd0gg48x7emjvjjasmg76fz"
 const res = await client.cosmwasm.wasm.v1.smartContractState({
     address: contractAddress, 
-    queryData: new Uint8Array(Buffer.from(`{"get_count": {}}`))
+    queryData: new TextEncoder().encode(`{"get_count": {}}`)
 })
 
 const { count } = JSON.parse(new TextDecoder().decode(res.data));

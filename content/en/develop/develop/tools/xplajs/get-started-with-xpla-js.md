@@ -168,13 +168,13 @@ Before you can perform a swap, you'll need a belief price. You can calculate the
    // 5.1 simulate the tx
    const pairResponse = await rpc.cosmwasm.wasm.v1.smartContractState({
      address: contract,
-     queryData: new Uint8Array(Buffer.from(`{"pair": {}}`))
+     queryData: new TextEncoder().encode(`{"pair": {}}`)
    });
    const { asset_decimals: assetDecimals } = JSON.parse(new TextDecoder().decode(pairResponse.data));
    
    const res = await rpc.cosmwasm.wasm.v1.smartContractState({
      address: contract,
-     queryData: new Uint8Array(Buffer.from(`{
+     queryData: new TextEncoder().encode(`{
        "simulation": {
          "offer_asset": {
            "info" : {
@@ -185,7 +185,7 @@ Before you can perform a swap, you'll need a belief price. You can calculate the
            "amount": "${offerAmount}"
          }
        }
-     }`))
+     }`)
    });
    const { return_amount: returnAmount } = JSON.parse(new TextDecoder().decode(res.data));
 
@@ -204,7 +204,7 @@ Before you can perform a swap, you'll need a belief price. You can calculate the
    const executeContractMsg = await MsgExecuteContract.fromPartial({
      sender: await signer.getAddress(),
      contract: contract,
-     msg: new Uint8Array(Buffer.from(`{
+     msg: new TextEncoder().encode(`{
        "swap": {
          "belief_price": "${beliefPrice.toString()}",
          "max_spread": "0.005",
@@ -217,7 +217,7 @@ Before you can perform a swap, you'll need a belief price. You can calculate the
            "amount": "${offerAmount}"
          }
        }
-     }`)),
+     }`),
      funds: [Coin.fromPartial({denom: "axpla", amount: offerAmount.toString()})]
    });
    ```

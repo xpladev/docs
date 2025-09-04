@@ -55,7 +55,7 @@ const tokenAddress = "xpla19w8vmg7tmh07ztr3v7lq8sdny6jjkj6pk03a7fk52gpgepfxnlgq8
 const walletAddress = "xpla1dr6hsalnns5tjvd68kg7tfam3qzmt3958dra8x";
 const response = await rpcClient.cosmwasm.wasm.v1.smartContractState({
     address: tokenAddress,
-    queryData: new Uint8Array(Buffer.from(`{"balance": {"address": "${walletAddress}"}}`))
+    queryData: new TextEncoder().encode(`{"balance": {"address": "${walletAddress}"}}`)
 })
 
 console.log(JSON.parse(new TextDecoder().decode(response.data)))
@@ -245,7 +245,7 @@ const tx = await executeContract(
     {
         sender: signerAddress,
         contract: tokenAddress,
-        msg: new Uint8Array(Buffer.from(`{"transfer": {"recipient": "xpla1888g76xr3phk7qkfknnn8hvxyzfj0e2vuh4jmw", "amount": "1"}}`)),
+        msg: new TextEncoder().encode(`{"transfer": {"recipient": "xpla1888g76xr3phk7qkfknnn8hvxyzfj0e2vuh4jmw", "amount": "1"}}`),
         funds: []
     },
     {
@@ -310,13 +310,13 @@ const rpcClient = await createRPCQueryClient({rpcEndpoint: "https://cube-rpc.xpl
 // Fetch the decimal of each asset in the pool and simulation result with `xplaAmount`.
 const res = await rpcClient.cosmwasm.wasm.v1.smartContractState({
     address: pool,
-    queryData: new Uint8Array(Buffer.from(`{"pair": {}}`))
+    queryData: new TextEncoder().encode(`{"pair": {}}`)
 })
 const { asset_decimals: assetDecimals } = JSON.parse(new TextDecoder().decode(res.data))
 
 const simulateResponse = await rpcClient.cosmwasm.wasm.v1.smartContractState({
     address: pool,
-    queryData: new Uint8Array(Buffer.from(`{
+    queryData: new TextEncoder().encode(`{
         "simulation": {
         "offer_asset": {
             "info" : {
@@ -327,7 +327,7 @@ const simulateResponse = await rpcClient.cosmwasm.wasm.v1.smartContractState({
             "amount": "${xplaAmount}"
         }
     }
-}`))
+}`)
 })
 const {return_amount: returnAmount} = JSON.parse(new TextDecoder().decode(simulateResponse.data))
 
@@ -357,7 +357,7 @@ const tx = await executeContract(
     {
         sender: signerAddress,
         contract: pool,
-        msg: new Uint8Array(Buffer.from(JSON.stringify(swapMsg))),
+        msg: new TextEncoder().encode(JSON.stringify(swapMsg)),
         funds: [Coin.fromPartial({denom: "axpla", amount: xplaAmount.toString()})]
     },
     {
