@@ -107,12 +107,9 @@ XPLA Chain's RPC allows users to connect to the blockchain, make queries, create
 3. Add the following code to your `index.ts` file and input your mnemonic key:
 
    ```ts
-   import { EthSecp256k1Auth } from "@interchainjs/auth/ethSecp256k1";
-   import { HDPath } from "@interchainjs/types";
-   import { DirectSigner } from "@xpla/xpla/signers/direct";
-   import { toEncoders } from "@interchainjs/cosmos/utils";
-   import { MsgExecuteContract } from "@xpla/xplajs/cosmwasm/wasm/v1/tx";
-   import { Network } from "@xpla/xpla/defaults";
+   import { DEFAULT_COSMOS_EVM_SIGNER_CONFIG, EthSecp256k1HDWallet } from "@xpla/xpla"
+   import { HDPath } from "@interchainjs/types"
+   import { createCosmosQueryClient, DirectSigner } from "@interchainjs/cosmos";
 
    const queryClient = await createCosmosQueryClient("https://cube-rpc.xpla.io");
    const mnemonic = "-> Input your 24-word mnemonic key here <-";
