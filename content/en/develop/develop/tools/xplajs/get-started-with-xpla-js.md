@@ -163,7 +163,7 @@ Before you can perform a swap, you'll need a belief price. You can calculate the
    import { Decimal } from 'decimal.js';
 
    const contract = "<POOL_CONTRACT_ADDRESS>"; // A Dezswap pair contract address
-   const offerAmount = 1000000000000000000;
+   const offerAmount = "1000000000000000000";
    
    // 5.1 simulate the tx
    const pairResponse = await rpc.cosmwasm.wasm.v1.smartContractState({
