@@ -263,12 +263,17 @@ try {
 console.log(tx)
 ```
 
-## Swapping a Native XPLA Chain Asset for a CW20 Token Using Dezswap
+## Swapping a Native Token(denominator, IBC, ERC20) Using Dezswap
 
-The following code example shows how to swap a native asset for CW20 using Dezswap.
+The following code example shows how to swap a native token for CW20 using Dezswap.
 
-Run this example on testnet.
+{{< alert context="warning">}}
+**Native Token**
 
+Native tokens on XPLA Chain include XPLA (the main token), IBC tokens, and ERC20 tokens. For more information about Dezswap, visit [Dezswap docs](https://deploy-preview-16--docs-dezswap.netlify.app/docs/introduction/asset/).
+{{< /alert >}}
+
+#### Example: Swap XPLA to CW20 Token
 ```ts
 import { createRPCQueryClient } from "@xpla/xplajs/xpla/rpc.query";
 import { EthSecp256k1HDWallet } from "@xpla/xpla"
@@ -376,11 +381,81 @@ try {
 console.log(tx)
 ```
 
-## Decoding Protobuf-encoded Messages
-
-The following code example shows how to decode messages that have been encoded using Protobuf:
-
+#### Example: Swap ERC20 to XPLA
 ```ts
+// TKN (ERC20) <> XPLA
+const pool = "xpla1d4hn6l43sqtklmcypzea0c9xhags9f33g67vp6lntetmzgdagvys3mzdyy";
+const erc20Amount = 1000000;
+
+const rpcClient = await createRPCQueryClient({rpcEndpoint: "https://cube-rpc.xpla.io"})
+
+// Fetch the decimal of each asset in the pool and simulation result with `xplaAmount`.
+const res = await rpcClient.cosmwasm.wasm.v1.smartContractState({
+    address: pool,
+    queryData: new Uint8Array(Buffer.from(`{"pair": {}}`))
+})
+const { asset_decimals: assetDecimals } = JSON.parse(new TextDecoder().decode(res.data))
+
+const simulateResponse = await rpcClient.cosmwasm.wasm.v1.smartContractState({
+    address: pool,
+    queryData: new Uint8Array(Buffer.from(`{
+        "simulation": {
+        "offer_asset": {
+            "info" : {
+            "native_token": {
+                "denom": "xerc20:69FD386467E3659F81e58b6EC7a12C64b32FB1E2"
+            }
+            },
+            "amount": "${erc20Amount}"
+        }
+    }
+}`))
+})
+const {return_amount: returnAmount} = JSON.parse(new TextDecoder().decode(simulateResponse.data))
+
+// Calculate belief price using pool balances.
+const Decimal18 = Decimal.set({ precision: 18, rounding: Decimal.ROUND_DOWN });
+const beliefPrice = new Decimal18(erc20Amount).dividedBy(10 ** assetDecimals[0]).dividedBy(new Decimal18(returnAmount).dividedBy(10 ** assetDecimals[1]))
+
+// Swap 1 XPLA to CTXT with 1% slippage tolerance.
+const swapMsg = {
+    swap: {
+        max_spread: "0.01",
+        offer_asset: {
+            info: {
+                native_token: {
+                    denom: "xerc20:69FD386467E3659F81e58b6EC7a12C64b32FB1E2"
+                }
+            },
+            amount: erc20Amount.toString()
+        },
+        belief_price: beliefPrice.toString()
+    }
+};
+
+const tx = await executeContract(
+    signer,
+    signerAddress,
+    {
+        sender: signerAddress,
+        contract: pool,
+        msg: new Uint8Array(Buffer.from(JSON.stringify(swapMsg))),
+        funds: [Coin.fromPartial({denom: "xerc20:69FD386467E3659F81e58b6EC7a12C64b32FB1E2", amount: erc20Amount.toString()})]
+    },
+    {
+        amount: [{denom: "axpla", amount: "28000000000000000000"}],
+        gas: "100000000"
+    },
+    ""
+
+)
+
+try {
+    await tx.wait()
+} catch (error) {
+    console.log(error)
+}
+console.log(tx)
 ```
 
 ## Validate a XPLA Chain Address
