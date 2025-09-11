@@ -94,7 +94,7 @@ const mne_key = new MnemonicKey({
 
 - [ BIP-39 Mnemonics ](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)
 
-- Coin Types Numbers `60` and `118` above refer to "coin-types" for `Cosmos` and `Ethereum` blockchains accordingly. These numbers are defined according to the [ BIP044 ](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) standard. You can find more information [ here ](https://github.com/satoshilabs/slips/blob/master/slip-0044.md).
+- Coin Types Numbers `60` and `118` above refer to "coin-types" for `Cosmos` and `Ethereum` blockchains accordingly. These numbers are defined according to the [ BIP-44 ](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) standard. You can find more information [ here ](https://github.com/satoshilabs/slips/blob/master/slip-0044.md).
 
 ## Custom Key Implementation
 

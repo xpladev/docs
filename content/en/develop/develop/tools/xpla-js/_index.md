@@ -1,6 +1,6 @@
 ---
 title: xpla.js
-weight: 30
+weight: 40
 type: docs
 ---
 

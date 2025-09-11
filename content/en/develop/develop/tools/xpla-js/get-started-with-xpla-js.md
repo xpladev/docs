@@ -135,7 +135,7 @@ Before you can perform a swap, you’ll need a belief price. You can calculate t
 
    ```ts
    const contract = "<POOL_CONTRACT_ADDRESS>"; // A Dezswap pair contract address on cube_47-5(CW20 token <> XPLA)
-   const offerAmount = 1000000000000000000
+   const offerAmount = "1000000000000000000"
    const { asset_decimals: assetDecimals } = await lcd.wasm.contractQuery(contract, { "pair": {} }); // Query
    const { return_amount: returnAmount } = await lcd.wasm.contractQuery( // Query
      contract,
