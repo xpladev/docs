@@ -26,7 +26,7 @@ In the above example, a `MnemonicKey` was specified for the wallet, but any type
 
 ### Getting Account Number and Sequence
 
-A wallet is connected to the XPLA Chain and can poll the values of an account's account number and sequence directly:
+A wallet is connected to the CONX Chain and can poll the values of an account's account number and sequence directly:
 
 ```ts
 console.log(await wallet.accountNumber());

@@ -54,7 +54,7 @@ The default number of files Linux can open per process is `1024`. `xplad` is kno
    ```systemd
    # /etc/systemd/system/xplad.service
    [Unit]
-   Description=XPLA Chain Node Daemon
+   Description=CONX Chain Node Daemon
    After=network.target
 
    [Service]

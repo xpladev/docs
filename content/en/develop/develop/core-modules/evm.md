@@ -7,7 +7,7 @@ type: docs
 {{< alert >}}
 **Note**
 
-XPLA Chain's evm module inherits from Evmos's [`evm`](https://docs.evmos.org/protocol/modules/evm) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+CONX Chain's evm module inherits from Evmos's [`evm`](https://docs.evmos.org/protocol/modules/evm) module. This document is a stub and covers mainly important CONX Chain-specific notes about how it is used.
 {{< /alert >}}
 
 This document defines the specification of the Ethereum Virtual Machine (EVM) as a Cosmos SDK module.
@@ -20,7 +20,7 @@ The `x/evm` module provides this EVM familiarity on a scalable, high-throughput 
 
 The `x/evm` is part of the [ethermint library](https://pkg.go.dev/github.com/evmos/ethermint).
 
-This module will be used in the XPLA Chain.
+This module will be used in the CONX Chain.
 
 ## Concepts
 

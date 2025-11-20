@@ -70,6 +70,6 @@ With PAY, our platform offers a low-code payment integration that creates a cust
 
 ## Venly - XPLA
 
-Venly supports the XPLA chain on its Wallet API which allows you to create wallets on the XPLA chain. You can send and receive funds to/from XPLA wallets directly through the Wallet API, enabling seamless integration with applications using the XPLA blockchain.
+Venly supports the CONX Chain on its Wallet API which allows you to create wallets on the CONX Chain. You can send and receive funds to/from XPLA wallets directly through the Wallet API, enabling seamless integration with applications using the XPLA blockchain.
 
 > Read the next guide to learn how to create and manage XPLA wallets with the Wallet API.

@@ -6,9 +6,9 @@ type: docs
 
 ## Install `xplad` for Mac (Intel or M1)
 
-`xplad` is the command-line interface and daemon that connects to XPLA Chain and enables you to interact with the XPLA Chain. XPLA Chain core is the official Golang reference implementation of the XPLA Chain node software.
+`xplad` is the command-line interface and daemon that connects to CONX Chain and enables you to interact with the CONX Chain. CONX Chain core is the official Golang reference implementation of the CONX Chain node software.
 
-This guide is for developers who want to install `xplad` and interact with XPLA Chain core without running a full node. If you want to run a full node or join a network, visit [Run a Full Node]({{< ref "/full-node/full-node/run-a-full-node/overview" >}}).
+This guide is for developers who want to install `xplad` and interact with CONX Chain core without running a full node. If you want to run a full node or join a network, visit [Run a Full Node]({{< ref "/full-node/full-node/run-a-full-node/overview" >}}).
 
 1. Navigate to [https://github.com/xpladev/xpla/tags](https://github.com/xpladev/xpla/tags) and click on the latest release.
 

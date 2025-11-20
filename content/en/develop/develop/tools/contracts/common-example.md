@@ -6,11 +6,11 @@ type: docs
 
 # Common Examples
 
-This page provides practical examples of how to use `@xpla/contracts` to interact with XPLA Chain's precompile contracts. We'll walk through a complete staking pool implementation that demonstrates real-world usage of the StakingI interface.
+This page provides practical examples of how to use `@xpla/contracts` to interact with CONX Chain's precompile contracts. We'll walk through a complete staking pool implementation that demonstrates real-world usage of the StakingI interface.
 
 ## StakingPool Contract Example
 
-The StakingPool contract demonstrates how to create a staking pool that utilizes XPLA Chain's StakingI precompile contract to manage validator delegations while providing additional features like reward distribution and user management.
+The StakingPool contract demonstrates how to create a staking pool that utilizes CONX Chain's StakingI precompile contract to manage validator delegations while providing additional features like reward distribution and user management.
 
 ### Contract Overview
 
@@ -18,7 +18,7 @@ The StakingPool contract provides:
 - **Staking Management**: Users can stake tokens through the pool to validators
 - **Reward Distribution**: Automatic reward calculation and distribution
 - **User Management**: Track individual user stakes and rewards
-- **Validator Integration**: Direct integration with XPLA Chain's staking system
+- **Validator Integration**: Direct integration with CONX Chain's staking system
 
 ### Complete Contract Implementation
 
@@ -224,7 +224,7 @@ contract StakingPool {
 ```solidity
 StakingI public constant stakingContract = StakingI(0x0000000000000000000000000000000000000800);
 ```
-The contract directly integrates with XPLA Chain's StakingI precompile contract to perform actual validator delegations.
+The contract directly integrates with CONX Chain's StakingI precompile contract to perform actual validator delegations.
 
 #### 2. **Staking Function**
 ```solidity
@@ -406,9 +406,9 @@ To test the StakingPool contract:
 
 ### Key Benefits of This Implementation
 
-1. **Direct Integration**: Uses XPLA Chain's native staking system through precompile contracts
+1. **Direct Integration**: Uses CONX Chain's native staking system through precompile contracts
 2. **User Management**: Tracks individual user stakes and rewards
 3. **Flexible Configuration**: Pool manager can adjust reward rates
 4. **Event Tracking**: Comprehensive event emission for frontend integration
 
-This example demonstrates how to effectively use `@xpla/contracts` to build complex DeFi applications that integrate seamlessly with XPLA Chain's native functionality.
+This example demonstrates how to effectively use `@xpla/contracts` to build complex DeFi applications that integrate seamlessly with CONX Chain's native functionality.

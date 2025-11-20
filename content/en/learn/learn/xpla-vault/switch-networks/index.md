@@ -4,7 +4,7 @@ weight: 60
 type: docs
 ---
 
-Use this guide to switch between XPLA Chain mainnet and testnet networks.
+Use this guide to switch between CONX Chain mainnet and testnet networks.
 
 1. Open XPLA Vault and connect your wallet.
 

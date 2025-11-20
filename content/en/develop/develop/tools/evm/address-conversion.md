@@ -13,7 +13,7 @@ This example demonstrates how to convert between Cosmos Bech32 addresses and EVM
 Before running this example, make sure you have:
 
 - Node.js v18 or later
-- Access to XPLA Chain testnet (Cube)
+- Access to CONX Chain testnet (Cube)
 
 ## Setup
 
@@ -84,5 +84,5 @@ Conversion Valid: true
 ## Key Concepts
 
 - **Bech32 to EVM**: Use `fromBech32()` to extract hex bytes, then convert to EVM address
-- **EVM to Bech32**: Use `toBech32()` with the appropriate prefix ('xpla' for XPLA Chain)
+- **EVM to Bech32**: Use `toBech32()` with the appropriate prefix ('xpla' for CONX Chain)
 - **Address Validation**: Both addresses represent the same account on different interfaces

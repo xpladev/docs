@@ -6,11 +6,11 @@ type: docs
 
 # About @xpladev/contracts
 
-`@xpladev/contracts` is a Solidity interface package for interacting with [XPLA Chain's precompile contracts](../../../smart-contract-guide/evm/use-precompile-contract). This package provides type-safe interfaces for precompile contracts that allow access to various Cosmos SDK modules (bank, staking, governance, distribution, etc.) within the EVM environment.
+`@xpladev/contracts` is a Solidity interface package for interacting with [CONX Chain's precompile contracts](../../../smart-contract-guide/evm/use-precompile-contract). This package provides type-safe interfaces for precompile contracts that allow access to various Cosmos SDK modules (bank, staking, governance, distribution, etc.) within the EVM environment.
 
 ## Overview
 
-XPLA Chain is a Cosmos SDK-based blockchain that supports Solidity smart contracts through the EVM module. Precompile contracts are pre-compiled contracts deployed at specific addresses that provide direct access to Cosmos SDK module functionality within the EVM environment.
+CONX Chain is a Cosmos SDK-based blockchain that supports Solidity smart contracts through the EVM module. Precompile contracts are pre-compiled contracts deployed at specific addresses that provide direct access to Cosmos SDK module functionality within the EVM environment.
 
 The `@xpladev/contracts` package provides standardized Solidity interfaces for interacting with these precompile contracts.
 
@@ -78,7 +78,7 @@ The package includes common type definitions used across contracts:
 ## Key Features
 
 - **Type Safety**: Type-safe interfaces for all precompile contract functions
-- **Standardized Interfaces**: Standard interfaces compatible with XPLA Chain's precompile contracts
+- **Standardized Interfaces**: Standard interfaces compatible with CONX Chain's precompile contracts
 - **Easy Integration**: Easy integration with existing Solidity projects
 - **Comprehensive Coverage**: Support for all major Cosmos SDK module functionalities
 - **Modular Design**: Organized structure with core interfaces and utilities
@@ -86,7 +86,7 @@ The package includes common type definitions used across contracts:
 
 # Getting Started
 
-This guide will walk you through setting up a Hardhat project with `@xpla/contracts` and creating your first smart contract that interacts with XPLA Chain's precompile contracts.
+This guide will walk you through setting up a Hardhat project with `@xpla/contracts` and creating your first smart contract that interacts with CONX Chain's precompile contracts.
 
 ## About This Tutorial
 
@@ -96,7 +96,7 @@ In this tutorial, you'll learn how to:
 2. [Install @xpla/contracts](#2-install-xplacontracts)
 3. [Create a smart contract](#3-create-a-smart-contract)
 
-By the end of this guide, you'll be able to create and deploy smart contracts that interact with XPLA Chain's precompile contracts.
+By the end of this guide, you'll be able to create and deploy smart contracts that interact with CONX Chain's precompile contracts.
 
 ## Prerequisites
 
@@ -128,7 +128,7 @@ By the end of this guide, you'll be able to create and deploy smart contracts th
 
 ## 2. Install @xpla/contracts
 
-Install the `@xpla/contracts` package to access XPLA Chain's precompile contract interfaces:
+Install the `@xpla/contracts` package to access CONX Chain's precompile contract interfaces:
 
 ```sh
 npm install @xpla/contracts

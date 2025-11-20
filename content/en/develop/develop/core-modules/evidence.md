@@ -7,7 +7,7 @@ type: docs
 {{< alert >}}
 **Note**
 
-XPLA Chain's evidence module inherits from Cosmos SDK's [`evidence`](https://docs.cosmos.network/v0.45/modules/evidence/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+CONX Chain's evidence module inherits from Cosmos SDK's [`evidence`](https://docs.cosmos.network/v0.45/modules/evidence/) module. This document is a stub and covers mainly important CONX Chain-specific notes about how it is used.
 {{< /alert >}}
 
 The evidence module differs from standard evidence handling which typically expects the underlying consensus engine, e.g. Tendermint, to automatically submit evidence when it is discovered by allowing clients and foreign chains to submit more complex evidence directly.

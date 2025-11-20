@@ -10,11 +10,11 @@ type: docs
 This guide has been tested against Linux distributions only. To ensure a successful production environment setup, consider using a Linux system.
 {{< /alert >}}
 
-Running a full XPLA Chain node is a resource-intensive process that requires a persistent server. If you want to use XPLA Chain without downloading the entire blockchain, use [XPLA web vault](https://vault.xpla.io/).
+Running a full CONX Chain node is a resource-intensive process that requires a persistent server. If you want to use CONX Chain without downloading the entire blockchain, use [XPLA web vault](https://vault.xpla.io/).
 
 ## Hardware Requirements
 
-The minimum requirements for running a XPLA Chain full node are:
+The minimum requirements for running a CONX Chain full node are:
 
 | Network                                                                | CPU cores      | RAM   | Disk                       | BANDWIDTH |
 |------------------------------------------------------------------------|----------------|-------|----------------------------|-----------|
@@ -76,7 +76,7 @@ Most validators will only need to open the following port:
 
 Additional ports:
 
-- `1317`: The default port for the [Light Client Daemon]({{< ref "start-the-Light-Client-Daemon" >}}) (LCD), which can be executed by `xplad rest-server`. The LCD provides an HTTP RESTful API layer to allow applications and services to interact with your `xplad` instance through RPC. For usage examples, see [XPLA Chain REST API](https://dimension-lcd.xpla.dev/swagger/). You don't need to open this port unless you have use for it.
+- `1317`: The default port for the [Light Client Daemon]({{< ref "start-the-Light-Client-Daemon" >}}) (LCD), which can be executed by `xplad rest-server`. The LCD provides an HTTP RESTful API layer to allow applications and services to interact with your `xplad` instance through RPC. For usage examples, see [CONX Chain REST API](https://dimension-lcd.xpla.dev/swagger/). You don't need to open this port unless you have use for it.
 
 - `26660`: The default port for interacting with the [Prometheus](https://prometheus.io) database, which can be used to monitor the environment. In the default configuration, this port is not open.
 

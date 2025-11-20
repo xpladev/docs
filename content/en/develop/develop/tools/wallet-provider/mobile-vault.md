@@ -4,7 +4,7 @@ weight: 40
 type: docs
 ---
 
-XPLA mobile vault is an application that enables users to interact with XPLA Chain Core.
+XPLA mobile vault is an application that enables users to interact with CONX Chain Core.
 
 XPLA mobile vault allows users to:
 
@@ -32,7 +32,7 @@ xplavault://send/?payload=${base64 json}
 
 | Key     | Description                                   | Required? |
 |---------|-----------------------------------------------|-----------|
-| address | XPLA Chain address to send funds to           |           |
+| address | CONX Chain address to send funds to           |           |
 | token   | Native token denom or cw20 contract address   | ✔️        |
 | amount  | Amount of tokens in micro format              |           |
 | memo    | Specific memo to include with the transaction |           |

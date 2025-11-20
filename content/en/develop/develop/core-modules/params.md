@@ -7,10 +7,10 @@ type: docs
 {{< alert >}}
 **Note**
 
-XPLA Chain's params module inherits from the Cosmos SDK's [`params`](https://docs.cosmos.network/v0.45/modules/params/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+CONX Chain's params module inherits from the Cosmos SDK's [`params`](https://docs.cosmos.network/v0.45/modules/params/) module. This document is a stub and covers mainly important CONX Chain-specific notes about how it is used.
 {{< /alert >}}
 
-The params module provides a base parameter store for all other XPLA Chain modules. Structures made with the `params` module are globally available and use subspaces to register specific params to particular modules. The params module defines two types of access: `Keeper` and `Subspace`.
+The params module provides a base parameter store for all other CONX Chain modules. Structures made with the `params` module are globally available and use subspaces to register specific params to particular modules. The params module defines two types of access: `Keeper` and `Subspace`.
 
 Package params provides a globally available parameter store.
 

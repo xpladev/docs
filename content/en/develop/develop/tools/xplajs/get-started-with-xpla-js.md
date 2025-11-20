@@ -4,11 +4,11 @@ weight: 10
 type: docs
 ---
 
-xplajs seeks to provide a compatible way to work with the XPLA Chain within JavaScript runtimes, such as Node.js and the browser. xplajs enables the following functions:
+xplajs seeks to provide a compatible way to work with the CONX Chain within JavaScript runtimes, such as Node.js and the browser. xplajs enables the following functions:
 
 - Deserializing blockchain data into JavaScript objects with native data types and methods
 - Serializing objects back into a blockchain-compatible format
-- Providing access to the XPLA Chain RPC from a JavaScript-based interface
+- Providing access to the CONX Chain RPC from a JavaScript-based interface
 - Providing additional utilities, such as hash functions and key-signing algorithms
 
 ## About This Tutorial
@@ -54,7 +54,7 @@ By the end of this guide, you'll be able to execute a token swap from your appli
    touch index.ts
    ```
 
-   The `@xpla/xplajs` package provides the core functionality for interacting with the XPLA Chain, while `@xpla/xpla` contains the signing and transaction utilities.
+   The `@xpla/xplajs` package provides the core functionality for interacting with the CONX Chain, while `@xpla/xpla` contains the signing and transaction utilities.
   {{< alert context="warning" >}}
    **Note for Yarn Berry users**
    
@@ -78,7 +78,7 @@ By the end of this guide, you'll be able to execute a token swap from your appli
 
 ## 2. Initialize the RPC
 
-XPLA Chain's RPC allows users to connect to the blockchain, make queries, create wallets, and submit transactions. It's the main workhorse behind `xplajs`.
+CONX Chain's RPC allows users to connect to the blockchain, make queries, create wallets, and submit transactions. It's the main workhorse behind `xplajs`.
 
 1. Open your `index.js` file in a code editor and input the following to initialize the RPC:
 
@@ -90,7 +90,7 @@ XPLA Chain's RPC allows users to connect to the blockchain, make queries, create
    });
    ```
 
-   The `createRPCQueryClient` function establishes a connection to the XPLA Chain RPC endpoint, allowing you to query blockchain data and submit transactions. This replaces the older LCD (Light Client Daemon) approach with a more direct RPC connection.
+   The `createRPCQueryClient` function establishes a connection to the CONX Chain RPC endpoint, allowing you to query blockchain data and submit transactions. This replaces the older LCD (Light Client Daemon) approach with a more direct RPC connection.
 
    {{< alert >}}
    **Note**
@@ -257,7 +257,7 @@ Before you can perform a swap, you'll need a belief price. You can calculate the
     console.log(simulateResult)
    ```
 
-   This final step completes the transaction process. The `MessageComposer.encoded.executeContract` creates the properly formatted message, `simulateByTxBody` simulates the transaction to estimate gas fees, and the transaction can then be signed and broadcast to the network. The transaction will be processed by the XPLA Chain validators and the swap will be executed if all conditions are met.
+   This final step completes the transaction process. The `MessageComposer.encoded.executeContract` creates the properly formatted message, `simulateByTxBody` simulates the transaction to estimate gas fees, and the transaction can then be signed and broadcast to the network. The transaction will be processed by the CONX Chain validators and the swap will be executed if all conditions are met.
 
 2. Run the code in your terminal:
 

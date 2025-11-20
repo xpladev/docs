@@ -6,7 +6,7 @@ type: docs
 
 A smart contract is a contract whose terms are expressed as a computer program with logic and state persisted on the blockchain. Smart contracts can automatically carry out its terms and conditions with total transparency and no counter-party risk.
 
-Smart contracts allow users to extend the capabilities of the XPLA Chain by introducing custom logic that can be composed against the XPLA Chain's financial primitives. These decentralized applications unlock new avenues of value-transfer through enabling unique transaction flows not provided by XPLA Chain's native modules.
+Smart contracts allow users to extend the capabilities of the CONX Chain by introducing custom logic that can be composed against the CONX Chain's financial primitives. These decentralized applications unlock new avenues of value-transfer through enabling unique transaction flows not provided by CONX Chain's native modules.
 
 ## Developer Tools
 

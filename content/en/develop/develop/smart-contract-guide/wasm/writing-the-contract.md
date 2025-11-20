@@ -10,7 +10,7 @@ type: docs
 To better understand the building blocks of the smart contract you will build in this tutorial, view the [complete contract](https://github.com/CosmWasm/cw-template).
 {{< /alert >}}
 
-A smart contract can be considered an instance of a singleton object whose internal state is persisted on the blockchain. Users can trigger state changes through sending it JSON messages, and users can also query its state through sending a request formatted as a JSON message. These messages are different than XPLA Chain messages such as `MsgSend` and `MsgExecuteContract`.
+A smart contract can be considered an instance of a singleton object whose internal state is persisted on the blockchain. Users can trigger state changes through sending it JSON messages, and users can also query its state through sending a request formatted as a JSON message. These messages are different than CONX Chain messages such as `MsgSend` and `MsgExecuteContract`.
 
 As a smart contract writer, your job is to define 3 functions that define your smart contract's interface:
 
@@ -41,7 +41,7 @@ The starting template has the basic following state:
 
 - a singleton struct `State` containing:
   - a 32-bit integer `count`
-  - a XPLA Chain address `owner`
+  - a CONX Chain address `owner`
 
 ```rust
 // src/state.rs
@@ -60,7 +60,7 @@ pub struct State {
 pub const STATE: Item<State> = Item::new("state");
 ```
 
-XPLA Chain smart contracts have the ability to keep persistent state through XPLA Chain's native LevelDB, a bytes-based key-value store. As such, any data you wish to persist should be assigned a unique key at which the data can be indexed and later retrieved. The singleton in the example above is assigned the key `config` (in bytes).
+CONX Chain smart contracts have the ability to keep persistent state through CONX Chain's native LevelDB, a bytes-based key-value store. As such, any data you wish to persist should be assigned a unique key at which the data can be indexed and later retrieved. The singleton in the example above is assigned the key `config` (in bytes).
 
 Data can only be persisted as raw bytes, so any notion of structure or data type must be expressed as a pair of serializing and deserializing functions. For instance, objects must be stored as bytes, so you must supply both the function that encodes the object into bytes to save it on the blockchain and the function that decodes the bytes back into data types that your contract logic can understand. The choice of byte representation is up to you, so long as it provides a clean, bi-directional mapping.
 
@@ -75,13 +75,13 @@ Notice how the `State` struct holds both `count` and `owner`. In addition, the `
 - `PartialEq`: provides equality comparison
 - `JsonSchema`: auto-generates a JSON schema
 
-`Addr`, refers to a human-readable XPLA Chain address prefixed with `xpla...`. Its counterpart is the `CanonicalAddr`, which refers to a XPLA Chain address's native decoded Bech32 form in bytes.
+`Addr`, refers to a human-readable CONX Chain address prefixed with `xpla...`. Its counterpart is the `CanonicalAddr`, which refers to a CONX Chain address's native decoded Bech32 form in bytes.
 
 ## InstantiateMsg
 
 The `InstantiateMsg` is provided when a user creates a contract on the blockchain through a `MsgInstantiateContract`. This provides the contract with its configuration as well as its initial state.
 
-On the XPLA Chain, the uploading of a contract's code and the instantiation of a contract are regarded as separate events, unlike on Ethereum. This is to allow a small set of vetted contract archetypes to exist as multiple instances sharing the same base code but configured with different parameters (imagine one canonical ERC20, and multiple tokens that use its code).
+On the CONX Chain, the uploading of a contract's code and the instantiation of a contract are regarded as separate events, unlike on Ethereum. This is to allow a small set of vetted contract archetypes to exist as multiple instances sharing the same base code but configured with different parameters (imagine one canonical ERC20, and multiple tokens that use its code).
 
 ### Example
 

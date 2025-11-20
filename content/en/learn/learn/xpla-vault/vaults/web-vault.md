@@ -4,7 +4,7 @@ weight: 10
 type: docs
 ---
 
-The XPLA Web Vault is the official wallet of the XPLA Chain.
+The XPLA Web Vault is the official wallet of the CONX Chain.
 
 - [Vault Web Application](https://vault.xpla.io)
 

@@ -9,7 +9,7 @@ Use the following common examples to learn how to use xplajs. If this is your fi
 {{< alert >}}
 **Tip**
 
-If you are new to XPLA Chain and don't know where to start, visit the [getting started guide]({{< ref "get-started" >}}).
+If you are new to CONX Chain and don't know where to start, visit the [getting started guide]({{< ref "get-started" >}}).
 {{< /alert >}}
 
 ## Configuring LCDClient
@@ -270,7 +270,7 @@ The following code example shows how to swap a native token for CW20 using Dezsw
 {{< alert context="warning">}}
 **Native Token**
 
-Native tokens on XPLA Chain include XPLA (the main token), IBC tokens, and ERC20 tokens. For more information about Dezswap, visit [Dezswap docs](https://deploy-preview-16--docs-dezswap.netlify.app/docs/introduction/asset/).
+Native tokens on CONX Chain include XPLA (the main token), IBC tokens, and ERC20 tokens. For more information about Dezswap, visit [Dezswap docs](https://deploy-preview-16--docs-dezswap.netlify.app/docs/introduction/asset/).
 {{< /alert >}}
 
 #### Example: Swap XPLA to CW20 Token
@@ -458,9 +458,9 @@ try {
 console.log(tx)
 ```
 
-## Validate a XPLA Chain Address
+## Validate a CONX Chain Address
 
-The following code example shows how to do a basic verification on a XPLA Chain address.
+The following code example shows how to do a basic verification on a CONX Chain address.
 
 This is a basic version of the verification, it does not require external libraries as it performs a simple comparison with a regex string. It could give false positives since it doesn't verify the checksum of the address.
 

@@ -7,10 +7,10 @@ type: docs
 {{< alert >}}
 **Note**
 
-XPLA Chain's staking module inherits from the Cosmos SDK's [`staking`](https://docs.cosmos.network/v0.45/modules/staking/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+CONX Chain's staking module inherits from the Cosmos SDK's [`staking`](https://docs.cosmos.network/v0.45/modules/staking/) module. This document is a stub and covers mainly important CONX Chain-specific notes about how it is used.
 {{< /alert >}}
 
-The staking module enables XPLA Chain's proof-of-stake functionality by requiring validators to bond XPLA, the native staking asset.
+The staking module enables CONX Chain's proof-of-stake functionality by requiring validators to bond XPLA, the native staking asset.
 
 ## State
 
@@ -459,7 +459,7 @@ However, if the parameter `HistoricalEntries` has changed to a lower value there
 
 ##### GetLastValidators
 
-This function gets the bonded validators of the previous block. the number of validators in the return value is the same as `params.MaxValidators` in the cosmos-sdk module, and the XPLA Chain provides as many as the number of Volunteer Validators in addition.
+This function gets the bonded validators of the previous block. the number of validators in the return value is the same as `params.MaxValidators` in the cosmos-sdk module, and the CONX Chain provides as many as the number of Volunteer Validators in addition.
 
 ### End-Block
 

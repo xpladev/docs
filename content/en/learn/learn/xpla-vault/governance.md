@@ -6,11 +6,11 @@ type: docs
 
 If this is your first time using XPLA Vault, follow the [XPLA Vault tutorial]({{< ref "xpla-vault" >}}).
 
-Governance is an important part of being involved in the XPLA Chain community. Use the following information to learn how to vote on and submit governance proposals in XPLA Vault. For more information on governance and voting options, visit [the governance overview]({{< ref "about-xpla-chain#governance" >}}).
+Governance is an important part of being involved in the CONX Chain community. Use the following information to learn how to vote on and submit governance proposals in XPLA Vault. For more information on governance and voting options, visit [the governance overview]({{< ref "about-xpla-chain#governance" >}}).
 
 ## Vote on a Proposal
 
-Voting is an important way for community members to help the XPLA Chain evolve. Follow these steps to vote with your staked XPLA.
+Voting is an important way for community members to help the CONX Chain evolve. Follow these steps to vote with your staked XPLA.
 
 1. Open XPLA Vault and connect your wallet. In the sidebar, click **Governance**.
 
@@ -65,7 +65,7 @@ To prevent unnecessary proposals or abuse of the system, all governance proposal
    {{< alert >}}
    **Note**
 
-   Before uploading any proposal, try to get community feedback on the XPLA Chain Governance forum. The link will be unveiled in the near future.
+   Before uploading any proposal, try to get community feedback on the CONX Chain Governance forum. The link will be unveiled in the near future.
    Do not use text proposals to suggest parameter changes. For more information, visit the [Governance module reference page]({{< ref "/develop/develop/core-modules/governance" >}}).
    {{< /alert >}}
 

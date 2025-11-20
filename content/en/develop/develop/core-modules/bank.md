@@ -7,16 +7,16 @@ type: docs
 {{< alert >}}
 **Note**
 
-XPLA Chain's bank module inherits from the Cosmos SDK's [`bank`](https://docs.cosmos.network/v0.45/modules/bank/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+CONX Chain's bank module inherits from the Cosmos SDK's [`bank`](https://docs.cosmos.network/v0.45/modules/bank/) module. This document is a stub and covers mainly important CONX Chain-specific notes about how it is used.
 {{< /alert >}}
 
-The bank module is the base transactional layer of the XPLA Chain. This module allows assets to be sent from one `Account` to another. The bank module defines the following types of send transactions: `MsgSend` and `MsgMultiSend`.
+The bank module is the base transactional layer of the CONX Chain. This module allows assets to be sent from one `Account` to another. The bank module defines the following types of send transactions: `MsgSend` and `MsgMultiSend`.
 
 The bank module is responsible for handling multi-asset coin transfers between accounts and tracking special-case pseudo-transfers which must work differently with particular kinds of accounts (notably delegating/undelegating for vesting accounts). It exposes several interfaces with varying capabilities for secure interaction with other modules which must alter user balances.
 
 In addition, the bank module tracks and provides query support for the total supply of all assets used in the application.
 
-This module will be used in the XPLA Chain.
+This module will be used in the CONX Chain.
 
 ### Supply
 
@@ -101,7 +101,7 @@ type MsgSend struct {
 }
 ```
 
-The Bank module is used to send coins from one XPLA Chain account to another. `MsgSend` is constructed to facilitate the transfer. If the balance of coins in the sender `Account` is insufficient or the recipient `Account` is unable to receive the funds via the bank module, the transaction fails. Fees already paid through failed transactions are not refunded.
+The Bank module is used to send coins from one CONX Chain account to another. `MsgSend` is constructed to facilitate the transfer. If the balance of coins in the sender `Account` is insufficient or the recipient `Account` is unable to receive the funds via the bank module, the transaction fails. Fees already paid through failed transactions are not refunded.
 
 ### MsgMultiSend
 
@@ -129,7 +129,7 @@ To send multiple transactions at once, use `MsgMultiSend`. For each transaction,
 
 ## CW20 & ERC20 Support
 
-XPLA Chain's bank module has been extended to support both CosmWasm cw20 tokens and EVM erc20 tokens, allowing users to interact with these tokens using standard bank module commands without additional configuration.
+CONX Chain's bank module has been extended to support both CosmWasm cw20 tokens and EVM erc20 tokens, allowing users to interact with these tokens using standard bank module commands without additional configuration.
 
 ### Supported Token Types
 

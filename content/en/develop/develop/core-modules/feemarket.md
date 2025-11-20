@@ -7,7 +7,7 @@ type: docs
 {{< alert >}}
 **Note**
 
-XPLA Chain's feemarket module inherits from Evmos's [`feemarket`](https://docs.evmos.org/protocol/modules/feemarket) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+CONX Chain's feemarket module inherits from Evmos's [`feemarket`](https://docs.evmos.org/protocol/modules/feemarket) module. This document is a stub and covers mainly important CONX Chain-specific notes about how it is used.
 {{< /alert >}}
 
 The feemarket module which allows to define a global transaction fee for the network.
@@ -16,7 +16,7 @@ This module has been designed to support EIP1559 in cosmos-sdk.
 
 The `MempoolFeeDecorator` in `x/auth` module needs to be overrided to the `minimal-gas-prices`.
 
-This module will be used in the XPLA Chain.
+This module will be used in the CONX Chain.
 
 ## Concepts
 
@@ -33,7 +33,7 @@ To submit a transaction, the signer needs to specify the `gasPrice`.
 {{< alert >}}
 The Cosmos SDK uses a different terminology for `gas` than Ethereum.
 What is called `gasLimit` on Ethereum is called `gasWanted` on Cosmos.
-You might encounter both terminologies on XPLA Chain since it builds Ethereum on top of the SDK,
+You might encounter both terminologies on CONX Chain since it builds Ethereum on top of the SDK,
 e.g. when using different wallets like Keplr for Cosmos and Metamask for Ethereum.
 {{< /alert >}}
 

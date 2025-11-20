@@ -6,24 +6,24 @@ type: docs
 
 # About @xpla/evm
 
-`@xpla/evm` is a TypeScript library that provides TypeChain-generated interfaces for XPLA Chain's precompile contracts. This package enables developers to easily interact with XPLA Chain's precompile contracts using ethers.js with full TypeScript support and type safety.
+`@xpla/evm` is a TypeScript library that provides TypeChain-generated interfaces for CONX Chain's precompile contracts. This package enables developers to easily interact with CONX Chain's precompile contracts using ethers.js with full TypeScript support and type safety.
 
 ## Overview
 
-XPLA Chain provides various precompile contracts that allow access to Cosmos SDK module functionality within the EVM environment. The `@xpla/evm` package provides pre-generated TypeScript interfaces for these precompile contracts, making it easy to interact with them using familiar ethers.js patterns.
+CONX Chain provides various precompile contracts that allow access to Cosmos SDK module functionality within the EVM environment. The `@xpla/evm` package provides pre-generated TypeScript interfaces for these precompile contracts, making it easy to interact with them using familiar ethers.js patterns.
 
 ## Key Features
 
 - **TypeScript Interfaces**: Pre-generated TypeChain interfaces for all precompile contracts
 - **Ethers.js Integration**: Seamless integration with ethers.js library
 - **Type Safety**: Full TypeScript support with complete type definitions
-- **Precompile Contract Support**: Easy access to XPLA Chain's precompile contracts
+- **Precompile Contract Support**: Easy access to CONX Chain's precompile contracts
 - **Factory Classes**: Generated factory classes for contract instantiation
 - **Convenience Functions**: Helper functions for creating pre-connected precompile contracts
 
 ## Getting Started
 
-This guide will walk you through setting up a project with `@xpla/evm` and interacting with XPLA Chain's precompile contracts.
+This guide will walk you through setting up a project with `@xpla/evm` and interacting with CONX Chain's precompile contracts.
 
 ## About This Tutorial
 
@@ -35,7 +35,7 @@ In this tutorial, you'll learn how to:
 4. [Use individual precompile contracts](#4-use-individual-precompile-contracts)
 5. [Use convenience functions](#5-use-convenience-functions)
 
-By the end of this guide, you'll be able to interact with XPLA Chain's precompile contracts using the `@xpla/evm` package.
+By the end of this guide, you'll be able to interact with CONX Chain's precompile contracts using the `@xpla/evm` package.
 
 ## Prerequisites
 

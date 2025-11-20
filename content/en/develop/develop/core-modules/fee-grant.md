@@ -7,7 +7,7 @@ type: docs
 {{< alert >}}
 **Note**
 
-XPLA Chain's fee grant module inherits from the Cosmos SDK's [`feegrant`](https://docs.cosmos.network/v0.45/modules/feegrant/) module. This document is a stub and explains mainly important XPLA Chain-specific notes about how it is used.
+CONX Chain's fee grant module inherits from the Cosmos SDK's [`feegrant`](https://docs.cosmos.network/v0.45/modules/feegrant/) module. This document is a stub and explains mainly important CONX Chain-specific notes about how it is used.
 {{< /alert >}}
 
 This module allows accounts to grant fee allowances and to use fees from their accounts. Grantees can execute any transaction without the need to maintain sufficient fees.
