@@ -1,10 +1,10 @@
 # Meta Data for SEO
 
 ## Homepage
-title = "XPLA"
+title = "CONX Docs"
 titleSeparator = "|"
 titleAddition = ""
-description = "XPLA Technical Documentation"
+description = "CONX Chain Technical Documentation"
 
 ## Documentation
 # docsVersion = "0.3"
@@ -13,7 +13,7 @@ description = "XPLA Technical Documentation"
 images = ["xpla-opengraph-image.svg"]
 ogLocale = "en_US"
 domainTLD = "docs.xpla.io"
-titleHome = "XPLA Docs"
+titleHome = "CONX Docs"
 
 ## Twitter Cards
 twitterSite = ""

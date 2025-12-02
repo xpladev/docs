@@ -584,12 +584,8 @@ $navbar-dark-active-color:          $link-color-dark;
   border: 1px solid $body-overlay-dark;
 }
 
-[data-dark-mode] .xpla_docs_logo {
-  background-image: url("/XPLA_DOCS_black_bg.svg");
-}
-
 [data-dark-mode] .xpla_logo {
-  background-image: url("/XPLA_black_bg.svg");
+  background-image: url("/XPLA.svg");
 }
 
 
