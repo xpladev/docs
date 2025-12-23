@@ -37,7 +37,7 @@ You can update your node's moniker by editing the `moniker` field in `~/.xpla/co
 
 ## Start the Light Client Daemon (LCD)
 
-For information about the available XPLA Chain REST API endpoints, see the [Swagger documentation](https://cube-lcd.xpla.dev/swagger/). To enable the REST API and Swagger, and to start the LCD, complete the following steps:
+For information about the available CONX Chain REST API endpoints, see the [Swagger documentation](https://cube-lcd.xpla.dev/swagger/). To enable the REST API and Swagger, and to start the LCD, complete the following steps:
 
 1. Open `~/.xpla/config/app.toml`.
 

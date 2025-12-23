@@ -7,12 +7,12 @@ type: docs
 {{< alert >}}
 **Note**
 
-You can also follow these steps in the official web wallet for XPLA Chain, [XPLA Vault](https://vault.xpla.io).
+You can also follow these steps in the official web wallet for CONX Chain, [XPLA Vault](https://vault.xpla.io).
 {{< /alert >}}
 
 ## Requirements
 
-You should also have the latest version of `xplad` by building the latest version of XPLA Chain core. You will configure `xplad` to use it against your isolated testnet environment.
+You should also have the latest version of `xplad` by building the latest version of CONX Chain core. You will configure `xplad` to use it against your isolated testnet environment.
 
 In a separate terminal, make sure to set up the following mnemonic:
 
@@ -388,7 +388,7 @@ query_result:
   count: 7
 ```
 
-Excellent! Congratulations, you've created your first smart contract, and now know how to get developing with the XPLA Chain dApp Platform.
+Excellent! Congratulations, you've created your first smart contract, and now know how to get developing with the CONX Chain dApp Platform.
 
 ## What's Next?
 

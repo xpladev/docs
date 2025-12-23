@@ -4,12 +4,12 @@ weight: 10
 type: docs
 ---
 
-There are a variety of tools in the XPLA Chain Development Suite. Use this guide to find the right tool for your project.
+There are a variety of tools in the CONX Chain Development Suite. Use this guide to find the right tool for your project.
 
-If you are new to XPLA Chain, start with the [beginner's guide]({{< ref "get-started" >}}).
+If you are new to CONX Chain, start with the [beginner's guide]({{< ref "get-started" >}}).
 
 ```
-XPLA Chain Development Suite
+CONX Chain Development Suite
 │
 ├── xplajs: JavaScript SDK.
 │
@@ -43,15 +43,15 @@ Wallet Provider makes it easy to connect a React-based web app to XPLA Vault. Fo
 
 ## Other Tools
 
-Use these tools to interact with the XPLA Chain.
+Use these tools to interact with the CONX Chain.
 
 ### xplad
 
-The command line interface and node daemon for interacting with the XPLA Chain. Use `xplad` to run a full node or interact with the chain. Follow the [`xplad` install guide]({{< ref "install-xplad" >}}) to get started.
+The command line interface and node daemon for interacting with the CONX Chain. Use `xplad` to run a full node or interact with the chain. Follow the [`xplad` install guide]({{< ref "install-xplad" >}}) to get started.
 
 ### XPLA Explorer
 
-XPLA Chain’s multi-purpose [block explorer](https://explorer.xpla.io/).
+CONX Chain’s multi-purpose [block explorer](https://explorer.xpla.io/).
 
 ### Faucet
 

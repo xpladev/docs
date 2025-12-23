@@ -7,10 +7,10 @@ type: docs
 {{< alert >}}
 **Note**
 
-XPLA Chain's Governance module inherits from Cosmos SDK's [`gov`](https://docs.cosmos.network/v0.45/modules/gov/) module. This document is a stub, and covers mainly important XPLA Chain-specific notes about how it is used.
+CONX Chain's Governance module inherits from Cosmos SDK's [`gov`](https://docs.cosmos.network/v0.45/modules/gov/) module. This document is a stub, and covers mainly important CONX Chain-specific notes about how it is used.
 {{< /alert >}}
 
-Governance is the process through which members of the XPLA Chain community can effect change on the protocol by submitting petitions known as "proposals" and arriving at a popular consensus when a threshold amount of support has been reached. The proposal structure is versatile and allows for holders of staked XPLA (those who have an interest in the long-term viability of the network) to voice their opinion on both blockchain parameter updates and the future development of the XPLA Chain.
+Governance is the process through which members of the CONX Chain community can effect change on the protocol by submitting petitions known as "proposals" and arriving at a popular consensus when a threshold amount of support has been reached. The proposal structure is versatile and allows for holders of staked XPLA (those who have an interest in the long-term viability of the network) to voice their opinion on both blockchain parameter updates and the future development of the CONX Chain.
 
 Check the [Governance section of the `xplad` reference]({{< ref "subcommands#tx-gov-submit-proposal" >}}) to see examples of how to participate in the Governance process.
 
@@ -88,7 +88,7 @@ When a the a proposal finalized, the coins from the deposit are either refunded 
 #### Participants
 
 _Participants_ are users that have the right to vote on proposals. On the
-XPLA Chain, participants are bonded Xpla holders. Unbonded Xpla holders and
+CONX Chain, participants are bonded Xpla holders. Unbonded Xpla holders and
 other users do not get the right to participate in governance. However, they
 can submit and deposit on proposals.
 

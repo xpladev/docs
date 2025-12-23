@@ -4,7 +4,7 @@ weight: 30
 type: docs
 ---
 
-Use the following information to set up and manage your production-level XPLA Chain full node.
+Use the following information to set up and manage your production-level CONX Chain full node.
 
 For information about running a validator node, visit the [validator guide]({{< ref "/full-node/full-node/manage-a-validator/overview" >}}).
 
@@ -38,7 +38,7 @@ Modify `/etc/security/limits.conf`[\*](https://linux.die.net/man/5/limits.conf) 
 
    ```bash
    [Unit]
-   Description=XPLA Chain Daemon
+   Description=CONX Chain Daemon
    After=network.target
 
    [Service]

@@ -8,7 +8,7 @@ type: docs
 
 ### Wallet credential
 
-You should also have the latest version of `xplad` by building the latest version of XPLA Chain core. You will configure `xplad` to use it against your isolated testnet environment.
+You should also have the latest version of `xplad` by building the latest version of CONX Chain core. You will configure `xplad` to use it against your isolated testnet environment.
 
 In a separate terminal, make sure to set up the following mnemonic:
 
@@ -141,7 +141,7 @@ And then execute the command above again!
 
 ## Querying & executing on the contract
 
-Like other EVM-based blockchain network, you may use `web3.js` to interact with EVM contracts on XPLA chain. To query and send transactions to a smart contract on the Ethereum blockchain using web3.js, you will need to do the following:
+Like other EVM-based blockchain network, you may use `web3.js` to interact with EVM contracts on CONX Chain. To query and send transactions to a smart contract on the Ethereum blockchain using web3.js, you will need to do the following:
 
 - Create an instance of the web3 object and connect to an Ethereum network
 - Load the contract ABI (Application Binary Interface) and instantiate the contract object
@@ -150,7 +150,7 @@ Like other EVM-based blockchain network, you may use `web3.js` to interact with 
 
 ### Querying
 
-XPLA chain opens `8545` port for EVM based interaction. Here's an example of how to connect to the XPLA chain:
+CONX Chain opens `8545` port for EVM based interaction. Here's an example of how to connect to the CONX Chain:
 
 ```javascript
 const Web3 = require('web3');

@@ -6,7 +6,7 @@
 
 [[main]]
   parent = "learn"
-  name = "About XPLA Chain"
+  name = "About CONX Chain"
   weight = 11
   url = "/learn/learn/about-xpla-chain"
 

@@ -7,7 +7,7 @@ type: docs
 {{< alert >}}
 **Note**
 
-XPLA Chain's crisis module inherits from the Cosmos SDK's [`crisis`](https://docs.cosmos.network/v0.45/modules/crisis/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+CONX Chain's crisis module inherits from the Cosmos SDK's [`crisis`](https://docs.cosmos.network/v0.45/modules/crisis/) module. This document is a stub and covers mainly important CONX Chain-specific notes about how it is used.
 {{< /alert >}}
 
 The crisis module halts the blockchain under the circumstance that a blockchain invariant is broken. Invariants can be registered with the application during the application initialization process.

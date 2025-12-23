@@ -82,7 +82,7 @@ const mne_key = EthSecp256k1HDWallet.fromMnemonic(
         derivations: [{
             prefix: "cosmos",
             hdPath: HDPath.cosmos().toString()
-        }]    // Cosmos(118)' coin type ( XPLA Chain had inherited initially )
+        }]    // Cosmos(118)' coin type ( CONX Chain had inherited initially )
     }
 )
 ```

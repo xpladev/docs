@@ -13,7 +13,7 @@ This example demonstrates how to use the Governance precompile contract to query
 Before running this example, make sure you have:
 
 - Node.js v18 or later
-- Access to XPLA Chain testnet (Cube)
+- Access to CONX Chain testnet (Cube)
 
 ## Setup
 

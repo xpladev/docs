@@ -1,3 +1,3 @@
 ---
-title : "XPLA Docs"
+title : "CONX Docs"
 ---

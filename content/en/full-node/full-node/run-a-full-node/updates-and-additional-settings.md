@@ -41,13 +41,13 @@ make
 If you have issues at this step, please check that you have a compatible version of GO installed (v1.18+).
 {{< /alert >}}
 
-The previous command uses `master` as it contains the latest stable release. See the [testnet repo](https://github.com/xpladev/testnets) for details on which version is needed for which testnet, and the [XPLA Chain Core release page](https://github.com/xpladev/xpla/releases) for details on each release.
+The previous command uses `master` as it contains the latest stable release. See the [testnet repo](https://github.com/xpladev/testnets) for details on which version is needed for which testnet, and the [CONX Chain Core release page](https://github.com/xpladev/xpla/releases) for details on each release.
 
 Your full node is now cleanly upgraded!
 
 ## Exporting State
 
-XPLA Chain can export the entire application state to a JSON file. You can use this file for manual analysis or as the genesis file of a new network.
+CONX Chain can export the entire application state to a JSON file. You can use this file for manual analysis or as the genesis file of a new network.
 
 Export state:
 
@@ -105,6 +105,6 @@ persistent_peers = "id100000000000000000000000000000000@1.2.3.4:26656,id20000000
 
 ### Rosetta
 
-Integrate XPLA Chain with Coinbase via the Rosetta API. Rosetta is an open-source API that organizes blockchain data into a standardized format, making it easy for developers to build cross-chain applications. Instead of creating specific code for each chain, Rosetta allows different blockchains to integrate into any exchange that uses Rosetta API.
+Integrate CONX Chain with Coinbase via the Rosetta API. Rosetta is an open-source API that organizes blockchain data into a standardized format, making it easy for developers to build cross-chain applications. Instead of creating specific code for each chain, Rosetta allows different blockchains to integrate into any exchange that uses Rosetta API.
 
 For more information, visit the [Rosetta docs site](https://www.rosetta-api.org/docs/welcome.html).

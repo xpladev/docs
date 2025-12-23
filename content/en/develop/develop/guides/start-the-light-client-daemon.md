@@ -9,7 +9,7 @@ The light client daemon (LCD) provides a REST-based adapter for the RPC endpoint
 {{< alert >}}
 **Note**
 
-The XPLA Chain SDKs currently rely on an active connection to a running LCD server. If you need a dedicated connection for the SDKs, set up an LCD.
+The CONX Chain SDKs currently rely on an active connection to a running LCD server. If you need a dedicated connection for the SDKs, set up an LCD.
 {{< /alert >}}
 
 To enable the REST API and Swagger, and to start the LCD, complete the following steps:
@@ -34,6 +34,6 @@ To enable the REST API and Swagger, and to start the LCD, complete the following
 
 Once restarted, the LCD will be available.
 
-For more information about the XPLA Chain REST API endpoints, see the [Swagger documentation](https://cube-lcd.xpla.dev/swagger/).
+For more information about the CONX Chain REST API endpoints, see the [Swagger documentation](https://cube-lcd.xpla.dev/swagger/).
 
 For more information on configuring `app.toml`, see [Configure General Settings]({{< ref "configure-general-settings" >}}).

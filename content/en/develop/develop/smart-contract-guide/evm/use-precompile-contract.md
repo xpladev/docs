@@ -6,7 +6,7 @@ type: docs
 
 # Precompile Contracts
 
-XPLA Chain is a Cosmos SDK-based blockchain that supports Solidity smart contracts through the EVM module. Precompile contracts are special contracts that allow you to access functionality from other Cosmos SDK modules (bank, staking, governance, etc.) within the EVM environment.
+CONX Chain is a Cosmos SDK-based blockchain that supports Solidity smart contracts through the EVM module. Precompile contracts are special contracts that allow you to access functionality from other Cosmos SDK modules (bank, staking, governance, etc.) within the EVM environment.
 
 ## Overview
 
@@ -14,7 +14,7 @@ Precompile contracts are pre-compiled contracts deployed at specific addresses t
 
 ## Available Precompile Contracts
 
-The following precompile contracts are available on XPLA Chain:
+The following precompile contracts are available on CONX Chain:
 
 | Module | Contract Address | Owner |
 |--------|------------------|-------|

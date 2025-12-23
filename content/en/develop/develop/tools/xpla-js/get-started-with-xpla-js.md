@@ -4,7 +4,7 @@ weight: 10
 type: docs
 ---
 
-xpla.js seeks to provide a compatible way to work with the XPLA Chain within JavaScript runtimes, such as Node.js and the browser. xpla.js enables the following functions:
+xpla.js seeks to provide a compatible way to work with the CONX Chain within JavaScript runtimes, such as Node.js and the browser. xpla.js enables the following functions:
 
 - Deserializing blockchain data into JavaScript objects with native data types and methods
 - Serializing objects back into a blockchain-compatible format
@@ -18,7 +18,7 @@ This is an in-depth guide on how to use the `xpla.js` SDK.
 In this tutorial, you'll learn how to:
 
 1. [Set up your project](#1-set-up-your-project)
-2. [Set up a XPLA Chain LCD (light client daemon)](#2-initialize-the-lcd)
+2. [Set up a CONX Chain LCD (light client daemon)](#2-initialize-the-lcd)
 3. [Create and connect a wallet](#3-create-a-cube-testnet-wallet)
 4. [Find a contract address](#4-find-a-contract-address)
 5. [Query a contract](#5-query-a-contract-and-set-up-the-transaction)
@@ -65,7 +65,7 @@ By the end of this guide, you'll be able to execute a token swap from your appli
 
 ## 2. Initialize the LCD
 
-XPLA Chain’s LCD or Light Client Daemon allows users to connect to the blockchain, make queries, create wallets, and submit transactions. It's the main workhorse behind `xpla.js`.
+CONX Chain’s LCD or Light Client Daemon allows users to connect to the blockchain, make queries, create wallets, and submit transactions. It's the main workhorse behind `xpla.js`.
 
 1. Install a fetch library to make HTTP requests and dynamically pull recommended gas prices. You can use the one wallet referenced below or choose your favorite.
 

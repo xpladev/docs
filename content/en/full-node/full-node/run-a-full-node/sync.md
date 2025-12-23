@@ -58,7 +58,7 @@ Compare this height to the **Latest Blocks** by checking the API for latest bloc
 
 ## State Sync
 
-You can significantly accelerate the synchronization process by providing `xplad` with a recent snapshot of the network state. Snapshots are made publicly available by members of the XPLA Chain community, and not maintained as part of this documentation.
+You can significantly accelerate the synchronization process by providing `xplad` with a recent snapshot of the network state. Snapshots are made publicly available by members of the CONX Chain community, and not maintained as part of this documentation.
 
 ## Sync Complete
 
@@ -97,4 +97,4 @@ xplad start --x-crisis-skip-assert-invariants
 
 ## Congratulations!
 
-You've successfully joined a network as a full node operator. If you are a validator, continue to [manage a XPLA Chain validator]({{< ref "/full-node/full-node/manage-a-validator/overview" >}}) for the next steps.
+You've successfully joined a network as a full node operator. If you are a validator, continue to [manage a CONX Chain validator]({{< ref "/full-node/full-node/manage-a-validator/overview" >}}) for the next steps.

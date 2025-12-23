@@ -88,7 +88,7 @@ For example, to recover a mnemonic with the old XPLA Vault HD path using coin ty
 ```ts
 const mne_key = new MnemonicKey({
   mnemonic: "[ Your BIP39 mnemonic ]",
-  coinType: 118     // <--------- Cosmos' coin type ( XPLA Chain had inherited initially )
+  coinType: 118     // <--------- Cosmos' coin type ( CONX Chain had inherited initially )
 });
 ```
 

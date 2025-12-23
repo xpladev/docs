@@ -4,9 +4,9 @@ weight: 10
 type: docs
 ---
 
-The tasks in this section describe how to set up a XPLA Chain validator. While setting up a rudimentary validating node is easy, running a production-quality validator node with a robust architecture and security features requires an extensive setup.
+The tasks in this section describe how to set up a CONX Chain validator. While setting up a rudimentary validating node is easy, running a production-quality validator node with a robust architecture and security features requires an extensive setup.
 
-The XPLA Chain core is powered by the Tendermint consensus. Validators run full nodes, participate in consensus by broadcasting votes, commit new blocks to the blockchain, and participate in governance of the blockchain. Validators can cast votes on behalf of their delegators. A validator's voting power is weighted according to their total stake. Higher staked validators make up the **Active Validator Set** and are the only validators that sign blocks and receive revenue.
+The CONX Chain core is powered by the Tendermint consensus. Validators run full nodes, participate in consensus by broadcasting votes, commit new blocks to the blockchain, and participate in governance of the blockchain. Validators can cast votes on behalf of their delegators. A validator's voting power is weighted according to their total stake. Higher staked validators make up the **Active Validator Set** and are the only validators that sign blocks and receive revenue.
 
 Validators and their delegators earn the fees, which are added on to each transaction to avoid spamming and pay for computing power. Validators check minimum gas prices and reject transactions that have implied gas prices below this threshold.
 

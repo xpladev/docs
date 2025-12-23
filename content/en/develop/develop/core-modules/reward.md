@@ -13,7 +13,7 @@ Before explaining the rewards module, please refer to the [Distribution module](
 
 The reward module supports settlement to validators.
 
-`RewardDistributeAccount` stakes XPLA and a portion of all delegation rewards accrued in `RewardDistributeAccount` are moved to the `reward module account` and devoted to settlement funds, which help validators to settle down on the XPLA Chain.
+`RewardDistributeAccount` stakes XPLA and a portion of all delegation rewards accrued in `RewardDistributeAccount` are moved to the `reward module account` and devoted to settlement funds, which help validators to settle down on the CONX Chain.
 
 ## Transitions
 

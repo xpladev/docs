@@ -8,7 +8,7 @@ It is highly recommended that you set up a private local network before joining 
 
 ### Create a Single Node
 
-The simplest XPLA Chain you can set up is a local testnet with just a single node. In a single-node environment, you have one account and are the only validator signing blocks for your private network.
+The simplest CONX Chain you can set up is a local testnet with just a single node. In a single-node environment, you have one account and are the only validator signing blocks for your private network.
 
 1. Initialize your genesis file that will bootstrap the network. Replace the following variables with your own information:
 
@@ -16,7 +16,7 @@ The simplest XPLA Chain you can set up is a local testnet with just a single nod
      xplad init --chain-id=<testnet-name> <node-moniker>
    ```
 
-1. Generate a XPLA Chain account. Replace the variable with your account name:
+1. Generate a CONX Chain account. Replace the variable with your account name:
 
    ```bash
    xplad keys add <account-name>
@@ -38,7 +38,7 @@ xplad gentx <my-account> 10000000000000000000axpla --chain-id=<testnet-name>
 xplad collect-gentxs
 ```
 
-### Start Your Private XPLA Chain
+### Start Your Private CONX Chain
 
 Run the following command to start your private network:
 
@@ -46,11 +46,11 @@ Run the following command to start your private network:
 xplad start
 ```
 
-If the private XPLA Chain is set up correctly, your `xplad` node will be running on `tcp://localhost:26656`, listening for incoming transactions, and signing blocks.
+If the private CONX Chain is set up correctly, your `xplad` node will be running on `tcp://localhost:26656`, listening for incoming transactions, and signing blocks.
 
 ## Join a public network
 
-These instructions are for setting up a brand new full node from scratch. You can join a public XPLA Chain, such as the mainnet or testnet, by completing the following steps:
+These instructions are for setting up a brand new full node from scratch. You can join a public CONX Chain, such as the mainnet or testnet, by completing the following steps:
 
 ### 1. Select a network
 
@@ -71,7 +71,7 @@ Note that the versions of the network listed above are the latest versions. To f
 
 **Genesis-transaction** specifies the account balances and parameters at the start of the network to use when replaying transactions and syncing.
 
-**Addressbook** lists a selection of peers for your node to dial to in order to discover other nodes in the network. Public address books of peers are made available by the XPLA Chain community.
+**Addressbook** lists a selection of peers for your node to dial to in order to discover other nodes in the network. Public address books of peers are made available by the CONX Chain community.
 
 Choose a `testnet` or `mainnet` address type and download the appropriate genesis-transaction and addressbook. Links to these are posted in [Select-a-network]({{< ref "#1-select-a-network" >}}).
 

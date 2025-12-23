@@ -10,7 +10,7 @@ The WASM module implements the execution environment for WebAssembly smart contr
 
 ### Smart Contracts
 
-Smart contracts are autonomous agents that can interact with other entities on the XPLA Chain, such as human-owned accounts, validators, and other smart contracts. Each smart contract has:
+Smart contracts are autonomous agents that can interact with other entities on the CONX Chain, such as human-owned accounts, validators, and other smart contracts. Each smart contract has:
 
 - A unique **contract address** with an account that holds funds.
 - A **code ID**, where its logic is defined.
@@ -18,11 +18,11 @@ Smart contracts are autonomous agents that can interact with other entities on t
 
 #### Contract Address
 
-Upon instantiation, each contract is automatically assigned a XPLA Chain account address, called the contract address. The address is procedurally generated on-chain without an accompanying private and public key pair, and it can be completely determined by the contract's number order of existence. For instance, on two separate XPLA Chain, the first contract will always be assigned the address `xpla14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9s525s0h`, and similarly for the second, third, and so on.
+Upon instantiation, each contract is automatically assigned a CONX Chain account address, called the contract address. The address is procedurally generated on-chain without an accompanying private and public key pair, and it can be completely determined by the contract's number order of existence. For instance, on two separate CONX Chain, the first contract will always be assigned the address `xpla14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9s525s0h`, and similarly for the second, third, and so on.
 
 #### Code ID
 
-On XPLA Chain, code upload and contract creation are separate events. A smart contract writer first uploads WASM bytecode onto the blockchain to obtain a code ID, which they then can use to initialize an instance of that contract. This scheme promotes efficient storage because most contracts share the same underlying logic and vary only in their initial configuration. Vetted, high-quality contracts for common use cases like fungible tokens and multisig wallets can be easily reused without the need to upload new code.
+On CONX Chain, code upload and contract creation are separate events. A smart contract writer first uploads WASM bytecode onto the blockchain to obtain a code ID, which they then can use to initialize an instance of that contract. This scheme promotes efficient storage because most contracts share the same underlying logic and vary only in their initial configuration. Vetted, high-quality contracts for common use cases like fungible tokens and multisig wallets can be easily reused without the need to upload new code.
 
 #### Key-value Store
 
@@ -73,7 +73,7 @@ The actual execution of WASM bytecode is performed by [wasmer](https://github.co
 
 #### Gas Meter
 
-In addition to the regular gas fees incurred from creating the transaction, XPLA Chain also calculates a separate gas when executing smart contract code. This is tracked by the **gas meter**, which is during the execution of every opcode and gets translated back to native XPLA Chain gas via a constant multiplier (currently set to 100).
+In addition to the regular gas fees incurred from creating the transaction, CONX Chain also calculates a separate gas when executing smart contract code. This is tracked by the **gas meter**, which is during the execution of every opcode and gets translated back to native CONX Chain gas via a constant multiplier (currently set to 100).
 
 ### Gas Fees
 

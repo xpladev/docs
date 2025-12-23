@@ -7,10 +7,10 @@ type: docs
 {{< alert >}}
 **Note**
 
-XPLA Chain's slashing module inherits from the Cosmos SDK's [`slashing`](https://docs.cosmos.network/v0.45/modules/slashing/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+CONX Chain's slashing module inherits from the Cosmos SDK's [`slashing`](https://docs.cosmos.network/v0.45/modules/slashing/) module. This document is a stub and covers mainly important CONX Chain-specific notes about how it is used.
 {{< /alert >}}
 
-The slashing module enables XPLA Chain to disincentivize any attributable action by a protocol-recognized actor with value at stake by penalizing them. The penalty is called [slashing]({{< ref "glossary#slashing" >}}). XPLA Chain mainly uses the [`Staking`]({{< ref "staking" >}}) module to slash when violating validator responsibilities. This module manages lower-level penalties at the Tendermint consensus level, such as double-signing.
+The slashing module enables CONX Chain to disincentivize any attributable action by a protocol-recognized actor with value at stake by penalizing them. The penalty is called [slashing]({{< ref "glossary#slashing" >}}). CONX Chain mainly uses the [`Staking`]({{< ref "staking" >}}) module to slash when violating validator responsibilities. This module manages lower-level penalties at the Tendermint consensus level, such as double-signing.
 
 ## Concepts
 
@@ -29,7 +29,7 @@ attributes.
 ### Tombstone Caps
 
 In order to mitigate the impact of initially likely categories of non-malicious
-protocol faults, the XPLA Chain implements for each validator
+protocol faults, the CONX Chain implements for each validator
 a _tombstone_ cap, which only allows a validator to be slashed once for a double
 sign fault. For example, if you misconfigure your HSM and double-sign a bunch of
 old blocks, you'll only be punished for the first double-sign (and then immediately tombstombed). This will still be quite expensive and desirable to avoid, but tombstone caps

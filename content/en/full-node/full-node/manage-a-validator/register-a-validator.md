@@ -4,7 +4,7 @@ weight: 50
 type: docs
 ---
 
-This is a detailed step-by-step guide for setting up a XPLA Chain validator. Please be aware that while it is easy to set up a rudimentary validating node, running a production-quality validator node with a robust architecture and security features requires an extensive setup.
+This is a detailed step-by-step guide for setting up a CONX Chain validator. Please be aware that while it is easy to set up a rudimentary validating node, running a production-quality validator node with a robust architecture and security features requires an extensive setup.
 
 For more information on setting up a validator, see [additional resources]({{< ref "overview#additional-resources" >}}).
 

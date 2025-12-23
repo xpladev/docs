@@ -56,7 +56,7 @@ A node address has the following format: `nodeid@ip:port`, you can get the nodei
 
 By default, uppercase environment variables with the following prefixes will replace lowercase command-line flags:
 
-- `TE` \(for XPLA Chain flags\)
+- `TE` \(for CONX Chain flags\)
 - `TM` \(for Tendermint flags\)
 - `BC` \(for democli or basecli flags\)
 

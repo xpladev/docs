@@ -7,7 +7,7 @@ type: docs
 {{< alert >}}
 **Note**
 
-XPLA Chain's mint module inherits from the Cosmos SDK's [`mint`](https://docs.cosmos.network/v0.45/modules/mint/) module. This document is a stub and covers mainly important XPLA Chain-specific notes about how it is used.
+CONX Chain's mint module inherits from the Cosmos SDK's [`mint`](https://docs.cosmos.network/v0.45/modules/mint/) module. This document is a stub and covers mainly important CONX Chain-specific notes about how it is used.
 {{< /alert >}}
 
 The mint module is in charge of the creation of new XPLA through minting. At the beginning of every block, new XPLA is released by the mint module and sent to the fee collector account to be distributed to stakers as rewards.

@@ -24,7 +24,7 @@ Please contact us via official [Telegram channel](https://t.me/Official_XPLA) if
 {{< alert context="warning" >}}
 **Important**
 
-You must first agree to the following disclaimer by checking the box and clicking “Agree” before you proceed with the migration. Please keep in mind that in no event XPLA is liable for any loss that occurred during the migration process, so it is very important that you follow all of the given instructions to safely complete the migration procedure. Please refer to the whitepaper for detailed tokenomics behind XPLA chain.
+You must first agree to the following disclaimer by checking the box and clicking “Agree” before you proceed with the migration. Please keep in mind that in no event XPLA is liable for any loss that occurred during the migration process, so it is very important that you follow all of the given instructions to safely complete the migration procedure. Please refer to the whitepaper for detailed tokenomics behind CONX Chain.
 {{< /alert >}}
 
 {{< figure2 src="migration-1.png" width="70%" >}}
@@ -41,17 +41,17 @@ Here, you can pick the type of migration you wish to undertake. If you wish to m
 
 {{< figure2 src="migration-4.png" width="70%" >}}
 
-In “Migrate All”, you can view all of the CTX you currently hold in your C2X Station. You can migrate all of your CTX to XPLA chain at once by clicking “Migrate”.
+In “Migrate All”, you can view all of the CTX you currently hold in your C2X Station. You can migrate all of your CTX to CONX Chain at once by clicking “Migrate”.
 
 {{< figure2 src="migration-5.png" width="70%" >}}
 
-On the other hand, if you wish to migrate some of your assets first, click "Migrate by your choice" and the following screen with tick boxes will appear to the left of all of the assets you own in your C2X Station. Here, you can manually pick which assets and how many of them to migrate over to the XPLA chain.
+On the other hand, if you wish to migrate some of your assets first, click "Migrate by your choice" and the following screen with tick boxes will appear to the left of all of the assets you own in your C2X Station. Here, you can manually pick which assets and how many of them to migrate over to the CONX Chain.
 If you change your mind and wish to migrate everything at once, you can also do it here by clicking the button "Max".
 
 {{< alert >}}
 **Note**
 
-You can only migrate CTX for now, you will be able to migrate other tokens and assets from games after each of them has migrated to XPLA chain.
+You can only migrate CTX for now, you will be able to migrate other tokens and assets from games after each of them has migrated to CONX Chain.
 {{< /alert >}}
 
 {{< figure2 src="migration-6.png" width="70%" >}}
@@ -77,4 +77,4 @@ Please check the app C2X Station on your phone to finalize the migration procedu
 
 {{< figure2 src="migration-8.png" width="70%" >}}
 
-Please migrate all your assets in your C2X Station to XPLA chain when you can because it can become quite troublesome to enjoy everything what XPLA has to offer without appropriate tokens. We're only getting started so stay tuned as we revolutionize the gaming space.
+Please migrate all your assets in your C2X Station to CONX Chain when you can because it can become quite troublesome to enjoy everything what XPLA has to offer without appropriate tokens. We're only getting started so stay tuned as we revolutionize the gaming space.

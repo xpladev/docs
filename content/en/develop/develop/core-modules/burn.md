@@ -5,7 +5,7 @@ type: docs
 mermaid: true
 ---
 
-The burn module is responsible for handling token burning operations through governance proposals. This module allows the XPLA Chain community to burn tokens by submitting and passing governance proposals.
+The burn module is responsible for handling token burning operations through governance proposals. This module allows the CONX Chain community to burn tokens by submitting and passing governance proposals.
 
 ## Concepts
 

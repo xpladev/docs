@@ -4,7 +4,7 @@ title: IBC Transfers
 type: docs
 ---
 
-XPLA Chain has full IBC transfer capabilities through both xpla.js and XPLA Vault. Although IBC functionality is not readily exposed through XPLA Vault’s front-end, it can be fully incorporated into any dApp. It is up to a dApp’s front end to initiate IBC transfers.
+CONX Chain has full IBC transfer capabilities through both xpla.js and XPLA Vault. Although IBC functionality is not readily exposed through XPLA Vault’s front-end, it can be fully incorporated into any dApp. It is up to a dApp’s front end to initiate IBC transfers.
 
 ## MsgTransfer
 
@@ -15,7 +15,7 @@ new MsgTransfer(
   "transfer", // IBC port
   "channel-0", // Outbound channel (Axelar)
   new Coin("axpla", "1000000000000000000"), // 1 XPLA
-  "xpla1cvw8sundusurqajhurpcfk7yvuzlh92cvkpy28", // Source Address on XPLA Chain
+  "xpla1cvw8sundusurqajhurpcfk7yvuzlh92cvkpy28", // Source Address on CONX Chain
   "axelar1cl4qw7u35uf77l4scjtv0qej8ycevu4mrdpvmg", // Destination address on Axelar network
   undefined, // Timeout block height (optional)
   (Date.now() + 60 * 1000) * 1e6 // Timeout timestamp (in nanoseconds) relative to the current block timestamp.
@@ -24,13 +24,13 @@ new MsgTransfer(
 
 ## Supported Channels
 
-Channels are defined when a relayer is set up between XPLA Chain and an external chain. For each new connected chain the channel ID is incremented.
+Channels are defined when a relayer is set up between CONX Chain and an external chain. For each new connected chain the channel ID is incremented.
 
 You can use [Mintscan](https://www.mintscan.io/xpla/relayers) to find the available channels and their IDs.
 
-## Derive Cosmos Chain Addresses from a XPLA Chain Address
+## Derive Cosmos Chain Addresses from a CONX Chain Address
 
-Cosmos SDK based blockchains use bech32 to encode the public key for display. Assuming the same private key is used on multiple Cosmos SDK chains it is possible to decode a XPLA Chain address and generate the corresponding public key on another chain.
+Cosmos SDK based blockchains use bech32 to encode the public key for display. Assuming the same private key is used on multiple Cosmos SDK chains it is possible to decode a CONX Chain address and generate the corresponding public key on another chain.
 
 Here's a quick example using the [bech32](https://github.com/bitcoinjs/bech32) JavaScript library:
 
@@ -44,7 +44,7 @@ const axelarAddress = bech32.encode('axelar', decodedAddress.words);
 
 ## Complete Example
 
-The following example demonstrates how to send 1 XPLA from XPLA Chain to the Axelar network.
+The following example demonstrates how to send 1 XPLA from CONX Chain to the Axelar network.
 
 ```JS
 import {

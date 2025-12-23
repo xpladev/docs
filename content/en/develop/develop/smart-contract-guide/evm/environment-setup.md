@@ -6,9 +6,9 @@ type: docs
 
 As a smart contract developer, you will need to write, compile, upload, and test your contracts before deploying them on the Dimension mainnet. The first step is to set up a specialized environment to streamline development.
 
-## Install XPLA Chain Core Locally
+## Install CONX Chain Core Locally
 
-Visit [build XPLA Chain core]({{< ref "build-xpla-core" >}}) to install the latest version of XPLA Chain Core to obtain a working version of `xplad`. You will need this to connect to your local XPLA Chain test network to work with smart contracts.
+Visit [build CONX Chain core]({{< ref "build-xpla-core" >}}) to install the latest version of CONX Chain Core to obtain a working version of `xplad`. You will need this to connect to your local CONX Chain test network to work with smart contracts.
 
 ## Install Node.js
 

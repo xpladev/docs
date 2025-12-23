@@ -4,7 +4,7 @@ weight: 30
 type: docs
 ---
 
-The following information explains the functions you can use from xplad, the command-line interface that connects to XPLA Chain and enables you to interact with the XPLA Chain. Every active validator and full node runs xplad and communicates with their node via xplad. In this relationship, xplad operates as both the client and the server. You can use xplad to interact with the XPLA Chain by uploading contracts, querying data, managing staking activities, working with governance proposals, and more. For more general information at the command line, run `xplad --help`. For more information about a specific `xplad` command, append the `-h` or `--help` flag after the command, such as `xplad query --help`.
+The following information explains the functions you can use from xplad, the command-line interface that connects to CONX Chain and enables you to interact with the CONX Chain. Every active validator and full node runs xplad and communicates with their node via xplad. In this relationship, xplad operates as both the client and the server. You can use xplad to interact with the CONX Chain by uploading contracts, querying data, managing staking activities, working with governance proposals, and more. For more general information at the command line, run `xplad --help`. For more information about a specific `xplad` command, append the `-h` or `--help` flag after the command, such as `xplad query --help`.
 
 ## Accessing a Node
 
@@ -12,7 +12,7 @@ To query the state and send transactions, you must connect to a node, which is t
 
 ### Running Your Own Full Node
 
-Running your own full node is the most secure option, but it comes with relatively high resource requirements. For more information about the requirements to run your own full node and a tutorial for installing `xplad`, see [installation]({{< ref "build-xpla-core" >}}). For a tutorial that explains how to connect to an existing XPLA Chain, see [joining a network]({{< ref "join-a-network" >}}).
+Running your own full node is the most secure option, but it comes with relatively high resource requirements. For more information about the requirements to run your own full node and a tutorial for installing `xplad`, see [installation]({{< ref "build-xpla-core" >}}). For a tutorial that explains how to connect to an existing CONX Chain, see [joining a network]({{< ref "join-a-network" >}}).
 
 ### Connecting to a Remote Full Node
 
@@ -24,7 +24,7 @@ If you are not running a node yet would like to communicate through xplad, lists
 
 ## Configuring `xplad`
 
-`xplad` enables you to interact with the node that runs on the XPLA Chain, whether you run it yourself or not. To configure `xplad`, edit the the `config.toml` file in the `~/.xpla/config/` directory.
+`xplad` enables you to interact with the node that runs on the CONX Chain, whether you run it yourself or not. To configure `xplad`, edit the the `config.toml` file in the `~/.xpla/config/` directory.
 
 ## Querying Blockchain State
 
@@ -181,7 +181,7 @@ xplad tx broadcast --node=<node> signedSendTx.json
 
 ## Fees
 
-Transactions on the XPLA Chain need to include a transaction fee in order to be processed. This fee pays for the gas required to run the transaction. The formula is the following:
+Transactions on the CONX Chain need to include a transaction fee in order to be processed. This fee pays for the gas required to run the transaction. The formula is the following:
 
 {{< katex display >}}fees = gas * gasPrices{{< /katex >}}
 
@@ -240,7 +240,7 @@ xplad tx send ... \
 
 ## Shell Autocompletion
 
-Auto-completion scripts for popular UNIX shell interpreters such as `bash` and `zsh` can be generated through the `completion` command, which is available for both `xplad` and `xplad`. This allows for a more convenient way to interact with the XPLA Chain core endpoints when using the command-line.
+Auto-completion scripts for popular UNIX shell interpreters such as `bash` and `zsh` can be generated through the `completion` command, which is available for both `xplad` and `xplad`. This allows for a more convenient way to interact with the CONX Chain core endpoints when using the command-line.
 
 If you want to generate `bash` completion scripts run the following command:
 

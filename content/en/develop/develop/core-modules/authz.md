@@ -7,7 +7,7 @@ type: docs
 {{< alert >}}
 **Note**
 
-XPLA Chain's fee grant module inherits from the Cosmos SDK's [`authz`](https://docs.cosmos.network/v0.45/modules/authz/) module. This document is a stub and explains mainly important XPLA Chain-specific notes about how it is used.
+CONX Chain's fee grant module inherits from the Cosmos SDK's [`authz`](https://docs.cosmos.network/v0.45/modules/authz/) module. This document is a stub and explains mainly important CONX Chain-specific notes about how it is used.
 {{< /alert >}}
 
 The authz (message authorization) module allows users to authorize another account to send messages on their behalf. Certain authorizations, such as the spending of another account's tokens, can be parameterized to constrain the permissions of the grantee, such as setting a spending limit.

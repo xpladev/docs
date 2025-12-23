@@ -288,22 +288,22 @@ body {
 }
 
 .xpla_docs_logo {
-  background-image: url("/XPLA_DOCS_white_bg.svg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
   width: 170px;
   height: 27px;
+  display: flex;
+  align-items: center;
 }
 
 .xpla_logo {
-  background-image: url("/XPLA_white_bg.svg");
+  background-image: url("/XPLA.svg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
   width: 90px;
-  height: 20px;
-  margin-bottom: 2px;
+  height: 27px;
 }
 
 .nav-link {
