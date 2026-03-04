@@ -6,7 +6,7 @@ type: docs
 
 # Governance Precompile Example
 
-This example demonstrates how to use the Governance precompile contract to query proposals and governance parameters.
+This example demonstrates how to use the Governance precompile contract to query proposals and governance parameters with viem and `@xpla/evm`.
 
 ## Prerequisites
 
@@ -20,43 +20,47 @@ Before running this example, make sure you have:
 Install the required dependencies:
 
 ```bash
-npm install @xpla/evm @xpla/xpla @interchainjs/cosmos @interchainjs/utils ethers bip39
+pnpm add @xpla/evm viem
 ```
+
+Or with npm: `npm install @xpla/evm viem`
 
 ## Example Code
 
-```javascript
-// examples/governance-precompile.js
-import { JsonRpcProvider, Wallet } from 'ethers';
-import { createPrecompileGov } from '@xpla/evm/precompiles';
+```typescript
+// examples/governance-precompile.ts
+import { gov } from '@xpla/evm/precompiles';
+import { conxTestnet } from '@xpla/evm';
+import { getContract, createPublicClient, http } from 'viem';
 
 async function governancePrecompileExample() {
   console.log('=== Governance Precompile Example ===\n');
 
-  const RPC_URL = 'https://cube-evm-rpc.xpla.dev';
-  const provider = new JsonRpcProvider(RPC_URL);
+  const publicClient = createPublicClient({
+    chain: conxTestnet,
+    transport: http(),
+  });
 
-  // Create governance contract instance
-  const govContract = createPrecompileGov(provider);
+  const govContract = getContract({ ...gov, client: publicClient });
 
   try {
     // Query governance proposals
     console.log('Querying governance proposals...');
-    const proposalsResponse = await govContract.getProposals(
+    const proposalsResponse = await govContract.read.getProposals([
       0, // proposal status (0 = all)
-      '0x0000000000000000000000000000000000000000', // voter address
-      '0x0000000000000000000000000000000000000000', // depositor address
+      '0x0000000000000000000000000000000000000000' as `0x${string}`, // voter
+      '0x0000000000000000000000000000000000000000' as `0x${string}`, // depositor
       {
         key: new Uint8Array(),
         offset: 0n,
         limit: 10n,
         countTotal: false,
-        reverse: false
-      }
-    );
-    
+        reverse: false,
+      },
+    ]);
+
     console.log(`Found ${proposalsResponse.proposals.length} proposals\n`);
-    
+
     if (proposalsResponse.proposals.length > 0) {
       const proposal = proposalsResponse.proposals[0];
       console.log('Sample Proposal:');
@@ -70,22 +74,20 @@ async function governancePrecompileExample() {
 
     // Query governance parameters
     console.log('Querying governance parameters...');
-    const params = await govContract.getParams();
-    
+    const params = await govContract.read.getParams();
     console.log('Governance Parameters:');
     console.log(`- Voting Period: ${params.votingPeriod} seconds`);
-    console.log(`- Min Deposit: ${params.minDeposit.map(d => `${d.amount} ${d.denom}`).join(', ')}`);
+    console.log(`- Min Deposit: ${params.minDeposit.map((d) => `${d.amount} ${d.denom}`).join(', ')}`);
     console.log(`- Quorum: ${params.quorum}`);
     console.log(`- Threshold: ${params.threshold}`);
     console.log(`- Veto Threshold: ${params.vetoThreshold}\n`);
 
     // Query constitution
     console.log('Querying constitution...');
-    const constitution = await govContract.getConstitution();
+    const constitution = await govContract.read.getConstitution();
     console.log(`Constitution: ${constitution}`);
-    
+
     console.log('✅ Governance queries completed successfully!');
-    
   } catch (error) {
     console.error('❌ Governance operation failed:', error);
   }
@@ -97,7 +99,7 @@ governancePrecompileExample().catch(console.error);
 ## Running the Example
 
 ```bash
-node examples/governance-precompile.js
+npx tsx examples/governance-precompile.ts
 ```
 
 ## Expected Output
@@ -129,22 +131,15 @@ Constitution: This chain operates under...
 
 ## Key Features
 
-- **Proposal Queries**: Retrieve active and historical governance proposals
-- **Parameter Queries**: Get current governance parameters like voting periods
-- **Constitution Access**: Query the chain's constitution document
-- **Filtering Options**: Filter proposals by status, voter, or depositor
-
-## Common Operations
-
-This example demonstrates:
-- Querying all governance proposals with pagination
-- Extracting proposal details (ID, status, title, summary, proposer)
-- Retrieving governance parameters (voting period, deposit requirements, thresholds)
-- Accessing the chain constitution
+- **Proposal Queries**: Retrieve proposals via `getProposals` with pagination
+- **Parameter Queries**: Get governance parameters with `getParams`
+- **Constitution**: Query the chain constitution with `getConstitution`
+- **viem + @xpla/evm**: Uses `getContract` with `gov` from `@xpla/evm/precompiles`
 
 ## Proposal Statuses
 
-Common proposal statuses you might encounter:
+Common proposal statuses:
+
 - `PROPOSAL_STATUS_UNSPECIFIED`
 - `PROPOSAL_STATUS_DEPOSIT_PERIOD`
 - `PROPOSAL_STATUS_VOTING_PERIOD`
@@ -154,5 +149,6 @@ Common proposal statuses you might encounter:
 
 ## Related Documentation
 
+- [About @xpla/evm](/develop/develop/tools/evm/about-evm/)
 - [Governance Precompile Reference](/develop/develop/smart-contract-guide/precompile/gov/)
 - [Governance Module Documentation](/develop/develop/core-modules/gov/)

@@ -6,258 +6,169 @@ type: docs
 
 # About @xpla/evm
 
-`@xpla/evm` is a TypeScript library that provides TypeChain-generated interfaces for CONX Chain's precompile contracts. This package enables developers to easily interact with CONX Chain's precompile contracts using ethers.js with full TypeScript support and type safety.
+`@xpla/evm` provides chain definitions and precompile addresses/ABIs for XPLA EVM. Use it with [viem](https://viem.sh/) to interact with CONX Chain's EVM and precompile contracts with full TypeScript type inference.
 
 ## Overview
 
-CONX Chain provides various precompile contracts that allow access to Cosmos SDK module functionality within the EVM environment. The `@xpla/evm` package provides pre-generated TypeScript interfaces for these precompile contracts, making it easy to interact with them using familiar ethers.js patterns.
+CONX Chain exposes Cosmos SDK module functionality via precompile contracts in the EVM environment. The `@xpla/evm` package exports chain configs and precompile `{ abi, address }` objects for use with viem, so you can call `readContract` and `writeContract` with full type safety.
 
 ## Key Features
 
-- **TypeScript Interfaces**: Pre-generated TypeChain interfaces for all precompile contracts
-- **Ethers.js Integration**: Seamless integration with ethers.js library
-- **Type Safety**: Full TypeScript support with complete type definitions
-- **Precompile Contract Support**: Easy access to CONX Chain's precompile contracts
-- **Factory Classes**: Generated factory classes for contract instantiation
-- **Convenience Functions**: Helper functions for creating pre-connected precompile contracts
-
-## Getting Started
-
-This guide will walk you through setting up a project with `@xpla/evm` and interacting with CONX Chain's precompile contracts.
-
-## About This Tutorial
-
-In this tutorial, you'll learn how to:
-
-1. [Set up your project](#1-set-up-your-project)
-2. [Install @xpla/evm](#2-install-xpla-evm)
-3. [Connect to precompile contracts](#3-connect-to-precompile-contracts)
-4. [Use individual precompile contracts](#4-use-individual-precompile-contracts)
-5. [Use convenience functions](#5-use-convenience-functions)
-
-By the end of this guide, you'll be able to interact with CONX Chain's precompile contracts using the `@xpla/evm` package.
+- **Chain definitions**: `conxMainnet`, `conxTestnet`, `conxLocal` for viem
+- **Precompile ABI + address**: Each precompile exported as `{ abi, address }` for viem
+- **Type inference**: Full type inference for `readContract` / `writeContract` and `getContract`
+- **Precompile support**: auth, bank, wasm, bech32, distribution, gov, slashing, staking
 
 ## Prerequisites
 
 - [Node.js v18 or later](https://nodejs.org/)
-- [npm or yarn](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [pnpm](https://pnpm.io/), npm, or yarn
 - Basic knowledge of TypeScript/JavaScript
-- Understanding of ethers.js and smart contracts
+- Understanding of [viem](https://viem.sh/) and smart contracts
 
-## 1. Set up Your Project
+## Installation
 
-1. Create a new directory for your project:
-
-   ```sh
-   mkdir my-xpla-evm-project
-   cd my-xpla-evm-project
-   ```
-
-2. Initialize your project:
-
-   ```sh
-   npm init -y
-   ```
-
-3. Create the basic project structure:
-
-   ```sh
-   mkdir src
-   touch src/index.ts
-   ```
-
-## 2. Install @xpla/evm
-
-Install the `@xpla/evm` package and its dependencies:
-
-```sh
-npm install @xpla/evm
+```bash
+pnpm add @xpla/evm viem
 ```
 
-Or if you're using yarn:
+Or with npm:
 
-```sh
-yarn add @xpla/evm
+```bash
+npm install @xpla/evm viem
 ```
 
-## 3. Use Query Functions
+Or with yarn:
 
-Create a script using the convenience functions for easier precompile contract access. Create `src/query-example.ts`:
+```bash
+yarn add @xpla/evm viem
+```
+
+## Chain (viem)
+
+Use the exported chain definitions with viem's `createPublicClient`:
 
 ```typescript
-import { ethers } from 'ethers';
-import { 
-  createPrecompileBank, 
-  createPrecompileGov, 
-  createPrecompileContracts 
-} from '@xpla/evm/precompiles';
+import { conxMainnet, conxTestnet, conxLocal } from '@xpla/evm';
+import { createPublicClient, http } from 'viem';
+
+const client = createPublicClient({
+  chain: conxMainnet,
+  transport: http(),
+});
+```
+
+## Precompile addresses and ABI
+
+Each precompile is exported as `{ abi, address }` from `@xpla/evm/precompiles` for use with viem. You get full type inference for `readContract` and `writeContract`.
+
+### Query example (read)
+
+Example that queries bank balance and staking validators.
+
+```typescript
+import { bank, staking } from '@xpla/evm/precompiles';
+import { getContract, createPublicClient, http } from 'viem';
+import { conxMainnet } from '@xpla/evm';
 
 async function main() {
-  console.log('=== Convenience Functions Example ===\n');
+  const publicClient = createPublicClient({
+    chain: conxMainnet,
+    transport: http(),
+  });
 
-  // Setup provider
-  const provider = new ethers.JsonRpcProvider('https://cube-evm-rpc.xpla.dev');
+  // Bank: query balance
+  const bankContract = getContract({ ...bank, client: publicClient });
+  const testAddress = '0x1234567890123456789012345678901234567890' as const;
+  const denom = 'axpla';
 
   try {
-    // Method 1: Create individual precompile contracts
-    console.log('Creating individual precompile contracts...');
-    const bankContract = createPrecompileBank(provider);
-    const govContract = createPrecompileGov(provider);
-    
-    console.log('✅ Individual contracts created successfully!\n');
-
-    // Method 2: Create all precompile contracts at once
-    console.log('Creating all precompile contracts...');
-    const contracts = createPrecompileContracts(provider);
-    
-    console.log('✅ All contracts created successfully!\n');
-
-    // Example: Using individual contracts
-    const testAddress = '0x1234567890123456789012345678901234567890';
-    console.log(`Querying balance using individual contract: ${testAddress}`);
-    
-    try {
-      const balance = await bankContract.balance(testAddress, 'axpla');
-      console.log(`Balance: ${ethers.formatEther(balance)} XPLA\n`);
-    } catch (error) {
-      console.log('Balance query failed (expected for test address)\n');
-    }
-
-    // Example: Using staking contract from contracts object
-    console.log('Querying staking validators using contracts object...');
-    try {
-      const validators = await contracts.staking.validators('BOND_STATUS_BONDED', {
-        key: new Uint8Array(),
-        offset: 0n,
-        limit: 10n,
-        countTotal: false,
-        reverse: false
-      });
-      console.log(`Found ${validators.validators.length} validators\n`);
-    } catch (error) {
-      console.log('Validators query failed (expected if no validators exist)\n');
-    }
-
+    const balance = await bankContract.read.balance([testAddress, denom]);
+    console.log('Balance:', balance);
   } catch (error) {
-    console.error('❌ Convenience functions failed:', error);
+    console.log('Balance query failed (expected for test address)');
+  }
+
+  // Staking: query validators
+  const stakingContract = getContract({ ...staking, client: publicClient });
+  try {
+    const validators = await stakingContract.read.validators([
+      'BOND_STATUS_BONDED',
+      { key: new Uint8Array(), offset: 0n, limit: 10n, countTotal: false, reverse: false },
+    ]);
+    console.log('Validators count:', validators.validators?.length ?? 0);
+  } catch (error) {
+    console.log('Validators query failed (expected if none exist)');
   }
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error('Script failed:', error);
-    process.exit(1);
-  });
+main();
 ```
 
-## Using with Signer
+### Write contract example (with signer)
 
-Create a script that demonstrates using precompile contracts with a signer for transactions. Create `src/signer-example.ts`:
+Example using a wallet (signer) to read balance and send transactions via the Bank precompile.
 
 ```typescript
-import { ethers } from 'ethers';
-import { IBank__factory } from '@xpla/evm';
+import { bank } from '@xpla/evm/precompiles';
+import { createWalletClient, http } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
+import { conxMainnet } from '@xpla/evm';
+import { getContract, writeContract } from 'viem';
 
 async function main() {
-  console.log('=== Precompile Contracts with Signer Example ===\n');
+  const transport = http();
+  const account = privateKeyToAccount(
+    (process.env.PRIVATE_KEY || '0x0000000000000000000000000000000000000000000000000000000000000001') as `0x${string}`
+  );
 
-  // Setup provider and signer
-  const provider = new ethers.JsonRpcProvider('https://cube-evm-rpc.xpla.dev');
-  const privateKey = process.env.PRIVATE_KEY || 'your-private-key-here';
-  const signer = new ethers.Wallet(privateKey, provider);
+  const walletClient = createWalletClient({ chain: conxMainnet, transport, account });
 
-  console.log(`Using signer address: ${signer.address}\n`);
+  const bankContract = getContract({ ...bank, client: walletClient });
 
-  // Precompile contract address
-  const BANK_ADDRESS = '0x1000000000000000000000000000000000000001';
+  // Read: query balance for signer address
+  const balance = await bankContract.read.balance([account.address, 'axpla']);
+  console.log('Signer balance:', balance);
 
-  try {
-    // Create contract instance with signer
-    const bankContract = IBank__factory.connect(BANK_ADDRESS, signer);
-
-    console.log('✅ Bank contract connected with signer!\n');
-
-    // Example: Send transaction (this would require proper parameters)
-    console.log('Note: Sending transactions to precompile contracts requires specific parameters');
-    console.log('and may require special permissions. This is for demonstration purposes.\n');
-
-    // Example: Query balance using signer
-    const balance = await bankContract.balance(signer.address, 'axpla');
-    console.log(`Signer balance: ${ethers.formatEther(balance)} XPLA\n`);
-
-  } catch (error) {
-    console.error('❌ Signer example failed:', error);
-  }
+  // Write: call send (use real toAddress, amount, denom for actual transfer)
+  await writeContract(walletClient, {
+     ...bank,
+     functionName: 'send',
+     args: [toAddress, amount, denom],
+  });
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error('Script failed:', error);
-    process.exit(1);
-  });
+main();
 ```
 
-## Environment Setup
+To load your private key from environment variables, add `PRIVATE_KEY=0x...` to a `.env` file and use `dotenv`:
 
-Create a `.env` file for your private key:
-
-```env
-PRIVATE_KEY=your-private-key-here
-```
-
-Install dotenv to load environment variables:
-
-```sh
+```bash
 npm install dotenv
 ```
-
-Update your scripts to use environment variables:
 
 ```typescript
 import 'dotenv/config';
 // ... rest of your code
 ```
 
-## Running Your Project
+## Available precompiles
 
-1. **Test connection**:
-   ```sh
-   npx ts-node src/index.ts
-   ```
+The following precompiles are exported from `@xpla/evm/precompiles` (use these instead of legacy constants):
 
-2. **Run query functions example**:
-   ```sh
-   npx ts-node src/query-example.ts
-   ```
+| Export     | Description              |
+| ---------- | ------------------------ |
+| **auth**   | Authentication           |
+| **bank**   | Bank / token operations  |
+| **wasm**   | CosmWasm                 |
+| **bech32** | Bech32 encoding          |
+| **distribution** | Distribution       |
+| **gov**    | Governance               |
+| **slashing** | Slashing              |
+| **staking**  | Staking                |
 
-4. **Run signer example**:
-   ```sh
-   npx ts-node src/signer-example.ts
-   ```
 
-## Included Interfaces
+## ABI sources
 
-The `@xpla/evm` package includes TypeScript interfaces for the following precompile contracts:
-
-- **IAuth** - Authentication related contracts
-- **IBank** - Bank/Token related contracts  
-- **IGov** - Governance related contracts
-- **StakingI** - Staking related contracts
-- **DistributionI** - Distribution related contracts
-- **ISlashing** - Slashing related contracts
-- **IWasm** - CosmWasm related contracts
-- **Bech32I** - Bech32 encoding related contracts
-
-## Installation
-
-```bash
-npm install @xpla/evm
-```
-
-Or
-
-```bash
-yarn add @xpla/evm
-```
+- **@xpla/contracts**: Auth, Bank, Wasm
+- **cosmos-evm-contracts**: Bech32, Distribution, Gov, Slashing, Staking

@@ -6,7 +6,7 @@ type: docs
 
 # Bank Precompile Example
 
-This example demonstrates how to use the Bank precompile contract for token transfers.
+This example demonstrates how to use the Bank precompile contract for token transfers with viem and `@xpla/evm`.
 
 ## Prerequisites
 
@@ -21,78 +21,71 @@ Before running this example, make sure you have:
 Install the required dependencies:
 
 ```bash
-npm install @xpla/evm @xpla/xpla @interchainjs/cosmos @interchainjs/utils ethers bip39
+pnpm add @xpla/evm viem
 ```
+
+Or with npm: `npm install @xpla/evm viem`
 
 ## Example Code
 
-```javascript
-// examples/bank-precompile.js
-import { JsonRpcProvider, Wallet } from 'ethers';
-import { createPrecompileBank } from '@xpla/evm/precompiles';
-import { EthSecp256k1HDWallet } from '@xpla/xpla/wallets/ethSecp256k1hd';
-import * as bip39 from 'bip39';
+```typescript
+// examples/bank-precompile.ts
+import { bank } from '@xpla/evm/precompiles';
+import { conxTestnet } from '@xpla/evm';
+import { createPublicClient, createWalletClient, getContract, http, parseEther } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
 
 async function bankPrecompileExample() {
   console.log('=== Bank Precompile Example ===\n');
 
-  const RPC_URL = 'https://cube-evm-rpc.xpla.dev';
-  const provider = new JsonRpcProvider(RPC_URL);
+  const transport = http();
 
-  // Generate wallets
-  const mnemonic1 = bip39.generateMnemonic();
-  const mnemonic2 = bip39.generateMnemonic();
-  
-  const wallet1 = Wallet.fromPhrase(mnemonic1);
-  const wallet2 = Wallet.fromPhrase(mnemonic2);
-  
-  const senderAddress = wallet1.address;
-  const receiverAddress = wallet2.address;
-  
+  const publicClient = createPublicClient({ chain: conxTestnet, transport });
+  const account = privateKeyToAccount(
+    (process.env.PRIVATE_KEY as `0x${string}`) || '0x0000000000000000000000000000000000000000000000000000000000000001'
+  );
+  const walletClient = createWalletClient({ chain: conxTestnet, transport, account });
+
+  const senderAddress = account.address;
+  const receiverAddress = (process.env.RECEIVER_ADDRESS as `0x${string}`) || '0x0000000000000000000000000000000000000002';
+
   console.log(`Sender: ${senderAddress}`);
   console.log(`Receiver: ${receiverAddress}\n`);
 
-  // Create bank contract instance
-  const bankContract = createPrecompileBank(provider);
-  const bankContractWithSigner = bankContract.connect(wallet1.connect(provider));
+  const bankContractRead = getContract({ ...bank, client: publicClient });
+  const bankContractWrite = getContract({ ...bank, client: walletClient });
 
-  // Check initial balances
-  const initialBalance = await provider.getBalance(senderAddress);
-  console.log(`Initial Sender Balance: ${initialBalance} wei`);
+  // Check initial balances (native / EVM balance)
+  const initialSenderBalance = await publicClient.getBalance({ address: senderAddress });
+  const initialReceiverBalance = await publicClient.getBalance({ address: receiverAddress });
+  console.log(`Initial Sender Balance: ${initialSenderBalance} wei`);
+  console.log(`Initial Receiver Balance: ${initialReceiverBalance} wei\n`);
 
-  const receiverBalance = await provider.getBalance(receiverAddress);
-  console.log(`Initial Receiver Balance: ${receiverBalance} wei\n`);
+  // Bank module balance (axpla) via precompile
+  try {
+    const senderAxpla = await bankContractRead.read.balance([senderAddress, 'axpla']);
+    console.log(`Sender axpla balance: ${senderAxpla}\n`);
+  } catch (e) {
+    console.log('Balance query skipped or failed\n');
+  }
 
-  // Prepare transfer amount
-  const transferAmount = {
-    denom: 'axpla',
-    amount: '1000000000000000000' // 1 XPLA
-  };
+  // Prepare transfer: send(sender, receiver, coins)
+  const transferAmount = parseEther('1'); // 1 XPLA
+  const coins = [{ denom: 'axpla', amount: transferAmount.toString() }];
 
   try {
-    // Execute transfer
     console.log('Executing transfer...');
-    const txResponse = await bankContractWithSigner.send(
-      senderAddress, 
-      receiverAddress, 
-      [transferAmount]
-    );
-    
-    console.log(`Transaction Hash: ${txResponse.hash}`);
-    
-    // Wait for transaction confirmation
-    const txReceipt = await txResponse.wait();
-    console.log(`Transaction confirmed in block: ${txReceipt.blockNumber}\n`);
+    const hash = await bankContractWrite.write.send([senderAddress, receiverAddress, coins]);
+    console.log(`Transaction Hash: ${hash}`);
 
-    // Check updated balances
-    const newSenderBalance = await provider.getBalance(senderAddress);
-    const newReceiverBalance = await provider.getBalance(receiverAddress);
-    
+    const receipt = await publicClient.waitForTransactionReceipt({ hash });
+    console.log(`Transaction confirmed in block: ${receipt.blockNumber}\n`);
+
+    const newSenderBalance = await publicClient.getBalance({ address: senderAddress });
+    const newReceiverBalance = await publicClient.getBalance({ address: receiverAddress });
     console.log(`New Sender Balance: ${newSenderBalance} wei`);
     console.log(`New Receiver Balance: ${newReceiverBalance} wei`);
-    
     console.log('✅ Bank transfer completed successfully!');
-    
   } catch (error) {
     console.error('❌ Transfer failed:', error);
   }
@@ -103,8 +96,16 @@ bankPrecompileExample().catch(console.error);
 
 ## Running the Example
 
+Set `PRIVATE_KEY` (and optionally `RECEIVER_ADDRESS`), then run:
+
 ```bash
-node examples/bank-precompile.js
+npx tsx examples/bank-precompile.ts
+```
+
+Or with ts-node:
+
+```bash
+npx ts-node examples/bank-precompile.ts
 ```
 
 ## Expected Output
@@ -129,12 +130,12 @@ New Receiver Balance: 1000000000000000000 wei
 
 ## Key Features
 
-- **Token Transfer**: Transfer native tokens using the Bank precompile
-- **Balance Queries**: Check account balances before and after transfers
-- **Transaction Handling**: Proper async/await pattern for transaction execution
-- **Error Handling**: Graceful handling of transfer failures
+- **Token Transfer**: Transfer native tokens using the Bank precompile `send`
+- **Balance Queries**: Check EVM balance and Bank (axpla) balance via precompile
+- **viem + @xpla/evm**: Uses `getContract` with `bank` from `@xpla/evm/precompiles` and viem clients
 
 ## Related Documentation
 
+- [About @xpla/evm](/develop/develop/tools/evm/about-evm/)
 - [Bank Precompile Reference](/develop/develop/smart-contract-guide/precompile/bank/)
 - [Bank Module Documentation](/develop/develop/core-modules/bank/)
