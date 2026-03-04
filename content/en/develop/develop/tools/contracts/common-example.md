@@ -6,11 +6,11 @@ type: docs
 
 # Common Examples
 
-This page provides practical examples of how to use `@xpla/contracts` to interact with CONX Chain's precompile contracts. We'll walk through a complete staking pool implementation that demonstrates real-world usage of the StakingI interface.
+This page provides practical examples of how to use CONX Chain's precompile contracts in your Solidity projects. The staking pool example uses the **StakingI** interface from the [cosmos-evm-contracts](https://www.npmjs.com/package/cosmos-evm-contracts) package (for precompiles such as staking, distribution, gov, use `cosmos-evm-contracts`; for CONX-specific auth, bank, wasm use `@xpla/contracts`).
 
 ## StakingPool Contract Example
 
-The StakingPool contract demonstrates how to create a staking pool that utilizes CONX Chain's StakingI precompile contract to manage validator delegations while providing additional features like reward distribution and user management.
+The StakingPool contract demonstrates how to create a staking pool that utilizes CONX Chain's StakingI precompile contract to manage validator delegations. The **StakingI** interface is imported from **cosmos-evm-contracts**, not from `@xpla/contracts`. Ensure both packages are installed if you use CONX-specific precompiles in the same project.
 
 ### Contract Overview
 
@@ -22,10 +22,16 @@ The StakingPool contract provides:
 
 ### Complete Contract Implementation
 
+Install the **cosmos-evm-contracts** package (StakingI is not part of `@xpla/contracts`):
+
+```sh
+npm install cosmos-evm-contracts
+```
+
 ```solidity
 pragma solidity ^0.8.28;
 
-import "@xpla/contracts/interfaces/StakingI.sol";
+import "cosmos-evm-contracts/precompiles/staking/StakingI.sol";
 
 /// @title Simple Staking Pool
 /// @dev A simple staking pool contract utilizing StakingI interface
@@ -174,7 +180,7 @@ contract StakingPool {
     /// @dev Query user's reward information
     function pendingRewards(address _user) external view returns (uint256) {
         // TBD ...
-        return 0
+        return 0;
     }
     
     /// @dev Query pool information
@@ -224,7 +230,7 @@ contract StakingPool {
 ```solidity
 StakingI public constant stakingContract = StakingI(0x0000000000000000000000000000000000000800);
 ```
-The contract directly integrates with CONX Chain's StakingI precompile contract to perform actual validator delegations.
+The contract uses the **StakingI** interface from **cosmos-evm-contracts** and integrates with CONX Chain's StakingI precompile at the address above to perform actual validator delegations. Install with: `npm install cosmos-evm-contracts`.
 
 #### 2. **Staking Function**
 ```solidity
@@ -411,4 +417,4 @@ To test the StakingPool contract:
 3. **Flexible Configuration**: Pool manager can adjust reward rates
 4. **Event Tracking**: Comprehensive event emission for frontend integration
 
-This example demonstrates how to effectively use `@xpla/contracts` to build complex DeFi applications that integrate seamlessly with CONX Chain's native functionality.
+This example demonstrates how to use **cosmos-evm-contracts** (StakingI) together with CONX Chain's precompiles to build DeFi applications that integrate with the chain's native staking functionality. Use **@xpla/contracts** for auth, bank, and wasm precompiles and **cosmos-evm-contracts** for staking, distribution, gov, slashing, and others.
