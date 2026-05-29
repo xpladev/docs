@@ -7,7 +7,7 @@ type: docs
 Snapshot services for CONX are currently supported by the following providers:
 
 - [Polkachu](https://polkachu.com/tendermint_snapshots/xpla)
-- [PublicNode](https://publicnode.com/#xpla)
+- [PublicNode](https://publicnode.com/snapshots#xpla)
 
 If you require assistance with bootstrapping your full node or need a snapshot to facilitate the migration or initiation of your validator, these snapshot services can simplify the process for you.
 
