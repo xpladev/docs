@@ -6,7 +6,7 @@ type: docs
 
 # Staking Precompile Example
 
-This example demonstrates how to use the Staking precompile contract for validator delegation.
+This example demonstrates how to use the Staking precompile contract for validator queries and delegation with viem and `@xpla/evm`.
 
 ## Prerequisites
 
@@ -21,34 +21,37 @@ Before running this example, make sure you have:
 Install the required dependencies:
 
 ```bash
-npm install @xpla/evm @xpla/xpla @interchainjs/cosmos @interchainjs/utils ethers bip39
+pnpm add @xpla/evm viem
 ```
+
+Or with npm: `npm install @xpla/evm viem`
 
 ## Example Code
 
-```javascript
-// examples/staking-precompile.js
-import { JsonRpcProvider, Wallet, getBytes } from 'ethers';
-import { createPrecompileStaking } from '@xpla/evm/precompiles';
-import { toBech32 } from '@interchainjs/encoding';
-import * as bip39 from 'bip39';
+```typescript
+// examples/staking-precompile.ts
+import { staking, bech32 } from '@xpla/evm/precompiles';
+import { conxTestnet } from '@xpla/evm';
+import { getContract, createPublicClient, createWalletClient, http, hexToBytes } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
 
 async function stakingPrecompileExample() {
   console.log('=== Staking Precompile Example ===\n');
 
-  const RPC_URL = 'https://cube-evm-rpc.xpla.dev';
-  const provider = new JsonRpcProvider(RPC_URL);
+  const transport = http();
+  const publicClient = createPublicClient({ chain: conxTestnet, transport });
+  const account = privateKeyToAccount(
+    (process.env.PRIVATE_KEY as `0x${string}`) || '0x0000000000000000000000000000000000000000000000000000000000000001'
+  );
+  const walletClient = createWalletClient({ chain: conxTestnet, transport, account });
 
-  // Generate wallet
-  const mnemonic = bip39.generateMnemonic();
-  const wallet = Wallet.fromPhrase(mnemonic);
-  const delegatorAddress = wallet.address;
-  
+  const delegatorAddress = account.address;
+
+  const stakingContractRead = getContract({ ...staking, client: publicClient });
+  const stakingContractWrite = getContract({ ...staking, client: walletClient });
+  const bech32Contract = getContract({ ...bech32, client: publicClient });
+
   console.log(`Delegator Address: ${delegatorAddress}\n`);
-
-  // Create staking contract instance
-  const stakingContract = createPrecompileStaking(provider);
-  const stakingContractWithSigner = stakingContract.connect(wallet.connect(provider));
 
   try {
     // Query available validators
@@ -58,55 +61,62 @@ async function stakingPrecompileExample() {
       offset: 0n,
       limit: 10n,
       countTotal: false,
-      reverse: false
+      reverse: false,
     };
-    
-    const validatorsResponse = await stakingContract.validators('BOND_STATUS_BONDED', pageRequest);
-    
-    if (validatorsResponse.validators.length === 0) {
+
+    const validatorsResponse = await stakingContractRead.read.validators([
+      'BOND_STATUS_BONDED',
+      pageRequest,
+    ]);
+
+    if (!validatorsResponse.validators?.length) {
       console.log('No validators found');
       return;
     }
-    
+
     const validator = validatorsResponse.validators[0];
-    const operatorAddressHex = validator.operatorAddress;
-    const operatorAddressBech32 = toBech32('xplavaloper', getBytes(operatorAddressHex));
-    
+    // Convert validator operator address (hex) to Bech32 for delegation calls
+    const operatorAddressBech32 = await bech32Contract.read.encode([
+      'xplavaloper',
+      hexToBytes(validator.operatorAddress as `0x${string}`),
+    ]);
+
     console.log(`Selected Validator: ${operatorAddressBech32}`);
     console.log(`Validator Status: ${validator.status}\n`);
 
     // Check initial delegation
     console.log('Checking initial delegation...');
     try {
-      const initialDelegation = await stakingContract.delegation(delegatorAddress, operatorAddressBech32);
+      const initialDelegation = await stakingContractRead.read.delegation([
+        delegatorAddress,
+        operatorAddressBech32,
+      ]);
       console.log(`Initial Delegation: ${initialDelegation.balance.amount} ${initialDelegation.balance.denom}\n`);
-    } catch (error) {
+    } catch {
       console.log('No initial delegation found\n');
     }
 
     // Execute delegation
     const delegationAmount = 1000000000000000000n; // 1 XPLA
     console.log(`Delegating ${delegationAmount} wei to validator...`);
-    
-    const txResponse = await stakingContractWithSigner.delegate(
-      delegatorAddress, 
-      operatorAddressBech32, 
-      delegationAmount
-    );
-    
-    console.log(`Transaction Hash: ${txResponse.hash}`);
-    
-    // Wait for transaction confirmation
-    const txReceipt = await txResponse.wait();
-    console.log(`Transaction confirmed in block: ${txReceipt.blockNumber}\n`);
 
-    // Check updated delegation
-    const updatedDelegation = await stakingContract.delegation(delegatorAddress, operatorAddressBech32);
+    const hash = await stakingContractWrite.write.delegate([
+      delegatorAddress,
+      operatorAddressBech32,
+      delegationAmount,
+    ]);
+    console.log(`Transaction Hash: ${hash}`);
+
+    const receipt = await publicClient.waitForTransactionReceipt({ hash });
+    console.log(`Transaction confirmed in block: ${receipt.blockNumber}\n`);
+
+    const updatedDelegation = await stakingContractRead.read.delegation([
+      delegatorAddress,
+      operatorAddressBech32,
+    ]);
     console.log(`Updated Delegation: ${updatedDelegation.balance.amount} ${updatedDelegation.balance.denom}`);
     console.log(`Delegation Shares: ${updatedDelegation.shares}`);
-    
     console.log('✅ Delegation completed successfully!');
-    
   } catch (error) {
     console.error('❌ Staking operation failed:', error);
   }
@@ -117,8 +127,10 @@ stakingPrecompileExample().catch(console.error);
 
 ## Running the Example
 
+Set `PRIVATE_KEY` in your environment, then run:
+
 ```bash
-node examples/staking-precompile.js
+npx tsx examples/staking-precompile.ts
 ```
 
 ## Expected Output
@@ -146,20 +158,21 @@ Delegation Shares: 1000000000000000000
 
 ## Key Features
 
-- **Validator Discovery**: Query available validators on the network
-- **Delegation Management**: Delegate tokens to validators for staking rewards
-- **Delegation Queries**: Check current delegation amounts and shares
-- **Transaction Handling**: Proper async/await pattern for staking operations
+- **Validator Discovery**: Query bonded validators with `validators`
+- **Bech32 Encoding**: Use the bech32 precompile to convert operator address to Bech32 for delegation
+- **Delegation**: Delegate with `delegate(delegator, validatorBech32, amount)`
+- **Delegation Queries**: Check delegation with `delegation(delegator, validatorBech32)`
+- **viem + @xpla/evm**: Uses `staking` and `bech32` from `@xpla/evm/precompiles` with viem clients
 
 ## Common Operations
 
-This example demonstrates:
-- Querying bonded validators
-- Converting between EVM and Bech32 validator addresses
-- Delegating tokens to a validator
-- Checking delegation status
+- Query bonded validators and paginate with `pageRequest`
+- Convert validator operator address (hex) to Bech32 via the bech32 precompile `encode`
+- Delegate and query delegation amounts/shares
 
 ## Related Documentation
 
+- [About @xpla/evm](/develop/develop/tools/evm/about-evm/)
+- [Address Conversion](/develop/develop/tools/evm/address-conversion/)
 - [Staking Precompile Reference](/develop/develop/smart-contract-guide/precompile/staking/)
 - [Staking Module Documentation](/develop/develop/core-modules/staking/)

@@ -6,7 +6,7 @@ type: docs
 
 # Wasm Precompile Example
 
-This example demonstrates how to use the Wasm precompile contract to interact with CosmWasm smart contracts.
+This example demonstrates how to use the Wasm precompile contract to interact with CosmWasm smart contracts using viem and `@xpla/evm`.
 
 ## Prerequisites
 
@@ -21,94 +21,87 @@ Before running this example, make sure you have:
 Install the required dependencies:
 
 ```bash
-npm install @xpla/evm @xpla/xpla @interchainjs/cosmos @interchainjs/utils ethers bip39
+pnpm add @xpla/evm viem
 ```
+
+Or with npm: `npm install @xpla/evm viem`
 
 ## Example Code
 
-```javascript
-// examples/wasm-precompile.js
-import { JsonRpcProvider, Wallet } from 'ethers';
-import { createPrecompileWasm } from '@xpla/evm/precompiles';
-import { fromBech32 } from '@interchainjs/encoding';
-import { hexlify } from 'ethers';
-import * as fs from 'fs';
-import * as path from 'path';
+```typescript
+// examples/wasm-precompile.ts
+import { wasm, bech32 } from '@xpla/evm/precompiles';
+import { conxTestnet } from '@xpla/evm';
+import { getContract, createPublicClient, createWalletClient, http, bytesToHex } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
 
 async function wasmPrecompileExample() {
   console.log('=== Wasm Precompile Example ===\n');
 
-  const RPC_URL = 'https://cube-evm-rpc.xpla.dev';
-  const provider = new JsonRpcProvider(RPC_URL);
+  const transport = http();
+  const publicClient = createPublicClient({ chain: conxTestnet, transport });
+  const account = privateKeyToAccount(
+    (process.env.PRIVATE_KEY as `0x${string}`) || '0x0000000000000000000000000000000000000000000000000000000000000001'
+  );
+  const walletClient = createWalletClient({ chain: conxTestnet, transport, account });
 
-  // Generate wallet
-  const mnemonic = 'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about';
-  const wallet = Wallet.fromPhrase(mnemonic);
-  const userAddress = wallet.address;
-  
+  const wasmContractRead = getContract({ ...wasm, client: publicClient });
+  const wasmContractWrite = getContract({ ...wasm, client: walletClient });
+  const bech32Contract = getContract({ ...bech32, client: publicClient });
+
+  const userAddress = account.address;
   console.log(`User Address: ${userAddress}\n`);
 
-  // Create wasm contract instance
-  const wasmContract = createPrecompileWasm(provider);
-  const wasmContractWithSigner = wasmContract.connect(wallet.connect(provider));
-
   try {
-    // For this example, we'll assume a contract is already deployed
-    // In a real scenario, you would first deploy the contract using CosmWasm
-    
-    // Example contract address
+    // Example contract address (Bech32)
     const contractAddressBech32 = 'xpla1qw97zu0xazljpckxzf7wc5g3hevp7weefn40fw8z09ejzm2wz6ms7qverx';
-    
-    // Convert to EVM address format (last 20 bytes)
-    const { data: contractAddressHex } = fromBech32(contractAddressBech32);
-    const contractAddressHexString = hexlify(contractAddressHex.slice(12));
-    
+
+    // Convert Bech32 to EVM address (last 20 bytes of decoded data)
+    const decoded = await bech32Contract.read.decode([contractAddressBech32]);
+    const contractAddressHexString = bytesToHex(decoded.slice(-20)) as `0x${string}`;
+
     console.log(`Contract Bech32: ${contractAddressBech32}`);
     console.log(`Contract EVM: ${contractAddressHexString}\n`);
 
     // Query contract state
     console.log('Querying contract state...');
-    const queryData = new Uint8Array(Buffer.from('{"get_count": {}}'));
-    
-    const queryResponse = await wasmContract.smartContractState(contractAddressHexString, queryData);
-    
-    // Parse response
+    const queryData = new TextEncoder().encode('{"get_count": {}}');
+    const queryResponse = await wasmContractRead.read.smartContractState([
+      contractAddressHexString,
+      queryData,
+    ]);
+
     const responseHex = queryResponse.startsWith('0x') ? queryResponse.slice(2) : queryResponse;
     const responseBytes = new Uint8Array(Buffer.from(responseHex, 'hex'));
     const responseText = new TextDecoder().decode(responseBytes);
     const responseData = JSON.parse(responseText);
-    
     console.log(`Current Count: ${responseData.count}\n`);
 
     // Execute contract function
     console.log('Executing increment function...');
-    const executeMsg = new Uint8Array(Buffer.from('{"increment": {}}'));
-    
-    const txResponse = await wasmContractWithSigner.executeContract(
-      userAddress, 
-      contractAddressHexString, 
-      executeMsg, 
-      []
-    );
-    
-    console.log(`Transaction Hash: ${txResponse.hash}`);
-    
-    // Wait for transaction confirmation
-    const txReceipt = await txResponse.wait();
-    console.log(`Transaction confirmed in block: ${txReceipt.blockNumber}\n`);
+    const executeMsg = new TextEncoder().encode('{"increment": {}}');
+    const hash = await wasmContractWrite.write.executeContract([
+      userAddress,
+      contractAddressHexString,
+      executeMsg,
+      [],
+    ]);
+    console.log(`Transaction Hash: ${hash}`);
+
+    const receipt = await publicClient.waitForTransactionReceipt({ hash });
+    console.log(`Transaction confirmed in block: ${receipt.blockNumber}\n`);
 
     // Query updated state
     console.log('Querying updated contract state...');
-    const updatedQueryResponse = await wasmContract.smartContractState(contractAddressHexString, queryData);
-    
+    const updatedQueryResponse = await wasmContractRead.read.smartContractState([
+      contractAddressHexString,
+      queryData,
+    ]);
     const updatedResponseHex = updatedQueryResponse.startsWith('0x') ? updatedQueryResponse.slice(2) : updatedQueryResponse;
     const updatedResponseBytes = new Uint8Array(Buffer.from(updatedResponseHex, 'hex'));
-    const updatedResponseText = new TextDecoder().decode(updatedResponseBytes);
-    const updatedResponseData = JSON.parse(updatedResponseText);
-    
+    const updatedResponseData = JSON.parse(new TextDecoder().decode(updatedResponseBytes));
     console.log(`Updated Count: ${updatedResponseData.count}`);
     console.log('✅ Wasm contract interaction completed successfully!');
-    
   } catch (error) {
     console.error('❌ Wasm operation failed:', error);
   }
@@ -119,8 +112,10 @@ wasmPrecompileExample().catch(console.error);
 
 ## Running the Example
 
+Set `PRIVATE_KEY` if needed, then run:
+
 ```bash
-node examples/wasm-precompile.js
+npx tsx examples/wasm-precompile.ts
 ```
 
 ## Expected Output
@@ -147,27 +142,22 @@ Updated Count: 6
 
 ## Key Features
 
-- **Contract Address Conversion**: Convert between Bech32 and EVM address formats
-- **State Queries**: Query CosmWasm contract state using JSON messages
-- **Contract Execution**: Execute contract functions with proper message encoding
-- **Response Parsing**: Decode hex responses back to readable JSON
-
-## Common Operations
-
-This example demonstrates:
-- Converting CosmWasm contract addresses to EVM format
-- Querying contract state with structured messages
-- Executing contract functions
-- Parsing binary responses from contract calls
+- **Address Conversion**: Use the bech32 precompile `decode` to convert Bech32 contract address to EVM (last 20 bytes)
+- **State Queries**: Query CosmWasm state with `smartContractState(contractAddress, queryData)`
+- **Contract Execution**: Execute with `executeContract(sender, contractAddress, msg, funds)`
+- **viem + @xpla/evm**: Uses `wasm` and `bech32` from `@xpla/evm/precompiles` with viem clients
 
 ## Message Format
 
-CosmWasm contracts expect messages in JSON format:
-- **Query Messages**: `{"get_count": {}}`, `{"get_balance": {"address": "..."}}`
-- **Execute Messages**: `{"increment": {}}`, `{"transfer": {"to": "...", "amount": "..."}}`
+CosmWasm contracts expect JSON messages:
+
+- **Query**: `{"get_count": {}}`, `{"get_balance": {"address": "..."}}`
+- **Execute**: `{"increment": {}}`, `{"transfer": {"to": "...", "amount": "..."}}`
 
 ## Related Documentation
 
+- [About @xpla/evm](/develop/develop/tools/evm/about-evm/)
+- [Address Conversion](/develop/develop/tools/evm/address-conversion/)
 - [Wasm Precompile Reference](/develop/develop/smart-contract-guide/precompile/wasm/)
 - [Wasm Module Documentation](/develop/develop/core-modules/wasm/)
 - [CosmWasm Documentation](https://docs.cosmwasm.com/)
