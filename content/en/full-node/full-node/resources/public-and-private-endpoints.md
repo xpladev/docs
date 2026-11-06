@@ -29,3 +29,5 @@ Public RPC endpoints should only be used in development. For live dApps, use a p
 | -------- | ------------------ |
 | https://dimension-rpc.xpla.dev | `dimension_37-1` mainnet |
 | https://cube-rpc.xpla.dev | `cube_47-5` testnet    |
+
+To compare the live latency of the public mainnet RPC endpoints, including community-run ones, see the [OpenChainBench CONX (XPLA) RPC benchmark](https://openchainbench.com/benchmarks/xpla-rpc), which probes each one every 60 seconds from US-East, EU-West and Singapore, and publishes p50 / p90 / p99 latency and success rate.
